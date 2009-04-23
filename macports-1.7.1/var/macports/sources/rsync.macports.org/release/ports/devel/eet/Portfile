@@ -1,0 +1,26 @@
+# $Id: Portfile 47511 2009-02-28 21:09:29Z jeremyhu@macports.org $
+PortSystem 1.0
+name		eet
+version		0.9.10.038
+description	EET is a library for writing sets of data.
+long_description        EET is a tiny library designed to write an \
+			arbitary set of chunks of data to a file and \
+			optionally compress each chunk (very much like \
+			a zip file) and allow fast random-access \
+			reading of the file later on. It does not \
+			do zip as a zip itself has more complexity \
+			than is needed, and it was much simpler to \
+			impliment this once here.
+maintainers	nomaintainer
+categories	devel x11
+platforms	darwin 
+homepage	http://www.enlightenment.org
+master_sites    http://enlightenment.freedesktop.org/files
+
+checksums           md5     d913862ac467bfeb3a0b92f41d857dfd \
+                    sha1    d6bc3c39c8fbca1a0f5ace3819bb6f6b6758eaac \
+                    rmd160  5fc7cb0c48b1e6d6bfb4370c4ff724485bf625ac
+
+depends_lib	port:jpeg port:zlib
+
+configure.args	--mandir=${prefix}/share/man 

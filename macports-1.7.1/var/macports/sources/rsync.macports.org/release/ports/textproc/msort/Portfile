@@ -1,0 +1,24 @@
+# $Id: Portfile 36995 2008-05-22 14:42:31Z simon@macports.org $
+
+PortSystem 1.0
+
+name			msort
+version			8.45
+categories		textproc
+platforms		darwin
+maintainers		nomaintainer
+description		program for sorting files in sophisticated ways
+long_description	Msort is a program for sorting files in sophisticated \
+			ways. Records need not be single lines.
+
+homepage		http://billposer.org/Software/msort.html
+master_sites	http://www.billposer.org/Software/Downloads/
+checksums		sha1 03e0390da91a0c3242da7d36cb21285906663066
+use_bzip2		yes
+
+depends_lib		port:libtre port:gettext port:libuninum port:libutf8proc
+depends_run		port:tcl port:tk
+
+configure.args	--mandir=${prefix}/share/man
+configure.ldflags-append	"-lintl"
+

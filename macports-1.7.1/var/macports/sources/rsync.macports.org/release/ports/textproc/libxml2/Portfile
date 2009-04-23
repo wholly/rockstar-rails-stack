@@ -1,0 +1,64 @@
+# $Id: Portfile 49954 2009-04-21 03:50:18Z mcalhoun@macports.org $
+
+PortSystem            1.0
+PortGroup             muniversal 1.0
+
+name                  libxml2
+version               2.7.3
+categories            textproc
+description           gnome xml library
+platforms             darwin
+maintainers           cedric.luthi@gmail.com
+homepage              http://xmlsoft.org/
+
+master_sites          ftp://fr.rpmfind.net/pub/libxml/ \
+                      ftp://gd.tuwien.ac.at/pub/libxml/ \
+                      ftp://ftp.planetmirror.com/pub/xmlsoft/ \
+                      gnome:sources/${name}/[strsed ${version} {/\.[0-9]*$//}]/ \
+                      ${homepage}sources/ \
+                      ftp://xmlsoft.org/${name}/
+
+checksums           md5     8f4fda3969237c2a33bdb1583b5d06b2 \
+                    sha1    fd4e427fb55c977876bc74c0e552ef7d3d794a07 \
+                    rmd160  14018347531fd135366cee9fd9d760a1988546e2
+
+depends_lib           port:libiconv port:zlib
+
+post-extract {
+    reinplace "s|/etc|${prefix}/etc|g" \
+        ${worksrcpath}/catalog.c \
+        ${worksrcpath}/runtest.c \
+        ${worksrcpath}/xmlcatalog.c \
+        ${worksrcpath}/xmllint.c \
+        ${worksrcpath}/doc/xmlcatalog.1 \
+        ${worksrcpath}/doc/xmllint.1
+
+}
+
+configure.args          --enable-static \
+                        --without-python
+
+use_parallel_build      yes
+
+destroot.keepdirs       ${destroot}${prefix}/etc/xml
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/etc/xml
+}
+
+test.run              yes
+test.target           check
+
+variant debug description {Enable debug build} {
+        configure.cflags-append -O0 -g -Wno-uninitialized
+	configure.args-append --with-run-debug
+}
+
+long_description \
+Libxml is the XML C library developed for the Gnome project.  \
+XML itself is a metalanguage to design markup languages. \
+Though the library is written in C, a variety of language bindings make it \
+available in other environments.
+
+livecheck.check regex
+livecheck.url   ${homepage}news.html
+livecheck.regex {<h3>(\d+(?:\.\d+)*): .*</h3>}

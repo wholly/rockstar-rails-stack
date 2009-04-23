@@ -1,0 +1,23 @@
+# $Id: Portfile 49369 2009-04-08 12:07:15Z illogic-al@macports.org $
+
+PortSystem          1.0
+PortGroup           kde4    1.0
+
+name                qimageblitz
+version             0.0.5
+revision            4
+categories          graphics kde kde4
+maintainers         illogic-al openmaintainer
+description         Graphical effects library for KDE4
+long_description    QImageBlitz is a graphical effect and filter library \
+                    for KDE4 with MMX/SSE support.
+homepage            http://www.kde.org
+platforms           darwin
+master_sites        http://www.kde.org
+distname            ${version}
+
+fetch.type          svn 
+svn.url             svn://anonsvn.kde.org/home/kde/tags/${name}/${version}
+
+configure.args-append      ../${distname}
+

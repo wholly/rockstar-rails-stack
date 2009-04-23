@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: wrapper for assert_select_email
+- !ruby/struct:SM::Flow::P 
+  body: see documentation for assert_select_email at http://api.rubyonrails.org/
+full_name: Spec::Rails::Matchers#send_email
+is_singleton: false
+name: send_email
+params: |
+  response.should send_email(*args, &block)
+
+visibility: public

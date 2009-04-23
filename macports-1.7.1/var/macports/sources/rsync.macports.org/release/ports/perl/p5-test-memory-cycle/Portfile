@@ -1,0 +1,15 @@
+# $Id: Portfile 33894 2008-02-07 02:45:08Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Test-Memory-Cycle 1.04
+maintainers           narf_tm openmaintainer
+description           Check for memory leaks and circular memory references
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 0c51e09f6bc23676ca0112b1a95e129d
+
+depends_lib-append    port:p5-test-simple port:p5-devel-cycle

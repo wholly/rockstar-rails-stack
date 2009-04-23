@@ -1,0 +1,18 @@
+# $Id: Portfile 35580 2008-03-30 12:00:05Z rhwood@macports.org $
+
+PortSystem 1.0
+name		conglomerate
+version		0.9.1
+description	Conglomerate aims to be an XML editor that everyone can use.
+long_description        ${description}
+maintainers	nomaintainer
+categories	gnome textproc
+platforms	darwin 
+homepage	http://www.conglomerate.org
+master_sites    sourceforge
+checksums	md5 49ad67492e947d6c15e5b875d8360890
+depends_lib	bin:gnome-session:gnome-session lib:libiconv.2:libiconv
+depends_build	port:rarian
+configure.cppflags-append "-L${prefix}/lib"
+configure.cflags-append "-no-cpp-precomp -flat_namespace -undefined suppress"
+configure.args	--disable-gtksourceview

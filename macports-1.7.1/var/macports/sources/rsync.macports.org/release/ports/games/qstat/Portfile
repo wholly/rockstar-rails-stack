@@ -1,0 +1,24 @@
+# $Id: Portfile 30227 2007-10-22 22:55:58Z jmpp@macports.org $
+
+PortSystem 1.0
+name			qstat
+version			2.10
+categories		games net
+platforms		darwin
+maintainers		nomaintainer
+homepage		http://qstat.org/
+description		Gather statistics from game servers
+
+long_description	Qstat is a command-line program that gathers real-time \
+			statistics from Internet game servers. Most supported \
+			games are of the first person shooter variety (Quake, \
+			Half-Life, etc).
+
+master_sites		sourceforge
+checksums		md5 ac3ce3dbed5248bd5738a4968460880e
+
+post-destroot {		file mkdir ${destroot}${prefix}/share/doc/${name}
+			xinstall -m 644 -v -W ${worksrcpath} \
+				ChangeLog CHANGES.txt LICENSE.txt qstatdoc.html \
+				${destroot}${prefix}/share/doc/${name}
+			}

@@ -1,0 +1,27 @@
+# $Id: Portfile 46551 2009-02-06 21:32:09Z jmr@macports.org $
+
+PortSystem 1.0
+
+name            socat
+version         1.7.0.0
+categories      sysutils net
+maintainers     md@hudora.de
+platforms       darwin
+description     netcat on steroids
+long_description        \
+ socat is a relay for bidirectional data transfer between two independent data \
+ channels. Each of these data channels may be a file, pipe, device (serial line \
+ etc. or a pseudo terminal), a socket (UNIX, IP4, IP6 - raw, UDP, TCP), an \
+ SSL socket, proxy CONNECT connection, a file descriptor (stdin etc.), the \
+ GNU line editor (readline), a program, or a combination of two of these.
+homepage        http://www.dest-unreach.org/socat/
+master_sites    http://www.dest-unreach.org/socat/download/
+checksums       md5     82967132b5a8ca4d07e54370fdcb2662 \
+                sha1    f20badcaff11c4dad1e89f2ce396bd60a14d3464 \
+                rmd160  b03ef9ba23c45a55632dac17930b4a26346aa430
+depends_lib		port:readline port:openssl
+
+post-configure {
+    reinplace "s|\$(INSTALL) -m 644 socat.1 \$(DESTDIR)\$(MANDEST)/man1/|\$(INSTALL) -d -m 755 \$(DESTDIR)\$(MANDEST)/man1/\\\n\\\t\$(INSTALL) -m 644 socat.1 \$(DESTDIR)\$(MANDEST)/man1/|g" \
+              ${worksrcpath}/Makefile
+}

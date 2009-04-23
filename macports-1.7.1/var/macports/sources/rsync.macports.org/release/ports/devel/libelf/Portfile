@@ -1,0 +1,32 @@
+# $Id: Portfile 35880 2008-04-09 09:58:03Z rhwood@macports.org $
+
+PortSystem 1.0
+
+name		libelf
+version		0.8.10
+revision	1
+categories	devel
+maintainers	jstrine@vexate.net
+description	ELF object file access library
+homepage	http://www.mr511.de/software/english.html
+platforms	darwin
+
+long_description  'Libelf' lets you read, modify or create ELF files in an \
+		   architecture-independent way. The library takes care of \
+		   size and endian issues, e.g. you can process a file for \
+		   SPARC processors on an Intel-based system.
+
+master_sites	http://www.mr511.de/software
+distname	libelf-${version}
+checksums	md5 9db4d36c283d9790d8fa7df1f4d7b4d9 \
+		sha1 5f6fb666b0cf604243110383ba55ef37df1c8ece
+
+depends_lib	port:gettext
+
+configure.args			--enable-compat
+build.pre_args-append		instroot=${destroot}
+destroot.pre_args-append	instroot=${destroot}
+
+post-destroot {
+	file delete ${destroot}${prefix}/include/nlist.h
+}

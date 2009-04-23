@@ -1,0 +1,20 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: create_story_runner
+- !ruby/object:RI::MethodSummary 
+  name: dry_run
+- !ruby/object:RI::MethodSummary 
+  name: register_listener
+comment: 
+constants: []
+
+full_name: Spec::Story::Runner
+includes: []
+
+instance_methods: []
+
+name: Runner
+superclass: 

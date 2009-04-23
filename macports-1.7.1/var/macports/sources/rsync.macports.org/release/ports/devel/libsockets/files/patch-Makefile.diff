@@ -1,0 +1,29 @@
+--- Makefile	2008-10-07 19:12:46.000000000 +0200
++++ Makefile	2008-11-01 21:07:04.000000000 +0100
+@@ -13,6 +13,7 @@
+ # include paths
+ INCLUDE =	-I/usr/include/libxml2
+ 
++include		Makefile.macports
+ include		Makefile.version
+ 
+ # CXX, CFLAGS, LIBS
+@@ -39,6 +40,9 @@
+ Sockets-config:	Sockets-config.o
+ 		$(CXX) -o $@ $^
+ 
++libSockets.dylib: libSockets.a
++		CC="$(CXX)" LDFLAGS="$(LDFLAGS) $(LIBS)" ./create-dylib.sh libSockets.a 1.0.0 $(PREFIX)/lib
++
+ clean:
+ 		rm -f *.o *~ slask *.d $(PROGS) *.a */*~
+ 
+@@ -57,7 +61,7 @@
+ 		@mkdir -p $(DESTDIR)/$(PREFIX)/lib
+ 		cp libSockets.a $(DESTDIR)/$(PREFIX)/lib
+ 		@mkdir -p $(DESTDIR)/$(PREFIX)/include/Sockets
+-		cp -a *.h $(DESTDIR)/$(PREFIX)/include/Sockets
++		cp -Rp *.h $(DESTDIR)/$(PREFIX)/include/Sockets
+ 		@rm -f $(DESTDIR)/$(PREFIX)/include/Sockets/SSLSocket.*
+ 		@rm -f $(DESTDIR)/$(PREFIX)/include/Sockets/HttpsGetSocket.*
+ 		@rm -f $(DESTDIR)/$(PREFIX)/include/Sockets/HttpsSocket.*

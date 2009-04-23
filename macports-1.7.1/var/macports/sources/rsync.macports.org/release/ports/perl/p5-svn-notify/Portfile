@@ -1,0 +1,29 @@
+# $Id: Portfile 38469 2008-07-21 16:13:11Z dluke@macports.org $
+
+PortSystem	1.0
+PortGroup	perl5 1.0
+
+perl5.setup	SVN-Notify 2.77
+maintainers	dluke@geeklair.net
+description	Subversion activity notification
+long_description \
+		This class may be used for sending email messages for \
+		Subversion repository activity. There are a number of \
+		different modes supported, and SVN::Notify is fully \
+		subclassable to easily add new functionality. By default, \
+		a list of all the files affected by the commit will be \
+		assembled and listed in a single message. An additional option \
+		allows diffs to be calculated for the changes and either \
+		appended to the message or added as an attachment.
+
+platforms	darwin
+
+checksums	md5 a6909bfca5d623db5f019b57da6e97e6 \
+		sha1 51b7869cde88365b1973c8847e5c81f1d8cdf414 \
+		rmd160 e2953d7b659f4521e7582e2ad80d76f832a97916
+
+depends_lib-append	port:p5-module-build \
+			port:p5-pathtools \
+			port:p5-version \
+			port:p5-html-parser \
+			port:p5-net-smtp_auth

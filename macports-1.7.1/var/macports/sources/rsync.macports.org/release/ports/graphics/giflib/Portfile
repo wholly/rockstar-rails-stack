@@ -1,0 +1,32 @@
+# $Id: Portfile 49992 2009-04-22 00:18:03Z mcalhoun@macports.org $
+
+PortSystem                      1.0
+PortGroup                       muniversal 1.0
+
+name                            giflib
+version                         4.1.6
+revision                        1
+categories                      graphics
+maintainers                     ryandesign
+platforms                       darwin
+homepage                        http://sourceforge.net/projects/giflib/
+master_sites                    sourceforge
+use_bzip2                       yes
+
+description                     GIF library using patented LZW algorithm
+
+long_description                GIF loading and saving shared library. \
+                                Uses the LZW algorithm.
+
+checksums                       md5     7125644155ae6ad33dbc9fc15a14735f \
+                                sha1    22680f604ec92065f04caf00b1c180ba74fb8562 \
+                                rmd160  bdb99f7048a79b9e771b069f90ac151537011d19
+
+patchfiles                      patch-gif_lib.h.diff
+
+depends_lib                     port:xorg-libsm \
+                                port:xorg-libX11
+
+use_parallel_build              yes
+
+livecheck.regex                 "<title>${name} [lindex [split ${version} .] 0].x ${name}-(\\d+(?:\\.\\d+)*) released .*</title>"

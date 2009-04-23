@@ -1,0 +1,33 @@
+# $Id: Portfile 30182 2007-10-22 18:44:25Z mww@macports.org $
+
+PortSystem 1.0
+
+name			cpio
+version			2.9
+categories		archivers
+platforms		darwin
+maintainers		mww
+description		copies files into or out of a cpio or tar archives
+long_description	GNU cpio copies files into or out of a cpio or tar \
+				archive. The archive can be another file on the disk, a \
+				magnetic tape, or a pipe.
+
+homepage		http://www.gnu.org/software/cpio/cpio.html
+master_sites	gnu
+checksums		sha1 ef381d0f33f1ea74475b6d813c42a74327762c4a
+use_bzip2		yes
+
+depends_lib		port:gettext port:libiconv
+
+configure.args	--program-prefix=gnu \
+				--mandir=${prefix}/share/man \
+				--infodir=${prefix}/share/info \
+				--libexecdir=${prefix}/lib/${name}
+
+test.run		yes
+test.target		check
+
+livecheck.check	regex
+livecheck.url	http://ftp.gnu.org/gnu/cpio/?C=M&O=D
+livecheck.regex	cpio-(\[0-9\]+\\.\[0-9\]+)
+

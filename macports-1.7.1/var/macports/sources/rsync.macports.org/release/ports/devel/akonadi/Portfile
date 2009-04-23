@@ -1,0 +1,31 @@
+# $Id: Portfile 49369 2009-04-08 12:07:15Z illogic-al@macports.org $
+
+PortSystem          1.0
+PortGroup           kde4    1.0
+
+name                akonadi
+version             1.0.0
+revision            4
+categories          devel kde kde4
+maintainers         illogic-al openmaintainer
+description         A personal information management storage service.
+long_description    Akonadi is an extensible cross-desktop storage service \
+for PIM data and metadata providing concurrent read, write, and query access.
+platforms           darwin
+homepage            http://pim.kde.org/akonadi/
+master_sites        http://download.akonadi-project.org/
+use_bzip2           yes
+checksums           md5 90039928f818a55a7e2a1bf852a32f2d
+
+configure.args-append   -DMYSQLD_EXECUTABLE="" \
+                        ../${distname}
+
+# Needed if compiling for 10.4 universal on 10.5
+#post-configure {
+#    reinplace "s|#define HAVE_EXECINFO_H 1||" ${workpath}/build/config-akonadi.h
+#}
+
+variant mysql description "Install the Akonadi server" {
+    depends_lib-append	    path:bin/mysqld:mysql5-devel
+    configure.args-delete   -DMYSQLD_EXECUTABLE=""
+}

@@ -1,0 +1,34 @@
+# $Id: Portfile 30233 2007-10-22 23:09:00Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			xmlenc
+version			0.50
+categories		java textproc
+platforms		darwin
+maintainers		nomaintainer
+description		fast stream-based XML output library for Java
+long_description	The xmlenc library is a fast stream-based XML output \
+					library for Java. Main design goals are performance, \
+					simplicitity and pureness.
+
+homepage		http://xmlenc.sourceforge.net/
+master_sites	${homepage}
+checksums		md5 adc720754a91aaca6f23c338b458c1f1
+
+depends_build	bin:ant:apache-ant
+depends_lib		bin:java:kaffe
+
+use_configure	no
+
+build.cmd		ant
+build.target	jar javadoc-public
+
+destroot	{
+	xinstall -m 755 -d ${destroot}${prefix}/share/java/ \
+		${destroot}${prefix}/share/doc/
+	xinstall -m 644 ${worksrcpath}/build/xmlenc.jar \
+		${destroot}${prefix}/share/java/
+	file copy ${worksrcpath}/build/javadoc \
+		${destroot}${prefix}/share/doc/${name}
+}

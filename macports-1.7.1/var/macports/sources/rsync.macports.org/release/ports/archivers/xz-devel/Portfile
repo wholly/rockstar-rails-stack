@@ -1,0 +1,37 @@
+# $Id: Portfile 47952 2009-03-11 14:30:47Z afb@macports.org $
+
+PortSystem      1.0
+
+name            xz-devel
+version         4.999.8beta
+categories      archivers
+platforms       darwin
+maintainers     afb@macports.org openmaintainer
+description     XZ Utils
+
+long_description \
+XZ utils consist of a few relatively separate submodules: \
+* LZMA/XZ encoder/decoder command line tool similar to gzip/bzip2 \
+* Scripts to ease grepping, diffing and viewing (lz*grep, lzdiff/lzcmp, lzmore/lzless)
+
+homepage        http://tukaani.org/xz/
+master_sites    ${homepage}
+distname        xz-${version}
+checksums       md5 f00967331a487e88d51207fe17c56f52 \
+                sha1 d282518518488c37ec268401e1b8247749279c44 \
+                rmd160 41303aed49cfb976da54d7e3e88210b4eeaebbbd
+
+depends_lib     port:libiconv port:gettext
+
+configure.args  --with-libiconv-prefix=${prefix} --with-libintl-prefix=${prefix}
+
+# the internal "check.h" header conflicts with port check's <check.h>
+configure.cppflags -I${worksrcpath}/src/liblzma/check -I${prefix}/include
+
+# the library is being provided by the liblzma port instead
+post-destroot {
+    file delete -force ${destroot}${prefix}/include/lzma.h
+    file delete -force ${destroot}${prefix}/include/lzma_adv.h
+    foreach lib [glob ${destroot}${prefix}/lib/liblzma*] { file delete $lib }
+    file delete ${destroot}${prefix}/lib/pkgconfig/lzma.pc
+}

@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Model examples live in $RAILS_ROOT/spec/models/.
+- !ruby/struct:SM::Flow::P 
+  body: Model examples use Spec::Rails::Example::ModelExampleGroup, which provides support for fixtures and some custom expectations via extensions to ActiveRecord::Base.
+constants: []
+
+full_name: Spec::Rails::Example::ModelExampleGroup
+includes: []
+
+instance_methods: []
+
+name: ModelExampleGroup
+superclass: RailsExampleGroup

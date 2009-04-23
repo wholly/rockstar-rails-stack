@@ -1,0 +1,16 @@
+# $Id: Portfile 33894 2008-02-07 02:45:08Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Test-Pod-Coverage 1.08
+maintainers           narf_tm openmaintainer
+description           Check for pod coverage in a distribution
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 33405cca7c75b7b89c06ba30eea66692
+
+depends_lib-append    port:p5-pod-coverage \
+                      port:p5-test-simple

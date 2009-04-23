@@ -1,0 +1,24 @@
+# $Id: Portfile 45942 2009-01-25 22:45:59Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           haskell 1.0
+haskell.setup       bytestring-lexing 0.2
+maintainers         blb openmaintainer
+description         Parse literals efficiently from ByteStrings
+long_description \
+   Parse literals efficiently from GHC's ByteString type.  At the moment, \
+   only Doubles are supported.  Reading Ints and Integers is supported by \
+   GHC's included ByteString module.
+
+platforms           darwin
+
+checksums           md5     42e2346d8eacb5be5342d8b3d87b6cad \
+                    sha1    4d173786aa7cef0bd129ca4cb856ecca122c7a1f \
+                    rmd160  3b5352acfd19694bbd68ceead2827e4d290daa5b
+
+depends_build-append   port:alex
+
+configure.args-append   --enable-library-profiling
+
+build.args-append   -v
+

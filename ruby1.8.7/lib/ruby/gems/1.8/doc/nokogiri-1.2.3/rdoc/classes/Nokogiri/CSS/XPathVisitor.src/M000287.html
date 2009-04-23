@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>visit_attribute_condition (Nokogiri::CSS::XPathVisitor)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/css/xpath_visitor.rb, line 62</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">visit_attribute_condition</span> <span class="ruby-identifier">node</span>
+         <span class="ruby-identifier">attribute</span> = <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:FUNCTION</span>) <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/::/</span>)
+                       <span class="ruby-value str">''</span>
+                     <span class="ruby-keyword kw">else</span>
+                       <span class="ruby-value str">'@'</span>
+                     <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">attribute</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">accept</span>(<span class="ruby-keyword kw">self</span>)
+
+        <span class="ruby-comment cmt"># Support non-standard css</span>
+        <span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^@@/</span>, <span class="ruby-value str">'@'</span>)
+
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">attribute</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+
+        <span class="ruby-identifier">value</span> = <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">last</span>
+        <span class="ruby-identifier">value</span> = <span class="ruby-node">&quot;'#{value}'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/^['&quot;]/</span>
+
+        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>]
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'*='</span>
+          <span class="ruby-node">&quot;contains(#{attribute}, #{value})&quot;</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'^='</span>
+          <span class="ruby-node">&quot;starts-with(#{attribute}, #{value})&quot;</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'|='</span>
+          <span class="ruby-node">&quot;#{attribute} = #{value} or starts-with(#{attribute}, concat(#{value}, '-'))&quot;</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'~='</span>
+          <span class="ruby-node">&quot;contains(concat(\&quot; \&quot;, #{attribute}, \&quot; \&quot;),concat(\&quot; \&quot;, #{value}, \&quot; \&quot;))&quot;</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'$='</span>
+          <span class="ruby-node">&quot;substring(#{attribute}, string-length(#{attribute}) - &quot;</span> <span class="ruby-operator">+</span>
+            <span class="ruby-node">&quot;string-length(#{value}) + 1, string-length(#{value})) = #{value}&quot;</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">attribute</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; #{node.value[1]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{value}&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

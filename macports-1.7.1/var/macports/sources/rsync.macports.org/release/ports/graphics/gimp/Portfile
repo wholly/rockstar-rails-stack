@@ -1,0 +1,74 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 48263 2009-03-17 22:24:47Z devans@macports.org $
+
+PortSystem 1.0
+
+name            gimp
+version         2.6.6
+categories      graphics
+maintainers     devans
+homepage        http://www.gimp.org/
+platforms       darwin
+
+description     The Gimp - Batteries Included
+long_description \
+    "This is a META port for the gimp2 which includes help and documentation, \
+        support for icns, jp2000 and RAW formats, content-aware rescaling \
+        Gutenprint and scanner frontends and even a nice theme (Nodoka). \
+    Mac OS X users also get a Gimp.app bundle, a \"Show in Finder\" menu \
+        and clipboard integration."
+
+depends_lib     port:icns-gimp \
+                port:gimp-jp2 \
+                port:gimp-lqr-plugin \
+                port:gtk-nodoka-engine \
+                port:gutenprint \
+                port:ufraw \
+                port:xsane
+
+platform macosx {
+    depends_lib-append  port:gimp-app \
+                        port:macclipboard-gimp \
+                        port:macfile-gimp
+}
+
+distfiles
+master_sites
+use_configure   no
+build           {}
+
+destroot {
+    xinstall -d ${destroot}${prefix}/share/gimp/2.0/themes/Nodoka
+    system "cd ${destroot}${prefix}/share/gimp/2.0/themes/Nodoka &&
+        ln -s ${prefix}/share/themes/Nodoka/gtk-2.0/gtkrc"
+}
+
+variant animation description "Include the Gimp Animation Package (gimp-gap)." {
+    depends_lib-append  path:lib/gimp/2.0/plug-ins/gap_plugins:gimp-gap-devel
+    post-activate {
+        if {[file isdirectory ${prefix}/lib/gimp-gap-2.4/]} {
+            ui_msg "
+*******
+******* You have selected the +animation variant and port gimp-gap 2.4
+******* is installed.  This will work but be aware that gimp-gap 2.4
+******* was written for the gimp 2.4 release series and may not be
+******* completely compatible with gimp ${version}.
+*******
+******* You may wish to try port gimp-gap-devel, a development version leading
+******* up to the gimp-gap 2.6 release. While not yet a stable release,
+******* this version is better integrated into gimp ${version} and offers many new
+******* features.
+*******
+******* To switch from gimp-gap to gimp-gap-devel do the following:
+*******
+*******    sudo port deactivate gimp-gap
+*******    sudo port install gimp-gap-devel
+*******
+"
+        }
+    }
+}
+
+variant manual description {Include the help files.} {
+    depends_lib-append  port:gimp-user-manual
+}

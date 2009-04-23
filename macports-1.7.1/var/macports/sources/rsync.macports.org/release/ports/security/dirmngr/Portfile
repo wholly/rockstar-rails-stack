@@ -1,0 +1,55 @@
+# $Id: Portfile 44020 2008-12-19 18:08:37Z jmr@macports.org $
+
+PortSystem  1.0
+
+name        dirmngr
+version     1.0.2
+categories  security mail
+maintainers boeyms openmaintainer
+description X.509 certificate directory manager for GnuPG
+long_description    \
+    Dirmngr is a server for managing and downloading certificate \
+    revocation lists (CRLs) for X.509 certificates and for downloading \
+    the certificates themselves. Dirmngr also handles OCSP requests as \
+    an alternative to CRLs. Dirmngr is either invoked internaly by \
+    gpgsm (from gnupg 1.9) or when running as a system daemon through \
+    the dirmngr-client tool.
+homepage    http://www.gnupg.org
+platforms   darwin
+master_sites    gnupg
+
+use_bzip2   yes
+checksums   md5 88d62a348903009cbc96212e4684c89c \
+            sha1 55c82f918731f142cbe26d598a97c0c08bd7d1f8 \
+            rmd160 671d853b53fc83c96e5d0005316442c70cf497dd
+
+patchfiles  patch-tests__Makefile.in.diff
+
+depends_lib port:libiconv       \
+            port:gettext        \
+            port:libassuan      \
+            port:libksba        \
+            port:libgcrypt      \
+            port:libgpg-error   \
+            port:pth            \
+            port:openldap
+
+test.run    yes
+test.dir    ${worksrcpath}/tests
+test.target     check
+
+platform darwin {
+#   Get around the fact that Darwin linker complains about multiply defined
+#   symbols since DirMngr doesn't currently test for presence strcasecmp
+    configure.cflags-append -DHAVE_STRCASECMP=1
+#   Do something to fix the fact that, for some reason, -llber is required
+    configure.env-append    LDAPLIBS="-lldap -llber"
+}
+
+platform darwin 7 {
+    configure.ldflags-append    -framework IOKit
+}
+
+livecheck.check regex
+livecheck.url   http://mirrors.rootmode.com/ftp.gnupg.org/gnupg/?O=D
+livecheck.regex gnupg-(\\d+\\.\\d+\\.\\d+)

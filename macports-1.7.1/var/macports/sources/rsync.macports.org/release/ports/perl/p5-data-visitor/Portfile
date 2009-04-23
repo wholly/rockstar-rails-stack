@@ -1,0 +1,23 @@
+# $Id: Portfile 44002 2008-12-19 15:27:43Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Data-Visitor 0.22
+maintainers           narf_tm openmaintainer
+description           Visitor style traversal of Perl data structures
+long_description      This module is a simple visitor implementation \
+                      for Perl values.
+
+platforms             darwin
+
+checksums             md5 f3bca28efc96aef200dd6bba74510c12 \
+                      sha1 9d18f6366ad8e597e57d6f780dd7196ca62f4dce \
+                      rmd160 485b975ecfcf6491ebe16d7ea5f61fdd1e98e83c
+
+depends_lib-append    port:p5-mouse \
+                      port:p5-namespace-clean \
+                      port:p5-task-weaken \
+                      port:p5-test-mockobject \
+                      port:p5-test-use-ok \
+                      port:p5-tie-toobject

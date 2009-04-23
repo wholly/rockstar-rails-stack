@@ -1,0 +1,53 @@
+# $Id: Portfile 47953 2009-03-11 14:36:33Z gwright@macports.org $
+
+PortSystem 1.0
+
+name		cadabra
+version		1.08
+categories	math
+platforms	darwin
+maintainers	gwright
+description	A field theory approach to symbolic computer algebra
+long_description \
+	Cadabra is a computer algebra system for the manipulation	\
+	of what could loosely be called tensorial expressions. It is	\
+	aimed at, though not necessarily restricted to, theoretical	\
+	high energy physicists. Because of its target audience, the	\
+	program's interface, storage system and underlying philosophy	\
+	differ substantially from other computer algebra systems.
+
+homepage	http://www.aei.mpg.de/~peekas/cadabra/
+master_sites	${homepage}/
+
+checksums	md5     a33a17c0794ce7e40b600a0f23bbfff2		\
+		sha1    c631dbca7816d2259795184a8bcc583cc9394235	\
+		rmd160  719305cd6d12ffcbf0cfe62df535ffe6ddfe9d55
+
+variant texmacs	description { install TeXmacs from end } {
+		  depends_run port:TeXmacs
+		}
+
+variant no_gui  description { do not build GUI } {
+		  depends_lib-delete port:gtkmm
+		  configure.args-append	--disable-gui
+		}
+
+patchfiles	patch-Makefile.in.diff
+
+depends_lib	port:modglue	\
+		port:pcre	\
+		port:gmp	\
+		port:LiE	\
+		port:gtkmm	\
+		port:texlive
+
+build.env	CC=gcc CXX=g++
+
+post-build	{
+		  system "env CDB_LOG=1 ${build.cmd} advtest"
+		}
+
+post-activate	{
+		  system "texhash"
+		}
+

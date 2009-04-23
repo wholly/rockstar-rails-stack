@@ -1,0 +1,17 @@
+# $Id: Portfile 45874 2009-01-23 20:57:05Z narf_tm@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Set-Object 1.27
+maintainers         narf_tm openmaintainer
+description         set of objects and strings
+long_description    This modules implements a set of objects, \
+                    that is, an unordered collection of objects \
+                    without duplication.
+
+platforms           darwin
+
+checksums           md5 619697cb17b709f566d4985edc9352cb \
+                    sha1 e5affbec5d7fa7dd9e75b784ae5dfe7adbbe4c98 \
+                    rmd160 297db263af2cb669a0980993b8548315ae41f7e2

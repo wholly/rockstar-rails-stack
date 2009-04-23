@@ -1,0 +1,29 @@
+# $Id: Portfile 41240 2008-10-28 23:37:30Z pguyot@kallisys.net $
+
+PortSystem 1.0
+
+name		aspell-dict-es
+version		1.9a
+categories	textproc
+maintainers	nomaintainer
+description	Spanish dictionary for aspell
+homepage	http://aspell.net/
+platforms	darwin
+universal_variant   no
+
+long_description Aspell with Spanish dictionary.
+
+master_sites	gnu:aspell/dict/es
+
+distname	aspell6-es-${version}-1
+checksums	md5 473c980181e1930d075c6111a7a68e49 \
+		sha1 02edeca6efdc6c82b649bc85308f15a0df5b9258 \
+		rmd160 294e456632babcc37f09805547f3a850316632cc
+
+use_bzip2	yes
+
+depends_build	port:aspell
+
+configure	{ system "cd ${worksrcpath} && ./configure \
+		    --vars ASPELL=${prefix}/bin/aspell \
+		    WORD_LIST_COMPRESS=${prefix}/bin/word-list-compress" }

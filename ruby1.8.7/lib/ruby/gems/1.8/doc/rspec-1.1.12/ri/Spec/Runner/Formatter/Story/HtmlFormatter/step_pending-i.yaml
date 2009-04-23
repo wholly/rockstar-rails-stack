@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Runner::Formatter::Story::HtmlFormatter#step_pending
+is_singleton: false
+name: step_pending
+params: (type, description, *args)
+visibility: public

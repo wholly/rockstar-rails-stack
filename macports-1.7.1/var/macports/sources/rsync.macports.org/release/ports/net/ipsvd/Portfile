@@ -1,0 +1,43 @@
+# $Id: Portfile 30239 2007-10-23 01:55:09Z jmpp@macports.org $
+
+PortSystem 1.0
+name             ipsvd
+version          0.10.1
+categories       net
+maintainers      nomaintainer
+description      internet protocol service daemons
+long_description \
+	ipsvd is a set of internet protocol service \
+	daemons for Unix. It currently includes a \
+	TCP/IP service daemon, and a UDP/IP service \
+	daemon.
+homepage         http://smarden.org/ipsvd/
+platforms        darwin
+master_sites     ${homepage}
+checksums        md5 076121e7b2011aad6f94e7025c37a4c7
+
+use_configure    no
+
+worksrcdir       net/${name}-${version}
+
+build.dir        ${worksrcpath}/src
+build.target
+
+test.run         yes
+test.target      check
+
+destroot {
+	foreach app {ipsvd-cdb tcpsvd udpsvd} {
+		xinstall -m 555 ${build.dir}/${app} \
+			${destroot}${prefix}/sbin
+		xinstall -m 444 ${worksrcpath}/man/${app}.8 \
+			${destroot}${prefix}/share/man/man8
+	}
+
+	xinstall -m 444 ${worksrcpath}/man/ipsvd-instruct.5 \
+		${destroot}${prefix}/share/man/man5
+	xinstall -m 444 ${worksrcpath}/man/ipsvd.7 \
+		${destroot}${prefix}/share/man/man7
+	xinstall -m 444 ${worksrcpath}/man/sslio.8 \
+		${destroot}${prefix}/share/man/man8
+}

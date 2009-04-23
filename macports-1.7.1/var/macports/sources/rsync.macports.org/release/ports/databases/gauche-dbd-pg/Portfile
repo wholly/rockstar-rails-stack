@@ -1,0 +1,25 @@
+# $Id: Portfile 36963 2008-05-21 11:12:55Z jmr@macports.org $
+
+PortSystem 1.0
+name                gauche-dbd-pg
+version             0.2.1
+categories          databases scheme
+maintainers         nomaintainer
+description         Gauche database driver for PostgreSQL
+homepage            http://www.kahua.org/cgi-bin/kahua.fcgi/kahua-web/show/dev/DBI
+master_sites        http://www.kahua.org/download/dbi/
+distname            Gauche-dbd-pg-${version}
+extract.suffix		.tgz
+checksums           md5 453dc296365dfbc47d465f29e6552627
+depends_lib         port:gauche lib:libpq:postgresql80
+configure.env-append PATH=${prefix}/lib/pgsql8/bin:\${PATH}
+test.run            yes
+test.target         check
+destroot.destdir    prefix=${destroot}${prefix}
+
+variant postgresql7 {
+    configure.env-delete PATH=${prefix}/lib/pgsql8/bin:\${PATH}
+    configure.env-append PATH=${prefix}/bin:\${PATH}
+    depends_lib-delete lib:libpq:postgresql80
+    depends_lib     port:postgresql7
+}

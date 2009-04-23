@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::Runner::StoryMediator::Scenario#last_step
+is_singleton: false
+name: last_step
+params: ()
+visibility: public

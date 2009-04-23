@@ -1,0 +1,38 @@
+# $Id: Portfile 44307 2008-12-25 05:11:19Z blb@macports.org $
+
+PortSystem 1.0
+
+name                gnome-session
+version             2.24.2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Session component for the GNOME 2 desktop
+long_description \
+   Session component for the GNOME 2.0 desktop.  This package contains the \
+   commands needed to start GNOME 2.0.
+maintainers         nomaintainer
+categories          gnome
+platforms           darwin
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/${name}/${branch}/
+
+checksums           md5     13e882a8c73bebb5403c207da0455156 \
+                    sha1    dff795c6fd372910e9fc613dfc4b9b2326be1f97 \
+                    rmd160  19532398cae3f9e54029824676df749ad2c4738f
+
+depends_lib         port:gnome-desktop \
+                    port:gnome-control-center \
+                    port:dbus \
+                    port:dbus-glib \
+                    port:libwnck \
+                    port:gnome-keyring
+
+use_bzip2           yes
+
+post-activate {
+   system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/GNOME/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-([0-9\.]+)}
+

@@ -1,0 +1,23 @@
+# $Id: Portfile 30256 2007-10-23 02:26:16Z jmpp@macports.org $
+
+PortSystem 1.0
+name		antiword
+version		0.37
+categories	textproc
+maintainers	nomaintainer
+description	Utility to read Microsoft Word (.doc) files
+homepage	http://www.winfield.demon.nl/index.html
+platforms	darwin
+
+long_description Antiword is a utility that can read binary files from \
+		 Microsoft Word 6, 7, 97, and 2000.
+
+master_sites	http://www.winfield.demon.nl/linux/
+
+checksums	md5 f868e2a269edcbc06bf77e89a55898d1
+
+patchfiles	patch-Makefile.Linux
+
+configure	{ reinplace "s|/usr|${prefix}|g" ${worksrcpath}/antiword.h }
+
+destroot.args	prefix=${destroot}${prefix}

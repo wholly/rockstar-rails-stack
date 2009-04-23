@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.txt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.txt</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.txt
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Apr 23 14:46:49 +0600 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../classes/Spec/Rails.html">Spec::Rails</a></h1>
+<ul>
+<li><a href="http://rspec.info">rspec.info</a>
+
+</li>
+<li><a
+href="http://rubyforge.org/projects/rspec">rubyforge.org/projects/rspec</a>
+
+</li>
+<li><a
+href="http://github.com/dchelimsky/rspec-rails/wikis">github.com/dchelimsky/rspec-rails/wikis</a>
+
+</li>
+<li><a href="mailto:rspec-devel@rubyforge.org">rspec-devel@rubyforge.org</a>
+
+</li>
+</ul>
+<h2>DESCRIPTION:</h2>
+<p>
+Behaviour Driven Development for Ruby on Rails.
+</p>
+<p>
+<a href="../classes/Spec/Rails.html">Spec::Rails</a> (a.k.a. RSpec on
+Rails) is an RSpec extension that allows you to drive the development of
+your RoR application using RSpec.
+</p>
+<h2>FEATURES:</h2>
+<ul>
+<li>Use RSpec to independently specify Rails Models, Views, Controllers and
+Helpers
+
+</li>
+<li>Integrated fixture loading
+
+</li>
+<li>Special generators for Resources, Models, Views and Controllers that
+generate RSpec code examples.
+
+</li>
+</ul>
+<h2>VISION:</h2>
+<p>
+For people for whom TDD is a brand new concept, the testing support built
+into Ruby on Rails is a huge leap forward. The fact that it is built right
+in is fantastic, and Ruby on Rails apps are generally much easier to
+maintain than they might have been without such support.
+</p>
+<p>
+For those of us coming from a history with TDD, and now BDD, the existing
+support presents some problems related to dependencies across examples. To
+that end, RSpec on Rails supports 4 types of examples. We’ve also built
+in first class mocking and stubbing support in order to break dependencies
+across these different concerns.
+</p>
+<h2>MORE INFORMATION:</h2>
+<p>
+See <a href="../classes/Spec/Rails/Example.html">Spec::Rails::Example</a>
+for information about the different kinds of example groups you can use to
+spec the different Rails components
+</p>
+<p>
+See <a href="../classes/Spec/Rails/Matchers.html">Spec::Rails::Matchers</a>
+for information about Rails-specific expectations you can set on responses
+and models, etc.
+</p>
+<h2>INSTALL</h2>
+<ul>
+<li>Visit <a
+href="http://github.com/dchelimsky/rspec-rails/wikis">github.com/dchelimsky/rspec-rails/wikis</a>
+for installation instructions.
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

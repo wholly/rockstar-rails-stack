@@ -1,0 +1,30 @@
+# $Id: Portfile 30224 2007-10-22 22:49:14Z jmpp@macports.org $
+
+PortSystem 1.0
+name            oniguruma
+version         4.6.2
+revision        1
+maintainers     nomaintainer
+categories      devel
+platforms       darwin
+homepage        http://www.geocities.jp/kosako3/oniguruma/
+
+description     A regular expressions library.
+long_description \
+    Oniguruma is a regular expressions library in which \
+    different character encoding can be specified for every expression. \
+    Version 4.x supports Ruby1.9.
+
+distname        onig-${version}
+master_sites    http://www.geocities.jp/kosako3/oniguruma/archive/
+checksums       md5 720291233bc663111e05031ec78467a1
+
+pre-fetch {
+    return -code error "
+            
+            Please use either 
+                oniguruma4 (for ruby support) 
+            or 
+                oniguruma5 (for unicode support)
+            "
+}

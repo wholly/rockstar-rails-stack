@@ -1,0 +1,56 @@
+# $Id: Portfile 50022 2009-04-22 20:04:59Z blair@macports.org $
+
+PortSystem 1.0
+
+name		scala
+version		2.7.3.99.2.7.4.1
+categories	lang java
+maintainers	blair
+description	The Scala Programming Language
+long_description \
+		Scala is a modern multi-paradigm programming language \
+		designed to express common programming patterns in a \
+		concise, elegant, and type-safe way.  It smoothly \
+		integrates features of object-oriented and functional \
+		languages.  It runs inside a Java Virtual Machine and \
+			is fully interoperable with Java.
+homepage	http://www.scala-lang.org/
+platforms	darwin
+
+master_sites	${homepage}downloads/distrib/files/
+distname	scala-2.7.4.RC1
+extract.suffix	.tgz
+checksums	md5 a3df40b56cf587ca68792bc6a42d480e \
+		sha1 09037d03cb1b1488211383863daf3c4e2f6abce6 \
+		rmd160 94124a09227cd7fc14bb1ea2d769a0f09ed9163c
+
+use_configure	no
+build		{}
+
+destroot {
+	set sharedir ${destroot}${prefix}/share
+	set scaladir ${sharedir}/scala
+	set docscaladir ${sharedir}/doc/scala
+
+	xinstall -d -m 755 ${sharedir}
+	file copy ${worksrcpath} ${scaladir}
+
+	foreach app {fsc sbaz sbaz-setup scala scalac scaladoc scalap} {
+		ln -s ../share/scala/bin/$app ${destroot}${prefix}/bin/${app}
+	}
+
+	file delete ${sharedir}/man/man1
+	file rename ${scaladir}/man/man1 ${sharedir}/man/man1
+	file delete -force ${scaladir}/man
+
+	xinstall -d -m 755 ${docscaladir}
+	foreach doc {sbaz sbaz-setup} {
+		file rename ${scaladir}/doc/${doc} ${docscaladir}/${doc}
+	}
+	file delete -force ${scaladir}/doc
+
+	xinstall -d -m 755 ${sharedir}/java
+	foreach f {sbaz-tests.jar sbaz.jar scala-compiler.jar scala-dbc.jar scala-decoder.jar scala-library.jar} {
+		ln -s ../scala/lib/${f} ${sharedir}/java/${f}
+	}
+}

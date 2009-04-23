@@ -1,0 +1,33 @@
+# $Id: Portfile 39900 2008-09-11 05:17:02Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name		vips
+version		7.16.1
+set branch	[join [lrange [split ${version} .] 0 1] .]
+description	VIPS is an image processing library.
+long_description	VIPS is an image processing library. It's good for \
+			large images and for colour.
+maintainers	gmail.com:jcupitt
+categories	graphics
+platforms	darwin
+homepage	http://www.vips.ecs.soton.ac.uk
+master_sites	${homepage}/supported/${branch}/
+checksums	md5 f820bf98db71cc96da424d4c426036fd
+
+depends_build	port:pkgconfig \
+		port:swig
+
+depends_lib	port:fftw-3 \
+		port:glib2 \
+		port:jpeg \
+		port:libpng \
+		port:tiff \
+		port:ImageMagick \
+		port:openexr \
+		port:lcms \
+		port:zlib \
+		port:pango \
+		port:libexif \
+		port:liboil \
+		port:libxml2

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Rails::Mocks::ModelStubber#new_record?
+is_singleton: false
+name: new_record?
+params: ()
+visibility: public

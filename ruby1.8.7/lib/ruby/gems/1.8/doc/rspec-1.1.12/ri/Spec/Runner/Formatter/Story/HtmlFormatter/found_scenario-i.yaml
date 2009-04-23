@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Runner::Formatter::Story::HtmlFormatter#found_scenario
+is_singleton: false
+name: found_scenario
+params: (type, description)
+visibility: public

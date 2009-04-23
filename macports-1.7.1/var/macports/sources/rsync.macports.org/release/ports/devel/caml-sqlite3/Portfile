@@ -1,0 +1,35 @@
+# $Id: Portfile 47078 2009-02-21 18:50:06Z mww@macports.org $
+
+PortSystem          1.0
+
+name                caml-sqlite3
+version             1.3.0
+categories          devel ml databases
+maintainers         landonf openmaintainer
+description         OCaml bindings for SQLite 3
+long_description    ${description}
+
+homepage            http://www.ocaml.info/home/ocaml_sources.html
+platforms           darwin
+master_sites        http://www.ocaml.info/ocaml_sources/
+
+distname            ocaml-sqlite3-${version}
+
+
+checksums           md5     8ed5bebf6fb0dd06acebb82ed242cbb0 \
+                    sha1    768d90129216578f645d2ba0c28f48889e4426b6 \
+                    rmd160  105cacd607fbb59f1d9cc3764d76097af1d9c1f5
+
+depends_lib         port:ocaml \
+                    port:caml-findlib \
+                    port:sqlite3
+
+patchfiles          patch-Makefile.in
+
+configure.args      --with-sqlite3=${prefix}
+
+pre-destroot {
+    set ocaml_site_path [exec ocamlfind printconf destdir]
+    file mkdir ${destroot}/${ocaml_site_path}
+    file mkdir ${destroot}/${ocaml_site_path}/stublibs
+}

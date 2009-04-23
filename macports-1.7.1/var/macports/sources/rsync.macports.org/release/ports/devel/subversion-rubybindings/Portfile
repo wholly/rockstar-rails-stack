@@ -1,0 +1,83 @@
+# $Id: Portfile 49469 2009-04-10 14:58:55Z dluke@macports.org $
+
+PortSystem 1.0
+
+name			subversion-rubybindings
+version			1.6.1
+categories		devel ruby
+platforms		darwin
+maintainers		dluke@geeklair.net
+description		Ruby bindings for the subversion version control system.
+
+long_description	Subversion is a version control system designed to be \
+			as similar to cvs(1) as possible, while fixing many \
+			outstanding problems with cvs(1). The ruby bindings \
+			provide access to subversion API from ruby.
+
+homepage		http://subversion.tigris.org/
+master_sites		${homepage}/downloads/
+use_bzip2		yes
+checksums		md5 95708b96b920faeffca017f43ec96777 \
+			sha1 de01efed25505d689c369a67fbf9b2d2f02e4795 \
+			rmd160 b3cc8e6cf46c8e4ad4adbee6e3dec186ae790257
+
+distname		subversion-${version}
+dist_subdir		subversion
+
+test.run		yes
+test.target		check-swig-rb
+
+depends_lib		port:expat port:neon \
+			port:apr port:apr-util \
+			port:db46 port:subversion \
+			port:ruby port:sqlite3 \
+			port:gettext port:libiconv \
+			port:serf port:cyrus-sasl2
+
+configure.env		RUBY=${prefix}/bin/ruby
+configure.args		--with-berkeley-db=yes \
+			--with-neon=${prefix} --with-apr=${prefix}/bin/apr-1-config \
+			--with-apr-util=${prefix}/bin/apu-1-config --without-apxs \
+			--mandir=\\\${prefix}/share/man \
+			--disable-neon-version-check --with-serf=${prefix} \
+			--with-sasl=${prefix}
+
+build.target		swig-rb
+destroot.target		install-swig-rb
+
+pre-test {
+			set x {}
+			fs-traverse dir ${worksrcpath}/subversion {
+				if {[file tail ${dir}] == ".libs" && [file isdirectory ${dir}]} {
+				lappend x ${dir}
+				continue
+				}
+			}
+
+			test.env-append DYLD_LIBRARY_PATH=[join ${x} ":"]
+			}
+
+pre-configure {		reinplace "s|hardcode_direct=yes|hardcode_direct=no|g" \
+				${worksrcpath}/configure
+			}
+
+post-configure {	reinplace "s|need_relink=yes|need_relink=no|g" \
+				${worksrcpath}/libtool
+			}
+
+variant no_bdb description {Build without support for BerkeleyDB repositories} {
+		        depends_lib-delete      port:db46 port:py-bsddb
+                        configure.args-delete   --with-berkeley-db=yes
+                        configure.args-append   --without-berkeley-db
+                        }
+
+variant no_neon description {Build without neon (http/https support)} {
+			depends_lib-delete      port:neon
+                        configure.args-append   --without-neon
+                        configure.args-delete   --with-neon=${prefix}
+                        }
+
+# 10.3 says -> CarbonCore/MacTypes.h: No such file or directory
+platform darwin 7 {		configure.args-append \
+					--disable-keychain
+				}

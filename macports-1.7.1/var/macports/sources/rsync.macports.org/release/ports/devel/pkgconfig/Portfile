@@ -1,0 +1,41 @@
+# $Id: Portfile 42121 2008-11-15 22:24:23Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                pkgconfig
+version             0.23
+revision            1
+categories          devel
+maintainers         ryandesign
+homepage            http://pkg-config.freedesktop.org/
+master_sites        ${homepage}releases/ \
+                    http://www.vg.kernel.org/pub/mirrors/gentoo/source/distfiles/
+distname            pkg-config-${version}
+platforms           darwin freebsd
+use_parallel_build  yes
+
+description \
+	System for managing library compile and link flags
+
+long_description \
+	The pkg-config program is used to retrieve information about \
+	installed libraries in the system. It is typically used to compile \
+	and link against one or more libraries.
+
+checksums \
+	md5 d922a88782b64441d06547632fd85744 \
+	sha1 b59dddd6b5320bd74c0f74b3339618a327096b2a \
+	rmd160 0aa5565430d609319917ac2c8ffeaa5e4a509489
+
+configure.args \
+	--enable-indirect-deps \
+	--with-pc-path=${prefix}/lib/pkgconfig:${prefix}/share/pkgconfig:${x11prefix}/lib/pkgconfig
+
+platform darwin 6 {
+	configure.cppflags-append \
+		-no-cpp-precomp
+}
+
+livecheck.check     regex
+livecheck.url       "${homepage}releases/?C=M&O=D"
+livecheck.regex     pkg-config-(\[0-9.\]+)\\.tar

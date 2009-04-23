@@ -1,0 +1,51 @@
+# $Id: Portfile 50020 2009-04-22 18:38:34Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name                pari
+version             2.3.4
+categories          math
+platforms           darwin
+maintainers         vincent-opdarw@vinc17.org
+description         PARI/GP computer algebra system
+long_description    PARI/GP is a widely used computer algebra system designed \
+                    for fast  computations in number theory (factorizations, \
+                    algebraic number theory,  elliptic curves...)
+homepage            http://pari.math.u-bordeaux.fr/
+master_sites        ${homepage}/pub/pari/unix/
+checksums           md5 35c896266e4257793387ba22d5d76078 \
+                    sha1 0c97456c5fc7e9fe774ceb44aaf77e9ba9574ae6 \
+                    rmd160 d3bf1f24c0f321ccee309bc2b4c15c8a263fb73f
+depends_build       path:${prefix}/bin/tex:texlive
+depends_lib         port:xorg-libX11 port:ncurses port:readline
+
+build.target        gp docpdf
+
+# PARI/GP doesn't use autoconf, and if only *FLAGS environment variables are
+# used, libreadline is not found. One needs *PATH environment variables.
+configure.env       C_INCLUDE_PATH=${prefix}/include \
+                    LIBRARY_PATH=${prefix}/lib
+configure.args      --mandir=${prefix}/share/man --with-readline
+pre-configure {
+    file rename -force ${worksrcpath}/Configure ${worksrcpath}/configure
+}
+
+variant gmp description {GNU MP support} {
+    depends_lib-append port:gmp
+    configure.args-append --with-gmp
+}
+
+post-destroot {
+    set docdir ${destroot}${prefix}/share/doc/${name}
+    file mkdir ${docdir}
+    xinstall -m 644 -v -W ${worksrcpath} \
+      AUTHORS CHANGES COPYING ${docdir}
+    system "ln -s ../../${name}/doc ${docdir}/doc"
+    xinstall -m 644 -v -W ${worksrcpath}/doc \
+      develop.pdf libpari.pdf refcard.pdf tutorial.pdf users.pdf \
+      ${destroot}${prefix}/share/${name}/doc
+}
+
+livecheck.check     regex
+livecheck.url       ${master_sites}?M=D
+livecheck.regex     ${name}-(\\d+\\.\\d+\\.\\d+)

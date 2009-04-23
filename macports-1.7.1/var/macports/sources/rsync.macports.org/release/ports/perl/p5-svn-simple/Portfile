@@ -1,0 +1,16 @@
+# $Id: Portfile 33867 2008-02-06 18:30:48Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		SVN-Simple 0.27
+maintainers		dluke@geeklair.net
+description		This is a Perl extension for driving svn delta editors (used by svk).
+long_description	${description}
+
+checksums		md5 6a5609e038421564051019649dd05fd0
+platforms		darwin
+master_sites		http://cpan.perl.org/authors/id/C/CL/CLKAO/
+homepage		http://search.cpan.org/~clkao/
+
+depends_lib-append	port:subversion-perlbindings

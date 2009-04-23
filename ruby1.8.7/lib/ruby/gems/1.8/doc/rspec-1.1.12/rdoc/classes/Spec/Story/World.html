@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Spec::Story::World</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Spec::Story::World</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/spec/story/world_rb.html">
+                lib/spec/story/world.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000119">And</a>&nbsp;&nbsp;
+      <a href="#M000116">Given</a>&nbsp;&nbsp;
+      <a href="#M000115">GivenScenario</a>&nbsp;&nbsp;
+      <a href="#M000118">Then</a>&nbsp;&nbsp;
+      <a href="#M000117">When</a>&nbsp;&nbsp;
+      <a href="#M000105">add_listener</a>&nbsp;&nbsp;
+      <a href="#M000103">create</a>&nbsp;&nbsp;
+      <a href="#M000112">dry_run</a>&nbsp;&nbsp;
+      <a href="#M000114">errors</a>&nbsp;&nbsp;
+      <a href="#M000111">errors</a>&nbsp;&nbsp;
+      <a href="#M000104">listeners</a>&nbsp;&nbsp;
+      <a href="#M000109">run_given_scenario_with_suspended_listeners</a>&nbsp;&nbsp;
+      <a href="#M000113">start_collecting_errors</a>&nbsp;&nbsp;
+      <a href="#M000106">step_mother</a>&nbsp;&nbsp;
+      <a href="#M000108">step_names</a>&nbsp;&nbsp;
+      <a href="#M000110">store_and_call</a>&nbsp;&nbsp;
+      <a href="#M000107">use</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="../Example/Pending.html">::Spec::Example::Pending</a></span>
+        <span class="include-name"><a href="../Matchers.html">::Spec::Matchers</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000105" class="method-detail">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000105.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000105.html');return false;">
+          <span class="method-name">add_listener</span><span class="method-args">(listener)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000103.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000103.html');return false;">
+          <span class="method-name">create</span><span class="method-args">(cls = Object, *args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000112" class="method-detail">
+        <a name="M000112"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000112.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000112.html');return false;">
+          <span class="method-name">dry_run</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000111" class="method-detail">
+        <a name="M000111"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000111.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000111.html');return false;">
+          <span class="method-name">errors</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000104.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000104.html');return false;">
+          <span class="method-name">listeners</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000109" class="method-detail">
+        <a name="M000109"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000109.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000109.html');return false;">
+          <span class="method-name">run_given_scenario_with_suspended_listeners</span><span class="method-args">(world, type, name, scenario)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000106.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000106.html');return false;">
+          <span class="method-name">step_mother</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000108.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000108.html');return false;">
+          <span class="method-name">step_names</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000110" class="method-detail">
+        <a name="M000110"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000110.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000110.html');return false;">
+          <span class="method-name">store_and_call</span><span class="method-args">(world, type, name, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000107.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000107.html');return false;">
+          <span class="method-name">use</span><span class="method-args">(steps)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000119" class="method-detail">
+        <a name="M000119"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000119.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000119.html');return false;">
+          <span class="method-name">And</span><span class="method-args">(name, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000116" class="method-detail">
+        <a name="M000116"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000116.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000116.html');return false;">
+          <span class="method-name">Given</span><span class="method-args">(name, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000115" class="method-detail">
+        <a name="M000115"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000115.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000115.html');return false;">
+          <span class="method-name">GivenScenario</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000118" class="method-detail">
+        <a name="M000118"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000118.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000118.html');return false;">
+          <span class="method-name">Then</span><span class="method-args">(name, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000117" class="method-detail">
+        <a name="M000117"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000117.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000117.html');return false;">
+          <span class="method-name">When</span><span class="method-args">(name, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000114" class="method-detail">
+        <a name="M000114"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000114.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000114.html');return false;">
+          <span class="method-name">errors</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000113" class="method-detail">
+        <a name="M000113"></a>
+
+        <div class="method-heading">
+          <a href="World.src/M000113.html" target="Code" class="method-signature"
+            onclick="popupCode('World.src/M000113.html');return false;">
+          <span class="method-name">start_collecting_errors</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

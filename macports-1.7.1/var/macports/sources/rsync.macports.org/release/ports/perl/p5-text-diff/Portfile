@@ -1,0 +1,13 @@
+# $Id: Portfile 33868 2008-02-06 18:31:05Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		Text-Diff 0.35
+maintainers		dluke@geeklair.net
+description		This is a Perl extension for performing diffs on files and record sets.
+long_description	${description}
+
+checksums		md5 4931662ea353384dec2a54a71b26ee8c
+platforms		darwin
+depends_lib-append	port:p5-algorithm-diff

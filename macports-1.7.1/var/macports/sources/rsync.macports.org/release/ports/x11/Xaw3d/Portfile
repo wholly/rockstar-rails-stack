@@ -1,0 +1,74 @@
+# $Id: Portfile 48826 2009-03-29 22:07:22Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    Xaw3d
+version                 1.5E
+revision                4
+categories              x11
+maintainers             nomaintainer
+
+description \
+    The Three-D Athena Toolkit
+
+long_description \
+    This release of Xaw3d is based on X.Org's X11R6.3 Athena \
+    toolkit, with bits and pieces thrown in from other sources. \
+    It is intended to be a general-purpose replacement for the \
+    Athena (Xaw) toolkit. In general, you should be able to link \
+    almost any Athena-based application to this Xaw3d Athena \
+    toolkit, for a three-dimensional appearance on most of the \
+    widgets. On systems with shared libraries, you might be able \
+    replace your shared libXaw.* with libXaw3d.* to obtain the \
+    appearance without even relinking, but the odds of this \
+    working is slim, and not recommended.
+
+homepage                http://www.visi.com/~hawkeyd/xaw3d.html
+platforms               darwin
+master_sites            freebsd \
+                        ftp://ftp.visi.com/users/hawkeyd/X/
+checksums               md5 29ecfdcd6bcf47f62ecfd672d31269a1 \
+                        sha1 efc5b923feda52866c859c59a5b553cb675a69d1 \
+                        rmd160 086cbabaa45ce5c110815aea24eebcbb54613118
+
+depends_build \
+	path:bin/xmkmf:imake
+
+depends_lib \
+	port:xorg-libsm \
+	port:xorg-libXext \
+	port:xorg-libXmu \
+	port:xorg-libXp \
+	port:xpm \
+	port:xorg-libXt
+
+worksrcdir              xc/lib/${name}
+
+patch {
+    reinplace "s|XCOMM EXTRA_INCLUDES|EXTRA_INCLUDES|" "${worksrcpath}/Imakefile"
+    file mkdir ${worksrcpath}/X11
+    system "ln -fs .. ${worksrcpath}/X11/Xaw3d"
+}
+use_xmkmf               yes
+
+use_parallel_build      yes
+
+# This uses xmkmf to build and doesn't make a universal lib
+universal_variant	no
+
+if {[file exists ${prefix}/lib/pkgconfig/x11.pc]} {
+    build.target-append  INCROOT=${prefix}/include
+} else {
+    build.target-append  SHLIBGLOBALSFLAGS=-L${x11prefix}/lib
+}
+
+# The Imakefile default is to install everything into /usr/X11R6/lib,
+# which prevents multiple MacPorts installs on the same system.  Have
+# it install the entire package into ${prefix} instead.
+build.target-append     INCDIR=${prefix}/include \
+                        SHLIBDIR=${prefix}/lib \
+                        USRLIBDIR=${prefix}/lib
+
+destroot.destdir-append INCDIR=${prefix}/include \
+                        SHLIBDIR=${prefix}/lib \
+                        USRLIBDIR=${prefix}/lib

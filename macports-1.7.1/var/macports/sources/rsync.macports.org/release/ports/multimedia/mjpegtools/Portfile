@@ -1,0 +1,39 @@
+# $Id: Portfile 47504 2009-02-28 20:23:03Z devans@macports.org $
+
+PortSystem 1.0
+
+name		mjpegtools
+version		1.9.0
+categories	multimedia
+maintainers 	filippo.natali@gmail.com
+platforms	darwin
+description	Set of tools to record/playback/edit videos in MPEG format
+long_description	Programs for MJPEG recording and playback and simple cut-and-paste \
+			editing and MPEG compression of audio and video.
+
+homepage	http://mjpeg.sourceforge.net/
+master_sites	sourceforge:mjpeg
+
+checksums       md5     309a6fcf0900a010d6a9c1e91afc2f5c \
+                sha1    1701233354c7ea86b5b7808c4dd5d03a71118e48 \
+                rmd160  79e0eb4bce468bb8f12da336e29abe8fab390a5f
+
+depends_build	port:pkgconfig
+
+depends_lib	port:xorg-libXxf86dga \
+                port:gtk2 \
+                port:libsdl_gfx \
+                port:libpng \
+                port:jpeg \
+                port:libdv \
+                port:libquicktime
+
+configure.args  --mandir=${prefix}/share/man --infodir=${prefix}/share/info --enable-simd-accel --disable-sdltest --with-x
+
+variant no_x11 {
+         depends_lib-delete port:xorg-libXxf86dga
+         configure.args-delete --with-x
+         configure.args-append --without-x
+}
+
+livecheck.regex "<title>${name} (\\d+(?:\\.\\d+)*) released.*</title>"

@@ -1,0 +1,35 @@
+# $Id: Portfile 45603 2009-01-18 20:52:41Z jeremyhu@macports.org $
+PortSystem 1.0
+name		enlightenment
+version		0.16.8
+revision        1
+description	Enlightenment is a highly configurable windowmanager.
+long_description        Enlightenment is a completely themeable, \
+			highly configurable Window Manager for i \
+			the X Window System, traditionally used \
+			in Unix environments. 
+maintainers	nomaintainer
+categories	x11 x11-wm
+platforms	darwin 
+homepage	http://www.enlightenment.org/
+master_sites    sourceforge
+distname	e16-${version}
+checksums	md5 ab16ef2d4608f2b24175cc8be1cc8b1a
+
+depends_build \
+	port:pkgconfig
+
+depends_lib \
+	port:xorg-libsm \
+	port:xorg-libXcomposite \
+	port:xorg-libXdamage \
+	port:xorg-libXinerama \
+	port:xorg-libXrandr \
+	port:xorg-libXxf86vm \
+	port:freetype \
+	port:imlib2 \
+	port:esound \
+	port:gettext
+
+configure.args	--enable-fsstd=yes --mandir=${prefix}/share/man
+use_parallel_build yes

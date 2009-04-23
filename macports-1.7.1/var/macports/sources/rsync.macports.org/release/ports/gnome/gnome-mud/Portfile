@@ -1,0 +1,22 @@
+# $Id: Portfile 30228 2007-10-22 22:59:36Z jmpp@macports.org $
+
+PortSystem 1.0
+name		gnome-mud
+version		0.10.5
+description	GNOME-Mud is a mudclient for the GNOME platform. 
+long_description        ${description}
+maintainers	nomaintainer
+categories	gnome games
+platforms	darwin 
+homepage	http://amcl.sourceforge.net/
+master_sites    sourceforge:amcl
+checksums	md5 74908bc30500f9876715fc624d271340
+depends_lib	bin:gnome-session:gnome-session
+configure.cppflags-append "-L${prefix}/lib"
+configure.cflags-append "-no-cpp-precomp -flat_namespace -undefined suppress"
+configure.args	--without-python --mandir=${prefix}/share/man
+post-destroot	{
+		file copy ${destroot}${prefix}/games/gnome-mud \
+			  ${destroot}${prefix}/bin/gnome-mud
+		file delete ${destroot}${prefix}/games/gnome-mud
+		}

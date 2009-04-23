@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::Step#perform
+is_singleton: false
+name: perform
+params: (instance, *args)
+visibility: public

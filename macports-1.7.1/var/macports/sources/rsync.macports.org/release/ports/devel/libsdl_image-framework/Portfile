@@ -1,0 +1,71 @@
+# $Id: Portfile 47103 2009-02-22 03:31:04Z raimue@macports.org $
+
+PortSystem      1.0
+PortGroup       xcode 1.0
+
+name            libsdl_image-framework
+set my_name     SDL_image
+version         1.2.6
+revision        1
+categories      devel graphics
+platforms       macosx
+maintainers     nox openmaintainer
+description     Add on library for libSDL handling several image formats
+
+long_description \
+    This is a simple library to load images of various formats as SDL surfaces. \
+    This library supports BMP, PPM, PCX, GIF, JPEG, PNG, TGA, and TIFF formats.
+
+homepage        http://www.libsdl.org/projects/SDL_image/
+master_sites    ${homepage}release/
+distname        ${my_name}-${version}
+dist_subdir     [strsed ${name} {/-.*$//}]
+
+checksums       md5 b866dc4f647517bdaf57f6ffdefd013e \
+                sha1 5045df31e4db29d8890110fd18024c9d08efca30 \
+                rmd160 8aea5f07216eb887f599c0908f8ea2c2f9eeac93
+
+depends_lib     port:libpng \
+                port:jpeg \
+                port:zlib \
+                port:libsdl-framework
+
+xcode.project       Xcode/${my_name}.xcodeproj
+xcode.target        Framework
+xcode.destroot.type framework
+
+if {! [variant_isset universal]} {
+    set arch ${os.arch}
+    if {! [string compare ${os.arch} powerpc]} {
+        set arch ppc
+    }
+
+    xcode.build.settings    ARCHS=${arch}
+    xcode.destroot.settings ARCHS=${arch}
+}
+
+post-extract {
+    system "cd ${worksrcpath} && \
+        tar -xvzf Xcode.tar.gz Xcode/{exports/SDL_image.x,Info-Framework__Upgraded_.plist,${my_name}.xcodeproj}"
+}
+
+post-patch {
+    set pbxproj ${worksrcpath}/${xcode.project}/project.pbxproj
+
+    reinplace -E "/(MACOSX_DEPLOYMENT_TARGET|GCC_VERSION|SDKROOT)_ppc =/d" ${pbxproj}
+    reinplace "s|~/Library/Frameworks|./build/Frameworks|g" ${pbxproj}
+    reinplace "s|\$(HOME)/Library/Frameworks|${frameworks_dir}|g" ${pbxproj}
+    reinplace -E "s|(\t+)/Library/Frameworks|\\1${frameworks_dir}|g" ${pbxproj}
+    reinplace "s|graphics/include|${prefix}/include|g" ${pbxproj}
+    reinplace "s|graphics/lib|${prefix}/lib|g" ${pbxproj}
+}
+
+pre-destroot {
+    xcode.destroot.settings ${xcode.build.settings}
+}
+
+variant universal {}
+
+livecheck.check regex
+livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)
+

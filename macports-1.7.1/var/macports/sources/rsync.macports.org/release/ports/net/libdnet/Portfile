@@ -1,0 +1,24 @@
+# $Id: Portfile 32352 2007-12-27 07:06:28Z jmpp@macports.org $
+
+PortSystem          1.0
+name                libdnet
+version             1.11
+categories          net
+maintainers         nomaintainer
+description         portable low-level networking library
+long_description    libdnet provides a simplified, portable interface to \
+                    several low-level networking routines, including: \
+                    network address manipulation, kernel arp(4) cache and \
+                    route(4) table lookup and manipulation, network \
+                    firewalling (IP filter, ipfw, ipchains, pf, ...), \
+                    network interface lookup and manipulation, raw IP packet \
+                    and Ethernet frame transmission.
+homepage            http://libdnet.sourceforge.net/
+platforms           darwin
+master_sites        sourceforge
+checksums           md5 04c394ed8e1e7fc455456e79e908916d
+
+configure.args      --mandir=${prefix}/share/man
+
+livecheck.check     sourceforge
+livecheck.regex     ${name}-(\\d+\\.\\d+)

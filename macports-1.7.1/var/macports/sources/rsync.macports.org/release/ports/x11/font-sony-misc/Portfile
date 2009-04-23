@@ -1,0 +1,16 @@
+# $Id: Portfile 47101 2009-02-22 03:12:10Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-sony-misc 1.0.0 misc
+revision            1
+maintainers         blb openmaintainer
+description         X.org Sony miscellaneous fonts
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     0dfddd1a946e4497f009094c0ae1bdd5 \
+                    sha1    8f8dbf44a03725d8769ebaae4a61575c5b948464 \
+                    rmd160  a4c3e12f27ad2b9c8bc7876244a1568dd5c2760f
+

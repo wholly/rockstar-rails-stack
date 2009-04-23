@@ -1,0 +1,18 @@
+# $Id: Portfile 45104 2009-01-08 14:36:55Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           YAML-Tiny 1.36
+maintainers           narf_tm openmaintainer
+description           Read/Write YAML files with as little code as possible
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 4d2b19298e9f500b3fff961daf458a01 \
+                      sha1 2b7b44680f19ea2b85bbd2da290c020bf1c9b76f \
+                      rmd160 e721997f68ee10ffddd6f3fb47935cf8adfc5ae2
+
+depends_lib-append    port:p5-yaml \
+                      port:p5-yaml-syck

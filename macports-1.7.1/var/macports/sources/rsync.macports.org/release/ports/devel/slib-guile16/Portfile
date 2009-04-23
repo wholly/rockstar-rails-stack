@@ -1,0 +1,34 @@
+# $Id: Portfile 42543 2008-11-24 01:19:51Z blb@macports.org $
+
+PortSystem 1.0
+name		slib-guile16
+version		1.0
+revision	2
+categories	devel
+maintainers	nomaintainer
+platforms	darwin
+description	Wrapper port to properly set up slib and guile16 together
+long_description	Create two symbolic links and a catalog file \
+			so that guile16 can find the slib library files.
+depends_lib	port:slib port:guile16
+distfiles
+
+use_configure	no
+
+build {}
+
+set guile		${prefix}/bin/guile16
+set guile-config	${prefix}/bin/guile16-config
+
+destroot {
+	set guile-branch [join [lrange [split [exec ${guile-config} info guileversion] .] 0 1] .]
+	xinstall -m 755 -d ${destroot}${prefix}/share/guile/${guile-branch}
+	ln -s ${prefix}/lib/slib \
+		${destroot}${prefix}/share/guile/${guile-branch}/slib
+	ln -s ${prefix}/lib/slib ${destroot}${prefix}/share/guile/slib
+}
+
+post-activate {
+	xinstall -m 755 -d ${prefix}/share/guile/site
+	system "${guile} -c \"(use-modules (ice-9 slib)) (require 'new-catalog)\""
+}

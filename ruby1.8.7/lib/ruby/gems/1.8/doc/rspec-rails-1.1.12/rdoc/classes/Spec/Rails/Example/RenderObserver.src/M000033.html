@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>expect_render (Spec::Rails::Example::RenderObserver)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/spec/rails/example/render_observer.rb, line 14</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">expect_render</span>(<span class="ruby-identifier">opts</span>={})
+          <span class="ruby-identifier">warn_deprecation</span>(<span class="ruby-value str">&quot;expect_render&quot;</span>, <span class="ruby-value str">&quot;should_receive&quot;</span>)
+          <span class="ruby-identifier">register_verify_after_each</span>
+          <span class="ruby-identifier">render_proxy</span>.<span class="ruby-identifier">should_receive</span>(<span class="ruby-identifier">:render</span>, <span class="ruby-identifier">:expected_from</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">caller</span>(<span class="ruby-value">1</span>)[<span class="ruby-value">0</span>]).<span class="ruby-identifier">with</span>(<span class="ruby-identifier">opts</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

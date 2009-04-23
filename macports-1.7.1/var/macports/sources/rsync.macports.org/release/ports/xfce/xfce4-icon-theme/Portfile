@@ -1,0 +1,17 @@
+# $Id: Portfile 41544 2008-11-05 22:45:35Z afb@macports.org $
+
+PortSystem 1.0
+
+name		xfce4-icon-theme
+version		4.4.3
+categories	xfce
+platforms	darwin
+maintainers	afb@macports.org
+description	Rodent vector icon theme
+long_description ${description}
+homepage	http://www.xfce.org/
+master_sites	http://www.ca-us.xfce.org/archive/xfce-${version}/src/
+use_bzip2	yes
+checksums	md5 73ce2977b84f634a6a6c5d9c27e336db \
+		sha1 0c0d0c45cd4a7f609310db8e9d17c1c4a131a6e7 \
+		rmd160 224c38f40a4e1e9039d5947a70744b4a11f77703

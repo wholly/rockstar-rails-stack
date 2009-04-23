@@ -1,0 +1,42 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49258 2009-04-06 08:03:35Z afb@macports.org $
+
+PortSystem 1.0
+
+name               glew
+version            1.5.1
+revision           1
+categories         graphics devel
+platforms          darwin
+maintainers        jmr openmaintainer
+description        OpenGL Extension Wrangler Library
+long_description   The OpenGL Extension Wrangler Library (GLEW) is a \
+                   cross-platform C/C++ extension loading library. GLEW \
+                   provides efficient run-time mechanisms for determining \
+                   which OpenGL extensions are supported on the target \
+                   platform. OpenGL core and extension functionality is \
+                   exposed in a single header file.
+
+homepage           http://glew.sourceforge.net
+master_sites       sourceforge
+distfiles          ${distname}-src.tgz
+checksums          md5 759a59853dfaae4d007b414a3c1712f2 \
+                   sha1 a94113169d46487ccda1bb2fde68fa1803bdf009 \
+                   rmd160 920fdff559976492a2e6acf93d3b02e8286f6b7b
+worksrcdir         ${name}
+use_configure      no
+build.env          GLEW_DEST=${prefix}
+build.args         CC=${configure.cc} LD=${configure.cc}
+destroot.env       GLEW_DEST=${destroot}${prefix}
+
+pre-patch {
+    # CRLF line endings confuse patch and sh
+    reinplace "s|\r||" ${worksrcpath}/config/config.guess \
+                       ${worksrcpath}/Makefile
+}
+
+variant universal {
+    patchfiles patch-Makefile.diff
+    build.args-append CFLAGS.EXTRA="${configure.universal_cflags}" \
+                      LDFLAGS.EXTRA="${configure.universal_ldflags}"
+}

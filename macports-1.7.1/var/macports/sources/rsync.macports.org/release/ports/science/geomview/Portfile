@@ -1,0 +1,73 @@
+# $Id: Portfile 47444 2009-02-28 08:29:53Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                geomview
+version             1.9.4
+revision            2
+categories          science graphics x11
+maintainers         ira.uka.de:raphael openmaintainer
+description         interactive 3D viewing program
+long_description    Geomview is an interactive 3D viewing program for Unix. \
+                    It lets you view and manipulate 3D objects: you use the \
+                    mouse to rotate, translate, zoom in and out, etc. It \
+                    can be used as a standalone viewer for static objects \
+                    or as a display engine for other programs which produce \
+                    dynamically changing geometry. It can display objects \
+                    described in a variety of file formats. It comes with a \
+                    wide selection of example objects, and you can create \
+                    your own objects too.
+homepage            http://www.geomview.org/
+platforms           darwin
+master_sites        sourceforge
+checksums           md5 29c7e6d678af7b9968980f92954419bb \
+                    sha1 b5e04dfee5cef46655766c2456199905832cd45c \
+                    rmd160 adf7c8ba745db9ff003e3ed74089379b2a72c712
+patchfiles          patch-iobuffer.c.diff \
+                    patch-geomview.texi.diff \
+                    patch-geomview-pt_BR.texi.diff
+
+post-extract {      delete ${worksrcpath}/doc/geomview.html
+                    delete ${worksrcpath}/doc/geomview-pt_BR.html
+}
+
+configure.args      --with-opengl=${prefix} \
+                    --with-htmlbrowser=open \
+                    --with-pdfviewer=open
+
+depends_lib         port:openmotif \
+                    port:zlib \
+                    port:xorg-libXt \
+		    port:mesa
+
+depends_build       path:bin/tex:texlive \
+                    port:texinfo
+
+pre-extract {
+    if {"darwin" == ${os.platform} && 9 == ${os.major}} {
+        set minimum_xcodeversion 3.1
+        set current_xcodeversion [exec defaults read /Developer/Applications/Xcode.app/Contents/Info CFBundleShortVersionString]
+        if {[rpm-vercomp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
+            ui_msg "On Mac OS X ${macosx_version}, ${name} ${version} requires Xcode ${minimum_xcodeversion} or later but you have Xcode ${current_xcodeversion}."
+            return -code error "incompatible Xcode version"
+        }
+    }
+}
+
+variant no_zlib description {do not use zlib} {
+    configure.args-append       --without-zlib
+    depends_lib-delete          port:zlib
+}
+
+# For +system_x11 variant
+if { ![file exists ${prefix}/lib/pkgconfig/gl.pc] } {
+        configure.args-delete --with-opengl=${prefix}
+        configure.args-append --with-opengl=${x11prefix}
+}
+
+
+variant no_opengl description {do not use OpenGL} {
+    configure.args-append       --without-opengl
+    configure.args-delete       --with-opengl=${prefix}
+    configure.args-delete       --with-opengl=${x11prefix}
+}

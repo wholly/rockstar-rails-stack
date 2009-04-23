@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Runner::Configuration#use_transactional_fixtures=
+is_singleton: false
+name: use_transactional_fixtures=
+params: (value)
+visibility: public

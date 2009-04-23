@@ -1,0 +1,26 @@
+# $Id: Portfile 30242 2007-10-23 01:59:54Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			nget
+version			0.27.1
+categories		news
+platforms		darwin
+maintainers		nomaintainer
+description		nget is a command line nntp file grabber
+long_description	nget is a command line nntp file grabber. It automatically \
+				pieces together multipart postings for easy retrieval, even \
+				substituting parts from multiple servers and newsgroups. \
+				Handles disconnects gracefully, resuming after the last part \
+				succesfully downloaded.
+
+homepage		http://nget.sourceforge.net/
+master_sites	sourceforge
+checksums		md5 0710a25aebede4799bd9ca3756573f6a
+
+depends_lib		port:popt port:uudeview
+
+configure.args	--mandir='\${prefix}/share/man'
+configure.cxxflags-append	"-I${prefix}/include"
+
+destroot.destdir	prefix=${destroot}${prefix}

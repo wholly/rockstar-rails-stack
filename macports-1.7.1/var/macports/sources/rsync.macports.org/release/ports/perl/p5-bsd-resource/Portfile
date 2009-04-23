@@ -1,0 +1,12 @@
+# $Id: Portfile 33843 2008-02-06 18:22:04Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		BSD-Resource 1.28
+maintainers		dluke@geeklair.net
+description		This is a Perl extension for BSD process resource limit and priority functions
+long_description	$description
+
+checksums		md5 bf3ecc4127a831f2cd359bf920dde1cb
+platforms		darwin

@@ -1,0 +1,33 @@
+# $Id: Portfile 33297 2008-01-23 09:32:47Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			icpld
+version			1.1.4
+categories		net sysutils
+platforms		darwin
+maintainers		nomaintainer
+description		network connection performance tracking monitor
+long_description	ICPLD is a connection monitor which allows you to keep \
+			track of your network connection perfomance. It will log each \
+			occasion of broken networking. It runs as a background process, \
+			and sends ICMP requests to an ip of your choice. When a reply \
+			isn't received within proper amount of time, it will consider \
+			the connection as unavailable and put a stamp in its log.
+
+homepage		http://icpld.northernmost.org/
+master_sites	http://www.ibiblio.org/icpld/download/
+checksums		md5 03c8b2bee1cdb57909ba4a2bb6aefa48
+use_bzip2		yes
+patchfiles		patch-src-fork.cpp
+
+post-patch {
+	reinplace "s|/doc|/share/doc|" ${worksrcpath}/Makefile.in
+}
+
+configure.args	--mandir=${prefix}/share/man \
+				--enable-ipv6
+
+post-destroot {
+	xinstall -m 644 ${worksrcpath}/icpld.conf.sample ${destroot}${prefix}/etc/
+}

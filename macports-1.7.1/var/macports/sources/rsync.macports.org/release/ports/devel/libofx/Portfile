@@ -1,0 +1,28 @@
+# $Id: Portfile 48896 2009-03-31 08:31:39Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    libofx
+version                 0.8.3
+categories              devel
+maintainers             nomaintainer
+description             A parser and an API designed to allow applications \
+                        to very easily support OFX command responses
+long_description        This is the LibOFX library. It is a parser and an API \
+                        designed to allow applications to very easily support \
+                        OFX command responses, usually provided by financial \
+                        institutions for statement downloads. To my knowledge, \
+                        it is the first working OpenSource implementation of \
+                        the OFX (Open Financial eXchange) specification on \
+                        the client side.
+homepage                http://libofx.sourceforge.net/
+platforms               darwin
+master_sites            sourceforge
+
+checksums               md5 26ef343ebf93dc6351c889a402e10d89
+
+depends_build           path:bin/pkg-config:pkgconfig
+depends_lib             port:opensp
+
+configure.args          "--with-opensp-includes=${prefix}/include/OpenSP \
+                        --with-opensp-libs=${prefix}/lib"

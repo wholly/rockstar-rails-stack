@@ -1,0 +1,48 @@
+# $Id: Portfile 33995 2008-02-10 00:16:21Z ryandesign@macports.org $
+
+PortSystem		1.0
+
+name			icon
+version			9.4.3
+revision		1
+categories		lang
+maintainers		michael.grunewald@laposte.net
+description		The Icon Programming Language
+long_description	Icon is a high-level, general-purpose programming \
+			language with a large repertoire of features for \
+			processing data structures and character strings. \
+			Icon is an imperative, procedural language with a \
+			syntax reminiscent of C and Pascal, but with \
+			semantics at a much higher level.
+homepage		http://www.cs.arizona.edu/icon/
+platforms		darwin
+master_sites		${homepage}ftp/packages/unix/
+distname		icon.v[strsed ${version} {g/\.//}]src
+extract.suffix		.tgz
+checksums		md5 4740b1fc5caf2fe7409367923dffe607 \
+			sha1 92bd3347807b333fb903edf61a2805f2e1159577 \
+			rmd160 af75af7f106920cd59a7f8ac85954aa472ae78e7
+
+universal_variant	no
+
+configure.cmd		make
+configure.pre_args
+configure.args		X-Configure name=macintosh
+
+build.target		All
+
+destroot.target		Install
+destroot.destdir	dest=${destroot}${prefix}/libexec/${name}
+
+post-destroot {
+  foreach prog {icon icont iconx vib} {
+    ln -s ../libexec/${name}/bin/${prog} ${destroot}${prefix}/bin
+  }
+  set doc_dir ${destroot}${prefix}/share/doc
+  xinstall -d ${doc_dir}
+  ln -s ../../libexec/${name}/doc ${doc_dir}/${name}-${version}
+}
+
+livecheck.check		regex
+livecheck.url		${homepage}status.htm
+livecheck.regex		Version (\[0-9.\]+)

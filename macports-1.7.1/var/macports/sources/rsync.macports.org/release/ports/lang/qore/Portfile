@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 46826 2009-02-14 12:20:04Z davidnichols@macports.org $
+
+PortSystem          1.0
+
+name                qore
+version             0.7.3
+categories          lang
+maintainers         davidnichols
+description         dynamically-typed programming language
+long_description    Qore is a dynamically-typed, embeddabble programming language designed for SMP scalability
+homepage            http://qoretechnologies.com/qore
+platforms           darwin
+master_sites        sourceforge
+
+checksums           md5 cafb9d3d15eb02cb2d96ed952ebabf2b \
+                    sha1 0deecc1f0895b19db154b5297c0a4df9a7ad4d60 \
+                    rmd160 085b894f74114e40ec3e76fccd410968bef3ee06
+
+depends_build       port:flex \
+                    port:bison
+
+depends_lib         port:openssl \
+                    port:pcre \
+                    port:libxml2 \
+                    port:zlib \
+                    port:bzip2
+
+configure.args      --disable-debug --disable-static

@@ -1,0 +1,42 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49355 2009-04-08 08:50:27Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name		gst-plugins-good
+version		0.10.14
+description	This is gst-plugins, a set of plug-ins for GStreamer.
+long_description        ${description}
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    http://gstreamer.freedesktop.org/src/${name}/ gnome:sources/gst-plugins-good/0.10/
+
+checksums       md5     a861ccbb90a176d1242608502f45f0ac \
+                sha1    49dbcfcbbab9bd6a1e54d9e548184016c20f3aba \
+                rmd160  7832c2087c2a5d6c354f5a931dcc49f24c547ee9
+
+depends_lib	\
+	port:gst-plugins-base \
+	port:aalib \
+	port:esound \
+	port:flac \
+	port:gconf \
+	port:libcaca \
+	port:libdv \
+	port:libcdio \
+	port:libshout2 \
+	port:taglib \
+	port:wavpack \
+	port:zlib
+use_bzip2 	yes
+configure.cxx   g++
+pre-configure {
+	reinplace "s|OBJC = gcc|OBJC = @OBJC@|" ${worksrcpath}/sys/osxvideo/Makefile.in
+	reinplace "s|-DGST_DISABLE_DEPRECATED||" ${worksrcpath}/configure
+}
+
+livecheck.check regex
+livecheck.url   http://gstreamer.freedesktop.org/src/${name}/
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

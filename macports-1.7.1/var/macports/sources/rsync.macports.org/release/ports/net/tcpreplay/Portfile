@@ -1,0 +1,38 @@
+# $Id: Portfile 37887 2008-06-27 20:42:04Z pmq@macports.org $
+
+PortSystem          1.0
+
+name                tcpreplay
+categories          net security
+version             3.3.2
+platforms	    darwin
+maintainers	    pmq
+
+description         Replay pcap files at arbitrary speeds onto the network
+long_description    \
+    Tcpreplay is a suite of BSD licensed tools written by Aaron Turner for \
+    *NIX operating systems which gives you the ability to use previously \
+    captured traffic in libpcap format to test a variety of network devices. \
+    It allows you to classify traffic as client or server, rewrite Layer 2, 3 \
+    and 4 headers and finally replay the traffic back onto the network and \
+    through other devices such as switches, routers, firewalls, NIDS and \
+    IPS's. Tcpreplay supports both single and dual NIC modes for testing both \
+    sniffing and inline devices.
+
+homepage            http://tcpreplay.synfin.net
+master_sites        sourceforge
+checksums           sha1 270912f9f58abed741c65e8ea16fdf421603ea11 \
+		    rmd160 a42d75f54d2203f91f413ab7191554eb761fd06f
+
+# libnet is not recommended, so only use libpcap
+# TODO use libpcapnav
+depends_lib         port:libpcap port:tcpdump
+
+configure.args      --with-libpcap=${prefix} \
+		    --with-tcpdump=${prefix}/sbin/tcpdump
+
+# doesn't work on 10.4, will try on 10.5 to see if of any use
+variant edit description "Use packet editing code" {
+    depends_lib-append     port:libdnet
+    configure.args-append  --enable-tcpreplay-edit
+}

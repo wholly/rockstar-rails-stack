@@ -1,0 +1,27 @@
+# $Id: Portfile 42112 2008-11-15 13:32:27Z illogic-al@macports.org $
+
+PortSystem 1.0
+
+name             libusb
+version          0.1.12
+revision         1
+categories       devel
+maintainers      rwilcox@wilcoxd.com
+description      Library providing access to USB devices
+long_description \
+    A library originally developed under Linux to give userland programs \
+    an API to access to USB hardware.
+homepage         http://libusb.sourceforge.net/
+platforms        darwin
+master_sites     sourceforge
+checksums        sha1 599a5168590f66bc6f1f9a299579fd8500614807
+configure.args   --disable-build-docs
+
+patchfiles       patch-darwin.c.diff
+
+post-configure {
+    if {[variant_isset universal]} {
+        reinplace "s|CC -dynamiclib|CC -dynamiclib ${configure.universal_ldflags}|g" ${worksrcpath}/libtool
+    }
+}
+

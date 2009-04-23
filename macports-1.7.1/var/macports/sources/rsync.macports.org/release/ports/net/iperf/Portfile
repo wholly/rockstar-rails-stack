@@ -1,0 +1,20 @@
+# $Id: Portfile 41592 2008-11-06 19:59:44Z pmq@macports.org $
+
+PortSystem 1.0
+
+name		  iperf
+version		  2.0.4
+categories	  net
+platforms	  darwin
+maintainers	  pmq
+
+description	  A tool to measure maximum TCP and UDP bandwidth
+long_description  Iperf is a tool for measuring maximum TCP and UDP \
+		  bandwidth, reminiscent of ttcp and nettest. It has \
+		  been written to overcome the shortcomings of those \
+		  aging tools. Iperf can also test UDP bandwidth, \
+		  loss, and jitter.
+
+homepage	  http://iperf.sourceforge.net
+master_sites	  sourceforge
+checksums	  md5 8c5bc14cc2ea55f18f22afe3c23e3dcb

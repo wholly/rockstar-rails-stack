@@ -1,0 +1,26 @@
+#!@PREFIX@/bin/zsh
+############################################################## {{{1 ##########
+#   $Author: krischik@macports.org $
+#   $Revision: 46159 $
+#   $Date: 2009-01-30 09:43:49 -0800 (Fri, 30 Jan 2009) $
+#   $HeadURL: http://svn.macports.org/repository/macports/trunk/dports/news/leafnode/files/Restart_Leafnode.command.in $
+############################################################## }}}1 ##########
+
+setopt X_Trace;
+
+if test "${USER}" = "root"; then
+    if test ! -L /Library/LaunchDaemons/org.macports.leafnode.plist; then
+        ln -s										    \
+	   @PREFIX@/etc/LaunchDaemons/org.macports.leafnode/org.macports.leafnode.plist   \
+	    /Library/LaunchDaemons/org.macports.leafnode.plist				    ;
+    fi;
+    
+    launchctl unload -w /Library/LaunchDaemons/org.macports.leafnode.plist
+    launchctl load   -w /Library/LaunchDaemons/org.macports.leafnode.plist
+else
+    sudo ${0};
+fi;
+
+############################################################ {{{1 ###########
+# vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :
+# vim: set textwidth=0 filetype=zsh foldmethod=marker nospell :

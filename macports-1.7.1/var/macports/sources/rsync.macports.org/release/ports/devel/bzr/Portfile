@@ -1,0 +1,55 @@
+# $Id: Portfile 48510 2009-03-24 04:06:05Z ram@macports.org $
+
+PortSystem    1.0
+PortGroup     python25 1.0
+
+name          bzr
+version       1.13.1
+set branch    [join [lrange [split ${version} .] 0 1] .]
+categories    devel python
+platforms     darwin
+maintainers   nomaintainer
+
+description   The next-generation distributed version control system
+long_description  Bazaar is an open source distributed version control \
+    system that is powerful, friendly, and scalable. It manages trees of \
+    files and subdirectories, In particular, it records revisions of trees, \
+    representing their state at a particular point in time, and information \
+    about those revisions and their relationships. Recording and retrieving \
+    tree revisions is useful in several ways if you are writing software or \
+    documents or doing similar creative work.
+
+homepage      http://bazaar-vcs.org/
+master_sites  https://launchpad.net/${name}/${branch}/${version}/+download/
+
+checksums     md5 c18d386d48965fa00d05655ee55dc70c \
+              sha1 84bd7ffb357867d4088ec4d084eff5d045b21d41 \
+              rmd160 dd10a1f5eff9477f382119bf97941896bb533509
+
+patchfiles    patch-setup.py.diff
+
+depends_lib-append  port:py25-paramiko \
+                    port:py25-crypto \
+                    port:py25-hashlib \
+                    port:py25-zlib \
+                    port:py25-bz2 \
+                    port:py25-socket-ssl \
+                    port:py25-curl \
+                    port:py25-docutils \
+                    port:py25-pyrex \
+                    port:py25-curses
+
+test.run      yes
+test.cmd      make
+test.target   check
+
+post-destroot {
+  xinstall -m 644 -W ${worksrcpath} INSTALL NEWS README TODO \
+    ${destroot}${prefix}/share/doc/${name}
+}
+
+universal_variant no
+
+livecheck.check     regex
+livecheck.url       ${homepage}
+livecheck.regex     {Bazaar (\d+(?:\.\d+)*) was released}

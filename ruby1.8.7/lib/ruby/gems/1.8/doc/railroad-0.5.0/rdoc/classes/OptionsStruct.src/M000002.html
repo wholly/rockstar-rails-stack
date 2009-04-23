@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>parse (OptionsStruct)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/railroad/options_struct.rb, line 36</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">args</span>)
+    <span class="ruby-ivar">@opt_parser</span> = <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opts</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-node">&quot;Usage: #{APP_NAME} [options] command&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Common options:&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-b&quot;</span>, <span class="ruby-value str">&quot;--brief&quot;</span>, <span class="ruby-value str">&quot;Generate compact diagram&quot;</span>, 
+              <span class="ruby-value str">&quot;  (no attributes nor methods)&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">brief</span> = <span class="ruby-identifier">b</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-e&quot;</span>, <span class="ruby-value str">&quot;--exclude file1[,fileN]&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-value str">&quot;Exclude given files&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">list</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">exclude</span> = <span class="ruby-identifier">list</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-i&quot;</span>, <span class="ruby-value str">&quot;--inheritance&quot;</span>, <span class="ruby-value str">&quot;Include inheritance relations&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inheritance</span> = <span class="ruby-identifier">i</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-l&quot;</span>, <span class="ruby-value str">&quot;--label&quot;</span>, <span class="ruby-value str">&quot;Add a label with diagram information&quot;</span>, 
+              <span class="ruby-value str">&quot;  (type, date, migration, version)&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">label</span> = <span class="ruby-identifier">l</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-o&quot;</span>, <span class="ruby-value str">&quot;--output FILE&quot;</span>, <span class="ruby-value str">&quot;Write diagram to file FILE&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">output</span> = <span class="ruby-identifier">f</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-r&quot;</span>, <span class="ruby-value str">&quot;--root PATH&quot;</span>, <span class="ruby-value str">&quot;Set PATH as the application root&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">root</span> = <span class="ruby-identifier">r</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-v&quot;</span>, <span class="ruby-value str">&quot;--verbose&quot;</span>, <span class="ruby-value str">&quot;Enable verbose output&quot;</span>, 
+              <span class="ruby-value str">&quot;  (produce messages to STDOUT)&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-identifier">v</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-x&quot;</span>, <span class="ruby-value str">&quot;--xmi&quot;</span>, <span class="ruby-value str">&quot;Produce XMI instead of DOT&quot;</span>, 
+              <span class="ruby-value str">&quot;  (for UML tools)&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">xmi</span> = <span class="ruby-identifier">x</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Models diagram options:&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-a&quot;</span>, <span class="ruby-value str">&quot;--all&quot;</span>, <span class="ruby-value str">&quot;Include all models&quot;</span>, 
+              <span class="ruby-value str">&quot;  (not only ActiveRecord::Base derived)&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">all</span> = <span class="ruby-identifier">a</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--hide-magic&quot;</span>, <span class="ruby-value str">&quot;Hide magic field names&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">hide_magic</span> = <span class="ruby-identifier">h</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--hide-types&quot;</span>, <span class="ruby-value str">&quot;Hide attributes type&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">hide_types</span> = <span class="ruby-identifier">h</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-j&quot;</span>, <span class="ruby-value str">&quot;--join&quot;</span>, <span class="ruby-value str">&quot;Concentrate edges&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">join</span> = <span class="ruby-identifier">j</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-m&quot;</span>, <span class="ruby-value str">&quot;--modules&quot;</span>, <span class="ruby-value str">&quot;Include modules&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">modules</span> = <span class="ruby-identifier">m</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-p&quot;</span>, <span class="ruby-value str">&quot;--plugins-models&quot;</span>, <span class="ruby-value str">&quot;Include plugins models&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">plugins_models</span> = <span class="ruby-identifier">p</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-t&quot;</span>, <span class="ruby-value str">&quot;--transitive&quot;</span>, <span class="ruby-value str">&quot;Include transitive associations&quot;</span>,
+              <span class="ruby-value str">&quot;(through inheritance)&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">transitive</span> = <span class="ruby-identifier">t</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Controllers diagram options:&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--hide-public&quot;</span>, <span class="ruby-value str">&quot;Hide public methods&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">hide_public</span> = <span class="ruby-identifier">h</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--hide-protected&quot;</span>, <span class="ruby-value str">&quot;Hide protected methods&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">hide_protected</span> = <span class="ruby-identifier">h</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--hide-private&quot;</span>, <span class="ruby-value str">&quot;Hide private methods&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">hide_private</span> = <span class="ruby-identifier">h</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Other options:&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-h&quot;</span>, <span class="ruby-value str">&quot;--help&quot;</span>, <span class="ruby-value str">&quot;Show this message&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-constant">STDOUT</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;#{opts}\n&quot;</span>
+        <span class="ruby-identifier">exit</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--version&quot;</span>, <span class="ruby-value str">&quot;Show version and copyright&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-constant">STDOUT</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;#{APP_HUMAN_NAME} version #{APP_VERSION.join('.')}\n\n&quot;</span> <span class="ruby-operator">+</span>
+                     <span class="ruby-node">&quot;#{COPYRIGHT}\nThis is free software; see the source &quot;</span> <span class="ruby-operator">+</span>
+                     <span class="ruby-value str">&quot;for copying conditions.\n\n&quot;</span>
+        <span class="ruby-identifier">exit</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Commands (you must supply one of these):&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-M&quot;</span>, <span class="ruby-value str">&quot;--models&quot;</span>, <span class="ruby-value str">&quot;Generate models diagram&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">command</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">''</span>
+          <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;Error: Can only generate one diagram type\n\n&quot;</span>
+          <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">else</span> 
+          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">command</span> = <span class="ruby-value str">'models'</span>        
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span> 
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-C&quot;</span>, <span class="ruby-value str">&quot;--controllers&quot;</span>, <span class="ruby-value str">&quot;Generate controllers diagram&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">command</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">''</span>
+          <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;Error: Can only generate one diagram type\n\n&quot;</span>
+          <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">else</span> 
+          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">command</span> = <span class="ruby-value str">'controllers'</span>        
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># From Ana Nelson's patch</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-A&quot;</span>, <span class="ruby-value str">&quot;--aasm&quot;</span>, <span class="ruby-value str">&quot;Generate \&quot;acts as state machine\&quot; diagram&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">command</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'controllers'</span>
+          <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;Error: Can only generate one diagram type\n\n&quot;</span>
+          <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">else</span>    
+          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">command</span> = <span class="ruby-value str">'aasm'</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>        
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;For bug reporting and additional information, please see:&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;http://railroad.rubyforge.org/&quot;</span>
+    <span class="ruby-keyword kw">end</span> <span class="ruby-comment cmt"># do</span>
+
+    <span class="ruby-keyword kw">begin</span>
+      <span class="ruby-ivar">@opt_parser</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">AmbiguousOption</span>
+      <span class="ruby-identifier">option_error</span> <span class="ruby-value str">&quot;Ambiguous option&quot;</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidOption</span>
+      <span class="ruby-identifier">option_error</span> <span class="ruby-value str">&quot;Invalid option&quot;</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidArgument</span>
+      <span class="ruby-identifier">option_error</span> <span class="ruby-value str">&quot;Invalid argument&quot;</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingArgument</span>
+      <span class="ruby-identifier">option_error</span> <span class="ruby-value str">&quot;Missing argument&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

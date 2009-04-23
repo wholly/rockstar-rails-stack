@@ -1,0 +1,17 @@
+# $Id: Portfile 47727 2009-03-04 15:21:34Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           namespace-clean 0.11
+maintainers           narf_tm openmaintainer
+description           Keep imports and functions out of your namespace
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 480c3735ffe40b491a4700df5e8659a3 \
+                      sha1 b2916af3231c3ff58e22672e8061e110f45bb168 \
+                      rmd160 94b9848b7b9c88b0bafc605644ada301f8c42591
+
+depends_lib-append    port:p5-b-hooks-endofscope

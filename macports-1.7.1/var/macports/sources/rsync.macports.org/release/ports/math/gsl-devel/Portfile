@@ -1,0 +1,61 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 43536 2008-12-11 19:28:57Z jochen@macports.org $
+
+PortSystem          1.0
+
+name                gsl-devel
+version             1.11.90
+categories          math science
+maintainers         openmaintainer jochen
+homepage            http://www.gnu.org/software/gsl
+description         A numerical library for C and C++ programmers
+long_description    The GNU Scientific Library (GSL) is a numerical library  \
+                    for C and C++ programmers.  It is free software under the \
+                    GNU General Public License.  \
+                    \
+                    The library provides a wide range of mathematical routines \
+                    such as random number generators, special functions and \
+                    least-squares fitting. There are over 1000 functions in total.
+
+distname		    gsl-${version}
+master_sites        ftp://alpha.gnu.org/gnu/gsl/
+checksums           md5 817516ab8aed50683ecadc52c82d6001 \
+                    sha1 5514232f7e7daec399990f81b566f86f1ca25efa \
+                    rmd160 aa974bc4b1aebbacf5c41ad70115bd94bc9dc6b8
+
+platforms           darwin
+# Lower optimization level (-O1) is required to avoid code generation bugs in Apple's gcc 3.3 and earlier.
+platform darwin 6 {
+    configure.cflags-append "-O1"
+}
+platform darwin 7 {
+    configure.cflags-append "-O1"
+}
+
+configure.args      --mandir=${prefix}/share/man --infodir=${prefix}/share/info
+depends_build       port:texinfo
+test.run            yes
+test.target         check
+
+post-install    {
+    system "install-info ${destroot}${prefix}/share/info/gsl-ref.info ${prefix}/share/info/dir"
+}
+
+variant doc description "Install PDF and HTML documentation" {
+    depends_build   port:ghostscript bin:latex:texlive
+    post-destroot   {
+        system "cd ${worksrcpath} && make dvi"
+        system "cd ${worksrcpath}/doc && dvipdf gsl-ref.dvi gsl-ref.pdf"
+        xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
+        xinstall -c -m 644 ${worksrcpath}/doc/gsl-ref.pdf ${destroot}${prefix}/share/doc/${name}
+        system "cd ${worksrcpath}/doc && latex fftalgorithms"
+        system "cd ${worksrcpath}/doc && bibtex fftalgorithms"
+        system "cd ${worksrcpath}/doc && latex fftalgorithms"
+        system "cd ${worksrcpath}/doc && latex fftalgorithms"
+        system "cd ${worksrcpath}/doc && dvipdf fftalgorithms.dvi fftalgorithms.pdf"
+        xinstall -c -m 644 ${worksrcpath}/doc/fftalgorithms.pdf ${destroot}${prefix}/share/doc/${name}
+        system "cd ${worksrcpath} && make html"
+        xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}/html
+        eval xinstall -c -m 644 [glob ${worksrcpath}/doc/gsl-ref.html/*] ${destroot}${prefix}/share/doc/${name}/html
+    }
+}

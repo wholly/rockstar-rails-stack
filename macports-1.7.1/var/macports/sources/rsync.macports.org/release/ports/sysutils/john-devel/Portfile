@@ -1,0 +1,82 @@
+# $Id: Portfile 43262 2008-12-07 22:17:44Z blb@macports.org $
+
+PortSystem          1.0
+name                john-devel
+version             1.7.3.1
+categories          sysutils security
+maintainers         nomaintainer
+description         Featureful Unix password cracker
+long_description    John the Ripper is a UNIX password cracker, currently available for \
+                    UNIX (tested with Linux x86, FreeBSD x86, Solaris 2.x SPARC, OSF/1 \
+                    Alpha), DOS, WinNT/Win95.
+homepage            http://www.openwall.com/john/
+platforms           darwin
+master_sites        http://www.openwall.com/john/f/ \
+                    ftp://ftp2.msk.ru.openwall.com/pub/projects/john/${version}/ \
+                    ftp://ftp.ibiblio.org/pub/linux/distributions/openwall/projects/john/${version}/ \
+                    ftp://ftp.cert.dfn.de/pub/tools/net/Openwall/projects/john/${version}/ \
+                    http://distro.ibiblio.org/pub/linux/distributions/openwall/projects/john/${version}/ \
+                    ftp://ftp.mirrorgeek.com/openwall/projects/john/${version}/ \
+                    http://mirrorgeek.com/openwall/projects/john/${version}/ \
+                    ftp://ftp1.msk.ru.openwall.com/pub/projects/john/${version}/ \
+                    ftp://ftp.spb.ru.openwall.com/pub/projects/john/${version}/ \
+                    ftp://ftp.man.szczecin.pl/pub/Linux/Owl/projects/john/${version}/ \
+                    ftp://ftp.se.openwall.com/pub/projects/john/${version}/ \
+                    http://ftp.sunet.se/pub/security/tools/net/Openwall/projects/john/${version}/ \
+                    ftp://ftp.sunet.se/pub/security/tools/net/Openwall/projects/john/${version}/ \
+                    ftp://ftp.mathematik.uni-marburg.de/pub/mirror/openwall/projects/john/${version}/ \
+                    ftp://ftp.wiretapped.net/pub/openwall/projects/john/${version}/ \
+                    ftp://ftp.ua.openwall.com/pub/projects/john/${version}/ \
+                    ftp://ftp.cz.openwall.com/pub/projects/john/${version}/
+use_bzip2           yes
+checksums           md5     4a8de450ff332bd0c7cbc573eb5032d9 \
+                    sha1    45f6ed73f7ea82460f3a33d6452bd8c17bdf863d \
+                    rmd160  f6e01c72c068904fe9e49a0669a9cdf0dc745be2
+distname            john-${version}
+worksrcdir          ${distname}/src
+
+# Patch params.h since that avoids lots of messy escaping and quoting
+# issues
+patchfiles          patch-params.h
+post-patch {
+    reinplace "s|@@PREFIX@@|${prefix}|g" ${worksrcpath}/params.h
+}
+
+use_configure       no
+
+platform powerpc {
+    build.target    "clean macosx-ppc32"
+}
+
+platform i386 {
+    build.target    "clean macosx-x86-sse2"
+}
+
+variant altivec conflicts i386 description {Enable AltiVec support} {
+    build.target    "clean macosx-ppc32-altivec"
+}
+
+variant use_64_bit conflicts altivec description {Enable 64bit support} {
+    if {[variant_isset powerpc]} {
+        build.target    "clean macosx-ppc64"
+    } else {
+        build.target    "clean macosx-x86-64"
+    }
+}
+
+destroot {
+    xinstall -d ${destroot}${prefix}/bin
+    file copy ${workpath}/${distname}/run ${destroot}${prefix}/share/john
+    system "chmod -R a+rx ${destroot}${prefix}/share/john"
+    system "ln -s ${prefix}/share/john/john ${destroot}${prefix}/bin/john"
+    xinstall -d ${destroot}${prefix}/share/doc
+    file copy ${workpath}/${distname}/doc ${destroot}${prefix}/share/doc/john
+    system "chmod -R a+rx ${destroot}${prefix}/share/doc/john"
+}
+
+post-install {
+    ui_msg  ""
+    ui_msg  "You'll find the john files under ${prefix}/share/john/"
+    ui_msg  ""
+}
+

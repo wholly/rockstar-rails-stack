@@ -1,0 +1,62 @@
+# $Id: Portfile 40557 2008-10-06 21:07:41Z jmr@macports.org $
+
+PortSystem 1.0
+name		HaXml
+version		1.13.2
+categories	devel
+maintainers	nomaintainer
+platforms	darwin
+
+description	XML utilities for haskell
+long_description	\
+		HaXml is a collection of utilities for parsing,		\
+		filtering, transforming, and generating XML documents	\
+		using Haskell. Its basic facilities include:		\
+									\
+		    * a parser for XML,					\
+		    * a separate error-correcting parser for HTML,	\
+		    * an XML validator,					\
+		    * pretty-printers for XML and HTML.
+
+homepage	http://www.cs.york.ac.uk/fp/${name}
+master_sites	http://www.haskell.org/${name}/
+
+checksums	md5 528bb3dfedf75b722e9b234c5ad6a316
+
+depends_build	port:ghc
+
+post-patch	{
+		  delete ${worksrcpath}/src/Text/PrettyPrint/HughesPJ.hs
+		  delete ${worksrcpath}/src/Text/PrettyPrint
+		}
+
+pre-configure	{ system "cd ${worksrcpath} && ghc -o Setup Setup.hs -package Cabal"
+		}
+
+configure	{ system "cd ${worksrcpath} && ./Setup configure --ghc --prefix=${prefix}"
+		}
+
+build		{ system "cd ${worksrcpath} && ./Setup build"
+		}
+
+destroot	{ system "cd ${worksrcpath} && ./Setup copy --copy-prefix=${destroot}${prefix}"
+		  system "cd ${worksrcpath} && ./Setup register   --gen-script"
+		  system "cd ${worksrcpath} && ./Setup unregister --gen-script"
+
+		  file mkdir ${destroot}${prefix}/libexec/${name}
+		  file copy ${worksrcpath}/register.sh \
+			    ${destroot}${prefix}/libexec/${name}
+		  file copy ${worksrcpath}/unregister.sh \
+			    ${destroot}${prefix}/libexec/${name}
+                }
+
+post-activate	{ system "${prefix}/libexec/${name}/register.sh" }
+
+#pre-deactivate	{ system "${prefix}/libexec/${name}/unregister.sh" }
+
+universal_variant no
+
+livecheck.check	regex
+livecheck.url	${homepage}
+livecheck.regex	${name}-(\\d+(?:\\.\\d+)*)
+

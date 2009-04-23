@@ -1,0 +1,23 @@
+# $Id: Portfile 30236 2007-10-22 23:15:10Z jmpp@macports.org $
+
+PortSystem 1.0
+name		anubis
+version		4.0
+categories	mail
+maintainers	nomaintainer
+description	GNU Anubis is an outgoing mail processor.
+long_description GNU Anubis goes between the MUA (Mail User Agent) and the MTA (Mail Transport Agent), and can perform on the fly various sorts of processing and conversion on the outgoing mail in accord with the sender's specified rules, based on a highly configurable regular expressions system. It operates as a proxy server, independently from mail user agents. 
+homepage	http://www.gnu.org/software/anubis
+platforms	darwin
+
+master_sites	gnu
+checksums	md5 cded94ad14e528e899f5e8f7fd1aa022
+
+patchfiles	patch-lib__obstack.c
+
+configure.args	--infodir=${prefix}/share/info \
+		--mandir=${prefix}/share/man
+
+platform darwin 8 powerpc {
+	configure.compiler	gcc-3.3
+}

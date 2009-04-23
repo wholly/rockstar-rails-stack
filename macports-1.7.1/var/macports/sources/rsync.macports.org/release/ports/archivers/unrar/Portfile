@@ -1,0 +1,57 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 46260 2009-02-01 21:11:33Z nox@macports.org $
+
+PortSystem      1.0
+
+name            unrar
+set my_name     ${name}src
+version         3.8.4
+categories      archivers
+platforms       darwin freebsd
+maintainers     nox openmaintainer
+description     Extract, view & test RAR archives
+
+long_description \
+    The unRAR utility is a minor part of the RAR archiver and \
+    contains RAR uncompression algorithm. unRAR requires very \
+    small volume of memory to operate.
+
+homepage        http://www.rarlab.com/
+master_sites    ${homepage}rar/
+distname        ${my_name}-${version}
+
+checksums       md5     b40b43e28dee42abd9840bfc9e2909ee \
+                sha1    42ed2c4ed86756f150252870e8285776f458fdff \
+                rmd160  6f013bfdcf726799cad64c80ac265ed15f331e44
+
+worksrcdir      ${name}
+
+use_configure no
+
+set CXXFLAGS        ${configure.cxxflags}
+set LDFLAGS         ${configure.ldflags}
+if {[variant_isset universal]} {
+    set CXXFLAGS    "${CXXFLAGS} ${configure.universal_cxxflags}"
+    set LDFLAGS     "${LDFLAGS} ${configure.universal_ldflags}"
+}
+
+build.env-append CXXFLAGS="${CXXFLAGS}"
+build.env-append LDFLAGS="${LDFLAGS}"
+build.args      -f makefile.unix
+
+use_parallel_build  yes
+
+destroot {
+	set docdir ${prefix}/share/doc/${name}-${version}
+
+	xinstall -d ${destroot}${docdir}
+	xinstall ${worksrcpath}/${name} ${destroot}${prefix}/bin
+	xinstall -m 0644 ${worksrcpath}/license.txt ${destroot}${docdir}
+}
+
+variant universal {}
+
+livecheck.check regex
+livecheck.url   ${master_sites}?C=M&O=D
+livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)
+

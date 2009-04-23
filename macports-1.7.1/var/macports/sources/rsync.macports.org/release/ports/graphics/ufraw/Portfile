@@ -1,0 +1,31 @@
+# $Id: Portfile 44726 2009-01-02 17:36:18Z devans@macports.org $
+
+PortSystem       1.0
+
+name             ufraw
+version          0.15
+categories       graphics
+maintainers      frank.mcpherson@janusresearch.com
+description      Unidentified Flying Raw (UFRaw)
+
+long_description \
+    The Unidentified Flying Raw (UFRaw) is a utility to read and \
+    manipulate raw images from digital cameras. It can be used on \
+    its own or as a Gimp plug-in. It reads raw images using Dave Coffin's \
+    raw conversion utility - DCRaw. UFRaw supports basic color management \
+    using Little CMS, allowing the user to apply color profiles.
+
+homepage         http://ufraw.sourceforge.net
+platforms        darwin
+master_sites     sourceforge
+
+checksums        md5     6d8f6c98a388c438784cd909dd82d540 \
+                 sha1    e8c7fa95bfb84e18ee538495861e52516ca8b3b8 \
+                 rmd160  d24e9076114c909e3b2bbf87a128c70f62885299
+
+distname         ufraw-${version}
+depends_lib      lib:libgimp-2.0:gimp2 port:exiv2 port:gtkimageview
+
+configure.args   --mandir=${prefix}/share/man --enable-extras --with-exiv2
+
+livecheck.regex  "<title>${name} ${name}-(\\d+(?:\\.\\d+)*) released.*</title>"

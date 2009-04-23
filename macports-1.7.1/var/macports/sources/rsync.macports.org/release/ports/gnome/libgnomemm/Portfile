@@ -1,0 +1,21 @@
+# $Id: Portfile 36217 2008-04-22 21:03:10Z gui_dos@macports.org $
+
+PortSystem 1.0
+
+name		libgnomemm
+version		2.22.0
+description	libgnomemm provides C++ wrappers for libgnome.
+long_description        ${description}
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gtkmm.org/
+master_sites    gnome:sources/libgnomemm/[strsed ${version} {/\.[0-9]*$//}]
+use_bzip2	yes
+checksums	md5 a07209b2cfbc630f8c4d46b6a6f1db32
+depends_lib	lib:libgconfmm-2:gconfmm lib:libgnome-2:libgnome \
+		port:libiconv port:gettext
+configure.cflags-append -no-cpp-precomp
+configure.cflags-append -flat_namespace
+configure.cflags-append "-undefined suppress"
+

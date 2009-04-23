@@ -1,0 +1,21 @@
+# $Id: Portfile 47732 2009-03-04 15:33:32Z narf_tm@macports.org $
+
+PortSystem                1.0
+PortGroup                 perl5 1.0
+
+perl5.setup               Catalyst-View-XSLT 0.07
+maintainers               narf_tm openmaintainer
+description               Helper for XSLT Views
+long_description          ${description}
+
+platforms                 darwin
+
+checksums                 md5 75051988c0abf5245c356530b1dfd6ac \
+                          sha1 c0d1c14db689f5c8240836148d2a20417d93a20e \
+                          rmd160 aaa21c82685e4d34ef02fa841db33c3a9ec4c878
+
+depends_lib-append        port:p5-catalyst-runtime \
+                          port:p5-path-class \
+                          port:p5-xml-libxslt
+
+perl5.use_module_build

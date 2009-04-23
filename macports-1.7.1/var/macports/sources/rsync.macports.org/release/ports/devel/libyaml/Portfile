@@ -1,0 +1,21 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 46242 2009-02-01 11:17:54Z akitada@macports.org $
+
+PortSystem      1.0
+
+name            libyaml
+version         0.1.2
+maintainers     erickt openmaintainer
+categories      devel
+platforms       darwin
+description     A YAML Parser.
+long_description LibYAML is a YAML 1.1 parser and emitter written in C. It is \
+                 in an early stage of development.
+
+homepage        http://pyyaml.org
+master_sites    http://pyyaml.org/download/libyaml
+distname        yaml-${version}
+
+checksums       md5 f6c9b5c2b0f6919abd79f5fd059b01dc \
+                sha1 db151c273474bb0b76b17974e7625d094c8cce53 \
+                rmd160 7da49975832132205efa0a96e1789e48ac341115 \

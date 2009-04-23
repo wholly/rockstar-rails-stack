@@ -1,0 +1,39 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 47890 2009-03-09 16:04:45Z devans@macports.org $
+
+PortSystem      1.0
+
+name            libgnomeprintui
+version         2.18.4
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+description     This is an implementation of the Gnome Printing Architecture
+
+long_description \
+    ${description}
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     e76d763f6279b900a63e5fb2909f8810 \
+                sha1    677fb3dbd488632e59f7658c8780ca31e05bbbe5 \
+                rmd160  6db5de1b6c8288f502240f3638df06710053f739
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:gnome-icon-theme
+
+depends_lib     port:gtk2 \
+                port:libgnomeprint \
+                port:libgnomecanvas
+
+depends_run     port:gnome-icon-theme
+
+configure.args  --disable-gtk-doc
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

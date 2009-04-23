@@ -1,0 +1,31 @@
+# $Id: Portfile 30254 2007-10-23 02:22:51Z jmpp@macports.org $
+
+PortSystem 1.0
+PortGroup xcode 1.0
+
+name		contacts
+version		1.1
+revision	1
+categories	sysutils
+platforms	darwin
+maintainers	nomaintainer
+description	command line tool to access Mac OS X's Address Book
+long_description	The utility contacts gives you access to view and \
+			search all your records in Mac OS X's Address Book \
+			database.
+
+homepage	http://gnufoo.org/contacts/
+master_sites	${homepage}
+distname	${name}${version}
+extract.suffix	.tgz
+checksums	md5 37b6a6a0312dabc4ad2ddd8805f93e12
+patchfiles	patch-FormatHelper.m
+
+xcode.target	contacts
+xcode.destroot.path	${prefix}/bin
+
+post-patch {
+	reinplace "s|/usr/share|${prefix}/share|g" \
+		${worksrcpath}/${name}.pbproj/project.pbxproj
+}
+

@@ -1,0 +1,95 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 45502 2009-01-16 19:11:23Z jmr@macports.org $
+
+PortSystem	1.0
+
+name		gnome-desktop-suite
+version		2.24
+categories	gnome devel
+maintainers	nomaintainer
+description	The GNOME desktop environment
+long_description	The GNOME desktop environment is the set of libraries, applications and services that work as a cohesive integrated user interface produced by the GNOME project. The platform is one of the suites of software packages that form the complete GNOME project offerings.
+homepage	http://www.gnome.org/
+master_sites	gnome
+platforms	macosx freebsd
+depends_lib	port:gnome-platform-suite	\
+		port:bug-buddy	\
+		port:gnome-control-center	\
+		port:dasher	\
+		port:eel	\
+		port:eog	\
+		port:evince	\
+		port:evolution-data-server	\
+		port:file-roller	\
+		port:gcalctool	\
+		port:gconf-editor	\
+		port:gdm	\
+		port:gedit	\
+		port:gnome-user-docs	\
+		port:gnome-applets	\
+		port:gnome-backgrounds	\
+		port:gnome-desktop	\
+		port:gnome-doc-utils	\
+		port:gnome-games	\
+		port:gnome-icon-theme	\
+		port:gnome-keyring	\
+		port:gnome-keyring-manager	\
+		port:gnome-mag	\
+		port:gnome-media	\
+		port:gnome-menus	\
+		port:gnome-panel	\
+		port:gnome-session	\
+		port:gnome-speech	\
+		port:gnome-system-monitor	\
+		port:gnome-terminal	\
+		port:gnome-themes	\
+		port:gnome-utils	\
+		port:gnopernicus	\
+		port:gst-plugins-good	\
+		port:gstreamer	\
+		port:gtk-engines2	\
+		port:libgtkhtml3	\
+		port:gtksourceview2	\
+		port:gucharmap	\
+		port:libgail-gnome	\
+		port:libgnomeprint	\
+		port:libgnomeprintui	\
+		port:libgtop	\
+		port:librsvg	\
+		port:libsoup	\
+		port:libwnck	\
+		port:libxklavier	\
+		port:metacity	\
+		port:nautilus	\
+		port:rarian	\
+		port:startup-notification	\
+		port:system-tools-backends	\
+		port:vino	\
+		port:vte	\
+		port:yelp	\
+		port:zenity \
+		port:gnome-audio	\
+		port:gnome-python-desktop	\
+		port:seahorse
+distfiles
+fetch           { }
+checksum        { }
+use_configure   no
+build           { }
+destroot        {
+	file mkdir ${destroot}${prefix}/share/doc/gnome
+	file copy ${filespath}/README.${name}.txt.in ${destroot}${prefix}/share/doc/gnome/README.${name}.txt
+	reinplace "s|@PREFIX@|${prefix}|g" ${destroot}${prefix}/share/doc/gnome/README.${name}.txt
+}
+post-activate		{
+	set fl [open "| grep -c with_gnome ${prefix}/etc/macports/variants.conf" ]
+	set data [read $fl]
+	if {[catch {close $fl} err]} {
+		file copy -force ${prefix}/etc/macports/variants.conf ${prefix}/etc/macports/variants.conf.bak
+		system "	echo +with_gnome >> ${prefix}/etc/macports/variants.conf"
+	}
+	ui_msg "\nTo start gnome put \"exec gnome-session\" in your .xinitrc"
+	ui_msg "See also http://trac.macports.org/wiki/GNOME\n"
+}
+
+livecheck.check none

@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns an instance of ActionView::Base with the helper being spec'd included.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Example
+- !ruby/struct:SM::Flow::VERB 
+  body: "  describe PersonHelper do\n    it &quot;should write a link to person with the name&quot; do\n      assigns[:person] = mock_model(Person, :full_name =&gt; &quot;Full Name&quot;, :id =&gt; 37, :new_record? =&gt; false)\n      helper.link_to_person.should == %{&lt;a href=&quot;/people/37&quot;&gt;Full Name&lt;/a&gt;}\n    end\n  end\n\n  module PersonHelper\n    def link_to_person\n      link_to person.full_name, url_for(person)\n    end\n  end\n"
+full_name: Spec::Rails::Example::HelperExampleGroup#helper
+is_singleton: false
+name: helper
+params: ()
+visibility: public

@@ -1,0 +1,28 @@
+# $Id: Portfile 49007 2009-04-01 20:59:06Z ricci@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           podlators 2.2.2 ../by-authors/id/R/RR/RRA/
+maintainers           narf_tm openmaintainer
+description           podlators contains Pod::Man and Pod::Text modules.
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 c91079e0409c0911f6df6ae88f42c344 \
+                      sha1 bb8bca28e822ece6f96cc0b10911e9f0bbbe074d \
+                      rmd160 81a408ec6ccbcb2f8baf38828810a68ef46533fc
+
+depends_lib-append    port:p5-pod-simple
+
+## # Perl searches vendor location last, so this won't
+## # override the older version included with perl
+## # if we install it in the vendor location
+## set perl5.lib   ${prefix}/lib/perl5/${perl5.version}
+## 
+## configure.args  
+## 
+post-destroot {
+    ui_msg "You must install or activate this package with '-f' (force) as it needs to overwrite files installed by the perl5.8 port"
+}

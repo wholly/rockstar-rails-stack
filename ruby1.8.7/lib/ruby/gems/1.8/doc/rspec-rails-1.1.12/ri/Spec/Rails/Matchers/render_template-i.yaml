@@ -1,0 +1,28 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: For use in controller code examples (integration or isolation mode).
+- !ruby/struct:SM::Flow::P 
+  body: "Passes if the specified template (view file) is rendered by the response. This file can be any view file, including a partial. However if it is a partial it must be rendered directly i.e. you can't detect that a partial has been rendered as part of a view using render_template. For that you should use a message expectation (mock) instead:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  controller.should_receive(:render).with(:partial =&gt; 'path/to/partial')\n"
+- !ruby/struct:SM::Flow::P 
+  body: <tt>template</tt> can include the controller path. It can also include an optional extension, which you only need to use when there is ambiguity.
+- !ruby/struct:SM::Flow::P 
+  body: Note that partials must be spelled with the preceding underscore.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  response.should render_template('list')\n  response.should render_template('same_controller/list')\n  response.should render_template('other_controller/list')\n\n  # with extensions\n  response.should render_template('list.rjs')\n  response.should render_template('list.haml')\n  response.should render_template('same_controller/list.rjs')\n  response.should render_template('other_controller/list.rjs')\n\n  # partials\n  response.should render_template('_a_partial')\n  response.should render_template('same_controller/_a_partial')\n  response.should render_template('other_controller/_a_partial')\n"
+full_name: Spec::Rails::Matchers#render_template
+is_singleton: false
+name: render_template
+params: |
+  response.should render_template(template)
+  response.should_not render_template(template)
+
+visibility: public

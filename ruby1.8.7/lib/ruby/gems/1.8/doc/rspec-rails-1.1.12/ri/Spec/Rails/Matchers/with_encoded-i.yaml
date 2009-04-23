@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: wrapper for assert_select_encoded
+- !ruby/struct:SM::Flow::P 
+  body: see documentation for assert_select_encoded at http://api.rubyonrails.org/
+full_name: Spec::Rails::Matchers#with_encoded
+is_singleton: false
+name: with_encoded
+params: (*args, &block)
+visibility: public

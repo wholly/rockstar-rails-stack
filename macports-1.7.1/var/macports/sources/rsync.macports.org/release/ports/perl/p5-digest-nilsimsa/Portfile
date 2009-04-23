@@ -1,0 +1,12 @@
+# $Id: Portfile 30247 2007-10-23 02:05:08Z jmpp@macports.org $
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup		Digest-Nilsimsa 0.06
+revision		1
+maintainers		nomaintainer
+description		Perl version of Nilsimsa code
+long_description	${description}
+checksums		md5 08e940bd7f5d1167ef3fd1aa7ce234d7
+platforms		darwin
+

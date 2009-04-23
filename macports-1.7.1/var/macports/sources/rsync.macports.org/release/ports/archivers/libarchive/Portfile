@@ -1,0 +1,30 @@
+# $Id: Portfile 49724 2009-04-16 21:07:35Z toby@macports.org $
+
+PortSystem 1.0
+
+name             libarchive
+version          2.7.0
+categories       archivers
+maintainers      toby
+description      functions for reading and writing streaming archives
+long_description \
+	Libarchive is a programming library that can create and \
+	read several different streaming archive formats, including \
+	most popular tar variants and several cpio formats. It can \
+	also write shar archives.
+homepage         http://code.google.com/p/libarchive/
+platforms        darwin
+
+master_sites     googlecode
+
+checksums        md5 a2103ca334037562ad327eb3aed54869 \
+                 sha1 625347766797929873a8e31819a14c405bcb2275 \
+                 rmd160 997f2809cb91eb84707714cb58f4840dee0a9ea0
+
+depends_lib      port:bzip2 port:zlib
+
+# lzma disabled until i get a chance to test
+configure.args   --enable-bsdtar=shared --enable-bsdcpio=shared \
+                 --without-lzmadec --without-lzma
+
+livecheck.regex  files/libarchive-(\[0-9\]+\\.\[0-9\]+\\.\[0-9\]+)\\.tar\\.gz

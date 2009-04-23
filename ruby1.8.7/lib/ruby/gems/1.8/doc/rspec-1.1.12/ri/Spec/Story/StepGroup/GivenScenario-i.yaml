@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: given_scenario
+block_params: 
+comment: 
+full_name: Spec::Story::StepGroup#GivenScenario
+is_singleton: false
+name: GivenScenario
+params: (name, &block)
+visibility: public

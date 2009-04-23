@@ -1,0 +1,44 @@
+# $Id: Portfile 46771 2009-02-12 18:21:40Z mcalhoun@macports.org $
+
+PortSystem 1.0
+PortGroup  muniversal 1.0
+
+name                libffi
+version             3.0.8
+revision            1
+categories          devel
+platforms           darwin
+maintainers         pguyot@kallisys.net openmaintainer
+
+description         libffi provides a high level api to various calling conventions
+long_description    libffi library provides a portable, high level \
+                    programming interface to various calling conventions. \
+                    This allows a programmer to call any function \
+                    specified by a call interface description at run-time. \
+                    Some programs may not know at the time of compilation \
+                    what arguments are to be passed to a function. For \
+                    instance, an interpreter may be told at run-time about \
+                    the number and types of arguments used to call a given \
+                    function. Libffi can be used in such programs to \
+                    provide a bridge from the interpreter program to \
+                    compiled code.
+
+homepage            http://sources.redhat.com/libffi/
+master_sites        ftp://sourceware.org/pub/libffi
+checksums           md5     188a4f79fdac2310044b44b7d3918ef9 \
+                    sha1    ce44d10c39d9a37479c8777e206cac0f36c48712 \
+                    rmd160  4144f64e79ebf95161a6afd58ceaeef8372b5e57
+
+patchfiles          patch-includedir.diff patch-ffitarget.h.diff
+
+array set merger_host {
+    ppc64   powerpc-apple-darwin
+}
+set merger_dont_diff ${prefix}/include/ffitarget.h
+if {[variant_isset universal]} {
+    patchfiles-append patch-ffi.h.in.diff
+}
+
+livecheck.url       ${homepage}
+livecheck.check     regex
+livecheck.regex     ${name}-(\\d+(?:\\.\\d+)*)

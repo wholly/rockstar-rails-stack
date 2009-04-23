@@ -1,0 +1,52 @@
+# $Id: Portfile 42660 2008-11-28 21:00:37Z blair@macports.org $
+
+PortSystem 1.0
+
+name			spymemcached
+version			2.2
+categories		java
+platforms		darwin
+maintainers		blair
+description		A high performance, distributed object caching system.
+
+long_description	Memcached is a high-performance, distributed \
+			memory object caching system, generic in nature, \
+			but intended for use in speeding up dynamic web \
+			applications by alleviating database load.  This \
+			Port provides a native Java client written by \
+			Dustin Sallings.
+
+homepage		http://code.google.com/p/spymemcached/
+
+master_sites		googlecode
+distfiles		memcached-${version}.jar \
+			memcached-${version}-javadoc.zip
+extract.only
+
+checksums		memcached-${version}.jar \
+				md5 2309fedb8695509ff8eed9e3807dd6b5 \
+				sha1 5145de0f9c3f5409634a7dec55eafb58d31d5518 \
+				rmd160 8ed59697f9be67a0a377a3b800043ba82749568e \
+			memcached-${version}-javadoc.zip \
+				md5 72baaa970c6fde74ae43d10c4f43569b \
+				sha1 57bf64cf2a7a2d0520651258e9815a75df60cb86 \
+				rmd160 78216704b566de738f50274c1619367b8d737ac7
+
+depends_lib		bin:java:kaffe \
+			port:spyjar
+
+use_configure		no
+
+build { }
+
+destroot {
+	set javadir ${destroot}${prefix}/share/java
+	set docdir ${destroot}${prefix}/share/doc/${name}
+
+	xinstall -d -m 755 ${javadir}
+	xinstall -d -m 755 ${docdir}/api
+
+	file copy ${distpath}/memcached-${version}.jar \
+		${javadir}/spymemcached.jar
+	system "unzip -q ${distpath}/memcached-${version}-javadoc.zip -d ${docdir}/api"
+}

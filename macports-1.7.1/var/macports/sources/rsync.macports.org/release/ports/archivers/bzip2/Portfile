@@ -1,0 +1,76 @@
+# $Id: Portfile 46781 2009-02-12 23:52:25Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    bzip2
+version                 1.0.5
+revision                2
+platforms               darwin freebsd linux sunos
+categories              archivers sysutils
+maintainers             ryandesign openmaintainer
+use_configure           no
+use_parallel_build      yes
+homepage                http://www.bzip.org/
+master_sites            ${homepage}${version}
+
+description \
+    compression library and tools
+
+long_description \
+    ${name} is a freely available, patent free, high-quality data \
+    compressor.
+
+checksums \
+    md5 3c15a0c8d1d3ee1c46a1634d00617b1a \
+    sha1 8b02713ea0c8eb501cc8bdac4432d7f29700f767 \
+    rmd160 2b31a22138e3914d82a656fee28e2bf029cbc3d4
+
+patchfiles \
+    patch-Makefile-man.diff \
+    patch-Makefile-links.diff
+
+platform darwin {
+    patchfiles-append   patch-Makefile-dylib.diff
+
+    post-patch {
+    reinplace "s|__MacPorts_Version__|${version}|g" \
+        ${worksrcpath}/Makefile
+    reinplace "s|__MacPorts_Compatibility_Version__|[join [lrange [split ${version} .] 0 1] .]|g" \
+        ${worksrcpath}/Makefile
+    }
+
+    post-destroot {
+        ln -s libbz2.${version}.dylib ${destroot}${prefix}/lib/libbz2.[join [lrange [split ${version} .] 0 1] .].dylib
+        ln -s libbz2.${version}.dylib ${destroot}${prefix}/lib/libbz2.[join [lrange [split ${version} .] 0 0] .].dylib
+        ln -s libbz2.${version}.dylib ${destroot}${prefix}/lib/libbz2.dylib
+    }
+}
+
+platform freebsd {
+    patchfiles-append   patch-Makefile-so.diff
+}
+
+platform linux {
+    patchfiles-append   patch-Makefile-so.diff
+}
+
+platform sunos {
+    patchfiles-append   patch-Makefile-so.diff
+}
+
+platform darwin 7 {
+    build.env           DYLD_LIBRARY_PATH="${worksrcpath}"
+}
+
+post-configure {
+    reinplace "s|^CC=gcc|CC=${configure.cc}|" ${worksrcpath}/Makefile
+}
+
+build.args              PREFIX="${prefix}"
+destroot.destdir        PREFIX="${destroot}${prefix}"
+
+variant universal {
+    post-configure {
+        reinplace "s|^CC=\\(.*\\)|CC=\\1 ${configure.universal_cflags}|" ${worksrcpath}/Makefile
+    }
+}

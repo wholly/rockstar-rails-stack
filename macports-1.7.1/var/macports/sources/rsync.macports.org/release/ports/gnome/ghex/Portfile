@@ -1,0 +1,22 @@
+# $Id: Portfile 41387 2008-11-01 10:19:11Z jmr@macports.org $
+
+PortSystem 1.0
+
+name		ghex
+version		2.22.0
+set branch  [join [lrange [split ${version} .] 0 1] .]
+description	GHex - a binary editor.
+long_description	GHex allows the user to load data from any file, \
+			view and edit it in either hex or ascii. A must for \
+			anyone playing games that use non-ascii format for saving.
+maintainers	nomaintainer
+categories	gnome 
+platforms	darwin 
+homepage	http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2	yes
+checksums	md5 6f1ee7a56f7dd04bfba5ee74a639948a \
+			sha1 22764d71a8932c09b3e10baed13c3a5d7948aed4
+depends_lib	port:libgnomeprintui
+configure.cppflags-append "-L${prefix}/lib"
+configure.cflags-append -no-cpp-precomp

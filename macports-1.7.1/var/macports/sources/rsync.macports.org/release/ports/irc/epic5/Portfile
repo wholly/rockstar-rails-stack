@@ -1,0 +1,49 @@
+# $Id: Portfile 46912 2009-02-17 02:20:09Z raimue@macports.org $
+
+PortSystem 1.0
+name             epic5
+version          0.3.4
+revision         1
+categories       irc
+maintainers      nomaintainer
+description      (E)nhanced (P)rogrammable (I)RC-II (C)lient 5
+homepage         http://www.epicsol.org/
+platforms        darwin
+long_description \
+	EPIC5 is the new development branch of EPIC, which is a \
+	new direction in ircII development. No longer is EPIC 100% \
+	backwards compatable with ircII, but instead we have chosen \
+	to find those things where compatability is undesirable, \
+	and fix them. No gratuitous incompatabilities have been \
+	added, but lots of new code has been added to make EPIC the \
+	best ircII client we could make.
+
+master_sites     ftp://ftp.epicsol.org/pub/epic/EPIC5-ALPHA/
+use_bzip2        yes
+
+checksums        md5 8b742772924f5c0999cdaca72a983f1d \
+                 sha1 407722285e82a7bdf914b277ccc455470e652226 \
+                 rmd160 7fd173203b0c69ef4e4461189bc778baa6a2276c
+
+patchfiles       patch-configure \
+                 patch-configure.in
+
+post-patch {
+	reinplace s|__PREFIX__|${prefix}| ${worksrcpath}/configure
+}
+
+configure.args   --mandir=${prefix}/share/man \
+                 --without-ssl \
+                 --without-socks \
+                 --without-socks5 \
+                 --without-perl \
+                 --without-tcl \
+                 --with-ipv6
+
+destroot.destdir IP=${destroot}
+
+variant ssl {
+	configure.args-delete --without-ssl
+	configure.args-append --with-ssl
+	depends_lib-append    port:openssl
+}

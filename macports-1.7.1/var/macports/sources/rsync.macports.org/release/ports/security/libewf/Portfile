@@ -1,0 +1,32 @@
+# $Id: Portfile 37013 2008-05-22 21:43:14Z ricci@macports.org $
+
+PortSystem 1.0
+
+name		libewf
+version		20080501
+revision	0
+categories	security
+maintainers	opendarwin.org@darkart.com
+description	Libewf is a library for support of the Expert Witness Compression Format
+homepage	https://www.uitwisselplatform.nl/projects/libewf/
+platforms	darwin
+
+long_description Libewf is a library for support of the Expert Witness \
+		Compression Format (EWF), it support both the SMART \
+		format (EWF-S01) and the EnCase format (EWF-E01).  \
+		Libewf allows you to read and write media information within the EWF files.
+
+master_sites	http://www.uitwisselplatform.nl/frs/download.php/529/
+
+checksums           md5     be28a11d32ca72c328b081d38849d5bd \
+                    sha1    caa726c445b937f546f8e8f5332629ff8e47d2ca
+
+
+use_bzip2	no
+
+## master_site uses a self-signed cert and appears to force the use of SSL.
+## libcurl chokes on this, so disable cert. validation
+fetch.ignore_sslcert	yes
+
+#
+##EOF

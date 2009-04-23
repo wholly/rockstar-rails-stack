@@ -1,0 +1,45 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: fragment
+- !ruby/object:RI::MethodSummary 
+  name: parse
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: I srsly hate windows. it doesn't have vasprintf. Thank you Geoffroy Couprie for this implementation of vasprintf!
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Parser options
+  name: PARSE_NOERROR
+  value: 1 << 5
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NOWARNING
+  value: 1 << 6
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_PEDANTIC
+  value: 1 << 7
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NOBLANKS
+  value: 1 << 8
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NONET
+  value: 1 << 11
+- !ruby/object:RI::Constant 
+  comment: 
+  name: NamedCharacters
+  value: EntityLookup.new
+full_name: Nokogiri::HTML
+includes: []
+
+instance_methods: []
+
+name: HTML
+superclass: 

@@ -1,0 +1,30 @@
+# $Id: Portfile 30228 2007-10-22 22:59:36Z jmpp@macports.org $
+PortSystem 1.0
+name		genius
+version		0.6.1
+revision	1
+description	Genius is a calculator program.
+long_description        Genius is a calculator program similiar in some aspects to \
+			BC, Matlab or Maple. GEL is the name of its extention language \
+			(stands for \"Genius Extension Language\", clever huh?), in \
+			fact, a large part of the standard genius functions are \
+			written in GEL itself.
+maintainers	nomaintainer
+categories	gnome math
+platforms	darwin 
+homepage	http://www.jirka.org/genius.html
+master_sites    http://ftp.5z.com/pub/genius/ \
+		gnome:sources/genius/0.6
+checksums	md5 f6bb8357593f8a51aac1e7eae4f8ad91
+patchfiles	patch_calc.c patch_ve-misc.c
+depends_lib	lib:libgtksourceview-1:gtksourceview \
+		lib:libreadline:readline lib:libgmp:gmp
+configure.args	--enable-gnome --enable-gtksourceview
+configure.cflags-append        -no-cpp-precomp -flat_namespace -undefined supress
+
+variant without_gnome {
+	configure.args-delete 	--enable-gnome --enable-gtksourceview
+	depends_lib-delete 	lib:libgtksourceview-1:gtksourceview
+	
+	configure.args-append	--disable-gnome --disable-gtksourceview
+}

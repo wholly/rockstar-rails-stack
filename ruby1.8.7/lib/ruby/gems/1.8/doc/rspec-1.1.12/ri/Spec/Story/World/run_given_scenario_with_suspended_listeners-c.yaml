@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::World::run_given_scenario_with_suspended_listeners
+is_singleton: true
+name: run_given_scenario_with_suspended_listeners
+params: (world, type, name, scenario)
+visibility: public

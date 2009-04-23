@@ -1,0 +1,16 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: parse_query_parameters
+comment: 
+constants: []
+
+full_name: Spec::Rails::Matchers::RedirectTo::QueryParameterParser
+includes: []
+
+instance_methods: []
+
+name: QueryParameterParser
+superclass: Object

@@ -1,0 +1,47 @@
+# $Id: Portfile 44017 2008-12-19 17:57:08Z jmr@macports.org $
+
+PortSystem 1.0
+
+name		pfe
+version		0.33.65
+categories	lang
+maintainers	nomaintainer
+platforms	darwin
+description	Implementation of ANSI Forth
+long_description	The Forth-system is closely modeled along the new American National Standard for the programming language Forth. Every word of every word set mentioned in the dpANS-6 document of June 1993 has been implemented.  Additionally it is compatible to Forth-83.
+
+homepage	http://pfe.sourceforge.net/
+master_sites	sourceforge
+use_bzip2	yes
+checksums	md5 f1779efd88b5f4141195ac8483842a0b \
+		sha1 d0a1a591d7d9ac44d0be62b27fd42a6d49c68514 \
+		rmd160 4fb21c5bb4b5067fa1a754761b91c08eea002236
+configure.args	--with-sbr-static --without-testmodule
+
+depends_lib	port:ncurses
+
+post-configure {
+	global reldir
+	set reldir [string map {" " "_" "/" "_"} [exec uname -srm].d]
+	xinstall -m 755 /usr/bin/glibtool ${worksrcpath}/${reldir}/pfe/libtool
+}
+
+destroot {
+	global reldir
+	xinstall -m 755 ${worksrcpath}/${reldir}/pfe/.libs/pfe ${destroot}${prefix}/bin
+	eval xinstall -m 644 [glob ${worksrcpath}/${reldir}/pfe/.libs/*.dylib] ${destroot}${prefix}/lib
+	xinstall -m 755 -d ${destroot}${prefix}/lib/pfe-fastest
+	eval xinstall -m 644 [glob ${worksrcpath}/${reldir}/pfe/.libs/*.so] ${destroot}${prefix}/lib/pfe-fastest
+	xinstall -m 644 ${worksrcpath}/doc/pfe.1 ${destroot}${prefix}/share/man/man1
+	xinstall -m 755 -d ${destroot}${prefix}/share/pfe
+	eval xinstall -m 644 [glob ${worksrcpath}/lib/*.4th] ${destroot}${prefix}/share/pfe
+	xinstall -m 644 ${worksrcpath}/lib/easy4th.f ${destroot}${prefix}/share/pfe
+}
+
+# Fix gcc Intel bug, apparently. See:
+# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=11001
+# And:
+# http://factor-language.blogspot.com/2007/08/gcc-is-open-sores-software.html
+platform i386 {
+	configure.cflags-append -fno-builtin-strlen -fno-builtin-strcat
+}

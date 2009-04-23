@@ -1,0 +1,43 @@
+# $Id: Portfile 47852 2009-03-08 16:16:12Z macsforever2000@macports.org $
+
+PortSystem 1.0
+
+name			Growl
+set base_version	1.1.4
+version			${base_version}
+categories		aqua
+platforms		darwin
+maintainers		boeyms openmaintainer
+description		global notification system for Mac OS X
+long_description	Growl is a global notification system for Mac OS X. Any \
+				application can send a notification to Growl, which will \
+				display an attractive message on your screen.
+
+homepage		http://growl.info/
+
+master_sites	${homepage}files/source/
+checksums		md5 f497b5485f644e767482764da1813116 \
+				sha1 33bf8a3b122072a6713657e577a84b7f0ef8f839 \
+				rmd160 0052da5775ee1e8e4fe11316810ed6b87aa204ef
+use_bzip2		yes
+distname		${distname}-src
+
+# The following patch selection makes the source build for a single
+# architecture, rather than as universal binaries as the distributed source is
+# configured to do.  This probably plays havoc with the MacPorts +universal
+# variant, so I'll need to think further about this.
+patchfiles		patch-Growl.xcodeproj__project.pbxproj.${os.arch}.diff
+use_configure		no
+build.target		growl
+destroot.destdir	PREFIX=${destroot}
+
+# The old behaviour of automatically installing the contributed extras in the
+# source distribution has been disabled for now, as it is not apparent that
+# every Growl user will want these.  They should probably go into other ports,
+# in any case.
+
+variant universal {
+	patchfiles-delete \
+		patch-Growl.xcodeproj__project.pbxproj.${os.arch}.diff
+}
+

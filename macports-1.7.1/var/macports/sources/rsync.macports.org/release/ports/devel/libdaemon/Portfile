@@ -1,0 +1,38 @@
+# $Id: Portfile 44988 2009-01-06 05:16:31Z blb@macports.org $
+
+PortSystem      1.0
+
+name            libdaemon
+version         0.13
+categories      devel
+platforms       darwin
+maintainers     nomaintainer
+description     C library that eases writing UNIX daemons
+
+long_description \
+    libdaemon is a lightweight C library that eases the process of \
+    writing UNIX daemons. It contains a daemonizing fork() wrapper, \
+    a powerful syslog() wrapper, PID file management, and signal \
+    serialization.
+
+homepage        http://0pointer.de/lennart/projects/libdaemon/
+master_sites    ${homepage}
+
+checksums       md5     ae9113fcd825d5a7f07e5ddccb3c3102 \
+                sha1    2c67eedf0dfe303a86bee64feba3e40d21abbd01 \
+                rmd160  7fc41dc7a147d969b29e5a359442716859de7e0e
+
+depends_build   port:pkgconfig
+
+configure.args  --disable-lynx
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}-${version}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} LICENSE README ${destroot}${docdir}
+}
+
+platform darwin {
+   patchfiles-append   patch-libdaemon_dfork.c.diff
+}
+

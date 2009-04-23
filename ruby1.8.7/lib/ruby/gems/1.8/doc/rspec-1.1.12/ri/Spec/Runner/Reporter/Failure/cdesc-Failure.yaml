@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: example
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: exception
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Spec::Runner::Reporter::Failure
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: example_name
+- !ruby/object:RI::MethodSummary 
+  name: expectation_not_met?
+- !ruby/object:RI::MethodSummary 
+  name: header
+- !ruby/object:RI::MethodSummary 
+  name: pending_fixed?
+name: Failure
+superclass: Object

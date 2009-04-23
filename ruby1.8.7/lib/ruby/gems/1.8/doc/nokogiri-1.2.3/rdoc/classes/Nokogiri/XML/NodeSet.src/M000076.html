@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>[] (Nokogiri::XML::NodeSet)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  [](i)
+ *
+ * Get the node at index +i+
+ */
+static VALUE index_at(VALUE self, VALUE number)
+{
+  int i = NUM2INT(number);
+  xmlNodeSetPtr node_set;
+  Data_Get_Struct(self, xmlNodeSet, node_set);
+
+  if(i &gt;= node_set-&gt;nodeNr || abs(i) &gt; node_set-&gt;nodeNr)
+    return Qnil;
+
+  if(i &lt; 0)
+    i = i + node_set-&gt;nodeNr;
+
+  return Nokogiri_wrap_xml_node(node_set-&gt;nodeTab[i]);
+}</pre>
+</body>
+</html>

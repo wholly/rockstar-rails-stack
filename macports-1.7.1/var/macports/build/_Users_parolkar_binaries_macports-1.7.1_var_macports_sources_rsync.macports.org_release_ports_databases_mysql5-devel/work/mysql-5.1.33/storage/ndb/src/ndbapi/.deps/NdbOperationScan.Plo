@@ -1,0 +1,1 @@
+NdbOperationScan.lo NdbOperationScan.o: NdbOperationScan.cpp

@@ -1,0 +1,34 @@
+# $Id: Portfile 47475 2009-02-28 10:21:17Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name			polyml
+version			5.2.1
+revision                1
+set distfile_date	20080623181636
+categories		lang ml
+platforms		darwin
+maintainers		mww
+description		An implementation of Standard ML.
+long_description  Poly/ML is an extremely fast and efficient implementation of \
+				Standard ML. Program state can be saved in a memory-mapped \
+				persistent store. There are numerous addon libraries available.
+
+homepage		http://www.polyml.org/
+master_sites		sourceforge
+
+dist_subdir		${name}/${version}-${distfile_date}
+distname		${name}.${version}
+checksums		sha1 39cc9451113d41ca9c491167cf3973dfd55b7446
+
+#post-extract { system "chmod 755 ${worksrcpath}/install-sh" }
+
+configure.ldflags
+configure.cppflags
+configure.args		--mandir=${prefix}/share/man
+
+post-destroot {
+	xinstall -m 555 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 444 -W ${worksrcpath} COPYING \
+		${destroot}${prefix}/share/doc/${name}
+}

@@ -1,0 +1,30 @@
+# $Id: Portfile 41808 2008-11-10 23:41:44Z ryandesign@macports.org $
+
+PortSystem 1.0
+PortGroup python25 1.0
+
+name		kiwi
+version		1.9.20
+categories	devel gnome python
+maintainers	nomaintainer
+description	Framework for Python applications with GUIs.
+long_description \
+	Kiwi is a framework and a set of enhanced PyGTK widgets designed to \
+	make building programs with graphical interfaces both easy to write \
+	and easy to maintain. Kiwi is pure Python and should work \
+	cross-platform, but is developed on Python 2.4, Linux ix86.
+homepage	http://www.async.com.br/projects/kiwi
+platforms	darwin
+
+master_sites	gnome:sources/kiwi/[strsed ${version} {/\.[0-9]*$//}]/
+checksums	md5 2ed0ea4b7b22466ecf415a37602212d3 \
+	sha1 e150e4d5a43d97b1ff3e732a8fb40dedf5d81867 \
+	rmd160 2fb3cff74a55decfd11fffc0096188ef60806c60
+
+depends_lib-append	\
+	path:lib/pkgconfig/glib-2.0.pc:glib2 \
+	port:py25-gobject \
+	port:py25-gtk \
+	port:py25-numeric
+depends_build-append	\
+	port:pkgconfig

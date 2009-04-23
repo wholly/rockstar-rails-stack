@@ -1,0 +1,22 @@
+# $Id: Portfile 36408 2008-04-30 22:29:41Z brett@macports.org $
+
+PortSystem 1.0
+
+name			qrencode
+version			3.0.0
+categories		graphics
+maintainers		brett@macports.org
+description		QR Code generation
+long_description	Libqrencode is a C library for encoding data in a QR Code \
+			symbol, a kind of 2D symbology that can be scanned by handy \
+			terminals such as a mobile phone with CCD. The capacity of \
+			QR Code is up to 7000 digits or 4000 characters, and is highly robust.
+homepage		http://megaui.net/fukuchi/works/qrencode/index.en.html
+platforms		darwin
+master_sites		http://megaui.net/fukuchi/works/qrencode/
+checksums		sha1 67d491d522a19faf4ad304fdde8db003f0af8cb5
+configure.args		--mandir=${prefix}/share/man
+
+
+test.run		yes
+test.target		verify

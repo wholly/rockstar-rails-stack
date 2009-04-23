@@ -1,0 +1,15 @@
+# $Id: Portfile 34478 2008-02-26 18:20:29Z jmr@macports.org $
+
+PortSystem           1.0
+PortGroup            perl5 1.0
+
+perl5.setup          Log-Dispatch 2.21
+maintainers	     nomaintainer
+platforms            darwin
+checksums            md5 a9aeb68cbf45f99ab63985719f112ee7 \
+                     sha1 2d9c18ae680d3ca412e4f08cdac7055dfba955ed \
+                     rmd160 1c699f56bddb1ddb7d69c60578af1fa201322b35
+description          Dispatches messages to one or more outputs
+long_description     ${description}
+depends_lib-append   port:p5-params-validate \
+		     port:p5-test-simple

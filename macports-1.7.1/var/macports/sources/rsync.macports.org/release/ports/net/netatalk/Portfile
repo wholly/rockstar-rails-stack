@@ -1,0 +1,63 @@
+# $Id: Portfile 43061 2008-12-04 01:48:42Z mcalhoun@macports.org $
+
+PortSystem 1.0
+
+name			netatalk
+version			2.0.3
+revision		1
+categories		net
+platforms		darwin
+maintainers		nomaintainer
+description		file and printer server for Apple Macintosh clients
+long_description	netatalk is a daemon which provides POSIX-compliant \
+					Unix/BSD systems with the ability to share files and \
+					printers with Apple Macintosh computers.
+
+homepage		http://netatalk.sourceforge.net/
+master_sites	sourceforge
+checksums		md5 28092763085783805dc2f00aa2127a3e
+use_bzip2		yes
+patchfiles		patch-configure.in \
+				patch-configure \
+				patch-bin-Makefile.am \
+				patch-bin-Makefile.in \
+				patch-bin-cnid-cnid_index.c \
+                                patch-etc-cnid_dbd-dbif.c \
+				patch-afppasswd.c \
+				patch-paths.h \
+				patch-uams_randnum.c
+
+
+depends_lib		port:db44 \
+				port:openssl \
+				path:bin/perl:perl5 \
+				port:cracklib \
+				port:libiconv
+depends_build	path:include/cups/cups.h:cups-headers
+
+post-patch	{
+	reinplace "s|__PREFIX__|${prefix}|g" \
+		${worksrcpath}/include/atalk/paths.h
+}
+
+configure.args	--with-bdb=${prefix}/include/db44 \
+				--mandir=${prefix}/share/man \
+				--with-logfile=${prefix}/var/log/netatalk.log \
+				--with-spooldir=${prefix}/var/spool/netatalk \
+				--with-cracklib=${prefix}/lib/cracklib/pw_dict.pwd \
+				--enable-a2boot \
+				--with-ssl-dir=${prefix} \
+				--with-libiconv=${prefix}
+configure.cppflags-append	-I${prefix}/include/db44
+configure.ldflags-append	-L${prefix}/lib/db44
+
+post-destroot	{
+	file delete -force ${destroot}${prefix}/sbin/atalkd \
+		${destroot}${prefix}/share/netatalk ${destroot}/etc
+	xinstall -m 755 -d ${destroot}${prefix}/var/log/ \
+		${destroot}${prefix}/var/run/netatalk \
+		${destroot}${prefix}/var/spool/netatalk
+	system "touch ${destroot}${prefix}/var/log/netatalk.log"
+	system "touch ${destroot}${prefix}/var/run/netatalk/afpd"
+	destroot.keepdirs ${destroot}${prefix}/var/spool/netatalk
+}

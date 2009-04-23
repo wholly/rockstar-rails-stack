@@ -1,0 +1,25 @@
+# $Id: Portfile 39351 2008-08-18 15:56:17Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           DateTime-Format-Pg 0.16002
+maintainers           narf_tm openmaintainer
+description           Parse and format PostgreSQL dates and times
+long_description      This module understands the formats used by PostgreSQL \
+                      for its DATE, TIME, TIMESTAMP, and INTERVAL data types. \
+                      It can be used to parse these formats in order to \
+                      create DateTime or DateTime::Duration objects, and it \
+                      can take a DateTime or DateTime::Duration object and \
+                      produce a string representing it in a format accepted \
+                      by PostgreSQL.
+
+platforms             darwin
+
+checksums             md5 381bb4e599cae0da2c0c8a48d4b0e759 \
+                      sha1 abca241cc675a49b23d86bba2fa75eeaac93ce18 \
+                      rmd160 cbd6c3a650c5b93121fe95b07ba4fde400de5bbc
+
+depends_lib-append    port:p5-datetime \
+                      port:p5-datetime-format-builder \
+                      port:p5-datetime-timezone

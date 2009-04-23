@@ -1,0 +1,10 @@
+# $Id: Portfile 30247 2007-10-23 02:05:08Z jmpp@macports.org $
+
+PortSystem	1.0
+PortGroup	perl5 1.0
+perl5.setup	Crypt-IDEA 1.08
+maintainers	nomaintainer
+description	perl implementation of IDEA
+long_description	${description}
+platforms	darwin
+checksums	md5 6718c630fa8ac28cb989b7db763ed97c

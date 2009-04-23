@@ -1,0 +1,48 @@
+# $Id: Portfile 49024 2009-04-02 02:11:33Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name		quartz-wm
+version		1.0.3
+categories	x11
+maintainers	jeremyhu openmaintainer
+description     Apple's Window Manager for X11
+homepage	http://xquartz.macosforge.org
+platforms	macosx
+long_description quartz-wm is Apple's closed source window-manager.
+master_sites	${homepage}/downloads
+
+distfiles	quartz-wm-${version}-Tiger.bz2 quartz-wm-${version}-Leopard.bz2
+
+checksums           quartz-wm-1.0.3-Tiger.bz2 \
+                    md5     8c804674a5d8af77776060db928b5305 \
+                    sha1    4f34f006e1ccc901797f9f01d9108f1dd510d2d2 \
+                    rmd160  acd14a50ef58b0968be547044085a44aada4a8fb \
+                    quartz-wm-1.0.3-Leopard.bz2 \
+                    md5     e17617ac3f0eba6776b1547db1bc6c49 \
+                    sha1    40890a411855ae17e1b12de6ae53a00ad3b4e1b2 \
+                    rmd160  3e9f1cc19a7c0b31beb52636140842ab3af257c3
+
+use_bzip2	yes
+
+depends_lib     port:xorg-libXinerama \
+                port:xorg-libAppleWM
+
+use_configure no
+extract         { 
+	system "mkdir -p ${worksrcpath}"
+	file copy ${distpath}/quartz-wm-${version}-Tiger.bz2 ${worksrcpath}
+	file copy ${distpath}/quartz-wm-${version}-Leopard.bz2 ${worksrcpath}
+	system "cd ${worksrcpath} && bunzip2 quartz-wm-${version}-Tiger.bz2 && bunzip2 quartz-wm-${version}-Leopard.bz2"
+}
+
+build           { }
+
+destroot        {
+	xinstall -d -m 755 ${destroot}${prefix}/bin
+	if {${os.major} < 9} {
+		xinstall -m 755 ${worksrcpath}/quartz-wm-${version}-Tiger ${destroot}${prefix}/bin/quartz-wm
+	} else {
+		xinstall -m 755 ${worksrcpath}/quartz-wm-${version}-Leopard ${destroot}${prefix}/bin/quartz-wm
+	}
+}

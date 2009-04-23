@@ -1,0 +1,45 @@
+# $Id: Portfile 41349 2008-10-31 08:01:48Z ryandesign@macports.org $
+
+PortSystem      1.0
+
+name            mono-addins
+version         0.3.1
+categories      devel
+platforms       darwin
+maintainers     nox
+description     Mono.Addins is a framework for creating extensible applications
+
+long_description \
+    Mono.Addins is a framework for creating extensible applications, \
+    and for creating libraries which extend those applications. \
+    Mono.Addins has been designed to be easy to use and useful for a \
+    wide range of applications: from simple applications with small \
+    extensibility needs, to complex applications which need support \
+    for large add-in structures.  This new framework intends to set an \
+    standard for building extensible applications and add-ins in Mono.
+
+homepage        http://www.mono-project.com/Mono.Addins
+master_sites    http://go-mono.com/sources/${name}/
+use_bzip2       yes
+
+checksums       md5     bae5e01ba61bd261de2335ab0dfe999f \
+                sha1    eb74822acdff113956d449c0e67e6fdfc9dfa21c \
+                rmd160  dffb3fe49c4818b8ed95d0f3c51b99a75d244030
+
+depends_build   port:pkgconfig
+
+depends_lib     port:mono \
+                port:gtk-sharp2
+
+post-configure {
+    # TODO This shouldn't be needed, we need to fix Mono dllmap library path.
+    fs-traverse {f} ${worksrcpath} {
+        if {[string match *.dll.config ${f}]} {
+            reinplace -E "s|(target=\")|\\1${prefix}/lib/|" ${f}
+        }
+    }
+}
+
+livecheck.check regex
+livecheck.url   http://go-mono.com/sources-stable/
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)

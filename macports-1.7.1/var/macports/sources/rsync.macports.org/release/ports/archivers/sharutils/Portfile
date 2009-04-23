@@ -1,0 +1,41 @@
+# $Id: Portfile 28483 2007-09-01 18:25:52Z nox@macports.org $
+
+PortSystem			1.0
+
+name				sharutils
+version				4.7
+categories			archivers
+maintainers			nomaintainer
+description			Shell archiver utilities
+
+long_description	GNU shar makes so-called shell archives out of many files, \
+					preparing them for transmission by electronic mail services. \
+					A shell archive is a collection of files that can be unpacked \
+					by /bin/sh. A wide range of features provide extensive \
+					flexibility in manufacturing shars and in specifying shar \
+					smartness. For example, shar may compress files, uuencode binary \
+					files, split long files and construct multi-part mailings, ensure \
+					correct unsharing order, and provide simplistic checksums.
+
+homepage			http://www.gnu.org/software/${name}/
+master_sites		gnu:${name}/REL-${version}
+use_bzip2			yes
+
+depends_lib			port:gettext \
+					port:libiconv
+
+checksums			md5 729c070d814d9c688489d88dd7fd3efb \
+					sha1 0b8c1d54fdcf97a93aba079d342d1873a8fc423b \
+					rmd160 6ef271d21ea41003ff13d6aef241c6a4fd4dc296
+
+post-destroot {
+	set docdir ${prefix}/share/doc/${name}-${version}
+	xinstall -d ${destroot}${docdir}
+	xinstall -m 0644 -W ${worksrcpath} ABOUT-NLS AUTHORS COPYING ChangeLog NEWS README THANKS \
+		TODO ${destroot}${docdir}
+}
+
+livecheck.check		regex
+livecheck.url		http://ftp.gnu.org/gnu/sharutils/?C=M&O=D
+livecheck.regex		REL-(\\d+(?:\\.\\d+)*)
+

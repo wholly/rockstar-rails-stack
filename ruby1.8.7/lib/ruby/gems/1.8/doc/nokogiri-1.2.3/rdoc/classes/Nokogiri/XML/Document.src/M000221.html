@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Nokogiri::XML::Document)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  new
+ *
+ * Create a new document
+ */
+static VALUE new(int argc, VALUE *argv, VALUE klass)
+{
+  VALUE version;
+  if(rb_scan_args(argc, argv, &quot;01&quot;, &amp;version) == 0)
+    version = rb_str_new2(&quot;1.0&quot;);
+
+  xmlDocPtr doc = xmlNewDoc((xmlChar *)StringValuePtr(version));
+  return Nokogiri_wrap_xml_document(klass, doc);
+}</pre>
+</body>
+</html>

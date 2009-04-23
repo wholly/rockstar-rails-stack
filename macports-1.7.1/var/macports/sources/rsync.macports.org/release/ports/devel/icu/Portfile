@@ -1,0 +1,101 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 41935 2008-11-12 10:50:11Z nox@macports.org $
+
+PortSystem      1.0
+
+name            icu
+set my_name     icu4c
+version         4.0
+set doc_version [join [lrange [split ${version} .] 0 1] _]
+categories      devel
+platforms       darwin freebsd
+maintainers     nox openmaintainer
+description     International Components for Unicode
+
+long_description \
+    The International Components for Unicode (ICU) libraries provide robust \
+    and full-featured Unicode services on a wide variety of platforms. ICU \
+    supports the most current version of the Unicode standard, and they provide \
+    support for supplementary Unicode characters (needed for GB 18030 repertoire support).
+
+homepage        http://www.icu-project.org/
+master_sites    http://download.icu-project.org/files/${my_name}/${version}/ \
+                sourceforge
+
+distname        ${my_name}-[join [split ${version} .] _]
+extract.suffix  .tgz
+distfiles       [suffix ${distname}-src]
+
+checksums       icu4c-4_0-src.tgz \
+                md5     29ab09d84b72a74953cbb4d3d5759e14 \
+                sha1    ff1d3fa084d2dff140f6b5f53dc1566fdb5ebb17 \
+                rmd160  c80dc50b9177b60a0191ea095c4c1c3360d2c6f4 \
+                icu4c-4_0-docs.zip \
+                md5     32781fab60b60ab69cf7a6fbe4ee303a \
+                sha1    9a7c0a0c63adf02fb156b076d76acaa7dc59a15b \
+                rmd160  ce81012d86ff609b443b710f822f107d629a75ed
+
+worksrcdir      ${name}/source
+set docdir      ${prefix}/share/doc/${name}-${version}
+
+post-patch {
+    reinplace "s;install_name ;install_name ${prefix}/lib/;" ${worksrcpath}/config/mh-darwin
+}
+
+set platform [switch ${os.platform} {darwin {format MacOSX} freebsd {format FreeBSD}}]
+configure.cmd   ./runConfigureICU ${platform}
+
+configure.args  --mandir=${prefix}/share/man \
+                --disable-samples
+
+# ICU wants to build with -O3, let's do as it wants.
+configure.cflags-delete -O2
+
+pre-configure {
+    # The -delete statement above may lead to configure.cflags variable being unset
+    if {! [info exists configure.cflags]} {
+        configure.cflags
+    }
+}
+
+# Fix bug #11981 that prevents ICU from building when upgrading.
+# The default configure flags causes utilisation of outdated ICU
+# headers/libs instead of the right ones.
+configure.cppflags
+configure.ldflags
+
+build.type      gnu
+
+use_parallel_build  no
+
+test.run        yes
+test.target     check
+
+post-destroot {
+    foreach dylib [glob -type f ${destroot}${prefix}/lib/*.dylib] {
+        file attributes ${dylib} -permissions 0755
+    }
+
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath}/.. readme.html ${destroot}${docdir}
+}
+
+variant doc description {Install extra documentation} {
+    extract.only        [suffix ${distname}-src]
+    distfiles-append    ${my_name}-${doc_version}-docs.zip
+
+    post-extract {
+        system "unzip -q ${distpath}/${my_name}-${doc_version}-docs.zip -d ${workpath}/doc"
+    }
+
+    post-destroot {
+        eval xinstall -m 0644 [glob ${workpath}/doc/*.{css,gif,html,png}] ${destroot}${docdir}
+    }
+}
+
+platform freebsd {
+    build.env       MAKE=/usr/local/bin/gmake
+    destroot.env    MAKE=/usr/local/bin/gmake
+}
+
+livecheck.distname  ICU4C

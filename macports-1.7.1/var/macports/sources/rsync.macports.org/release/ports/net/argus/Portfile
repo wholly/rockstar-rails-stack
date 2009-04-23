@@ -1,0 +1,19 @@
+# $Id: Portfile 20336 2006-11-02 00:43:36Z blair@macports.org $
+
+PortSystem 1.0
+name            argus
+version         2.0.6
+categories      net
+maintainers     tk@ncircle.com
+description     \
+	the network Audit Record Generation and Utilization System
+long_description	\
+	Argus is a real-time Flow Monitor that is designed to perform \
+	comprehensive IP network traffic auditing.
+platforms	    darwin
+homepage        http://www.qosient.com/argus/
+master_sites    ftp://qosient.com/pub/argus/src/
+checksums       md5 ecc1b6880f32fab5adc93fce5186dc8e
+patchfiles	patch-Makefile
+destroot.destdir mandir=${destroot}${prefix}/share/man \
+	prefix=${destroot}${prefix}

@@ -1,0 +1,29 @@
+# $Id: Portfile 30224 2007-10-22 22:49:14Z jmpp@macports.org $
+
+PortSystem			1.0
+name				gpatch
+version				2.5.9
+categories			devel
+maintainers			nomaintainer
+description			GNU patch, for applying diffs to files
+long_description \
+	The GNU patch adds support for: \
+	handling arbitrary binary data and large files. \
+	the unified context diff format that GNU diff can produce. \
+	making GNU Emacs-style backup files. \
+	improved interaction with RCS and SCCS. \
+	the GNU conventions for option parsing and configuring and compilation. \
+	better POSIX.2 compliance.
+
+homepage			http://www.gnu.org/software/patch/
+master_sites		http://alpha.gnu.org/gnu/diffutils/
+
+platforms			darwin sunos
+distname			patch-${version}
+checksums			md5 dacfb618082f8d3a2194601193cf8716
+
+configure.args		--program-prefix=g --infodir=\\\${prefix}/share/info \
+					--mandir=\\\${prefix}/share/man
+
+destroot.args		prefix=${destroot}${prefix}
+

@@ -1,0 +1,52 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49839 2009-04-19 00:49:12Z devans@macports.org $
+
+PortSystem      1.0
+
+name            gnome-keyring
+version         2.26.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+description     GNOME program for storing passwords.
+
+long_description \
+    gnome-keyring is a program that keep password and other secrets \
+    for users. It is run as a daemon in the session, similar to \
+    ssh-agent, andother applications can locate it by an environment \
+    variable.
+
+homepage        http://live.gnome.org/GnomeKeyring/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     060b349a0aae130fdd3cd0a9827258c6 \
+                sha1    3ff24987392b3f51109709b2c020af3557155ef8 \
+                rmd160  0975197ae8e58a8d98a2ff11c062ec6c9cf74a79
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+depends_lib     port:gettext \
+                port:libiconv \
+                port:libgcrypt \
+                port:libtasn1 \
+                port:gconf
+
+test.run        yes
+test.target     check
+
+pre-test {
+    if {! [variant_isset test]} {
+        return -code 1 "You must enable test variant to test this port."
+    }
+}
+
+variant test description {Enable build of tests} {
+    configure.args-append   --enable-tests
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

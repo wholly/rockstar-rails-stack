@@ -1,0 +1,127 @@
+# $Id: Portfile 49154 2009-04-04 18:24:53Z mcalhoun@macports.org $
+
+PortSystem              1.0
+PortGroup               muniversal 1.0
+
+name                    freetype
+version                 2.3.9
+categories              print graphics
+maintainers             ryandesign
+homepage                http://freetype.sourceforge.net/
+use_bzip2               yes
+platforms               darwin
+use_parallel_build      yes
+
+description \
+    A software font engine
+
+long_description \
+    FreeType2 is a software font engine that is designed to \
+    be small, efficient, highly customizable and portable while \
+    capable of producing high-quality output (glyph images). \
+    It can be used in graphics libraries, display servers, font \
+    conversion tools, text image generation tools, and many \
+    other products as well.
+
+master_sites \
+    http://download.savannah.gnu.org/releases/freetype/ \
+    sourceforge
+
+set docdistfile \
+    ${name}-doc-${version}
+
+distfiles-append \
+    [suffix ${docdistfile}]
+
+checksums \
+    [suffix ${distname}] \
+        md5     d76233108aca9c9606cdbd341562ad9a \
+        sha1    db08969cb5053879ff9e973fe6dd2c52c7ea2d4e \
+        rmd160  c0351c2a3f43e64d26d2a964b1131a3dbf2fa162 \
+    [suffix ${docdistfile}] \
+        md5     ddcb766f7c5abab0e7061dcf32a0268f \
+        sha1    ced46581a39f449393bc267f24d0aac08c62559c \
+        rmd160  4624133b070791ff8dd92cfffb1bb1115393d08d
+
+patchfiles \
+    patch-detect.mk.diff \
+    patch-modules.cfg.diff
+
+depends_lib \
+    port:zlib
+
+# See http://trac.macports.org/ticket/18232
+configure.cppflags-delete   -I${prefix}/include
+configure.cppflags-append   -isystem${prefix}/include
+
+platform darwin 7 {
+    depends_build-append    port:gmake
+    build.cmd               ${prefix}/bin/gmake
+    configure.env-append    GNUMAKE=${build.cmd}
+}
+
+platform macosx {
+    if {${os.major} < 9} {
+        configure.args-append \
+            --with-old-mac-fonts
+    }
+}
+
+set docdir \
+    ${prefix}/share/doc/${name}-${version}
+
+post-destroot {
+    xinstall -m 0755 -d ${destroot}${docdir}
+    
+    xinstall -m 0644 -W ${worksrcpath} \
+        ChangeLog \
+        README \
+        ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath}/docs \
+        CHANGES \
+        FTL.TXT \
+        GPL.TXT \
+        LICENSE.TXT \
+        PATENTS \
+        PROBLEMS \
+        TODO \
+        formats.txt \
+        raster.txt \
+        ${destroot}${docdir}
+    
+    xinstall -m 0755 -d ${destroot}${docdir}/html
+    xinstall -m 0644 -W ${worksrcpath}/docs ft2faq.html ${destroot}${docdir}/html
+    foreach dir {design glyphs reference tutorial} {
+        copy ${worksrcpath}/docs/${dir} ${destroot}${docdir}/html
+    }
+}
+
+variant bytecode description {Build bytecode interpreter into the TrueType driver} {
+    pre-configure {
+        ui_msg "\n\n\
+            You may want not to compile a bytecode interpreter into the\n\
+            TrueType driver. Without this you will only compile the code\n\
+            necessary to load TrueType glyphs without hinting.\n\n\
+            Note that there are important patent issues related to the\n\
+            use of the interpreter.\n\n"
+    }
+    patchfiles-append \
+        patch-ftoption.h
+    
+    post-destroot {
+        xinstall -m 0644 -W ${worksrcpath}/docs TRUETYPE ${destroot}${docdir}
+    }
+}
+
+if { ${os.arch}=="i386" } {
+    if { ${os.major}>=10 } {
+        set merger_configure_env(ppc) CC_BUILD=${configure.cc}
+    }
+    set merger_configure_env(ppc64)   CC_BUILD=${configure.cc}
+} else {
+    set merger_configure_env(i386)    CC_BUILD=${configure.cc}
+    set merger_configure_env(x86_64)  CC_BUILD=${configure.cc}
+}
+
+livecheck.check         sourceforge
+livecheck.distname      ${name}[strsed ${version} {s/\..*//}]

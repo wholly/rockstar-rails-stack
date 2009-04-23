@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::World::step_names
+is_singleton: true
+name: step_names
+params: ()
+visibility: public

@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: wrapper for a nested assert_select with false
+- !ruby/struct:SM::Flow::VERB 
+  body: "  response.should have_tag(&quot;div#1&quot;) do\n    without_tag(&quot;span&quot;, &quot;some text that shouldn't be there&quot;)\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: see documentation for assert_select at http://api.rubyonrails.org/
+full_name: Spec::Rails::Matchers#without_tag
+is_singleton: false
+name: without_tag
+params: (*args, &block)
+visibility: public

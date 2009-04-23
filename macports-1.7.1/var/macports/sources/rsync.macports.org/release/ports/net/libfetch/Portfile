@@ -1,0 +1,45 @@
+# $Id: Portfile 28798 2007-09-09 07:31:24Z afb@macports.org $
+
+PortSystem 1.0
+
+name		libfetch
+version		6.2.0-RELEASE
+categories	net
+maintainers	afb@macports.org openmaintainer
+description	FreeBSD file fetching library
+long_description	These functions implement a high-level library for retrieving and \
+			uploading files using Uniform Resource Locators (URLs).
+platforms	darwin freebsd
+use_bzip2	yes
+homepage	http://www.freebsd.org/
+master_sites	macports
+checksums	md5 0d0b59e7c13b7bce67bcdd13e1fde7d5
+build.type	bsd
+worksrcdir	${name}
+use_configure	no
+set libver	4
+destroot	{
+		xinstall -m 644 -c ${worksrcpath}/fetch.h ${destroot}${prefix}/include
+		xinstall -m 644 -c ${worksrcpath}/fetch.3 ${destroot}${prefix}/share/man/man3 }
+
+platform darwin 6 {
+	patchfiles-append patch-ftp.c
+}
+
+platform darwin {
+	patchfiles	patch-Makefile patch-common.h
+	build.env	LDADD="-Wl,-install_name,${prefix}/lib/libfetch.${libver}.dylib"
+	pre-destroot {
+		xinstall -m 644 -c ${worksrcpath}/libfetch.${libver}.dylib \
+			${destroot}${prefix}/lib
+		ln -sf libfetch.${libver}.dylib ${destroot}${prefix}/lib/libfetch.dylib
+	}
+}
+
+platform freebsd {
+	pre-destroot {
+		xinstall -m 644 -c ${worksrcpath}/libfetch.so.${libver} \
+			${destroot}${prefix}/lib
+		ln -sf libfetch.so.${libver} ${destroot}${prefix}/lib/libfetch.so
+	}
+}

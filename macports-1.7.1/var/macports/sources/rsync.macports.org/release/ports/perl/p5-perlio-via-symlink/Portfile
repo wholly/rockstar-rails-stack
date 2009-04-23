@@ -1,0 +1,12 @@
+# $Id: Portfile 33862 2008-02-06 18:28:29Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		PerlIO-via-symlink 0.05
+maintainers		dluke@geeklair.net
+description		This is a PerlIO layer for creating symlinks (used by svk).
+long_description	${description}
+
+checksums		md5 bf33533dba6a48eb459a15df15c8415f
+platforms		darwin

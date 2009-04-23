@@ -1,0 +1,20 @@
+# $Id: Portfile 39273 2008-08-15 06:19:24Z ryandesign@macports.org $
+
+PortSystem      1.0
+PortGroup       perl5 1.0
+
+perl5.setup     Math-BigInt 1.89
+maintainers     nomaintainer
+categories-append   math
+platforms       darwin
+description     Arbitrary size integer math package
+
+long_description \
+                ${description}
+
+depends_build-append    port:p5-test-simple
+
+checksums       md5     695d70be20c3cb1778961b88c6b4ac42 \
+                sha1    7924059adc037ee220fcf7e89800634e02e0ac20 \
+                rmd160  e1090c931a8fa1cc0db9c7cc851507739ec7598c
+

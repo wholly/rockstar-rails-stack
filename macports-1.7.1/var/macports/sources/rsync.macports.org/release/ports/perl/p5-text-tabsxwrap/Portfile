@@ -1,0 +1,11 @@
+# $Id: Portfile 30247 2007-10-23 02:05:08Z jmpp@macports.org $
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup		Text-Tabs+Wrap 2006.0711
+name			p5-text-tabsxwrap
+maintainers		nomaintainer
+description		Line wrapping to form simple paragraphs
+long_description	${description}
+checksums		md5 0fe19b3fc2bac99374fe884b07bb3197
+platforms		darwin

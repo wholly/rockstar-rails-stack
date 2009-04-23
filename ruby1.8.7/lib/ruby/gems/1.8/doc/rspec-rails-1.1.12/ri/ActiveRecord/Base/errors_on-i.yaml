@@ -1,0 +1,15 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: error_on
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Extension for <tt>should have</tt> on AR Model instances
+- !ruby/struct:SM::Flow::VERB 
+  body: "  model.should have(:no).errors_on(:attribute)\n  model.should have(1).error_on(:attribute)\n  model.should have(n).errors_on(:attribute)\n"
+full_name: ActiveRecord::Base#errors_on
+is_singleton: false
+name: errors_on
+params: (attribute)
+visibility: public

@@ -1,0 +1,66 @@
+# $Id: Portfile 45052 2009-01-07 19:50:36Z jmr@macports.org $
+
+PortSystem 1.0
+
+name            zsh
+version         4.2.7
+categories      shells
+maintainers     nox openmaintainer
+description     Zsh is a UNIX command interpreter (shell)
+long_description \
+    Zsh is a UNIX command interpreter (shell) which of the standard     \
+    shells most resembles the Korn shell (ksh), although it is not      \
+    completely compatible. It includes enhancements of many types,      \
+    notably in the command-line editor, options for customising its     \
+    behaviour, filename globbing, features to make C-shell (csh) users  \
+    feel more at home and extra features drawn from tcsh (another       \
+    `custom' shell).
+
+homepage        http://www.zsh.org
+platforms       darwin
+use_bzip2       yes
+master_sites    sourceforge \
+                  http://www.zsh.org/pub/ \
+                  ftp://ftp.zsh.org/zsh/ \
+                  ftp://ftp.sterling.com/zsh/ \
+                  ftp://ftp.fu-berlin.de/pub/unix/shells/zsh/ \
+                  ftp://ftp.iij.ad.jp/pub/misc/zsh/ \
+                  ftp://ftp.icm.edu.pl/vol/wojsyl/zsh/
+checksums       ${distname}${extract.suffix} \
+                  md5 a9d8678c5acf20d78e8c300f107b708b \
+                  sha1 64c598cd48b78dff9d29341ea0cd904e7aa49541 \
+                  rmd160 454339205c78393cbb9460aa10f37fa341a40b59
+depends_lib     port:libiconv port:ncurses port:gdbm
+configure.args  --enable-libs="-lncurses"
+
+platform darwin 8 {
+    post-configure {
+        reinplace "s|#define HAVE_POLL 1|#undef HAVE_POLL|" ${worksrcpath}/config.h
+    }
+}
+
+variant mp_completion description {Include automatic completion of MacPorts commands} {
+    post-destroot   {
+        file copy -force ${filespath}/_port \
+          ${destroot}${prefix}/share/${name}/${version}/functions
+    }
+}
+
+variant dp_completion requires mp_completion description {Obsolete, synonymous with mp_completion} {}
+
+variant doc description {Install documentation} {
+    distfiles-append ${distname}-doc${extract.suffix}
+    checksums-append ${distname}-doc${extract.suffix} \
+                       md5 31e12a3e23f464a3ce3f51b45928bc44 \
+                       sha1 2aef0d011abc9586f7bb9e0f2379fa48bc0dc17b \
+                       rmd160 a049d7369ed3389e805a9f6b884597c2219334a0
+    post-destroot {
+        xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
+        eval xinstall -m 644 [glob ${worksrcpath}/Doc/*.html] \
+          ${destroot}${prefix}/share/doc/${name}
+        eval xinstall -m 644 [glob ${worksrcpath}/Doc/*.pdf] \
+          ${destroot}${prefix}/share/doc/${name}
+    }
+}
+
+livecheck.check sourceforge

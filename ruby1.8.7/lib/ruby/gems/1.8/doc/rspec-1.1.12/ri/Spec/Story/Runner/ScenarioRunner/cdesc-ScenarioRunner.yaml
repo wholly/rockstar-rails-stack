@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Spec::Story::Runner::ScenarioRunner
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add_listener
+- !ruby/object:RI::MethodSummary 
+  name: run
+name: ScenarioRunner
+superclass: Object

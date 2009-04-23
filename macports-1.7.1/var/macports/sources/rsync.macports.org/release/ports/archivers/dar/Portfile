@@ -1,0 +1,23 @@
+# $Id: Portfile 48199 2009-03-16 20:59:10Z blb@macports.org $
+
+PortSystem		1.0
+
+name			dar
+version			2.3.8
+categories		archivers
+platforms		darwin
+maintainers		nomaintainer
+
+description		Disk Archiver
+long_description	dar is a shell command that backs up directory trees \
+			and files.
+
+homepage		http://dar.sourceforge.net/
+master_sites		sourceforge
+
+checksums		md5 6c0d383c22df0e1816e860153f60d746 \
+			sha1 d0394ff9dd6a287e3b9b62ebe99e126bb6d8abd0 \
+			rmd160 0927b59ba0426634ba5c2ca8b7cad157d6579b13
+
+depends_lib		port:zlib port:bzip2 port:libiconv \
+			port:gettext port:openssl

@@ -1,0 +1,26 @@
+# $Id: Portfile 43748 2008-12-14 07:38:31Z mcalhoun@macports.org $
+
+PortSystem 1.0
+
+name			etpan
+version			0.6
+categories		mail
+platforms		darwin
+maintainers		nomaintainer
+description		etPan is a console mail user agent based on libEtPan
+long_description	${description}
+
+homepage		http://libetpan.sourceforge.net/etpan/
+master_sites	sourceforge:libetpan
+distname		${name}-ng-${version}
+checksums		md5 406c449adadd45760501edf6f500d134
+
+depends_lib		path:bin/perl:perl5 \
+				bin:libetpan-config:libetpan
+
+destroot.destdir	prefix=${destroot}${prefix}
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} COPYRIGHT Changelog NEWS README TODO \
+		doc/CONFIG doc/INTERNAL ${destroot}${prefix}/share/doc/${name}
+}

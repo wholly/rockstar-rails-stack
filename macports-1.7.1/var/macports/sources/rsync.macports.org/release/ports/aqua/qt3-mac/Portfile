@@ -1,0 +1,89 @@
+# $Id: Portfile 47854 2009-03-08 18:11:43Z macsforever2000@macports.org $
+
+PortSystem		1.0
+
+name			qt3-mac
+version			3.3.8
+revision		1
+categories		aqua
+maintainers		blair
+description		Qt Tool Kit (Native Aqua Version)
+long_description	This is Qt, TrollTech's C++ toolkit for writing \
+				cross-platform GUI applications.
+homepage		http://www.trolltech.com/
+master_sites		ftp://ftp.trolltech.com/qt/source/ \
+			http://ftp.silug.org/mirrors/ftp.trolltech.com/qt/source/ \
+			macports:blair
+distname		qt-mac-free-${version}
+checksums		md5 dc8013ea4e5b54849f1ed5eedf6b03a3 \
+			sha1 b4835adbf5afc15042ce25270e684df395fe897c \
+			rmd160 dd2bfc62488e2d0dd500df4899aeaf28738bd8b0
+platforms		darwin
+
+depends_lib		port:zlib port:libpng port:libmng
+
+variant mysql4 {
+	depends_lib-append	port:mysql4
+	configure.args-delete	-no-sql-mysql
+	configure.args-append	-qt-sql-mysql \
+					-L${prefix}/lib/mysql \
+					-I${prefix}/include/mysql \
+					-plugin-sql-mysql
+}
+
+variant mysql5 {
+	depends_lib-append	port:mysql5
+	configure.args-delete	-no-sql-mysql
+	configure.args-append	-qt-sql-mysql \
+					-L${prefix}/lib/mysql5/mysql \
+					-I${prefix}/include/mysql5/mysql \
+					-plugin-sql-mysql
+}
+
+configure.cmd	"echo yes | ./configure"
+configure.env	QMAKESPEC='' QTDIR='' DYLD_LIBRARY_PATH=''
+configure.args	-v -prefix '${prefix}' \
+			-docdir '${prefix}/share/doc/${name}/html' \
+			-datadir '${prefix}/share/qt3' \
+			-headerdir '${prefix}/include/qt3' \
+			-plugindir '${prefix}/lib/qt3-plugins' \
+			-release -shared -fast -thread -stl \
+			-qt-gif -qt-imgfmt-png -qt-imgfmt-jpeg -qt-imgfmt-mng \
+			-no-sql-ibase -no-sql-mysql -no-sql-odbc -no-sql-psql \
+			-no-sql-sqlite -no-nis -no-cups -ipv6 \
+			-largefile \
+			-system-zlib -system-libpng -system-libjpeg \
+			-system-libmng \
+			'-I${prefix}/include' '-L${prefix}/lib'
+
+build.env	QMAKESPEC='' QTDIR='' DYLD_LIBRARY_PATH="${worksrcpath}/lib"
+build.target	symlinks src-qmake src-moc sub-src sub-tools
+
+destroot.destdir	INSTALL_ROOT='${destroot}'
+post-destroot {
+	system "ranlib -s ${destroot}${prefix}/lib/libdesignercore.a"
+	system "ranlib -s ${destroot}${prefix}/lib/libeditor.a"
+	system "ranlib -s ${destroot}${prefix}/lib/libqassistantclient.a"
+}
+
+platform darwin	{
+	patchfiles		patch-src-qt_install.pri \
+					patch-mkspecs-qmake.conf \
+          qt3-leopard.diff
+	post-destroot {
+		system "sh ${filespath}/fix_install_names.sh '${prefix}' '${destroot}'"
+		set appPath ${destroot}/Applications/MacPorts/Qt3
+		xinstall -d -m 0755 ${appPath}
+		foreach app {assistant designer linguist qtconfig} {
+			system "mv -v ${destroot}${prefix}/bin/${app}.app \
+				${appPath}/${app}.app"
+		}
+		if {![file exists ${destroot}${prefix}/lib/libqt.dylib]} {
+			set majorver [strsed ${version} {s/\.[0-9]*\.[0-9]*$//}]
+			set minorver [strsed ${version} {s/\.[0-9]*$//}]
+			system "ln -s libqt-mt.${version}.dylib ${destroot}${prefix}/lib/libqt.dylib"
+			system "ln -s libqt-mt.${version}.dylib ${destroot}${prefix}/lib/libqt.${majorver}.dylib"
+			system "ln -s libqt-mt.${version}.dylib ${destroot}${prefix}/lib/libqt.${minorver}.dylib"
+		}
+	}
+}

@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: previous_nested_example_groups
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Spec::Runner::Formatter::NestedTextFormatter
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add_example_group
+- !ruby/object:RI::MethodSummary 
+  name: current_indentation
+- !ruby/object:RI::MethodSummary 
+  name: described_example_group_chain
+- !ruby/object:RI::MethodSummary 
+  name: example_failed
+- !ruby/object:RI::MethodSummary 
+  name: example_passed
+- !ruby/object:RI::MethodSummary 
+  name: example_pending
+name: NestedTextFormatter
+superclass: BaseTextFormatter

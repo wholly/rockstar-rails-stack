@@ -1,0 +1,38 @@
+# $Id: Portfile 48891 2009-03-31 08:18:12Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    gwget
+version                 0.96
+description             Gwget is a Download Manager for Gnome 2. It uses wget as a backend.
+long_description        ${description}
+maintainers             nomaintainer
+categories              gnome net
+platforms               darwin
+homepage                http://www.gnome.org/projects/gwget/
+master_sites            gnome:sources/${name}/${version}
+checksums               sha1 d859025fc9016b2f8bdfdeb4004edc78f3a88f20
+
+depends_build           path:bin/pkg-config:pkgconfig
+depends_lib             port:atk \
+                        path:bin/gconftool-2:gconf \
+                        port:gettext \
+                        path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                        port:gnome-vfs \
+                        port:gtk2 \
+                        port:libgnomecanvas \
+                        port:libart_lgpl \
+                        port:libbonobo \
+                        port:libbonoboui \
+                        port:libglade2 \
+                        port:libgnome \
+                        port:libgnomeui \
+                        path:bin/orbit-idl-2:orbit2 \
+                        port:libxml2 \
+                        port:p5-xml-parser \
+                        path:bin/perl:perl5 \
+                        path:lib/pkgconfig/pango.pc:pango \
+                        path:bin/wget:wget
+
+configure.cppflags-append "-L${prefix}/lib"
+configure.cflags-append "-no-cpp-precomp -L${prefix}/lib"

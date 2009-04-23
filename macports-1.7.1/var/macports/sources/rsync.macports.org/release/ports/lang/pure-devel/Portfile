@@ -1,0 +1,105 @@
+# $Id: Portfile 49472 2009-04-10 16:46:48Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    pure-devel
+version                 0.22.0.r1464
+set branch              [join [lrange [split ${version} .] 0 1] .]
+categories              lang
+platforms               darwin
+maintainers             ryandesign
+use_parallel_build      yes
+homepage                http://pure-lang.googlecode.com/
+master_sites            ${homepage}files/
+
+fetch.type              svn
+svn.url                 ${homepage}svn/trunk/pure
+svn.tag                 [strsed ${version} {g/^.*\.r//}]
+worksrcdir              pure
+
+description \
+    functional programming language based on term rewriting
+
+long_description \
+    Pure is a functional programming language based on term rewriting. \
+    It has a modern syntax featuring curried function applications, lexical \
+    closures and equational definitions with pattern matching, and thus is \
+    somewhat similar to languages of the Haskell and ML variety. But Pure is \
+    also a very dynamic and reflective language, and is more like Lisp in \
+    this respect. The interpreter has an LLVM backend to do JIT compilation, \
+    hence programs run blazingly fast and interfacing to C modules is easy.
+
+# svn, bison and flex aren't needed for released tarballs
+# svn is really a fetch dependency, but there isn't a depends_fetch
+depends_build \
+    path:bin/llvm-config:llvm \
+    bin:svn:subversion \
+    port:bison \
+    port:flex
+
+depends_lib \
+    port:gmp \
+    port:gsl \
+    port:libiconv \
+    port:libtool \
+    port:readline
+
+depends_run \
+    path:bin/w3m:w3m
+
+patchfiles \
+    patch-Makefile.in.diff
+
+configure.args \
+    --enable-release \
+    --enable-gsl
+
+platform macosx {
+    depends_run-delete  path:bin/w3m:w3m
+    depends_run-append  path:bin/openbrowser:openbrowser
+    patchfiles-append   patch-openbrowser.diff
+}
+
+pre-extract {
+    set llvm_minimum_version 2.4
+    set llvm_installed_version [exec llvm-config --version]
+    if {[rpm-vercomp ${llvm_installed_version} ${llvm_minimum_version}] < 0} {
+        ui_error "${name} ${version} requires llvm ${llvm_minimum_version} or later but you have llvm ${llvm_installed_version}."
+        return -code error "incompatible llvm version"
+    }
+}
+
+test.run                yes
+test.target             check
+
+post-destroot {
+    # Check for old modules.
+    set old_files {}
+    foreach dir [glob -nocomplain -type d -tails -directory ${prefix}/lib pure-*] {
+        if {"pure-${branch}" == ${dir}} continue
+        if {![regexp "^pure-\[0-9.\]+$" ${dir}]} continue
+        foreach file [glob -type f -directory ${prefix}/lib/${dir} *] {
+            lappend old_files ${file}
+        }
+    }
+    set old_ports {}
+    if {[llength ${old_files}] > 0} {
+        foreach provides [split [eval exec ${prefix}/bin/port provides ${old_files}] "\n"] {
+            set old_port [lindex [split ${provides}] end]
+            if {-1 == [lsearch -glob ${old_ports} ${old_port}]} {
+                lappend old_ports ${old_port}
+            }
+        }
+    }
+    if {[llength ${old_ports}] > 0} {
+        ui_msg "Some of your pure modules were built for a different version of pure."
+        ui_msg "To use them with version ${branch}, you must rebuild them by running this command:"
+        ui_msg ""
+        ui_msg "sudo port -nf upgrade [join ${old_ports} " "]"
+    }
+}
+
+livecheck.version       [strsed ${version} {g/\.0\.r.*$//}]
+livecheck.check         regex
+livecheck.url           ${svn.url}/configure.ac
+livecheck.regex         {pure, ([0-9.]+)}

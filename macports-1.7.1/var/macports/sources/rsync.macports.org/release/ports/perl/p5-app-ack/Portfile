@@ -1,0 +1,19 @@
+# $Id: Portfile 47587 2009-03-01 08:23:49Z jmr@macports.org $
+
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup         App-Ack 1.88
+platforms           darwin
+maintainers         mschout@gkg.net openmaintainer
+description         A grep replacement that ignores .svn/CVS/blib directories
+long_description    ack is a tool like grep, aimed at programmers with large \
+                    trees of heterogeneous source code.
+homepage            http://search.cpan.org/dist/ack/
+
+distname            ack-${version}
+checksums           md5 a1aad025ac94d582628ee72872d44c94 \
+                    sha1 3e257fc29e8cc07231a933887183c7c45ec9406c \
+                    rmd160 5a6762bf1ceb0ab835c403744c4deeae2f305bf2
+
+depends_lib-append  port:p5-file-next

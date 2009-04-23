@@ -1,0 +1,51 @@
+# $Id: Portfile 48949 2009-03-31 19:18:03Z mcalhoun@macports.org $
+
+PortSystem 1.0
+
+name            allegro
+version         4.2.2
+revision        1
+description     A game programming library for C/C++ developers.
+long_description \
+                Allegro is a game programming library for \
+                C/C++ developers distributed freely, supporting \
+                many platforms.
+maintainers     raimue \
+                openmaintainer
+categories      devel games
+platforms       darwin
+use_parallel_build  yes
+homepage        http://alleg.sourceforge.net/
+master_sites    sourceforge:alleg
+checksums       md5 87ffb1def034e0ec29a9ad4a595cda7e
+patchfiles      patch-makefile.osx
+
+configure    {
+    system "cd ${worksrcpath} && sh fix.sh macosx"
+    reinplace "s|CC = gcc|CC = ${configure.cc}|" ${worksrcpath}/makefile.osx
+}
+
+# check for universal build
+pre-build {
+    if {! [variant_isset universal]} {
+        build.args  PREFIX=${prefix}
+    } else {
+        build.args  PREFIX=${prefix} UB=1
+    }
+}
+
+build.target
+
+destroot.target     install install-man
+destroot.args       PREFIX=${prefix}
+
+# some additional tools were build, let's install them
+post-destroot {
+    foreach tool {colormap dat dat2c dat2s exedat grabber pack pat2dat rgbmap textconv} {
+        xinstall -m 0755 -W ${worksrcpath}/tools/ ${tool} ${destroot}${prefix}/bin/
+    }
+}
+
+livecheck.check regex
+livecheck.url   http://alleg.sourceforge.net/wip.html
+livecheck.regex {Stable branch ([\d.]+) source releases}

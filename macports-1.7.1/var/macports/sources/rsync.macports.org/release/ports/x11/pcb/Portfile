@@ -1,0 +1,26 @@
+# $Id: Portfile 44781 2009-01-03 02:23:59Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name			pcb
+version			20060321
+categories		x11 graphics
+maintainers		adam@megacz.com
+description		Printed Circuit Board Layout Tool
+long_description	PCB is an interactive printed circuit board editor for the \
+				X11 window system. PCB includes a rats nest feature, design \
+				rule checking, and can provide industry standard RS-274-X \
+				(Gerber), NC drill, and centroid data (X-Y data) output for \
+				use in the board fabrication and assembly process. PCB offers \
+				high end features such as an autorouter and trace optimizer \
+				which can tremendously reduce layout time.
+homepage		http://pcb.sourceforge.net
+master_sites	sourceforge
+platforms		darwin
+checksums		md5 5cc364253488a69527c2657c1f6c062e
+
+depends_run bin:wish:tk
+depends_lib port:gtk2
+
+configure.args	--mandir=${prefix}/share/man \
+				--infodir=${prefix}/share/info

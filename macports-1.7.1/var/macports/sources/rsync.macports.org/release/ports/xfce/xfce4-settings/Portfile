@@ -1,0 +1,29 @@
+# $Id: Portfile 50012 2009-04-22 06:31:49Z afb@macports.org $
+
+PortSystem 1.0
+
+name		xfce4-settings
+version		4.6.1
+categories	xfce
+platforms	darwin
+maintainers	afb@macports.org
+description	Settings Manager that replaces the previous xfce-mcs-manager
+long_description ${description}
+homepage	http://www.xfce.org/
+master_sites	http://www.ca-us.xfce.org/archive/xfce-${version}/src/
+use_bzip2	yes
+checksums	md5 dc1c8704471c5b0104fa10c30eb60cb6 \
+		sha1 ab117c3923571e2437095fd165ac4bf392e658e0 \
+		rmd160 6ecfa08d6ad528d43988c5fe128b2fcd6db6f0d3
+
+depends_build	path:bin/pkg-config:pkgconfig
+depends_lib	port:libxfcegui4 port:libwnck
+
+platform darwin 8 {
+    patchfiles-append		patch-configure.diff
+    configure.env-append	PKG_CONFIG_PATH="${x11prefix}/lib/pkgconfig" \
+	XI_VERSION="1.0.0" XI_CFLAGS="-I${x11prefix}/include" XI_LIBS="-L${x11prefix}/lib -lXi" \
+  	LIBX11_VERSION="6.2.0" LIBX11_CFLAGS="-I${x11prefix}/include" LIBX11_LIBS="-L${x11prefix}/lib -lX11" \
+	XRANDR_VERSION="2.0.0" XRANDR_CFLAGS="-I${x11prefix}/include" XRANDR_LIBS="-L${x11prefix}/lib -lXrandr" \
+	XCURSOR_VERSION="1.0.0" XCURSOR_CFLAGS="-I${x11prefix}/include" XCURSOR_LIBS="-L${x11prefix}/lib -lXcursor"
+}

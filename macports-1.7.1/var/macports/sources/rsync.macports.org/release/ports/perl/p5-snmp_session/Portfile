@@ -1,0 +1,16 @@
+# $Id: Portfile 39513 2008-08-22 17:39:56Z markd@macports.org $
+
+PortSystem              1.0
+
+PortGroup               perl5 1.0
+
+perl5.setup             SNMP_Session 1.12
+maintainers             nomaintainer
+description             A perl5 module providing rudimentary access to SNMPv1 and v2 agents.
+long_description        ${description}
+master_sites		http://www.switch.ch/misc/leinen/snmp/perl/dist/ \
+			http://www.switch.ch/misc/leinen/snmp/perl/dist/old
+
+checksums               md5 5f6b365b4c3815b13d7a902d94e254af
+homepage		http://www.switch.ch/misc/leinen/snmp/perl/
+platforms               darwin

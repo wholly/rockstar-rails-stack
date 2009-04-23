@@ -1,0 +1,43 @@
+# $Id: Portfile 48911 2009-03-31 10:02:34Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			cmus
+version			2.2.0
+categories		audio
+maintainers		milosh openmaintainer
+description		ncurses based music player
+long_description \
+	cmus is a small and fast text mode music player for Linux and many other\
+	UNIX like operating systems.
+homepage		http://cmus.sourceforge.net/
+platforms		darwin
+master_sites	http://mirror.greaterscope.net/cmus/
+use_bzip2		yes
+checksums		md5 7a9895ecfc10cd16577c73051436962f \
+				sha1 a6472633ac55660eb3aec5d2ae0296da86903bb2
+depends_build	path:bin/pkg-config:pkgconfig
+depends_lib		port:libao port:libmad port:libogg port:libvorbis \
+				port:libiconv port:ncurses
+build.args		V=2
+configure.pre_args
+configure.args	prefix=${prefix} CONFIG_FLAC=n CONFIG_MIKMOD=n \
+				CONFIG_AAC=n CONFIG_MP4=n CONFIG_MAD=y CONFIG_VORBIS=y
+
+variant aac  description {Support aac files}   {
+	depends_lib-append    port:faad2 lib:libmp4v2:libmp4v2
+	configure.args-delete CONFIG_AAC=n CONFIG_MP4=n
+	configure.args-append CONFIG_AAC=y CONFIG_MP4=y
+}
+
+variant flac  description {Support flac files} {
+	depends_lib-append    port:flac
+	configure.args-delete CONFIG_FLAC=n
+	configure.args-append CONFIG_FLAC=y
+}
+
+variant mikmod  description {Support mod files} {
+	depends_lib-append    port:libmikmod
+	configure.args-delete CONFIG_MIKMOD=n
+	configure.args-append CONFIG_MIKMOD=y
+}

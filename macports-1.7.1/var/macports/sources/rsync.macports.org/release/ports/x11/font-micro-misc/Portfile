@@ -1,0 +1,16 @@
+# $Id: Portfile 47101 2009-02-22 03:12:10Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-micro-misc 1.0.0 misc
+revision            1
+maintainers         blb openmaintainer
+description         X.org Micro miscellaneous font
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     8c8bffd7540f05caa0dbb4e6e1d6c58e \
+                    sha1    36be84d6c138c6758dfdd218b0c5d8244a2dc30c \
+                    rmd160  7f7e19fd0096b9ea656a89f48ece41db696e36e2
+

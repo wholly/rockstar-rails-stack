@@ -1,0 +1,32 @@
+# $Id: Portfile 48491 2009-03-23 18:33:47Z markd@macports.org $
+
+PortSystem	1.0
+
+name				cdpr
+version				2.3
+categories			net
+maintainers			markd
+platforms			darwin
+
+description			Cisco Discovery Protocol Reporter
+long_description	        CDPR will show which switch and port the machine running  \
+				it is connected to.  It also supports sending cdp data  \
+				back to a central server. \
+
+homepage			http://www.monkeymental.com/
+
+master_sites                    sourceforge
+extract.suffix			.tgz
+checksums			md5 c3eeaeb2641085647f13da6ff807aa0b
+
+depends_lib			port:libpcap
+
+use_configure	no
+
+build.target
+build.args	CFLAGS="-Wall -ggdb -lpcap -I. -I${prefix}/include" \
+			LDFLAGS="-L${prefix}/lib -lpcap"
+
+destroot {
+	xinstall -m 755 ${worksrcpath}/cdpr ${destroot}${prefix}/bin
+}

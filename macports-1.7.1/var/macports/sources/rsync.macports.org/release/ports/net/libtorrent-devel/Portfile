@@ -1,0 +1,46 @@
+# $Id: Portfile 42704 2008-11-29 22:13:50Z toby@macports.org $
+
+PortSystem      1.0
+
+name            libtorrent-devel
+set real_name   libtorrent
+version         0.12.4
+categories      net
+platforms       darwin
+maintainers     gardnermj@gmail.com
+description     BitTorrent library (development version)
+
+long_description \
+    libTorrent is a BitTorrent library written in C++ for \
+    *nix. It is designed to avoid redundant copying and \
+    storing of data that other clients and libraries suffer from. \
+    This is the development version of libTorrent.
+
+homepage        http://libtorrent.rakshasa.no/
+master_sites    ${homepage}downloads/
+distname        ${real_name}-${version}
+
+checksums       md5 7e4b4c29a69c86c38e3e60ec11fc2255 \
+                sha1 6deab3f6af5e9566c987131d586751c7dc3b5dbb \
+                rmd160 23fd8a242f493171f7e2afa714dc7b74359ff7bc
+
+depends_build   port:zlib \
+                port:pkgconfig
+
+depends_lib     port:openssl \
+                port:libsigcxx2
+
+configure.args  --disable-debug \
+                --enable-ipv6 \
+                --with-kqueue
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${real_name}-${version}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README \
+        ${destroot}${docdir}
+}
+
+livecheck.check regex
+livecheck.url   ${homepage}
+livecheck.regex ${real_name}-(\\d+(?:\\.\\d+)*)

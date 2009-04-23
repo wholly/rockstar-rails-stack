@@ -1,0 +1,22 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: wrapper for assert_select with additional support for using css selectors to set expectation on Strings. Use this in helper specs, for example, to set expectations on the results of helper methods.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # in a controller spec\n  response.should have_tag(&quot;div&quot;, &quot;some text&quot;)\n\n  # in a helper spec (person_address_tag is a method in the helper)\n  person_address_tag.should have_tag(&quot;input#person_address&quot;)\n"
+- !ruby/struct:SM::Flow::P 
+  body: see documentation for assert_select at http://api.rubyonrails.org/
+full_name: Spec::Rails::Matchers#have_tag
+is_singleton: false
+name: have_tag
+params: |
+  response.should have_tag(*args, &block)
+  string.should have_tag(*args, &block)
+
+visibility: public

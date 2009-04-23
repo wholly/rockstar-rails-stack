@@ -1,0 +1,35 @@
+# $Id: Portfile 46031 2009-01-27 16:30:25Z jmr@macports.org $
+
+PortSystem 1.0
+name		gnet2
+version		2.0.8
+set branch	[join [lrange [split ${version} .] 0 1] .]
+categories	devel
+maintainers	nomaintainer
+description	Simple network library
+homepage	http://www.gnetlibrary.org/
+platforms	darwin
+
+long_description GNet is a simple network library written in C.  It is \
+		 object-oriented, and built upon GLib.
+
+universal_variant   no
+
+master_sites	gnome:sources/gnet/${branch}/
+
+distname	gnet-${version}
+use_bzip2	yes
+checksums	md5 93327d2fca333d7e54ba2cf54e071165 \
+			sha1 74a33dd25cc594b874e3a5171795efd99e567387
+
+depends_lib	path:lib/pkgconfig/glib-2.0.pc:glib2 port:gettext port:libiconv
+
+post-configure	{ reinplace "s|-pthread|-lpthread|g" \
+		    ${workpath}/${distname}/src/Makefile
+		  reinplace "s|-pthread|-lpthread|g" \
+		    ${workpath}/${distname}/examples/Makefile
+		  reinplace "s|-pthread|-lpthread|g" \
+		    ${workpath}/${distname}/tests/Makefile }
+
+post-destroot	{ system "ln -fs libgnet-2.0.0.8.0.dylib \
+		    ${destroot}${prefix}/lib/libgnet.2.dylib" }

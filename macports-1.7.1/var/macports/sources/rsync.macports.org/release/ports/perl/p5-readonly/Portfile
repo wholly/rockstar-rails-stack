@@ -1,0 +1,14 @@
+# $Id: Portfile 33894 2008-02-07 02:45:08Z narf_tm@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Readonly 1.03
+maintainers         narf_tm openmaintainer
+description         Facility for creating read-only scalars, arrays, hashes.
+long_description    This is a facility for creating non-modifiable variables. \
+                    This is useful for configuration files, headers, etc.
+
+platforms           darwin
+
+checksums           md5 0acef3a995ac9ecf575f66a726d638f4

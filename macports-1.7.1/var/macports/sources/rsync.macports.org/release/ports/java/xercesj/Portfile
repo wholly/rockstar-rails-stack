@@ -1,0 +1,54 @@
+# $Id: Portfile 35275 2008-03-23 15:54:42Z jberry@macports.org $
+
+PortSystem 1.0
+
+name				xercesj
+version				2.9.1
+
+categories			java textproc
+maintainers			jberry openmaintainer
+platforms			darwin
+
+description			Apache Xerces 2 Java XML Parser
+long_description	The Xerces 2 Java Parser supports XML 1.0 Third Edition\; \
+					XML 1.1\; XML 1.1 Namespaces\; DOM Level 2 \
+					Core, Events, Traversal and Range\; \
+					SAX 2.0.1 Core and Extensions\; JAXP 1.2\; \
+					Schema 1.0 Structure and Datatypes.
+homepage			http://xml.apache.org/xerces-j/
+
+distname			Xerces-J-src.${version}
+distfiles			${distname}${extract.suffix} \
+					Xerces-J-tools.${version}${extract.suffix}
+
+master_sites		apache:xml/xerces-j/
+checksums			${distname}${extract.suffix} \
+						md5 e340cba4a2abf4f0f833488380821153 \
+					Xerces-J-tools.${version}${extract.suffix} \
+						md5 6b50c65f2c31d66bb258aa5be79b0e21
+
+depends_build		bin:ant:apache-ant
+depends_lib			bin:java:kaffe
+					
+worksrcdir			xerces-[string map ". _" $version]
+set tools			tools
+
+use_configure		no
+
+build.cmd			ant
+build.target		jars docs javadocs
+build.env			CLASSPATH=${tools}/xml-apis.jar:${tools}/xercesImpl.jar:${tools}/bin/xjavac.jar
+
+post-extract {
+	file rename ${workpath}/tools ${worksrcpath}/
+}
+
+destroot	{
+	xinstall -m 755 -d ${destroot}${prefix}/share/java \
+		${destroot}${prefix}/share/doc
+	xinstall -m 644 \
+		${worksrcpath}/build/xml-apis.jar \
+		${worksrcpath}/build/xercesImpl.jar \
+		${destroot}${prefix}/share/java/
+	file copy ${worksrcpath}/build/docs ${destroot}${prefix}/share/doc/${name}
+}

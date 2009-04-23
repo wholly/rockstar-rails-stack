@@ -1,0 +1,34 @@
+# $Id: Portfile 47168 2009-02-23 02:50:04Z narf_tm@macports.org $
+
+PortSystem                1.0
+PortGroup                 perl5 1.0
+
+perl5.setup               Perl-Critic 1.096
+epoch                     1
+maintainers               narf_tm openmaintainer
+description               Easy API to read/write XML (esp config files)
+long_description          ${description}
+
+platforms                 darwin
+
+checksums                 md5 0cc5e75f9fb994b3011de6e958bf6427 \
+                          sha1 07fb9febf44a097dc00530facdb241fe091af24d \
+                          rmd160 e0e8e6c3c9f4bfb21f05e01042025d94f3e39751
+
+depends_lib-append        port:p5-b-keywords \
+                          port:p5-config-tiny \
+                          port:p5-exception-class \
+                          port:p5-io-string \
+                          port:p5-list-moreutils \
+                          port:p5-module-pluggable \
+                          port:p5-ppi \
+                          port:p5-string-format \
+                          port:p5-version \
+                          port:p5-file-homedir \
+                          port:p5-file-which \
+                          port:p5-perl-tidy \
+                          port:p5-pod-spell \
+                          port:p5-readonly \
+                          port:p5-regexp-parser
+
+perl5.use_module_build

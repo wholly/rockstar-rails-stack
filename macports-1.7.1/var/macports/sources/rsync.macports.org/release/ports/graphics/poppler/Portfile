@@ -1,0 +1,74 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 47995 2009-03-12 07:04:16Z devans@macports.org $
+
+PortSystem 1.0
+
+name        poppler
+version     0.10.5
+maintainers nomaintainer
+categories  graphics
+platforms   darwin
+homepage    http://${name}.freedesktop.org/
+
+description Poppler is a PDF rendering library based on the xpdf-3.0 code base.
+long_description ${description}
+
+master_sites    ${homepage}
+
+checksums   md5     125f671a19707861132fb03e73b61184 \
+            sha1    720b79adbeb6e7b722d3f0f61e165b9310fe61fc \
+            rmd160  73e2330c2c874fb58f95c39fcdb5421766b6742c
+
+depends_build \
+    port:pkgconfig
+
+depends_lib \
+    port:gtk2 \
+    port:openjpeg \
+    port:poppler-data
+
+post-patch {
+    reinplace "s|-flat_namespace -undefined suppress||g" \
+        ${worksrcpath}/configure
+    reinplace "s|\$includedir|${prefix}/include|g" \
+        ${worksrcpath}/configure
+    reinplace "s|tests||" \
+        ${worksrcpath}/qt4/Makefile.in
+}
+
+configure.args \
+    --disable-poppler-qt4 \
+    --enable-xpdf-headers \
+    --enable-zlib \
+    --mandir=${prefix}/share/man
+
+variant quartz description { Support for the native Mac OS X interface instead of X11 } {
+    configure.args-append --disable-gtk-test --without-x
+}
+
+variant qt4 description { Support for the QT toolkit } {
+    configure.args-delete --disable-poppler-qt4
+    if ([variant_isset quartz]) {
+        depends_lib-append  port:qt4-mac
+        set qt_dir ${prefix}/libexec/qt4-mac
+    } else {
+        depends_lib-append  port:qt4-x11
+        set qt_dir ${prefix}/libexec/qt4-x11
+    }
+    configure.env-append  QTDIR=${qt_dir}
+    set env(PATH) "${qt_dir}/bin:$env(PATH)"
+    configure.pkg_config_path ${qt_dir}/lib/pkgconfig
+}
+
+variant docs description {Build gtk-doc documentation} {
+    depends_build-append   port:gtk-doc
+    configure.args-append  --enable-gtk-doc
+}
+
+test.run    yes
+test.dir    ${worksrcpath}/test
+test.target all
+
+livecheck.check regex
+livecheck.url   ${master_sites}
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

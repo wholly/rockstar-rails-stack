@@ -1,0 +1,36 @@
+# $Id: Portfile 30224 2007-10-22 22:49:14Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			icompile
+version			0.4
+categories		devel
+platforms		darwin
+maintainers		nomaintainer
+description		icompile is an autocompile tool for C++ projects
+long_description	iCompile is the easiest way to compile your C++ \
+				projects on Linux and OS X. It creates executables, \
+				static and shared libraries, and HTML documentation \
+				with no per-project configuration or scripts
+
+homepage		http://ice.sourceforge.net/
+master_sites	sourceforge:ice
+checksums		md5 ccc1cfb7315e09fc9af80ba8dd69c323
+
+depends_run		bin:python:python24
+
+patch		{
+	reinplace "s|/usr/bin/python|/usr/bin/env python|1" ${workpath}/icompile
+}
+
+use_configure	no
+
+build			{}
+
+destroot	{
+	xinstall -d -m 755 ${destroot}${prefix}/bin \
+		${destroot}${prefix}/share/doc/${name}
+	xinstall -m 755 ${workpath}/icompile ${destroot}${prefix}/bin
+	xinstall -m 644 ${workpath}/manual.html \
+		${destroot}${prefix}/share/doc/${name}
+}

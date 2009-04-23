@@ -1,0 +1,307 @@
+# $Id: Portfile 46387 2009-02-04 02:28:58Z markd@macports.org $
+
+PortSystem	1.0
+
+name			zabbix
+version			1.6.2
+categories		net
+maintainers		markd openmaintainer
+platforms		darwin
+
+description		An open source application and network monitor
+
+long_description	${description}
+
+homepage		http://www.zabbix.com
+master_sites		sourceforge
+checksums		md5 33da3661868a04042c596a819896446f
+patchfiles		patch-include-common.h
+default_variants	+server
+depends_lib		port:mysql5 \
+				port:fping
+
+configure.pre_args     --prefix=${prefix}
+
+configure.args		--enable-server \
+			--enable-agent \
+			--with-net-snmp \
+			--bindir=${prefix}/bin/zabbix \
+			--sbindir=${prefix}/sbin/zabbix \
+			--libexecdir=${prefix}/libexec/zabbix \
+			--datadir=${prefix}/share/zabbix \
+			--sysconfdir=${prefix}/etc/zabbix \
+			--localstatedir=${prefix}/var/zabbix \
+			--mandir=${prefix}/man \
+			--with-mysql=${prefix}/lib/mysql5/bin/mysql_config
+
+configure.ldflags-append	-lresolv
+
+if { [variant_isset agent_only] } {
+	startupitem.create      yes
+	startupitem.start       "${prefix}/share/zabbix/zabbix_agentd.init start"
+	startupitem.stop        "${prefix}/share/zabbix/zabbix_agentd.init stop"
+} else {
+	startupitem.create      yes
+	startupitem.start       "${prefix}/share/zabbix/zabbix_server.init start"
+	startupitem.stop        "${prefix}/share/zabbix/zabbix_server.init stop"
+}
+
+variant server  \
+    description {Dummy variant} {
+# This variant doesn't do anything in this port.  Its only purpose is to trigger the server
+# variant in the mysql5 port.
+}
+
+variant pgsql81 \
+        description {Use PostgreSQL 8.1.x for server database} {
+        depends_lib-delete      port:mysql5
+        depends_lib-append      port:postgresql81
+        configure.args-delete   --with-mysql=${prefix}/lib/mysql5/bin/mysql_config
+        configure.args-append   --with-pgsql=${prefix}/lib/postgresql81/bin/pg_config
+}
+
+variant pgsql82 \
+	description {Use PostgreSQL 8.2.x for server database} {
+	depends_lib-delete	port:mysql5
+	depends_lib-append	port:postgresql82
+	configure.args-delete	--with-mysql=${prefix}/lib/mysql5/bin/mysql_config
+	configure.args-append	--with-pgsql=${prefix}/lib/postgresql82/bin/pg_config
+}
+
+variant pgsql83 \
+        description {Use PostgreSQL 8.3.x for server database} {
+        depends_lib-delete      port:mysql5
+        depends_lib-append      port:postgresql83
+        configure.args-delete   --with-mysql=${prefix}/lib/mysql5/bin/mysql_config
+        configure.args-append   --with-pgsql=${prefix}/lib/postgresql83/bin/pg_config
+}
+
+variant sqlite3 \
+        description {Use SQLite3 for server database} {
+        depends_lib-delete      port:mysql5
+        depends_lib-append      port:sqlite3
+        configure.args-delete   --with-mysql=${prefix}/lib/mysql5/bin/mysql_config
+        configure.args-append   --with-sqlite3=${prefix}/lib
+}
+
+variant agent_only \
+	description {Do not install the Zabbix server} {
+	depends_lib-delete	port:mysql5 \
+				port:fping
+
+	configure.args-delete	--enable-server \
+				--with-mysql=${prefix}/lib/mysql5/bin/mysql_config \
+				--with-net-snmp
+}
+
+build {}
+
+post-patch {
+        reinplace "s|#DBSocket=/tmp/mysql.sock|DBSocket=${prefix}/var/run/mysql5/mysqld.sock|g" \
+                ${worksrcpath}/misc/conf/zabbix_server.conf
+
+        reinplace "s|#FpingLocation=/usr/sbin/fping|FpingLocation=${prefix}/sbin/fping|g" \
+        	${worksrcpath}/misc/conf/zabbix_server.conf
+}
+
+pre-destroot {
+        adduser zabbix
+        addgroup zabbix
+}
+
+post-destroot {
+
+if { [variant_isset agent_only] } {
+# Don't install MySQL data and frontend stuff for agent_only
+
+# Copy sample agent .conf files
+	xinstall -d -m 755 -d ${destroot}${prefix}/etc/zabbix
+	xinstall -m 755  ${worksrcpath}/misc/conf/zabbix_agent.conf \
+		${destroot}${prefix}/etc/zabbix/zabbix_agent.conf.sample
+        xinstall -m 755  ${worksrcpath}/misc/conf/zabbix_agentd.conf \
+                ${destroot}${prefix}/etc/zabbix/zabbix_agentd.conf.sample
+
+# Copy a startup script for the agent
+		xinstall -d -m 755 -d ${destroot}${prefix}/share/zabbix
+		xinstall -m 755 ${portpath}/${filesdir}/zabbix_agentd.init \
+			${destroot}${prefix}/share/zabbix
+		reinplace "s|__PREFIX__|${prefix}|g" \
+                ${destroot}${prefix}/share/zabbix/zabbix_agentd.init
+} else {
+
+# Copy sample server and agent .conf files
+	xinstall -d -m 755 -d ${destroot}${prefix}/etc/zabbix
+	xinstall -m 755 ${worksrcpath}/misc/conf/zabbix_agent.conf \
+		${destroot}${prefix}/etc/zabbix/zabbix_agent.conf.sample
+        xinstall -m 755 ${worksrcpath}/misc/conf/zabbix_agentd.conf \
+                ${destroot}${prefix}/etc/zabbix/zabbix_agentd.conf.sample
+        xinstall -m 755 ${worksrcpath}/misc/conf/zabbix_server.conf \
+                ${destroot}${prefix}/etc/zabbix/zabbix_server.conf.sample
+
+# Copy database data and schemas
+        xinstall -d -m 755 -d ${destroot}${prefix}/share/zabbix/data
+        xinstall -d -m 755 -d ${destroot}${prefix}/share/zabbix/schema
+
+        eval xinstall -m 755 [glob ${worksrcpath}/create/data/*.*] \
+                ${destroot}${prefix}/share/zabbix/data
+        eval xinstall -m 755 [glob ${worksrcpath}/create/schema/*] \
+                ${destroot}${prefix}/share/zabbix/schema
+
+# Copy the front end files
+
+        file mkdir ${destroot}${prefix}/share/zabbix/frontends/
+        file copy ${worksrcpath}/frontends/php/ \
+                ${destroot}${prefix}/share/zabbix/frontends/
+
+# Create a startup script for the server
+		xinstall -m 755 ${portpath}/${filesdir}/zabbix_server.init \
+			${destroot}${prefix}/share/zabbix
+		reinplace "s|__PREFIX__|${prefix}|g" \
+           	${destroot}${prefix}/share/zabbix/zabbix_server.init
+
+# Create a startup script for the agent
+		xinstall -m 755 ${portpath}/${filesdir}/zabbix_agentd.init \
+			${destroot}${prefix}/share/zabbix
+		reinplace "s|__PREFIX__|${prefix}|g" \
+            ${destroot}${prefix}/share/zabbix/zabbix_agentd.init
+
+# Set permissions for etc (protect passwords) and the frontend
+		system "chmod 660 ${destroot}${prefix}/etc/zabbix/*"
+		system "chown zabbix:zabbix ${destroot}${prefix}/etc/zabbix/*"
+		system "chown -R www:www ${destroot}${prefix}/share/zabbix/frontends/*"
+
+# End else clause - Done with server stuff
+}
+
+# Copy Win32 agent for normal and agent_only installs
+		xinstall -d -m 755 -d ${destroot}${prefix}/share/zabbix/zabbix_agent_win32
+		xinstall -m 755 ${worksrcpath}/bin/win32/zabbix_agentd.exe \
+			${destroot}${prefix}/share/zabbix/zabbix_agent_win32
+}
+
+post-activate {
+
+if { [variant_isset agent_only] } {
+
+ui_msg "\n#### To complete the ZABBIX agent installation ####
+
+
+1) Edit the sample .conf file ${prefix}/etc/zabbix/zabbix_agentd.conf (rename & omit .sample)
+
+   Set the following variable to the ip address of your ZABBIX server to
+   allow it access to the agent.
+
+	Server=x.x.x.x
+
+
+2) Set zabbix_agentd to run at system boot
+
+	OS X 10.4 and up - Run launchctl so ZABBIX will start at system boot
+	sudo launchctl load -w /Library/LaunchDaemons/org.macports.zabbix.plist
+
+	OS X 10.3 and previous - A startup item was created in /Library/StartupItems
+	Add \"ZABBIX=-YES-\" to the /etc/hostconfig file to run ZABBIX at system boot
+
+   To start Zabbix manually, use: ${prefix}/share/zabbix/zabbix_agentd.init start (stop|status)
+
+
+3) A Win32 agent is in ${prefix}/share/zabbix/zabbix_agent_win32 for
+   installation on Windows NT 4.0, Windows 2000, and Windows XP.
+
+
+\n"
+
+} else {
+
+ui_msg "\n#### To complete the ZABBIX installation ####
+
+
+1) Setup MySQL (for new MySQL installs)
+
+-Configure MySQL:
+        sudo -u mysql ${prefix}/lib/mysql5/bin/mysql_install_db
+
+-Start MySQL and set it to run at system boot:
+        sudo launchctl load -w /Library/LaunchDaemons/org.macports.mysql5.plist
+
+   NOTE: MySQL must have been installed with the +server variant in order to
+      use launchctl.
+
+-Set a root MySQL password
+   Follow the instructions that were given after you executed 'mysql_install_db' above
+
+
+2) Setup the ZABBIX MySQL database
+
+-Create the ZABBIX database
+	mysql5 -u root -p (enter password at prompt)
+	mysql> create database zabbix;
+	mysql> exit;
+
+-Import the ZABBIX Schema
+	cd ${prefix}/share/zabbix/schema
+	cat mysql.sql | mysql5 -u root -p zabbix
+	cd ${prefix}/share/zabbix/data
+	cat data.sql | mysql5 -u root -p zabbix
+	cat images_mysql.sql | mysql5 -u root -p zabbix
+
+-Create a MySQL 'zabbix' user and password
+	mysql5 -u root -p
+	mysql> grant SELECT, INSERT, UPDATE, DELETE, CREATE on zabbix.* to zabbix@localhost;
+	mysql> grant SELECT, INSERT, UPDATE, DELETE, CREATE on zabbix.* to zabbix;
+	mysql> set PASSWORD FOR zabbix@localhost = OLD_PASSWORD('zabbix-db-password');
+
+NOTE: ZABBIX uses MySQL old-style password hashes so the OLD_PASSWORD keyword is necessary
+
+3) Edit the sample .conf file ${prefix}/etc/zabbix/zabbix_server.conf (rename & omit .sample)
+
+   Modify these variables at the very least:
+
+	DBName=zabbix
+	DBUser=zabbix
+	DBPassword=<zabbix-mysql-password>
+
+
+4) Install PHP 4 or 5 (not covered)
+
+   Set mysql.default_socket path to ${prefix}/var/run/mysql5/mysqld.sock in this PHP file:
+
+	./phpx/lib/php.ini (in /usr/local, ${prefix}, or /Library depending on PHP package)
+
+   Modify the variables below in this Zabbix file:
+	${prefix}/share/zabbix/frontends/php/include/db.inc.php
+
+	\$DB_USER        =\"zabbix\";
+	\$DB_PASSWORD    =\"mysql-zabbix-password\";
+
+
+5) Set a symbolic link in your Apache document root pointing to the PHP frontend files
+
+	sudo ln -s ${prefix}/share/zabbix/frontends/php <Apache-docroot>/zabbix
+
+
+6) Set zabbix_server to run at system boot, then start it
+
+   OS X 10.4 - Run launchctl so ZABBIX will start at system boot
+	sudo launchctl load -w /Library/LaunchDaemons/org.macports.zabbix.plist
+
+   OS X 10.3 and previous - A startup item was created in /Library/StartupItems
+	Add \"ZABBIX=-YES-\" to the /etc/hostconfig file to run ZABBIX at system boot
+
+   ${prefix}/share/zabbix/zabbix_server.init start (stop|status)
+
+
+7) A Win32 agent is in ${prefix}/share/zabbix/zabbix_agent_win32 for
+   installation on Windows NT 4.0, Windows 2000, and Windows XP.  See
+   the ReadMe.txt for instructions.
+
+
+8) Login at http://localhost/zabbix with default user 'admin' with no password, then
+   be sure to read the manual: http://www.zabbix.com/manual/v1.1/index.php
+
+\n"
+# End else clause
+
+}
+}
+

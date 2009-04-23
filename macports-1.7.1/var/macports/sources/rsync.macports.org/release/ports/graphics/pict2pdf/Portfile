@@ -1,0 +1,21 @@
+# $Id: Portfile 49644 2009-04-14 06:02:38Z blb@macports.org $
+
+PortSystem 1.0
+name		pict2pdf
+version		1.1
+categories	graphics
+maintainers	prahl@bme.ogi.edu
+description	Vector-to-vector conversion of PICT files to PDF
+long_description	\
+	pict2pdf converts files in Apple's PICT format to Adobe's PDF \
+	format. The conversion retains any vector information in \
+	the PICT image.  
+platforms	darwin
+master_sites	sourceforge
+checksums       md5 c37627f7483509887f70d07d3f798208
+use_configure   no
+build.args      PREFIX=${prefix}
+destroot	{ xinstall -m 755 ${worksrcpath}/pict2pdf ${destroot}${prefix}/bin
+		  xinstall -m 644 ${worksrcpath}/pict2pdf.1 \
+		    ${destroot}${prefix}/share/man/man1 }
+

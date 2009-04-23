@@ -1,0 +1,25 @@
+# $Id: Portfile 38493 2008-07-22 17:17:53Z jowens@macports.org $
+
+PortSystem  1.0
+
+name        bibtex2html
+version     1.92
+categories  textproc www
+platforms   darwin
+maintainers reilles@loria.fr
+description Bibtex to HTML translator
+long_description  bibtex2html is a collection of tools for \
+    translating from BibTeX to HTML. They allow to \
+    produce, from a set of bibliography files in \
+    BibTeX format, a bibliography in HTML format.
+homepage         http://www.lri.fr/~filliatr/bibtex2html/
+master_sites     http://www.lri.fr/~filliatr/ftp/bibtex2html
+checksums	sha1 37b95ed2d9427f0289939d46af6839453db60794 \
+		md5  9d69980f595be02a79a96a851d79bb88
+patchfiles       patch-aux2bib.1.diff
+configure.type   gnu
+configure.args   --mandir=${destroot}${prefix}/share/man
+depends_build    bin:ocamlc:ocaml
+depends_run      bin:bibtex:texlive
+destroot.target  install
+destroot.destdir prefix=${destroot}${prefix}

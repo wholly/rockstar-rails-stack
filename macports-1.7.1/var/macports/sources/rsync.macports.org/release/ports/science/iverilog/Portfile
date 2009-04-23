@@ -1,0 +1,28 @@
+# $Id: Portfile 32442 2008-01-01 20:53:13Z ryandesign@macports.org $
+
+PortSystem 1.0
+name             iverilog
+version          0.8.6
+categories       science
+maintainers      nomaintainer
+description      Icarus Verilog
+long_description \
+    Icarus Verilog is a Verilog simulation and synthesis tool. It \
+    operates as a compiler, compiling source code writen in Verilog \
+    (IEEE-1364) into some target format. For batch simulation, the \
+    compiler can generate C++ code that is compiled and linked with \
+    a run time library (called \"vvm\") then executed as a command to \
+    run the simulation. For synthesis, the compiler generates netlists \
+    in the desired format.
+homepage         http://www.icarus.com/eda/verilog/
+platforms        darwin
+
+master_sites     ftp://ftp.icarus.com/pub/eda/verilog/v0.8/
+distname         verilog-${version}
+checksums        md5 281c161ac42ea1342ef8d8d6b3a1907a
+
+configure.args   mandir=\\\${prefix}/share/man
+destroot.destdir prefix=${destroot}${prefix}
+
+test.run         yes
+test.target      check

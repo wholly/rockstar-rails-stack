@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AppDiagram)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/railroad/app_diagram.rb, line 12</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span>)
+    <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+    <span class="ruby-ivar">@graph</span> = <span class="ruby-constant">DiagramGraph</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@graph</span>.<span class="ruby-identifier">show_label</span> = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">label</span>
+
+    <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;Loading application environment\n&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">verbose</span>
+    <span class="ruby-identifier">load_environment</span>
+
+    <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;Loading application classes\n&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">verbose</span>
+    <span class="ruby-identifier">load_classes</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

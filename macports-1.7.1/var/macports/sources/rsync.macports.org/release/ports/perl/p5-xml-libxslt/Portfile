@@ -1,0 +1,21 @@
+# $Id: Portfile 34424 2008-02-24 19:30:59Z pguyot@kallisys.net $
+
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup			XML-LibXSLT 1.66
+maintainers			ryan@cyberscript.net
+categories-append	textproc
+description			Perl interface to libxslt.
+long_description	This module is an interface to the gnome project's \
+					libxslt. This is an extremely good XSLT engine, \
+					highly compliant and also very fast. I have tests \
+					showing this to be more than twice as fast as Sablotron.
+homepage			http://search.cpan.org/dist/XML-LibXSLT/
+checksums			md5 cfabf853c7139fb21948a31bc77e6ac7 \
+					sha1 f88885307da7a06f3404eb35699b4e22444efcfd \
+					rmd160 8c349035f01e6b72e8c11dc72852d01808e5ae46
+platforms			darwin
+
+depends_lib-append	port:p5-xml-libxml \
+					port:libxslt

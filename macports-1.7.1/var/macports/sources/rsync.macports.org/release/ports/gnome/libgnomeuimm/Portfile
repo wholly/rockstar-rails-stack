@@ -1,0 +1,20 @@
+# $Id: Portfile 34239 2008-02-19 00:07:27Z ryandesign@macports.org $
+PortSystem 1.0
+name		libgnomeuimm
+version		2.20.0
+revision	1
+description	libgnomemm provides C++ wrappers for libgnomeui.
+long_description        ${description}
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin 
+homepage	http://www.gtkmm.org/
+master_sites    gnome:sources/libgnomeuimm/[strsed ${version} {/\.[0-9]*$//}]
+use_bzip2	yes
+checksums	md5 350d3424247611a009432395aff8619f
+depends_lib	\
+	port:libgnomecanvasmm \
+	port:libgnomeui \
+	port:gnome-vfsmm \
+	port:libiconv
+

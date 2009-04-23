@@ -1,0 +1,56 @@
+# $Id: Portfile 48389 2009-03-20 21:13:53Z blb@macports.org $
+
+PortSystem	1.0
+
+name		gpg-agent
+version		2.0.11
+revision	1
+categories	security mail
+maintainers	boeyms openmaintainer
+description	GPG key agent
+long_description	gpg-agent is a key management agent similar \
+			in function to ssh-agent.
+homepage	http://www.gnupg.org
+platforms	darwin freebsd sunos
+distname        gnupg-${version}
+dist_subdir     gnupg2
+master_sites    gnupg:gnupg
+
+use_bzip2	yes
+checksums           md5     a3014f3b3c919662278060f9a4818b89 \
+                    sha1    9f71a342c5be686b0dcef082078af693802a558f \
+                    rmd160  f532a2c41a4fdcf9bd5130f8d382348f6774ba18
+
+configure.args	--enable-agent-only \
+		--with-pinentry-pgm=${prefix}/bin/pinentry
+
+depends_lib	port:libiconv 		\
+		port:gettext 		\
+		port:zlib 		\
+		port:bzip2 		\
+		port:bison		\
+		port:libassuan		\
+		port:libksba		\
+		port:libgcrypt		\
+		port:libgpg-error	\
+		port:pth		\
+		port:pinentry
+
+patchfiles	patch-po_Makevars.diff
+
+post-destroot {
+	delete ${destroot}${prefix}/share/doc/gnupg/README
+}
+
+platform darwin 7 {
+	configure.ldflags-append	"-framework IOKit"
+}
+
+variant no_pinentry description {Do not use pinentry to handle user input} {
+	depends_lib-delete	port:pinentry
+	configure.args-delete	--with-pinentry-pgm=${prefix}/bin/pinentry
+}
+
+livecheck.check regex
+livecheck.url   http://mirrors.rootmode.com/ftp.gnupg.org/gnupg/?O=D
+livecheck.regex gnupg-(\\d+\\.\\d+\\.\\d+)

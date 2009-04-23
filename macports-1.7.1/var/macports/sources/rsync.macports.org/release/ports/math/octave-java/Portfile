@@ -1,0 +1,37 @@
+# $Id: Portfile 45284 2009-01-12 22:14:27Z alakazam@macports.org $
+
+PortSystem 1.0
+
+name                octave-java
+version             1.2.5
+categories          math science
+platforms           darwin
+maintainers         andrea.damore alakazam
+description         Provides Java interface with OO-like Java objects manipulation  
+long_description    ${description}
+
+homepage            http://octave.sourceforge.net/
+master_sites        sourceforge:octave
+
+distname            java-1.2.5
+
+checksums \
+            java-1.2.5.tar.gz \
+                md5     b5fef3c65481fb8f2e153ee4201f0e84 \
+                sha1    5af64e8f92dc1235a43a1bb3c9bac6e3ffc82c2b \
+                rmd160  47c3f6c631f26882e3db95ad49da323715ae7163
+
+
+depends_lib-append  port:octave 
+
+post-destroot {
+    move ${destroot}${prefix}/share/octave/octave_packages ${destroot}${prefix}/share/octave/octave_packages_${name}
+}
+
+post-activate {
+    system "octave --eval \"pkg rebuild\""
+}
+
+livecheck.check regex
+livecheck.url   http://octave.sourceforge.net/packages.html
+livecheck.regex http://downloads\.sourceforge\.net/octave/java-(\\d+(\\.\\d+)*)\.tar\.gz

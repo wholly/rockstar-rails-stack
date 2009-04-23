@@ -1,0 +1,23 @@
+# $Id: Portfile 42481 2008-11-22 01:18:33Z blb@macports.org $
+PortSystem      1.0
+name            loudmouth
+version         1.4.3
+maintainers     nomaintainer
+categories      net devel
+platforms       darwin 
+homepage        http://developer.imendio.com/projects/loudmouth/
+
+description A lightweight C library for the jabber protocol.
+long_description \
+    Loudmouth is a lightweight and easy-to-use C \
+    library for programming with the Jabber protocol. \
+    It's designed to be easy to get started with and yet \
+    extensible to let you do anything the Jabber protocol allows.  
+
+master_sites    http://ftp.imendio.com/pub/imendio/loudmouth/src/
+checksums       md5     7ca8bf7c2313d7b7f27088c373d195e2 \
+                sha1    eb81e06cbcea54d782bd91eae5588df3a57a41e6 \
+                rmd160  f19851a1f6aa4d1501710b76cb2a5373fcd01708
+
+depends_lib     port:gnutls path:lib/pkgconfig/glib-2.0.pc:glib2
+

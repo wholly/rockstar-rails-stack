@@ -1,0 +1,20 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: ActionController::Rescue
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: rescue_action_with_fast_errors
+- !ruby/object:RI::MethodSummary 
+  name: use_rails_error_handling!
+- !ruby/object:RI::MethodSummary 
+  name: use_rails_error_handling?
+name: Rescue
+superclass: 

@@ -1,0 +1,32 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 48157 2009-03-15 16:11:05Z macsforever2000@macports.org $
+
+PortSystem          1.0
+PortGroup           cmake 1.0
+
+name                lmms
+version             0.4.3
+revision            1
+categories          multimedia
+maintainers         nomaintainer
+
+description         Linux Multimedia Studio
+long_description    Free alternative to popular programs such as FruityLoops, Cubase and Logic
+
+homepage            http://lmms.sourceforge.net
+platforms           darwin
+master_sites        sourceforge
+#parallel build seems broken :(
+use_parallel_build  no
+use_bzip2           yes
+checksums           md5 6f16fb3a9b13e80d5cea061a87ee26c5
+
+
+#disable VST because it is not supported on OS X
+configure.args-append   -DWANT_VST=off
+
+depends_lib         port:libsndfile \
+                    port:qt4-mac \
+                    port:libsdl \
+                    port:fftw-3-single \
+                    port:fluidsynth

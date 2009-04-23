@@ -1,0 +1,28 @@
+# $Id: Portfile 33382 2008-01-26 01:22:48Z ryandesign@macports.org $
+
+PortSystem	1.0
+name		bakefile
+version		0.2.3
+categories	devel
+maintainers	masa@takatsuka.org
+description	Bakefile is cross-platform, cross-compiler native makefiles generator.
+long_description \
+	Bakefile is cross-platform, cross-compiler native makefiles generator. \
+	It takes compiler-independent description of build tasks as input and \
+	generates native makefile (autoconf's Makefile.in, Visual C++ project, \
+	bcc makefile etc.).
+
+platforms	darwin
+
+homepage	http://www.bakefile.org/
+master_sites	${homepage} \
+		sourceforge
+
+checksums	md5 720bd3aa988cdcaa3ff03df810f9277a
+post-destroot {
+	xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
+	file copy ${worksrcpath}/doc/html ${destroot}${prefix}/share/doc/${name}
+	fs-traverse docfile ${destroot}${prefix}/share/doc/${name} {
+		file attributes ${docfile} -permissions go-w
+	}
+}

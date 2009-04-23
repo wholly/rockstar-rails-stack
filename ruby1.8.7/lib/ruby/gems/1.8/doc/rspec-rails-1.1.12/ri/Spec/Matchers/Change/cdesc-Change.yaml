@@ -1,0 +1,16 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Spec::Matchers::Change
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: evaluate_value_proc_with_ensured_evaluation_of_proxy
+name: Change
+superclass: Object

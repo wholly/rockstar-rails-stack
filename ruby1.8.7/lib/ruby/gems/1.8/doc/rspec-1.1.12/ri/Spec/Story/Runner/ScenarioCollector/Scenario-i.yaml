@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::Runner::ScenarioCollector#Scenario
+is_singleton: false
+name: Scenario
+params: (name, &body)
+visibility: public

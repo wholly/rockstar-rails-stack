@@ -1,0 +1,33 @@
+# $Id: Portfile 48513 2009-03-24 04:06:27Z ram@macports.org $
+
+PortSystem    1.0
+PortGroup     python25 1.0
+
+name          bzr-rebase
+version       0.4.4
+categories    devel python
+platforms     darwin
+maintainers   nomaintainer
+
+description   Rebase plugin for bzr
+long_description  Rebasing is the process of taking a branch and \
+    modifying the history so that it appears to start from a different \
+    point. This can be useful to clean up the history before submitting \
+    your changes. The tree at the end of the process will be the same \
+    as if you had merged the other branch, but the history will be \
+    different.
+
+homepage      http://bazaar-vcs.org/Rebase
+master_sites  http://samba.org/~jelmer/bzr
+
+checksums     md5 962531c83d81e3f62fee032e08005107 \
+              sha1 ff3c227d38ffd40200c9b4d04f97646b97bdf832 \
+              rmd160 2cf27d464c67b7eb045faa50bff7259f4e49888a
+
+depends_lib-append  port:bzr
+
+universal_variant   no
+
+livecheck.check     regex
+livecheck.url       ${master_sites}
+livecheck.regex     {bzr-rebase-(\d+(?:\.\d+)*).tar.gz}

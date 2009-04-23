@@ -1,0 +1,20 @@
+# $Id: Portfile 36435 2008-05-01 20:49:52Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Plugin-Session-Store-DBI 0.13
+maintainers           narf_tm openmaintainer
+description           Store your sessions in a database
+long_description      This storage module will store session \
+                      data in a database using DBI.
+
+platforms             darwin
+
+checksums             md5 fda0bc9f14049e375921dbf36e7fbb25 \
+                      sha1 e05c214622d223b01e33194c69e7871775d8858f \
+                      rmd160 7e67eebfd635537bc025e2f477cc99f1e53656b3
+
+depends_lib-append    port:p5-catalyst-runtime \
+                      port:p5-catalyst-plugin-session \
+                      port:p5-dbi

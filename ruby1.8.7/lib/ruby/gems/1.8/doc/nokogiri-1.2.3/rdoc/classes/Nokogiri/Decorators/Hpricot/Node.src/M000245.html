@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>search (Nokogiri::Decorators::Hpricot::Node)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/decorators/hpricot/node.rb, line 5</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">search</span> <span class="ruby-operator">*</span><span class="ruby-identifier">paths</span>
+          <span class="ruby-identifier">ns</span> = <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
+          <span class="ruby-identifier">converted</span> = <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">convert_to_xpath</span>(<span class="ruby-identifier">path</span>)
+          }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>
+
+          <span class="ruby-keyword kw">super</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">converted</span> <span class="ruby-operator">+</span> [<span class="ruby-identifier">ns</span>])
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

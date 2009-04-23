@@ -1,0 +1,59 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49893 2009-04-19 20:18:12Z devans@macports.org $
+
+PortSystem  1.0
+
+name		libgnomecanvas
+version         2.26.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description	A graphics library for GNOME.
+long_description        The GNOMECanvas library provides a number \
+			of features: \
+        		Image loading facilities. Rendering of a \
+			GdkPixBuf into various formats: drawables \
+			(windows, pixmaps), GdkRGB buffers. \
+			A cache interface.
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     9bbc635e5ae70e63af071af74ba7e72f \
+                sha1    d0429140c3ae8974562f4eb34e89d4f512e8e4ec \
+                rmd160  87eb8f61b4ed8c3c3ede4941aeb8b539731d1d9f
+
+depends_build   port:pkgconfig \
+                port:p5-xml-parser \
+                port:intltool
+
+configure.perl  ${prefix}/bin/perl
+configure.env-append INTLTOOL_PERL=${prefix}/bin/perl
+
+depends_lib     port:gtk2 \
+                port:libart_lgpl \
+                port:libglade2
+
+use_bzip2 	yes
+
+configure.cppflags-append "-L${prefix}/lib"
+
+test.run        yes
+test.target     check
+
+pre-test {
+    set libdirs {}
+    fs-traverse {dir} ${worksrcpath} {
+        if {[file tail ${dir}] == ".libs" && [file isdirectory ${dir}]} {
+            lappend libdirs ${dir}
+
+            continue
+        }
+    }
+
+    test.env    DYLD_LIBRARY_PATH=[join ${libdirs} :]
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

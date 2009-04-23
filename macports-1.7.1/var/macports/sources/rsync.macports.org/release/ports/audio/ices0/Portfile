@@ -1,0 +1,39 @@
+# $Id: Portfile 41634 2008-11-07 20:21:03Z mcalhoun@macports.org $
+
+PortSystem 1.0
+name             ices0
+version          0.4
+categories       audio net
+maintainers      nomaintainer
+description      Stream audio to an icecast server
+long_description \
+	source client for broadcasting in MP3 format to an icecast2 server
+homepage         http://icecast.org/ices.php
+platforms        darwin
+
+master_sites     http://downloads.us.xiph.org/releases/ices/
+distname         ices-${version}
+checksums        md5 d31450c4011561dae0229f071cb41cb6
+
+depends_build    bin:pkg-config:pkgconfig
+depends_lib      port:libxml2 \
+                 lib:libmp3lame.0:lame \
+                 lib:libshout.3:libshout2
+
+configure.args   --program-suffix=0 \
+                 --with-docdir=${prefix}/share/doc \
+                 --mandir=${prefix}/share/man \
+                 --without-python \
+                 --without-perl
+
+variant	python	{
+		configure.args-delete --without-python
+		configure.args-append --with-python=${prefix}/bin/python2.5
+		depends_lib-append		port:python25
+}
+
+variant	perl	{
+		configure.args-delete --without-perl
+		configure.args-append --with-perl=${prefix}/bin/perl
+		depends_lib-append		path:bin/perl:perl5
+}

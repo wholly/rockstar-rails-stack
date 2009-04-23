@@ -1,0 +1,73 @@
+# $Id: Portfile 48851 2009-03-30 13:11:56Z dluke@macports.org $
+
+PortSystem      1.0
+
+name            neon
+version         0.28.4
+categories      www
+maintainers     dluke@geeklair.net
+description     An HTTP and WebDAV client library with a C interface
+platforms       darwin freebsd
+
+long_description \
+    neon is an HTTP and WebDAV client library with a C language API.    \
+    It provides a high-level interface to HTTP and WebDAV methods and a \
+    low-level interface to HTTP request handling, easily allowing the   \
+    implementation of new methods.
+
+homepage        http://www.webdav.org/neon/
+master_sites    ${homepage}
+
+depends_lib     port:expat \
+                port:gettext \
+                port:libiconv \
+                port:openssl \
+                port:zlib
+
+checksums	md5 6c3b94362af743d046e198e9fcbe4a85 \
+		sha1 f2685b56cecf754cb51ac69f974ea090ea85c75e \
+		rmd160 b9448e420c5d152628e7b09437b3e3be157759ae
+
+use_parallel_build	yes
+
+configure.args  --with-ssl \
+                --enable-shared \
+                --with-expat \
+                --mandir=${prefix}/share/man
+
+pre-test {
+	set x {}
+
+	fs-traverse dir ${worksrcpath} {
+		if {[file tail ${dir}] == ".libs" && [file isdirectory ${dir}]} {
+			lappend x ${dir}
+			continue
+		}
+	}
+
+	test.env-append DYLD_LIBRARY_PATH=[join ${x} ":"]
+}
+
+post-configure {
+	if {[variant_isset universal]} {
+		system "cd ${worksrcpath} && ed - config.h < ${filespath}/config.h.ed && touch stamp-h1"
+	}
+}
+
+post-destroot {
+	if {[variant_isset universal]} {
+		reinplace "s|${configure.universal_cppflags}||g" \
+			${destroot}${prefix}/bin/neon-config \
+			${destroot}${prefix}/lib/pkgconfig/neon.pc
+		reinplace "s|${configure.universal_ldflags}||g" \
+			${destroot}${prefix}/bin/neon-config \
+			${destroot}${prefix}/lib/pkgconfig/neon.pc
+	}
+}
+
+test.run    yes
+test.target check
+
+livecheck.check regex
+livecheck.url   ${homepage}
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)

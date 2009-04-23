@@ -1,0 +1,33 @@
+# $Id: Portfile 49657 2009-04-14 21:50:38Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name                encfs
+version             1.5
+revision            1
+categories          fuse
+platforms           darwin
+maintainers         eridius@macports.org
+description         An encrypted pass-through FUSE filesystem
+
+long_description    EncFS is an encrypted pass-through filesystem which \
+                    runs in userspace, using the FUSE kernel module.  \
+                    Similar in design to CFS and other pass-through \
+                    filesystems, all data is encrypted and stored in the \
+                    underlying filesystem.  Unlike loopback filesystems, \
+                    there is no predetermined or pre-allocated filesystem size.
+
+homepage            http://www.arg0.net/encfs
+
+distname            ${name}-${version}-2
+master_sites        googlecode
+extract.suffix      .tgz
+worksrcdir          ${name}-${version}
+checksums           md5 b07008545545b4a57cf2bf65f08a14ad \
+                    sha1 7fe225855645d98a33bf9f5fe64ac508fdb75257
+
+depends_lib         path:bin/pkg-config:pkgconfig
+depends_lib         port:rlog port:openssl port:macfuse port:gettext port:boost
+
+configure.cppflags-append   -D__FreeBSD__=10
+configure.ldflags-append    -lboost_system-mt-s -lboost_serialization-mt-s

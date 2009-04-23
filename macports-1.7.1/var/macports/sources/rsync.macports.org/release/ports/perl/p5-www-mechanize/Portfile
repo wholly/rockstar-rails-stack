@@ -1,0 +1,29 @@
+# $Id: Portfile 45885 2009-01-23 21:39:27Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           WWW-Mechanize 1.54
+maintainers           narf_tm openmaintainer
+description           Handy web browsing in a Perl object
+long_description      WWW::Mechanize, or Mech for short, helps you automate \
+                      interaction with a website. It supports performing a \
+                      sequence of page fetches including following links and \
+                      submitting forms. Each fetched page is parsed and its \
+                      links and forms are extracted. A link or a form can be \
+                      selected, form fields can be filled and the next page \
+                      can be fetched. Mech also stores a history of the URLs \
+                      you've visited, which can be queried and revisited.
+
+platforms             darwin
+
+checksums             md5 27257ee2a33348df181c866d865925fb \
+                      sha1 6ae01e188bc195a9e4bb4a71f8b65b971a2e36a2 \
+                      rmd160 a0109ffac1da71cebf911edc01903cd9b127cedf
+
+depends_lib-append    port:p5-libwww-perl \
+                      port:p5-html-parser \
+                      port:p5-http-response-encoding \
+                      port:p5-http-server-simple \
+                      port:p5-test-warn \
+                      port:p5-uri

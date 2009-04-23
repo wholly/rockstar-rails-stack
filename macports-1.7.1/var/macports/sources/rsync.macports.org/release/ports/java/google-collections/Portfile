@@ -1,0 +1,48 @@
+# $Id: Portfile 49327 2009-04-07 17:38:12Z blair@macports.org $
+
+PortSystem 1.0
+
+name			google-collections
+version			20090211.1.0.1
+set real_version	1.0-rc1
+categories		java
+platforms		darwin
+maintainers		blair
+description		Suite of new collections and collection-related classes.
+
+long_description	The Google Collections Library is a suite of new \
+			collections and collection-related goodness for \
+			Java 5.0, brought to you by Google.  This library \
+			is a natural extension of the Java Collections \
+			Framework you already know and love.  The major new \
+			types are: BiMap, Multiset, Multimap and Ordering.
+
+homepage		http://code.google.com/p/google-collections/
+
+master_sites		googlecode
+distfiles		google-collect-${real_version}.zip
+distname		google-collect-${real_version}
+use_zip			yes
+
+checksums		md5 0350082474e786efac108264c3ee134b \
+			sha1 da57f3e83597d295badccef38ff8b4ca527d4489 \
+			rmd160 d50f7c568e4fcbc0a45b5aed6d9a0fbf01c69d83
+
+depends_lib		bin:java:kaffe
+
+use_configure		no
+
+build { }
+
+destroot {
+	set javadir ${destroot}${prefix}/share/java
+	set docdir ${destroot}${prefix}/share/doc/${name}
+
+	xinstall -d -m 755 ${javadir}
+	xinstall -d -m 755 ${docdir}/api
+
+	file copy ${worksrcpath}/google-collect-${real_version}.jar \
+		${javadir}/google-collect.jar
+	file copy ${worksrcpath}/COPYING ${docdir}
+	file copy ${worksrcpath}/javadoc ${docdir}/api
+}

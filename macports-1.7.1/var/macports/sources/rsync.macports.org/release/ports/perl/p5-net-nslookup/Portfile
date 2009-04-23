@@ -1,0 +1,11 @@
+# $Id: Portfile 30247 2007-10-23 02:05:08Z jmpp@macports.org $
+PortSystem              1.0
+PortGroup               perl5 1.0
+
+perl5.setup             Net-Nslookup 1.16
+maintainers             nomaintainer
+description             Provide nslookup(1)-like capabilities
+long_description        ${description}
+
+checksums               md5 ff8b63e5fd3804b8a201bf00d4027db0
+platforms               darwin

@@ -1,0 +1,25 @@
+basestring_vsnprintf.lo basestring_vsnprintf.o: basestring_vsnprintf.c \
+  /usr/include/stdio.h /usr/include/_types.h /usr/include/sys/_types.h \
+  /usr/include/sys/cdefs.h /usr/include/machine/_types.h \
+  /usr/include/i386/_types.h \
+  ../../../../../storage/ndb/include/util/basestring_vsnprintf.h \
+  /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stdarg.h \
+  ../../../../../include/my_config.h
+
+/usr/include/stdio.h:
+
+/usr/include/_types.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/i386/_types.h:
+
+../../../../../storage/ndb/include/util/basestring_vsnprintf.h:
+
+/usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stdarg.h:
+
+../../../../../include/my_config.h:

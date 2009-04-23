@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: scenario_pending
+- !ruby/object:RI::AliasName 
+  name: scenario_failed
+block_params: 
+comment: 
+full_name: ActiveRecordSafetyListener#scenario_succeeded
+is_singleton: false
+name: scenario_succeeded
+params: (*args)
+visibility: public

@@ -1,0 +1,41 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 43832 2008-12-15 21:05:07Z devans@macports.org $
+
+PortSystem	1.0
+
+name		libpaper
+version		1.1.21
+set base_version	1.1.21
+revision	1
+categories	print
+maintainers	nomaintainer
+platforms	darwin
+description	A library providing routines for paper size management
+long_description	\
+		The paper library and accompanying files are intended	\
+		to provide a simple way for applications to take	\
+		actions based on a system- or user-specified paper size.
+
+homepage	http://packages.qa.debian.org/libp/libpaper.html
+master_sites	http://ftp.us.debian.org/debian/pool/main/libp/${name}/ \
+		ftp://ftp.us.debian.org/debian/pool/main/libp/${name}/
+
+distfiles	${name}_${version}${extract.suffix}
+
+checksums	md5 6397f8d60a157119c1de5d19e4d82436
+
+worksrcdir	${name}-${base_version}
+
+patchfiles	patch-config.guess.diff	\
+		patch-paper.c.diff	\
+		patch-paperconf.c.diff	\
+		patch-Makefile.in.diff
+
+pre-configure	{ system "touch ${worksrcpath}/config.sub" }
+
+configure.args	--mandir=${prefix}/share/man	\
+		--sysconfdir=${prefix}/etc
+
+livecheck.check regex
+livecheck.url   http://ftp.us.debian.org/debian/pool/main/libp/${name}/
+livecheck.regex "${name}_(\\d+(?:\\.\\d+)*)${extract.suffix}"

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: DEPRECATED
+- !ruby/struct:SM::Flow::P 
+  body: Use should_receive(:render).with(opts) instead
+full_name: Spec::Rails::Example::RenderObserver#expect_render
+is_singleton: false
+name: expect_render
+params: (opts={})
+visibility: public

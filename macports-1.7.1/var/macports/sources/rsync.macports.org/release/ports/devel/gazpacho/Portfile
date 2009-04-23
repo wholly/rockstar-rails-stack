@@ -1,0 +1,30 @@
+# $Id: Portfile 31825 2007-12-09 11:25:48Z rhwood@macports.org $
+
+PortSystem 1.0
+PortGroup python25 1.0
+
+name		gazpacho
+version		0.7.2
+categories	devel python gnome
+maintainers	nomaintainer
+description	A GUI builder for the GTK+ toolkit.
+long_description \
+	Gazpacho is a fresh new GUI builder for the GTK+ toolkit designed to \
+	be ultra easy to use.
+homepage	http://gazpacho.sicem.biz
+platforms	darwin
+
+master_sites	gnome:sources/gazpacho/[strsed ${version} {/\.[0-9]*$//}]
+checksums	md5 42d180f2570f2f5d6c0fa69ed9897d9b \
+		sha1 3f664b23982273e698509c94a704c468a93fd31e \
+		rmd160 9e7614be94763bc9570032902019d26663331740
+
+post-extract	{
+	reinplace "s|/usr/|${prefix}/|g" ${worksrcpath}/gazpacho.desktop
+}
+
+depends_lib-append	\
+	port:gettext \
+	port:py25-gobject \
+	port:py25-numeric \
+	port:kiwi

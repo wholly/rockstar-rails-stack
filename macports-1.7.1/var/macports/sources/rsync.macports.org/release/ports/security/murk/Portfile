@@ -1,0 +1,35 @@
+# $Id: Portfile 30252 2007-10-23 02:19:43Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			murk
+version			0.2
+categories		security
+platforms		darwin
+maintainers		nomaintainer
+description		rsync friendly encryption tool
+long_description	rsync friendly encryption that runs on the unix command \
+				line. Encrypt a file and backup the changes to an untrusted host.
+
+homepage		http://murk.sourceforge.net/
+master_sites	sourceforge
+checksums		md5 1fb86807f7fb885d658e1bc96d066731
+use_bzip2		yes
+patchfiles		patch-configure
+
+depends_lib		lib:libbz2.a:bzip2 \
+				lib:libcrypto:openssl
+
+configure.args	-I${prefix}/include -L${prefix}/lib
+
+test.run		yes
+test.target		test
+
+destroot	{
+	xinstall -m 755 ${worksrcpath}/murk ${destroot}${prefix}/bin
+	xinstall -m 644 ${worksrcpath}/doc/murk.1 \
+		${destroot}${prefix}/share/man/man1
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} INSTALL LICENSE README TODO \
+		doc/index.html doc/manpage.html ${destroot}${prefix}/share/doc/${name}
+}

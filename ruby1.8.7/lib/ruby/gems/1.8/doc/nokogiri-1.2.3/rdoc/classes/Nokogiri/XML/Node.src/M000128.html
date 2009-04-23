@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>add_namespace (Nokogiri::XML::Node)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  add_namespace(prefix, href)
+ *
+ * Add a namespace with +prefix+ using +href+
+ */
+static VALUE add_namespace(VALUE self, VALUE prefix, VALUE href)
+{
+  xmlNodePtr node;
+  Data_Get_Struct(self, xmlNode, node);
+
+  xmlNsPtr ns = xmlNewNs(
+      node,
+      (const xmlChar *)StringValuePtr(href),
+      (const xmlChar *)StringValuePtr(prefix)
+  );
+
+  if(NULL == ns) return self;
+
+  /*
+  xmlNewNsProp(
+      node,
+      ns,
+      (const xmlChar *)StringValuePtr(href),
+      (const xmlChar *)StringValuePtr(prefix)
+  );
+  */
+
+  return self;
+}</pre>
+</body>
+</html>

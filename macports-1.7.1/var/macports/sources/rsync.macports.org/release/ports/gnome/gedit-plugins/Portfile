@@ -1,0 +1,26 @@
+# $Id: Portfile 36170 2008-04-20 18:11:18Z gui_dos@macports.org $
+
+PortSystem 1.0
+
+name            gedit-plugins
+version         2.22.2
+description     Plug-ins for GEdit
+long_description Various additional plug-ins for GEdit 2.
+maintainers     nomaintainer
+categories      gnome editors
+platforms       darwin
+homepage        http://www.gnome.org/projects/gedit/
+master_sites    gnome:sources/${name}/[strsed ${version} {/\.[0-9]*$//}]/
+checksums       md5     556d4171db9a5a44fdc18f403cea5fdd \
+                sha1    88579a75df9a39ab871952aeac6ba356c749e14b \
+                rmd160  cb5ab52adebf1f7e80826b08a41ac092967dc952
+
+depends_lib     \
+	port:gedit \
+        port:py25-pygtksourceview \
+	port:vte \
+        port:gucharmap
+depends_build   \
+        port:gnome-doc-utils
+use_bzip2       yes
+configure.env	PYTHON=${prefix}/bin/python2.5

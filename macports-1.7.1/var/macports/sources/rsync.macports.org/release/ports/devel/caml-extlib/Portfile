@@ -1,0 +1,38 @@
+# $Id: Portfile 32423 2007-12-30 21:38:59Z eridius@macports.org $
+
+PortSystem          1.0
+
+name                caml-extlib
+version             1.5.1
+categories          devel ml
+maintainers         eridius@macports.org
+description         Extended Standard Library for OCaml
+long_description    A User-supported Extended Standard Library for OCaml
+homepage            http://code.google.com/p/ocaml-extlib/
+platforms           darwin
+master_sites        googlecode:ocaml-extlib
+
+checksums           md5 8dc2944cbf63141347956bd353893d75 \
+                    sha1 e72ae90f53cc4dbed151d57e6004ab6e4acddc7f
+distfiles           extlib-${version}.tar.gz
+worksrcdir          extlib-${version}
+
+patchfiles          patch-install.ml
+
+depends_lib         bin:camlp4:ocaml bin:ocamlfind:caml-findlib
+
+use_configure       no
+
+build {}
+
+destroot.cmd        "ocaml"
+destroot.pre_args   install.ml
+destroot.args       -b -n -doc
+destroot.post_args
+
+pre-destroot {
+        set extlib_destdir  ${destroot}[exec ${prefix}/bin/ocamlfind printconf destdir]
+        file mkdir $extlib_destdir
+        reinplace s|##PREFIX##|${prefix}| ${worksrcpath}/install.ml
+        reinplace s|##DESTDIR##|${extlib_destdir}| ${worksrcpath}/install.ml
+}

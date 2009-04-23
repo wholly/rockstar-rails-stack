@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Set the global XML default for substitute entities.
+full_name: Nokogiri::XML::Document::substitute_entities=
+is_singleton: true
+name: substitute_entities=
+params: |
+  substitute_entities=(boolean)
+
+visibility: public

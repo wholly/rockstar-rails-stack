@@ -1,0 +1,44 @@
+# $Id: Portfile 28543 2007-09-03 11:55:42Z mww@macports.org $
+
+PortSystem 1.0
+name		libdv
+version		1.0.0
+categories	multimedia
+maintainers 	filippo.natali@gmail.com	
+platforms	darwin
+description	Quasar DV codec (libdv): software codec for DV video encoding format	
+long_description	The Quasar DV codec (libdv) is a software codec for DV video, the \
+			encoding format used by most digital camcorders, typically those \
+			that support the IEEE 1394 (a.k.a. FireWire or i.Link) interface. \
+			Libdv was developed according to the official standards for DV \
+			video: IEC 61834 and SMPTE 314M.	
+
+homepage	http://libdv.sourceforge.net	
+master_sites	sourceforge
+
+checksums	md5 f895162161cfa4bb4a94c070a7caa6c7
+
+depends_lib	port:popt
+
+configure.args  --mandir=${prefix}/share/man   --disable-gtktest --disable-gtk --disable-sdltest
+
+configure.ldflags-append	"-flat_namespace -undefined suppress"
+
+platform darwin i386 {
+	configure.args-append	--disable-asm
+}
+
+variant gtk {
+        configure.args-delete   --disable-gtktest --disable-gtk
+        depends_lib-append      port:gtk1
+}
+
+variant sdl {
+        configure.args-delete   --disable-sdltest
+	configure.args-append	--enable-sdl
+        depends_lib-append      port:libsdl
+}
+
+variant pal {
+	configure.args-append	--with-pal-yuv
+}

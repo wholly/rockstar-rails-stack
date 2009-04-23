@@ -1,0 +1,65 @@
+# $Id: Portfile 48797 2009-03-29 01:43:25Z ryandesign@macports.org $
+
+PortSystem  1.0
+PortGroup   gnustep 1.0
+
+name        gnustep-back
+version     0.12.0
+platforms   darwin
+maintainers nomaintainer
+
+description A back-end component for the GNUstep GUI Library.
+long_description \
+    The implementation of the GNUstep GUI Library is designed \
+    in two parts.  The first part is the front-end component \
+    which is independent of platform and display system.  \
+    This front-end is combined with a back-end component \
+    which handles all of the display system dependent \
+    such as specific calls to the X Window System.
+
+depends_lib     port:gnustep-gui \
+                port:libart_lgpl \
+                port:Xft2
+
+checksums       md5 1b0252a1b645dd2ca4c78427fb885f1f 
+
+use_configure   yes
+configure.args  --enable-graphics=art \
+                --disable-glitz
+post-install {
+	ui_msg "
+	        In order to have a working GNUstep environment,
+	        copy these lines at the top of your ~/.xinitrc file :"
+	if {[file exists ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh]} {
+	    ui_msg ". ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh"
+	}
+    ui_msg "
+gdnc
+gpbs
+make_services
+
+            For more information on setting the GNUstep environment, see
+            http://gnustep.made-it.com/BuildGuide/#CONFIG.GNUSTEP"
+}
+
+platform macosx {
+    patchfiles-append   patch-ftfont.m \
+                        patch-CairoFaceInfo.h
+}
+
+platform darwin 8 {
+    configure.args-append   --disable-glx
+}
+
+# works better in quartz-wm
+variant quartzwm {
+    patchfiles-append patch-Source-x11-XGServerWindow.m
+}
+
+# experimental backend
+variant cairo {
+    depends_lib-delete      port:libart_lgpl
+    depends_lib-append      path:lib/pkgconfig/cairo.pc:cairo
+    configure.args-delete   --enable-graphics=art
+    configure.args-append   --enable-graphics=cairo
+}

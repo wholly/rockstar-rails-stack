@@ -1,0 +1,57 @@
+# $Id: Portfile 45603 2009-01-18 20:52:41Z jeremyhu@macports.org $
+PortSystem 1.0
+name                        aalib
+version                     1.4rc5
+categories                  graphics
+revision                    4
+maintainers                 tim@ccc.de
+description                 Portable ascii art GFX library
+long_description            AA-lib is a low level gfx library just as many other libraries are. \
+                            The main difference is that AA-lib does not require graphics device. \
+                            In fact, there is no graphical output possible. AA-lib replaces those \
+                            old-fashioned output methods with powerful ascii-art renderer. Now my \
+                            linux boots with a nice penguin logo at secondary display (yes! Like \
+                            Win95 does:) AA-lib API is designed to be similar to other graphics \
+                            libraries. Learning a new API would be a piece of cake!
+homepage                    http://aa-project.sourceforge.net/aalib/
+master_sites                sourceforge:aa-project freebsd
+checksums                   md5 9801095c42bba12edebd1902bcf0a990
+
+platforms                   darwin
+
+worksrcdir                  ${name}-1.4.0
+configure.args              --with-x=no --with-ncurses \
+                            --enable-shared --disable-static \
+                            --mandir=${prefix}/share/man \
+                            --infodir=${prefix}/share/info
+configure.cppflags          "-I/usr/include/malloc"
+
+patchfiles                  doc/patch-Makefile.in.diff man/patch-Makefile.in.diff \
+                            patch-aacurkbd.c.diff patch-aacurses.c.diff \
+                            patch-config.guess.diff patch-config.sub.diff \
+                            patch-configure.diff patch-aclocal.m4.diff \
+                            patch-depcomp.diff patch-ltmain.sh.diff \
+                            patch-Makefile.in.diff src/patch-Makefile.in.diff \
+                            patch-aalib.m4.diff
+
+platform darwin 6 {
+    patchfiles-append src/patch-malloc.h.diff
+}
+
+variant x11 {
+        depends_lib \
+                port:xorg-libX11
+        configure.args-delete   --with-x=no
+        configure.args-append   --with-x
+}
+
+depends_build \
+	port:autoconf \
+	port:automake \
+	port:libtool
+
+use_autoconf yes
+autoconf.cmd autoreconf
+autoconf.args -fvi
+
+livecheck.distname aa-lib

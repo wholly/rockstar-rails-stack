@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Runner::Formatter::Story::HtmlFormatter#scenario_started
+is_singleton: false
+name: scenario_started
+params: (story_title, scenario_name)
+visibility: public

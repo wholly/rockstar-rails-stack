@@ -1,0 +1,46 @@
+# $Id: Portfile 46266 2009-02-01 22:04:27Z takanori@macports.org $
+
+PortSystem      1.0
+
+name            nkf
+version         2.0.9
+categories      textproc japanese
+maintainers     takanori openmaintainer
+description     Network Kanji code conversion Filter
+long_description \
+                Nkf  is  a  yet  another kanji code converter among networks, hosts and \
+                terminals.  It converts input kanji code to designated kanji code  such \
+                as 7-bit JIS, MS-kanji (shifted-JIS), utf-8 or EUC.
+platforms       darwin
+homepage        http://sourceforge.jp/projects/nkf/
+master_sites    sourceforge_jp:${name}/37177/
+checksums       md5 0dadcf178785c87874822a2ff8da9f19 \
+                sha1 68e9d5c6224940e6f1fe1d3cf0a54e47c5769a27 \
+                rmd160 c27b176f675428c0cbfb7779700979e60de3a42f
+
+use_configure   no
+
+build.target
+build.args      CFLAGS="${configure.cflags}"
+
+test.run        yes
+
+use_parallel_build  yes
+
+destroot {
+    xinstall -m 755 ${worksrcpath}/nkf ${destroot}${prefix}/bin
+    xinstall -m 644 ${worksrcpath}/nkf.1 ${destroot}${prefix}/share/man/man1
+}
+
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 ${worksrcpath}/nkf.doc ${destroot}${prefix}/share/doc/${name}
+}
+
+variant universal {
+    build.args  CFLAGS="${configure.cflags} ${configure.universal_cflags}"
+}
+
+livecheck.check regex
+livecheck.url   ${homepage}files/
+livecheck.regex ${name}-(\[0-9.a-z\]+)\\.tar

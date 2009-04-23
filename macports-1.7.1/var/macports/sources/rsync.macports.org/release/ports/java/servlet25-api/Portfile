@@ -1,0 +1,42 @@
+# $Id: Portfile 48058 2009-03-13 18:33:43Z blair@macports.org $
+
+PortSystem 1.0
+
+name			servlet25-api
+version			6.0.18
+
+categories		java
+maintainers		jberry blair openmaintainer
+platforms		darwin
+
+description		Java Servlet 2.5 and JSP 2.1 APIs.
+long_description	The Java Servlet and JavaServer Pages specifications \
+				are developed by Sun under the Java Community \
+				Process.  This project provides the servlet \
+				and JSP API jars from Tomcat 6.
+homepage		http://jakarta.apache.org/tomcat/
+
+distname		apache-tomcat-${version}-src
+master_sites		apache:tomcat/tomcat-6/v${version}/src/
+checksums		md5 9bdbb1c1d79302c80057a70b18fe6721 \
+			sha1 9182b0d6b2d0cb2d60f04be6211f3b3516bc518e \
+			rmd160 ef85db0d65a4f3bdd3ca821420d06535050b6a93
+
+depends_lib		bin:java:kaffe
+depends_build		bin:ant:apache-ant
+
+use_configure		no
+
+build.cmd		ant
+build.target		download build-only
+build.args		-Dbase.path=${worksrcpath}/repository
+
+destroot	{
+	xinstall -m 755 -d ${destroot}${prefix}/share/java \
+		${destroot}${prefix}/share/doc
+	xinstall -m 644 ${worksrcpath}/output/build/lib/jsp-api.jar \
+		${destroot}${prefix}/share/java/jsp21-api.jar
+	xinstall -m 644 \
+		${worksrcpath}/output/build/lib/servlet-api.jar \
+		${destroot}${prefix}/share/java/servlet25-api.jar
+}

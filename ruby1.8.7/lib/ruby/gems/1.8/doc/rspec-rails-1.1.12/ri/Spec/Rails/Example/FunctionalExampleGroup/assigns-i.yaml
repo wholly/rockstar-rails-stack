@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Hash of instance variables to values that are made available to views. == Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  #in thing_controller.rb\n  def new\n    @thing = Thing.new\n  end\n\n  #in thing_controller_spec\n  get 'new'\n  assigns[:registration].should == Thing.new\n"
+full_name: Spec::Rails::Example::FunctionalExampleGroup#assigns
+is_singleton: false
+name: assigns
+params: |
+  assigns()
+
+visibility: public

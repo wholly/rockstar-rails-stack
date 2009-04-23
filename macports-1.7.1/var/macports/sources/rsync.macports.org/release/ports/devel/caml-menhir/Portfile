@@ -1,0 +1,25 @@
+# $Id: Portfile 31207 2007-11-18 10:25:12Z erickt@macports.org $
+
+PortSystem          1.0
+name                caml-menhir
+version             20070520
+categories          devel ml
+maintainers         erickt@macports.org
+description         Menhir is a LR(1) parser generator for the Objective Caml programming language.
+long_description    Menhir is a LR(1) parser generator for the Objective Caml programming language.
+homepage            http://cristal.inria.fr/~fpottier/menhir
+master_sites        http://cristal.inria.fr/~fpottier/menhir
+
+distname            menhir-${version}
+
+checksums           md5 babfd53c23ae0330b4337b1e362c73de \
+                    sha1 9e329763451776ec2edc7f5f0f1c423b71074185 \
+                    rmd160 9d1117e90c0e2c80bcd04ca4f63d2ea80f06a8a2
+
+depends_lib         port:caml-findlib \
+                    port:ocaml
+
+use_configure       no
+
+build.env           PREFIX=${prefix}
+destroot.env        PREFIX=${destroot}${prefix}

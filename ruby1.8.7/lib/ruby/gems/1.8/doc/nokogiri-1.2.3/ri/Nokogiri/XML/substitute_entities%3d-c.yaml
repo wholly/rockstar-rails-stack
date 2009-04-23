@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets whether or not entities should be substituted.
+full_name: Nokogiri::XML::substitute_entities=
+is_singleton: true
+name: substitute_entities=
+params: (value = true)
+visibility: public

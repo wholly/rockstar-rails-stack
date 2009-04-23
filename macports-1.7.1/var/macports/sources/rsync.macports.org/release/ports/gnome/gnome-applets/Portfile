@@ -1,0 +1,49 @@
+# $Id: Portfile 45411 2009-01-15 18:42:38Z jmr@macports.org $
+
+PortSystem 1.0
+
+name            gnome-applets
+version         2.24.3.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     GNOME panel applets.
+long_description This package contains applets for use with the \
+                GNOME panel.
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+checksums       md5 9d60394e9feedb754838e5087ddaee97 \
+                sha1 cc9a121bb06f687c221902c24dbdbe37bd68b07f \
+                rmd160 aa36ca16e88821a860d825bff9ab94e144e283f7
+
+depends_build   port:gnome-doc-utils
+depends_lib     port:libgnomeui \
+                port:gst-plugins-good \
+                port:popt \
+                port:gnome-keyring \
+                port:gnome-panel \
+                port:libgtop \
+                port:libgnomekbd \
+                port:libwnck \
+                port:libgweather \
+                port:system-tools-backends \
+                port:gucharmap \
+                port:py25-gtk \
+                port:gnome-control-center \
+                port:gnome-python-desktop
+
+use_bzip2 	yes
+
+configure.python  ${prefix}/bin/python2.5
+
+configure.args  --with-gstreamer=0.10 \
+		--without-hal \
+		--disable-scrollkeeper
+post-activate {
+	system "${prefix}/bin/scrollkeeper-update"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

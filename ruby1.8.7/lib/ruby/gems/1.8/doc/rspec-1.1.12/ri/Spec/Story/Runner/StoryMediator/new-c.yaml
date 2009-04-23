@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::Runner::StoryMediator::new
+is_singleton: true
+name: new
+params: (step_group, runner, options={})
+visibility: public

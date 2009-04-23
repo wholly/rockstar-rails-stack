@@ -1,0 +1,109 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 48251 2009-03-17 19:14:49Z devans@macports.org $
+
+PortSystem      1.0
+
+name            gnome-vfs
+version         2.24.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+description     This is the GNOME Virtual File System.
+
+long_description \
+    This is the GNOME Virtual File System. \
+    GNOME VFS is currently used as one of the \
+    foundations of the Nautilus file manager.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     100f9af16dc659e375ee8da45175a28d \
+                sha1    0e7b548ffe7b9eddaef3a43cdda47de538715f8b \
+                rmd160  e4c6f99b67496a456596b7040aff859ca49a8998
+
+depends_lib     port:gconf \
+                port:dbus \
+                port:openssl \
+                port:libidl \
+                port:dbus-glib \
+                port:libxml2 \
+                port:libiconv \
+                port:gettext
+
+depends_run     port:desktop-file-utils \
+                port:gnome-mime-data \
+                port:shared-mime-info
+
+patchfiles      patch-configure.diff
+
+configure.args  --enable-ipv6 \
+                --disable-howl \
+                --disable-avahi \
+                --with-openssl-libs=${prefix}/lib \
+                --with-openssl-includes=${prefix}/include \
+                --disable-gnutls \
+                ac_cv_func_open64=no \
+                ac_cv_func_posix_fadvise=no \
+                ac_cv_path_KRB5_CONFIG=none
+
+configure.ldflags-append    -lresolv
+
+post-patch {
+    reinplace -E "/xdg_data_dirs =/s|\"\[^\"\]*\"|\"${prefix}/share\"|" \
+        ${worksrcpath}/libgnomevfs/xdgmime.c
+
+    reinplace "s|/etc/fstab|/etc/fstab.hd|" \
+        ${worksrcpath}/libgnomevfs/gnome-vfs-unix-mounts.c
+}
+
+platform darwin 6 {
+    post-patch {
+        reinplace "s|#include <arpa/nameser.h>|#include <arpa/nameser.h>\\
+        #ifndef T_SRV\\
+        #define T_SRV 33\\
+        #endif|g" \
+            ${worksrcpath}/libgnomevfs/gnome-vfs-dns-sd.c
+
+        reinplace "s|#include <limits.h>|#include <limits.h>\\
+        #if \!defined getc_unlocked \\&\\& \!defined HAVE_GETC_UNLOCKED\\
+        #define getc_unlocked(fp) getc (fp)\\
+        #endif|g" \
+            ${worksrcpath}/libgnomevfs/xdgmimemagic.c
+
+        reinplace "s|socklen_t|int|g" ${worksrcpath}/modules/ftp-method.c
+    }
+
+    configure.ldflags-delete    -lresolv
+}
+
+platform darwin 7 {
+    post-patch {
+        reinplace "s|#include <stdio.h>|#include <stdio.h>\\
+        #include <stdint.h>|g" ${worksrcpath}/libgnomevfs/xdgmimecache.c
+    }
+}
+
+variant avahi description {Enable Bonjour through avahi} {
+    depends_lib-append      port:avahi
+    configure.args-delete   --disable-avahi
+}
+post-activate {
+    # We need to register some stuff to gconf. Just putting the
+    # schema files to the right place is not enough.
+    # You can watch the successful installation with gconf-editor.
+
+    system "cd ${prefix}/etc/gconf/schemas && \
+    GCONF_CONFIG_SOURCE=`${prefix}/bin/gconftool-2 --get-default-source` ${prefix}/bin/gconftool-2 --makefile-install-rule \
+        desktop_default_applications.schemas \
+        desktop_gnome_url_handlers.schemas \
+        system_dns_sd.schemas \
+        system_http_proxy.schemas \
+        system_smb.schemas"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

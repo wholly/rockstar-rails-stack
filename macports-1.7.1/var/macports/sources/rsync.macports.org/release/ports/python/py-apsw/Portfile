@@ -1,0 +1,40 @@
+# $Id: Portfile 32256 2007-12-23 09:18:47Z ryandesign@macports.org $
+
+PortSystem			1.0
+PortGroup			python24 1.0
+name				py-apsw
+version				3.3.5-r1
+revision			1
+maintainers			nomaintainer
+description			Very thin SQLite 3 wrapper for python
+long_description \
+	APSW provides an SQLite 3 wrapper that provides the thinnest layer \
+	over SQLite 3 possible.  Everything you can do from the C API to \
+	SQLite 3, you can do from Python.  Although APSW looks vaguely \
+	similar to the DBAPI, it is not compliant with that API and instead \
+	works the way SQLite 3 does.
+
+platforms			darwin
+
+homepage			http://www.rogerbinns.com/apsw.html
+master_sites		sourceforge:bitpim
+distname			apsw-${version}
+use_zip				yes
+
+checksums			md5 17e22e5da95be77e8e14708150db03ba \
+					sha1 71f04dd1e1145f3bc32c90633559a6b099a47bb3 \
+					rmd160 35507908a8761737867ea5bcc76c9022ad54606d
+
+depends_lib-append	port:sqlite3
+
+post-extract {
+	file copy ${filespath}/setup.cfg ${worksrcpath}/setup.cfg
+	reinplace "s|@@PREFIX@@|${prefix}|g" ${worksrcpath}/setup.cfg
+}
+
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} apsw.html \
+		${destroot}${prefix}/share/doc/${name}
+}
+

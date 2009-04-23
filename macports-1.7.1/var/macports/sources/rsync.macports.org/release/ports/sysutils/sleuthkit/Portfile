@@ -1,0 +1,80 @@
+# $Id: Portfile 45319 2009-01-13 15:00:17Z mcalhoun@macports.org $
+
+PortSystem 1.0
+
+name            sleuthkit
+version         2.09
+categories      sysutils
+maintainers     md@hudora.de
+platforms       darwin
+description     Forensic toolkit
+long_description The Sleuth Kit (previously known as TASK) is a collection \
+	of UNIX-based command line file system and media management forensic \
+	analysis tools. The file system tools allow you to examine file systems of \
+	a suspect computer in a non-intrusive fashion. Because the tools do not \
+	rely on the operating system to process the file systems, deleted and \
+	hidden content is shown. \
+	The media management tools allow you to examine the layout of disks and \
+	other media. The Sleuth Kit supports DOS partitions, BSD partitions (disk \
+	labels), Mac partitions, Sun slices (Volume Table of Contents), and GPT \
+	disks. With these tools, you can identify where partitions are located and \
+	extract them so that they can be analyzed with file system analysis tools.
+master_sites    sourceforge
+homepage        http://www.sleuthkit.org/sleuthkit/
+checksums       sha1 9d2db6868026d887a83b0becb4d95a69527df457 \
+                md5 7a7b50e089c1807956146a50621b7441
+use_configure   no
+depends_build   port:file port:perl5
+depends_lib     port:openssl port:p5-datemanip port:zlib
+patchfiles      patch-Makefile patch-check-install patch-src_timeline_config-perl
+
+post-patch {
+	reinplace {s|Darwin\.\[6-8\]|Darwin.[6-9]|g} ${worksrcpath}/src/makedefs
+	reinplace "s|/usr/local/bin/ /usr/bin/ /usr/ccs/bin/ /bin/ /usr/ucb/bin/ /sbin/ /usr/sbin/ /usr/local/sbin/ /usr/pkg/bin/|${prefix}/bin/|g" ${worksrcpath}/src/timeline/config-perl
+	reinplace "s|/usr/local/bin/ /usr/bin/ /usr/ccs/bin/ /bin/ /usr/ucb/bin/ /sbin/ /usr/sbin/ /usr/local/sbin/ /usr/pkg/bin/|${prefix}/bin/|g" ${worksrcpath}/src/sorter/install
+
+    foreach srcdir { auxtools disktools fstools hashtools imgtools
+                     mmtools srchtools } {
+        # Those are literal tabs after CFLAGS and LIBS, don't retab 'em
+    	reinplace "s|^CFLAGS\[ 	\]*=|CFLAGS	= -I${prefix}/include |g" \
+        	${worksrcpath}/src/${srcdir}/Makefile
+    	reinplace "s|^LIBS\[ 	\]*=|LIBS	= -L${prefix}/lib |g" \
+        	${worksrcpath}/src/${srcdir}/Makefile
+    }
+}
+
+destroot   {
+	reinplace "s|\\\$SK_DIR=\"${worksrcpath}/\"|\\\$SK_DIR=\"${prefix}\"|g" ${worksrcpath}/bin/sorter
+	reinplace "s|\\\$SK_DIR/share/sorter/|\\\$SK_DIR/share/${name}/sorter/|g" ${worksrcpath}/bin/sorter
+
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}/tct_docs
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}/api_docs
+
+	eval xinstall [glob ${worksrcpath}/docs/*.txt] \
+		${destroot}${prefix}/share/doc/${name}
+
+	eval xinstall [glob ${worksrcpath}/docs/api-doc/*] \
+		${destroot}${prefix}/share/doc/${name}/api_docs
+
+        xinstall -m 644 -W ${worksrcpath} CHANGES.txt INSTALL.txt README.txt \
+                ${destroot}${prefix}/share/doc/${name}
+
+	eval xinstall -m 644 [glob ${worksrcpath}/tct.docs/*] \
+		${destroot}${prefix}/share/doc/${name}/tct_docs
+
+	xinstall -m 755 -d ${destroot}${prefix}/bin
+	eval xinstall -m 755 [glob ${worksrcpath}/bin/*] \
+		${destroot}${prefix}/bin
+
+	xinstall -m 755 -d ${destroot}${prefix}/lib
+	xinstall -m 644 ${worksrcpath}/lib/libtsk.a \
+		${destroot}${prefix}/lib
+
+	xinstall -m 755 -d ${destroot}${prefix}/man/man1
+	eval xinstall -m 644 [glob ${worksrcpath}/man/man1/*] \
+		${destroot}${prefix}/share/man/man1/
+
+	xinstall -m 755 -d ${destroot}${prefix}/share/${name}/sorter
+	eval xinstall [glob ${worksrcpath}/share/sorter/*] \
+		${destroot}${prefix}/share/${name}/sorter
+}

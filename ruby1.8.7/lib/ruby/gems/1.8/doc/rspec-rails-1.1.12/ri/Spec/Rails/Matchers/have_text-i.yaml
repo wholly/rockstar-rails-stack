@@ -1,0 +1,24 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Accepts a String or a Regexp, matching a String using == and a Regexp using =~.
+- !ruby/struct:SM::Flow::P 
+  body: "If response_or_text has a #body, then that is used as to match against else it uses response_or_text"
+- !ruby/struct:SM::Flow::P 
+  body: Use this instead of <tt>response.should have_tag()</tt> when you want to match the whole string or whole body
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  response.should have_text(&quot;This is the expected text&quot;)\n"
+full_name: Spec::Rails::Matchers#have_text
+is_singleton: false
+name: have_text
+params: |
+  response.should have_text(expected)
+  response.should_not have_text(expected)
+
+visibility: public

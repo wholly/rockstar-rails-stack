@@ -1,0 +1,70 @@
+# $Id: Portfile 39720 2008-09-01 09:47:14Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name		cdf
+version		32
+maintainers	gwright@macports.org
+platforms	darwin
+categories	science
+
+description	CDF: Common Data Format
+long_description	\
+		The Common Data Format (CDF) is a self-describing data	\
+		format for the storage and manipulation of scalar and	\
+		multidimensional data in a platform and discipline	\
+		independent fashion. 
+
+homepage	http://cdf.gsfc.nasa.gov/
+master_sites	http://distfiles.macports.org/${dist_subdir} \
+				ftp://cdaweb.gsfc.nasa.gov/pub/cdf/dist/${name}${version}/unix
+
+distfiles	${name}${version}-dist-all${extract.suffix}
+
+checksums	sha1 c24a88dee108ab3ae7787697350f77ca3e9bd776
+
+depends_build	port:gcc42
+
+fetch.use_epsv	no
+configure	{ }
+worksrcdir	${name}${version}-dist-readonly
+
+platform darwin i386 {
+		  global cdf_arch
+		  set cdf_arch i386
+}
+
+platform darwin powerpc {
+		  global cdf_arch
+		  set cdf_arch ppc
+		}
+
+patchfiles	patch-Makefile
+
+post-patch	{
+		  reinplace "s|-L/usr/lib/gcc/powerpc-apple-darwin8/4.0.1|`gcc-mp-4.2 -print-libgcc-file-name`|g" Makefile
+		  reinplace "s|-L/usr/lib/gcc/powerpc-apple-darwin8/4.0.1/ppc64|`gcc-mp-4.2 -print-libgcc-file-name`|g" Makefile
+		  reinplace "s|-L/usr/lib/gcc/i686-apple-darwin8/4.0.1|`gcc-mp-4.2 -print-libgcc-file-name`|g" Makefile
+
+		  reinplace "s|/Developer/SDKs/MacOSX10.4u.sdk/usr/lib|${prefix}/lib|g" Makefile
+		}
+
+build		{
+		  system "make OS=macosx ENV=${cdf_arch} FORTRAN=yes FC=gfortran-mp-4.2 all"
+		}
+
+destroot	{
+		  reinplace "s|(INSTALLDIR)/bin/definitions.B|/${prefix}/bin/definitions.B|" ${worksrcpath}/Makefile
+		  reinplace "s|(INSTALLDIR)/bin/definitions.C|/${prefix}/bin/definitions.C|" ${worksrcpath}/Makefile
+		  reinplace "s|(INSTALLDIR)/bin/definitions.K|/${prefix}/bin/definitions.K|" ${worksrcpath}/Makefile
+		  system "make INSTALLDIR=${destroot}${prefix} install"
+		}
+
+post-destroot	{
+		  reinplace "s|${destroot}${prefix}|${prefix}|" ${destroot}${prefix}/bin/definitions.B
+		  reinplace "s|${destroot}${prefix}|${prefix}|" ${destroot}${prefix}/bin/definitions.C
+		  reinplace "s|${destroot}${prefix}|${prefix}|" ${destroot}${prefix}/bin/definitions.K
+
+		  system "install_name_tool -id ${prefix}/lib/libcdf.dylib ${destroot}${prefix}/lib/libcdf.dylib"
+		}
+

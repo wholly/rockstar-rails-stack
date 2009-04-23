@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>visit_pseudo_class (Nokogiri::CSS::XPathVisitor)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/css/xpath_visitor.rb, line 95</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">visit_pseudo_class</span> <span class="ruby-identifier">node</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">CSS</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:FUNCTION</span>
+          <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">accept</span>(<span class="ruby-keyword kw">self</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;visit_pseudo_class_#{node.value.first.gsub(/[(]/, '')}&quot;</span><span class="ruby-node">&quot;visit_pseudo_class_#{node.value.first.gsub(/[(]/, '')}&quot;</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">msg</span>, <span class="ruby-identifier">node</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">msg</span>)
+
+          <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;first&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;position() = 1&quot;</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;last&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;position() = last()&quot;</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;first-of-type&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;position() = 1&quot;</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;last-of-type&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;position() = last()&quot;</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;only-of-type&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;last() = 1&quot;</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;empty&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;not(node())&quot;</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;parent&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;node()&quot;</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;root&quot;</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;not(parent::*)&quot;</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;(.)&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

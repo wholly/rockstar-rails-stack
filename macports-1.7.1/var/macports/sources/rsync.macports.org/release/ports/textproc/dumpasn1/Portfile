@@ -1,0 +1,40 @@
+# $Id: Portfile 20475 2006-11-03 15:30:38Z blair@macports.org $
+
+PortSystem 1.0
+name		dumpasn1
+version		20060622
+categories	textproc security
+maintainers	cjr@macports.org
+description	an ASN.1 decoder and pretty-printer
+long_description	The dumpasn1 program decodes BER and DER-encoded \
+			ASN.1 data, and is configured with knowledge of \
+			many security-related objects.
+homepage	http://www.cs.auckland.ac.nz/~pgut001/
+master_sites	${homepage}
+distname	
+distfiles	dumpasn1.c dumpasn1.cfg
+checksums	dumpasn1.c md5 0855c6f21a9e2c7f984b1e48ce9c1f58 \
+		dumpasn1.cfg md5 ffb5d3c3f7b5216149dcc7bbf462408c
+platforms	darwin
+extract {
+	system "cp ${distpath}/dumpasn1.c ${worksrcpath}"
+	system "cp ${distpath}/dumpasn1.cfg ${worksrcpath}"
+}
+
+configure	{}
+
+post-configure {
+	reinplace "s|/etc/dumpasn1/|$prefix/etc/|g" \
+		"${worksrcpath}/dumpasn1.c"
+}
+
+build {
+	system "cc -o ${worksrcpath}/dumpasn1 ${worksrcpath}/dumpasn1.c"
+}
+
+destroot {
+	xinstall -c -m 0755 ${worksrcpath}/dumpasn1 \
+		${destroot}${prefix}/bin/dumpasn1
+	xinstall -c -m 0644 ${worksrcpath}/dumpasn1.cfg \
+		${destroot}${prefix}/etc/dumpasn1.cfg
+}

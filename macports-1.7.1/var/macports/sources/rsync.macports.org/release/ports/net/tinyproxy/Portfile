@@ -1,0 +1,35 @@
+# $Id: Portfile 30239 2007-10-23 01:55:09Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name		tinyproxy
+version		1.6.3
+categories	www net
+platforms	darwin
+maintainers	nomaintainer
+description	fast, lightweight HTTP proxy
+long_description	tinyproxy is a lightweight HTTP proxy. Designed from \
+			the ground up to be fast and yet small, it is an ideal \
+			solution for sites where a full-featured HTTP proxy is \
+			required, but the system resources required to run a \
+			more demanding HTTP proxy are unavailable.
+
+homepage	http://tinyproxy.sourceforge.net
+master_sites	sourceforge freebsd
+checksums	md5 bd14d029b12621bcfd7ee71b2f4893da
+patchfiles	patch-tinyproxy.conf.diff
+
+configure.args-append   --mandir=${prefix}/share/man
+
+post-patch	{
+	reinplace "s|PREFIX|${prefix}|g" ${worksrcpath}/doc/tinyproxy.conf
+}
+
+post-destroot	{
+	file mkdir ${destroot}${prefix}/share/doc/${name}
+	file copy ${worksrcpath}/AUTHORS ${worksrcpath}/COPYING \
+		${worksrcpath}/doc/filter-howto.txt ${worksrcpath}/INSTALL \
+		${worksrcpath}/NEWS ${worksrcpath}/README ${worksrcpath}/TODO \
+		${worksrcpath}/doc/RFC_INFO ${worksrcpath}/ChangeLog \
+		${destroot}${prefix}/share/doc/${name}
+}

@@ -1,0 +1,34 @@
+# $Id: Portfile 49930 2009-04-20 09:28:03Z perry@macports.org $
+
+PortSystem          1.0
+
+name                see
+version             3.0.1376
+revision            0
+categories          lang
+maintainers         perry
+platforms           darwin
+
+description         Simple ECMAScript Engine
+long_description    SEE is a library that provides an ECMAScript \
+                    (JavaScript) run-time environment.
+homepage            http://www.adaptive-enterprises.com.au/~d/software/see/
+
+livecheck.check     regex
+livecheck.regex     {'see-(.*)\.tar\.gz'}
+livecheck.url       ${homepage}
+
+depends_lib         port:boehmgc
+
+master_sites        ${homepage}
+
+checksums           rmd160 1fb3eb7a796ba96fe68fbc3225bcaafff5692f6f
+
+configure.args      --with-boehm-gc --without-pcre --without-readline
+
+variant readline description {Enable the GNU Readline library} {
+    depends_lib-append port:readline
+
+    configure.args-append --with-readline
+    configure.args-delete --without-readline
+}

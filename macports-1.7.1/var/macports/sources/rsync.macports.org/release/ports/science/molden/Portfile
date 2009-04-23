@@ -1,0 +1,72 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 47427 2009-02-28 02:48:30Z jeremyhu@macports.org $
+
+# I (Jochen Küpper) got explicit permission to distribute molden as a
+# MacPorts port, given that the source-code is always downloaded from
+# the authors webpage and we add a banner asking users to register at
+# the following web-page: http://www.cmbi.ru.nl/molden/form.html
+#
+# Feel free to update checksums whenever a stealth upgrade of molden is out...
+
+PortSystem 1.0
+
+name                molden
+version             4.6
+revision            13
+categories          science graphics
+maintainers         openmaintainer jochen
+homepage            http://www.cmbi.ru.nl/molden/molden.html
+distname            molden${version}
+dist_subdir         ${name}/${version}_${revision}
+master_sites        ftp://ftp.cmbi.ru.nl/pub/molgraph/molden/
+checksums           md5 3b4e7fa4a323c7e283c0348fc6bb3b2d \
+                    sha1 83f17d2079b83cc790689485c139301407313463 \
+                    rmd160 b75ec4c23001695044e82d9f8b8542cb45b3009c
+
+description         Molecular graphics visualisation tool
+long_description    Molden is a package for displaying Molecular Density from \
+                    the Ab Initio packages GAMESS-UK , GAMESS-US and \
+                    GAUSSIAN and the Semi-Empirical packages Mopac/Ampac, it \
+                    also supports a number of other programs via the Molden Format. \
+                    In order to keep up support for Molden, proof that \
+                    it is being used outside the CMBI is required. \
+                    Please register your copy of molden at: \
+                    http://www.cmbi.ru.nl/molden/form.html
+
+platforms           darwin
+depends_build       port:gmake
+depends_lib         port:gcc43 port:xorg-libX11
+patchfiles          patch-makefile.diff
+use_parallel_build  yes
+use_configure       no
+build.target        molden
+build.cmd           nice -n ${buildnicevalue} gmake -j${buildmakejobs}
+destroot            {
+    xinstall -W ${worksrcpath} molden   ${destroot}${prefix}/bin
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/molden
+    xinstall -W ${worksrcpath} HISTORY  ${destroot}${prefix}/share/doc/molden/
+    xinstall -W ${worksrcpath} README   ${destroot}${prefix}/share/doc/molden/
+    xinstall -W ${worksrcpath} REGISTER ${destroot}${prefix}/share/doc/molden/
+    if { [variant_isset opengl] } {
+        xinstall -W ${worksrcpath} moldenogl ${destroot}${prefix}/bin
+    }
+}
+
+post-install        { ui_msg "**************************************************"
+                      ui_msg "In order to keep up support for Molden, proof that"
+                      ui_msg "it is being used outside the CMBI is required."
+                      ui_msg "Please register your copy of molden at:"
+                      ui_msg "***   http://www.cmbi.ru.nl/molden/form.html   ***"
+                      ui_msg "**************************************************"
+                    }
+
+variant opengl description "Install moldenogl OpenGL helper program" {
+    depends_lib-append      port:mesa
+    build.target-append     moldenogl
+}
+
+set distfile_date   20081219110900
+livecheck.version   ${version}-${distfile_date}
+livecheck.check     regex
+livecheck.url       http://www.ryandesign.com/macports/version.php/${name}
+livecheck.regex     (.*)

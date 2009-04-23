@@ -1,0 +1,36 @@
+# $Id: Portfile 26331 2007-06-20 00:10:54Z ryandesign@macports.org $
+
+PortSystem 		1.0
+name			mailqfmt
+version			0.6
+categories		mail
+maintainers		cbellot@sky.fr
+description		Postfix mailq file reformatter
+platforms	 	darwin
+master_sites	 	http://www.dt.e-technik.uni-dortmund.de/~ma/postfix/
+distfiles		${name}.pl
+checksums	 	md5 e1d452850f59cd004d2d4930758a4a28
+depends_lib-append	port:p5-libwww-perl port:postfix
+
+variant apple_postfix {
+	  depends_lib-delete	port:postfix
+}
+
+use_configure		no
+extract	{
+	  file copy ${distpath}/mailqfmt.pl ${workpath}/mailqfmt
+	}
+post-patch { 
+	  reinplace "s|/usr/bin/perl|${prefix}/bin/perl|g" \
+	    ${workpath}/mailqfmt
+
+if { ![variant_isset apple_postfix] } {
+	  reinplace "s|/usr/bin/mailq|${prefix}/bin/mailq|g" \
+	    ${workpath}/mailqfmt
+   }
+	}
+build {}
+destroot { 
+	  xinstall -m 755 -d ${destroot}${prefix}/bin
+	  xinstall -m 755 ${workpath}/mailqfmt ${destroot}${prefix}/bin/mailqfmt
+	}

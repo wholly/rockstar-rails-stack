@@ -1,0 +1,25 @@
+# $Id: Portfile 38789 2008-07-31 09:55:33Z ryandesign@macports.org $
+
+PortSystem 1.0
+name		axel
+version		1.0b
+categories	net www
+platforms	darwin
+maintainers	nomaintainer
+description	A light Unix download accelerator
+long_description Axel does the same thing any other accelerator does: \
+		it opens more than one HTTP/FTP connection per download and \
+		each connection transfers its own, separate, part of the file. \
+		It may sound weird, but it works very well in practice.
+
+master_sites	http://wilmer.gaast.net/downloads
+homepage	http://wilmer.gaast.net/main.php/axel.html
+checksums	sha1 b9c9a4bb86ac5ffd53974af211edbfaefc182183
+
+configure.args	--i18n=1
+build.args	CFLAGS="-I${prefix}/include" \
+		LFLAGS="-L${prefix}/lib -lintl -liconv"
+
+patchfiles	patch-large-file-support.diff
+
+depends_lib	port:libiconv port:gettext

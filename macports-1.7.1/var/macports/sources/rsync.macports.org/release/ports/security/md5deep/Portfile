@@ -1,0 +1,35 @@
+# $Id: Portfile 49412 2009-04-09 04:13:55Z blb@macports.org $
+
+PortSystem          1.0
+
+name                md5deep
+version             3.3
+categories          security sysutils
+maintainers         blb openmaintainer
+description         Recursively compute digests on files/directories
+long_description \
+   md5deep is a cross-platform set of programs to recursively compute \
+   MD5, SHA-1, or SHA-256 message digests on an arbitrary number of files.
+
+platforms           darwin
+
+homepage            http://md5deep.sourceforge.net/
+master_sites        sourceforge
+
+checksums           md5     d673ca80c607d1efa929b67b2fcaef40 \
+                    sha1    7a91c15d46d5298a9039e44fed26671c2c8dc770 \
+                    rmd160  a3a85d7d713452278a796249d481d3a244d3eee8
+
+configure.args      --mandir=${prefix}/share/man
+
+use_parallel_build  yes
+
+post-destroot {
+   xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+   xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS \
+      README TODO ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.check     regex
+livecheck.regex     {md5deep - Latest version ([\d.]+)}
+

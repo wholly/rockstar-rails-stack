@@ -1,0 +1,25 @@
+# $Id: Portfile 49236 2009-04-06 01:59:05Z yves@macports.org $
+
+PortSystem			1.0
+
+name				mp3splt
+version				2.2.3
+categories			audio
+maintainers			yves
+description			Utility for mp3 and ogg splitting without decoding
+long_description \
+	mp3splt is a free command-line utility that allows you to split mp3 and \
+	ogg files from a begin time to an end time, without need of decoding and \
+	reencoding.  It's useful to split large mp3/ogg to make smaller files or \
+	to split entire albums to obtain original tracks.
+
+platforms			darwin
+
+homepage			http://mp3splt.sourceforge.net/
+
+master_sites		sourceforge
+
+checksums			md5 aa67e24931c62d2f09be13303fbf410e
+
+depends_lib			port:libmp3splt
+

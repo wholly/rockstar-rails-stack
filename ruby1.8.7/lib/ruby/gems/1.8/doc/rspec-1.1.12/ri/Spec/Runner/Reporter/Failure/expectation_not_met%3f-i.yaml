@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Runner::Reporter::Failure#expectation_not_met?
+is_singleton: false
+name: expectation_not_met?
+params: ()
+visibility: public

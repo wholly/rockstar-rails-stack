@@ -1,0 +1,56 @@
+# $Id: Portfile 49103 2009-04-03 23:57:42Z perry@macports.org $
+
+PortSystem          1.0
+
+name                libsndfile
+version             1.0.19
+revision            2
+categories          audio
+maintainers         perry
+platforms           darwin
+
+description         libsndfile is a C library for reading and writing files \
+                    containing sampled sound (such as MS Windows WAV and the \
+                    Apple/SGI AIFF format) through one standard library interface.
+long_description    ${description}
+homepage            http://www.mega-nerd.com/libsndfile/
+
+depends_build       port:pkgconfig
+depends_lib         port:flac port:libogg port:libvorbis
+
+master_sites        ${homepage}
+
+checksums           rmd160 027d53e55b6d01c78aba31ed239fd2f0d2f752b5
+
+configure.args \
+    --disable-alsa --disable-octave --disable-sqlite --enable-external-libs
+
+post-configure {
+    system "ed - ${worksrcpath}/src/config.h < ${filespath}/src__config.h.ed"
+}
+
+if {[variant_isset no_external_libs] && ![variant_isset sqlite]} {
+    depends_build-delete port:pkgconfig
+}
+
+variant no_external_libs description {Disable support for FLAC, Ogg and Vorbis} {
+    depends_lib-delete port:flac port:libogg port:libvorbis
+
+    configure.args-append --disable-external-libs
+    configure.args-delete --enable-external-libs
+}
+
+variant octave description {Enable support for GNU Octave} {
+    depends_build-append port:gsed
+    depends_lib-append   port:octave
+
+    configure.args-append --enable-octave
+    configure.args-delete --disable-octave
+}
+
+variant sqlite description {Enable support for SQLite} {
+    depends_lib-append port:sqlite3
+
+    configure.args-append --enable-sqlite
+    configure.args-delete --disable-sqlite
+}

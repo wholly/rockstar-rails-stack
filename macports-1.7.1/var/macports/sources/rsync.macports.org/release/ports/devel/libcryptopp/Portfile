@@ -1,0 +1,44 @@
+# $Id: Portfile 34859 2008-03-09 03:35:24Z jmr@macports.org $
+
+PortSystem 1.0
+
+name		libcryptopp
+version		5.5.2
+categories	devel security
+platforms	darwin
+maintainers	nomaintainer
+description	C++ class library of cryptographic schemes
+long_description	Crypto++ Library is a free C++ class library of \
+			cryptographic schemes.
+
+homepage	http://www.cryptopp.com/
+master_sites	sourceforge:cryptopp \
+		${homepage} \
+		http://www.mirrors.wiretapped.net/security/cryptography/libraries/cryptolib/ \
+		http://gd.tuwien.ac.at/privacy/crypto/libs/cryptlib/
+distname	cryptopp552
+checksums	md5 a889be9d9ad5c202c925fb105caa4857 \
+		sha1 18efe451b3c682f40db75dc2b09cb448a835e7d6 \
+		rmd160 8929795b654d7186b2b38714d22a57ea01862dbd
+use_zip		yes
+
+worksrcdir
+
+use_configure	no
+
+build.type	gnu
+build.args	-f GNUmakefile
+
+test.run	yes
+test.cmd	./cryptest.exe
+test.target
+
+destroot	{
+	xinstall -m 755 -d ${destroot}${prefix}/include/cryptopp \
+		${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 ${worksrcpath}/libcryptopp.a ${destroot}${prefix}/lib
+	eval xinstall -m 644 [glob ${worksrcpath}/*.h] \
+		${destroot}${prefix}/include/cryptopp/
+	xinstall -m 644 -W ${worksrcpath} Readme.txt License.txt \
+		${destroot}${prefix}/share/doc/${name}/
+}

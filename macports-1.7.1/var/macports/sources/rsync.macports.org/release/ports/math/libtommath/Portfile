@@ -1,0 +1,44 @@
+# $Id: Portfile 30184 2007-10-22 19:32:09Z mww@macports.org $
+
+PortSystem 1.0
+
+name			libtommath
+version			0.40
+categories		math
+platforms		darwin
+maintainers		mww
+description		Comprehensive, modular and portable mathematical routines
+long_description	LibTomMath provides highly optimized and portable routines \
+			for a vast majority of integer based number theoretic \
+			applications (including public key cryptography).
+
+homepage		http://math.libtomcrypt.com/
+master_sites	http://libtom.org/files/ \
+				http://www.atarininja.org/~wxs/distfiles/ \
+				freebsd
+distname		ltm-${version}
+checksums		sha1 439899c06444c363eee527f75447d189ee4f93ba
+use_bzip2		yes
+patchfiles		patch-makefile
+
+worksrcdir		${name}-${version}
+
+use_configure	no
+
+build.args		LIBDIR=${prefix}/lib
+
+destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/include/${name}
+	xinstall -m 644 -W ${worksrcpath} tommath.h tommath_class.h \
+		tommath_superclass.h ${destroot}${prefix}/include/${name}
+	xinstall -m 644 -W ${worksrcpath} libtommath.a libtommath.${version}.dylib \
+		${destroot}${prefix}/lib
+	system "cd ${destroot}${prefix}/lib \
+		&& ln -s libtommath.${version}.dylib libtommath.0.dylib \
+		&& ln -s libtommath.${version}.dylib libtommath.dylib"
+}
+
+platform darwin 8 {
+	build.args-append	CC=/usr/bin/gcc-4.0
+}
+

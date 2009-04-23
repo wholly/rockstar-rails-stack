@@ -1,0 +1,46 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 48249 2009-03-17 18:18:33Z devans@macports.org $
+
+PortSystem      1.0
+
+name            libidl
+set my_name     libIDL
+version         0.8.13
+maintainers     nomaintainer
+categories      devel gnome
+platforms       darwin
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     libIDL is a library for creating CORBA IDL files.
+
+long_description \
+    libIDL is a library licensed under the GNU LGPL \
+    for creating trees of CORBA Interface Definition \
+    Language (IDL) files, which is a specification \
+    for defining portable interfaces. libIDL was \
+    initially written for ORBit (the ORB from the \
+    GNOME project, and the primary means of libIDL \
+    distribution).  However, the functionality was \
+    designed to be as reusable and portable as possible.
+
+homepage        http://andrewtv.org/libIDL/
+master_sites    gnome:sources/${my_name}/${branch}/
+distname        ${my_name}-${version}
+use_bzip2       yes
+
+checksums       md5     b43b289a859eb38a710f70622c46e571 \
+                sha1    14cab91ecd9428b86dfe4d831b1b0a325be16a5e \
+                rmd160  9c6fadd8d87c2794405382db1ddc7cf618a6df6b
+
+depends_build   port:pkgconfig
+
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:libiconv \
+                port:gettext
+
+patchfiles	    patch-configure.diff
+
+configure.env   LEX=/usr/bin/flex YACC='/usr/bin/bison -y' HAVE_YACC=yes
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${my_name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

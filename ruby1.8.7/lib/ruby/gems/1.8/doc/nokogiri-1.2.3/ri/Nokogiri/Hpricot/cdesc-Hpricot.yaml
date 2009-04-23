@@ -1,0 +1,35 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: HTML
+- !ruby/object:RI::MethodSummary 
+  name: XML
+- !ruby/object:RI::MethodSummary 
+  name: add_decorators
+- !ruby/object:RI::MethodSummary 
+  name: make
+- !ruby/object:RI::MethodSummary 
+  name: parse
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: STag
+  value: String
+- !ruby/object:RI::Constant 
+  comment: 
+  name: Elem
+  value: XML::Node
+- !ruby/object:RI::Constant 
+  comment: 
+  name: NamedCharacters
+  value: Nokogiri::HTML::NamedCharacters
+full_name: Nokogiri::Hpricot
+includes: []
+
+instance_methods: []
+
+name: Hpricot
+superclass: 

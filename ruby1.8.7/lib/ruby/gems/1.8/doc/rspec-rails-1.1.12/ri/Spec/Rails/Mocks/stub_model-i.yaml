@@ -1,0 +1,31 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: model if block_given?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates an instance of <tt>Model</tt> that is prohibited from accessing the database*. For each key in <tt>hash_of_stubs</tt>, if the model has a matching attribute (determined by asking it) are simply assigned the submitted values. If the model does not have a matching attribute, the key/value pair is assigned as a stub return value using RSpec's mocking/stubbing framework.
+- !ruby/struct:SM::Flow::P 
+  body: <tt>new_record?</tt> is overridden to return the result of id.nil? This means that by default new_record? will return false. If you want the object to behave as a new record, sending it <tt>as_new_record</tt> will set the id to nil. You can also explicitly set :id =&gt; nil, in which case new_record? will return true, but using <tt>as_new_record</tt> makes the example a bit more descriptive.
+- !ruby/struct:SM::Flow::P 
+  body: While you can use stub_model in any example (model, view, controller, helper), it is especially useful in view examples, which are inherently more state-based than interaction-based.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Database Independence
+- !ruby/struct:SM::Flow::P 
+  body: <tt>stub_model</tt> does not make your examples entirely database-independent. It does not stop the model class itself from loading up its columns from the database. It just prevents data access from the object itself. To completely decouple from the database, take a look at libraries like unit_record or NullDB.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  stub_model(Person)\n  stub_model(Person).as_new_record\n  stub_model(Person, :id =&gt; 37)\n  stub_model(Person) do |person|\n    person.first_name = &quot;David&quot;\n  end\n"
+full_name: Spec::Rails::Mocks#stub_model
+is_singleton: false
+name: stub_model
+params: |
+  stub_model(Model)
+  stub_model(Model).as_new_record
+  stub_model(Model, hash_of_stubs)
+  stub_model(Model, instance_variable_name, hash_of_stubs)
+
+visibility: public

@@ -1,0 +1,48 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Spec::Rails::Expectations::Matchers provides several expectation matchers intended to work with Rails components like models and responses. For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  response.should redirect_to(&quot;some/url&quot;) #redirect_to(url) is the matcher.\n"
+- !ruby/struct:SM::Flow::P 
+  body: "In addition to those you see below, the arbitrary predicate feature of RSpec makes the following available as well:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  response.should be_success #passes if response.success?\n  response.should be_redirect #passes if response.redirect?\n"
+- !ruby/struct:SM::Flow::P 
+  body: Note that many of these matchers are part of a wrapper of <tt>assert_select</tt>, so the documentation comes straight from that with some slight modifications. <tt>assert_select</tt> is a Test::Unit extension originally contributed to the Rails community as a plugin by Assaf Arkin and eventually shipped as part of Rails.
+- !ruby/struct:SM::Flow::P 
+  body: For more info on <tt>assert_select</tt>, see the relevant Rails documentation.
+constants: []
+
+full_name: Spec::Rails::Matchers
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: be_valid
+- !ruby/object:RI::MethodSummary 
+  name: have_rjs
+- !ruby/object:RI::MethodSummary 
+  name: have_tag
+- !ruby/object:RI::MethodSummary 
+  name: have_text
+- !ruby/object:RI::MethodSummary 
+  name: include_text
+- !ruby/object:RI::MethodSummary 
+  name: redirect_to
+- !ruby/object:RI::MethodSummary 
+  name: render_template
+- !ruby/object:RI::MethodSummary 
+  name: send_email
+- !ruby/object:RI::MethodSummary 
+  name: with_encoded
+- !ruby/object:RI::MethodSummary 
+  name: with_tag
+- !ruby/object:RI::MethodSummary 
+  name: without_tag
+name: Matchers
+superclass: 

@@ -1,0 +1,38 @@
+# $Id: Portfile 48911 2009-03-31 10:02:34Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name		gmime
+version		2.2.18
+set branch              [strsed ${version} {s/\.[0-9]*$//}]
+
+description	MIME mail utilities
+long_description  The GMime suite provides a core library and set of utilities \
+                  which may be used for the creation and parsing of messages \
+                  using the Multipurpose Internet Mail Extension (MIME) \
+                  configurable and incorporating all the features you would expect \
+                  in a robust mail client.
+maintainers	boeyms openmaintainer
+categories	mail
+platforms	darwin
+homepage	http://spruce.sourceforge.net/gmime/
+master_sites    http://spruce.sourceforge.net/gmime/sources/v${branch} \
+		gnome:sources/gmime/${branch}
+checksums	md5 90b76399fca28ebbc4e5a4cb4cee4e46 \
+		sha1 e6eac0dc6135106554fdc685e4e5c9a23fb4ecdd \
+		rmd160 4d9e97d8833c70c516f0f1c2e1b59ca2a89444ea
+
+depends_build   path:bin/pkg-config:pkgconfig
+depends_lib     port:libiconv \
+                path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:gettext \
+                port:zlib
+
+configure.args	--disable-mono --enable-largefile
+
+test.run        yes
+test.target     check
+
+livecheck.check regex
+livecheck.url   http://spruce.sourceforge.net/gmime/sources/v${branch}/?O=D
+livecheck.regex ${name}-(\\d+\\.\\d+\\.\\d+)

@@ -1,0 +1,37 @@
+# $Id: Portfile 49830 2009-04-18 20:44:38Z blb@macports.org $
+
+PortSystem          1.0
+name                pdf2djvu
+version             0.5.4
+categories          graphics textproc
+maintainers         blb openmaintainer
+description         Convert PDF to DjVu
+long_description \
+   pdf2djvu creates DjVu files from PDF files. It's able to extract: \
+   graphics, text layer, hyperlinks, document outline (bookmarks), and \
+   metadata.
+
+platforms           darwin
+
+homepage            http://code.google.com/p/pdf2djvu/
+master_sites        http://pdf2djvu.googlecode.com/files/
+distname            ${name}_${version}
+worksrcdir          ${name}-${version}
+
+checksums           md5     0a35d72930c9ef4a2109da0e366dfc00 \
+                    sha1    6a6931a7a5447c7baf77ece20a5fd961e42545f3 \
+                    rmd160  8dfd4557e4b8ac8a8758edc67df1425d87a361c2
+
+depends_build       port:pkgconfig
+
+depends_lib         port:djvulibre port:poppler port:libiconv
+
+post-destroot {
+   xinstall -m 644 -W ${worksrcpath}/doc ${name}.1 \
+      ${destroot}${prefix}/share/man/man1
+}
+
+livecheck.check     regex
+livecheck.url       ${homepage}downloads/list
+livecheck.regex     ${name}_(\[0-9.\]+)${extract.suffix}
+

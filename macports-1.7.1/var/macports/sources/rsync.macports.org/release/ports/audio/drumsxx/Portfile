@@ -1,0 +1,39 @@
+# $Id: Portfile 30219 2007-10-22 22:40:35Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			drumsxx
+version			0.95
+categories		audio
+platforms		darwin
+maintainers		nomaintainer
+description		language designed for sequencing music through drum machines
+long_description	Drums++ is a programming language designed for \
+				sequencing music through drum machines. It uses simple \
+				C ideas, for example // and /* */ comments and { } to \
+				seperate sections. It is made as simple as possible so \
+				even a non-programmer can use it. Drums++ can both \
+				directly control your MIDI device or it can create \
+				.midi files
+
+homepage		http://dpp.mikekohn.net/
+master_sites	http://downloads.mikekohn.net/drumsplusplus/
+distname		drumsplusplus-${version}
+checksums		sha1 d18bde6dbec8891ac573df9edf57b522e9968939
+
+use_configure	no
+
+build.target
+
+destroot	{
+	xinstall -m 755 -s ${worksrcpath}/playdpp ${destroot}${prefix}/bin
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}/examples
+	xinstall -m 644 ${worksrcpath}/TODO ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath}/samples drum_defines.inc features.dpp \
+		pattern.inc sample.dpp simple.dpp test_include.dpp \
+		${destroot}${prefix}/share/doc/${name}/examples
+}
+
+platform darwin 8 {
+	build.args-append	CC=/usr/bin/gcc-4.0
+}

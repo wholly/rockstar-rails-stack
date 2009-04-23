@@ -1,0 +1,34 @@
+# $Id: Portfile 37082 2008-05-26 13:45:35Z mmoll@macports.org $
+
+PortSystem 1.0
+
+name			avr-gdb
+version			6.7.1
+categories		cross
+maintainers		nomaintainer
+description		GDB for the AVR processors
+long_description	avr-gdb is a version of the GNU Debugger that \
+			through the avarice program can be used to debug \
+			code for the AVR processors.
+homepage		http://www.gnu.org/software/gdb/gdb.html
+platforms		darwin
+master_sites		http://ftp.gnu.org/gnu/gdb/ \
+			ftp://mirrors.usc.edu/pub/gnu/gdb \
+			ftp://ftp.mcc.ac.uk/pub/gnu/gdb
+distfiles		gdb-${version}.tar.bz2
+worksrcdir		gdb-${version}
+use_bzip2		yes
+checksums		md5 30a6bf36eded4ae5a152d7d71b86dc14
+depends_run		bin:avarice:avarice
+
+# This actually breaks the build process
+#configure.env		CFLAGS="-I${prefix}/include" LDFLAGS="-L${prefix}/lib"
+# without --disable-nls the build process also breaks
+configure.args		--mandir=${prefix}/share/man \
+                    --infodir=${prefix}/share/info \
+                    --target=avr --disable-nls
+
+post-destroot {
+        # Installing (host) libiberty was a mistake.
+        file delete "${destroot}/${prefix}/lib/libiberty.a"
+}

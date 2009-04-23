@@ -1,0 +1,29 @@
+# $Id: Portfile 36191 2008-04-22 02:26:20Z waqar@macports.org $
+
+PortSystem 1.0
+
+name		minicom
+version		2.3
+categories	comms
+maintainers	waqar@macports.org
+platforms	darwin
+description	Menu driven communications program
+long_description  \
+	Minicom is a menu driven communications program. It emulates 	\
+	ANSI and VT102 terminals. It has a dialing directory and auto 	\
+	zmodem download.
+homepage	http://alioth.debian.org/projects/minicom
+master_sites	http://alioth.debian.org/download.php/2332
+checksums	md5 0ebe7a91898384ca906787cc4e2c3f25			\
+		sha1 407c4898a882f14639f30b394805382df0585b50
+depends_run	port:lrzsz port:kermit
+
+configure.args  --enable-dfl-port=/dev/cu.modem	\
+	        --enable-lock-dir=${prefix}/var	\
+		--infodir=${prefix}/share/info 	\
+		--mandir=${prefix}/share/man
+
+post-destroot	{
+	file delete -force ${destroot}${prefix}/lib/charset.alias	\
+		${destroot}${prefix}/share/locale/locale.alias
+}

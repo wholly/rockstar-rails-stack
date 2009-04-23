@@ -1,0 +1,15 @@
+# $Id: Portfile 43353 2008-12-09 21:29:01Z mcalhoun@macports.org $
+
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup             Image-Size 3.01
+maintainers             nomaintainer
+platforms               darwin
+categories-append       graphics
+description             Extract size information from image files
+long_description        This module provide functions to extract image \
+						sizes from image files
+homepage				http://search.cpan.org/~rjray/${distname}/
+checksums				sha1	d39cb121cba87d3cf4aa542cecc31f07ea52fa90
+depends_lib-append	port:p5-module-build

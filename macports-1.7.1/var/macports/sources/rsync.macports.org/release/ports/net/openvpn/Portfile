@@ -1,0 +1,26 @@
+# $Id: Portfile 20348 2006-11-02 01:45:56Z blair@macports.org $
+
+PortSystem 1.0
+name              openvpn
+version           1.6.0
+categories        net security
+maintainers       julien.touche@touche.fr.st
+description       easy-to-use, robust, and highly configurable VPN
+long_description  OpenVPN is an easy-to-use, robust, and highly \
+                  configurable VPN (Virtual Private Network) daemon \
+                  which can be used to securely link two or more \
+                  private networks using an encrypted tunnel over \
+                  the internet.
+homepage          http://openvpn.sourceforge.net/
+master_sites      sourceforge
+platforms         darwin openbsd
+depends_lib       lib:liblzo:lzo
+checksums         md5 9eab3719b280a12d19ef1fda286cc363
+configure.args	  --mandir=${prefix}/share/man \
+		  --with-lzo-headers=${prefix}/include \
+		  --with-lzo-lib=${prefix}/lib
+
+variant no_lzo {
+	configure.args-append --disable-lzo
+	depends_lib-delete lib:liblzo:lzo
+}

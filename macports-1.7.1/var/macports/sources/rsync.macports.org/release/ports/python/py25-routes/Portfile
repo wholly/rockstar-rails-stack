@@ -1,0 +1,28 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 44419 2008-12-28 09:31:44Z akitada@macports.org $
+
+PortSystem          1.0
+PortGroup           python25 1.0
+
+name                py25-routes
+version             1.10
+categories-append   www
+maintainers         openmaintainer stechert akitada
+description         A Routing package for Python that matches \
+                    URLs to dicts and vice versa.
+long_description    Routes is a Python re-implementation of the \
+                    Rails routes system for mapping URLs to \
+                    Controllers/Actions and generating URLs. \
+                    Routes makes it easy to create pretty and \
+                    concise URLs that are RESTful with little \
+                    effort.
+
+platforms           darwin
+
+homepage            http://routes.groovie.org
+master_sites        http://cheeseshop.python.org/packages/source/R/Routes/
+distname            Routes-${version}
+
+checksums           md5 12931a700bb358477d74054519a949f2 \
+                    sha1 86e592ce0eabcf70288382b9c70a59bbed1fec71 \
+                    rmd160 257927082ff07d3d815c8a936aae97f6824ccfbb

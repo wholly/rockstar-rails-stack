@@ -1,0 +1,22 @@
+# $Id: Portfile 30184 2007-10-22 19:32:09Z mww@macports.org $
+
+PortSystem 1.0
+PortGroup python25 1.0
+
+name			py25-zopeinterface
+version			3.3.0
+categories		python zope
+platforms		darwin
+maintainers		mww
+description		Python interfaces for Zope
+long_description	${description}
+
+homepage		http://www.zope.org/Products/ZopeInterface
+master_sites		${homepage}/${version}/
+distname		zope.interface-${version}
+checksums		md5 93668855e37b4691c5c956665c33392c
+
+livecheck.check	regex
+livecheck.url	${homepage}
+livecheck.regex	\[0-9\.]+/zope.interface-(\[0-9\.\]+).tar.gz
+

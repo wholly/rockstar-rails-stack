@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a new node from <tt>string</tt>
+- !ruby/struct:SM::Flow::P 
+  body: THIS METHOD IS DEPRECATED This method is deprecated and will be removed in 1.3.0 or by March 1, 2009. Instead, use Nokogiri::XML::Node#fragment()
+full_name: Nokogiri::XML::Node::new_from_str
+is_singleton: true
+name: new_from_str
+params: (string)
+visibility: public

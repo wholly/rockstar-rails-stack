@@ -1,0 +1,31 @@
+# $Id: Portfile 46217 2009-02-01 00:32:53Z blb@macports.org $
+
+PortSystem 1.0
+
+name            camlp5
+version         5.11
+categories      lang
+platforms       darwin
+description     Camlp5 is a preprocessor-pretty-printer of OCaml.
+long_description  Camlp5 is a preprocessor and pretty-printer for \
+        OCaml programs. It also provides parsing and printing tools. \
+        As a preprocessor, it allows to: extend the syntax of OCaml, \
+        redefine the whole syntax of the language. As a pretty printer, \
+        it allows to: display OCaml programs in an elegant way, convert \
+        from one syntax to another, check the results of syntax \
+        extensions. Camlp5 also provides some parsing and pretty \
+        printing tools: extensible grammars, extensible printers, \
+        stream parsers and lexers pretty print module.  It works as a \
+        shell command and can also be used in the OCaml toplevel.
+
+maintainers     nomaintainer
+homepage        http://pauillac.inria.fr/~ddr/camlp5/
+master_sites    ${homepage}distrib/src/
+extract.suffix  .tgz
+depends_build   port:ocaml
+configure.pre_args  --prefix "${prefix}" --mandir "${prefix}/share/man"
+build.target    world.opt
+checksums       md5     26d69abd669c5fda43dbf35074debc81 \
+                sha1    59b9321427954e224846608bf4b4e9b1991c4ad4 \
+                rmd160  9095037981f4542c069bf59c52392bdbac986a74
+

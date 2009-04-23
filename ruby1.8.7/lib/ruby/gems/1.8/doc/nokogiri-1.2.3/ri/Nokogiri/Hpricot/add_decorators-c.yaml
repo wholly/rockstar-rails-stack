@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::Hpricot::add_decorators
+is_singleton: true
+name: add_decorators
+params: (doc)
+visibility: public

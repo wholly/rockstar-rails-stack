@@ -1,0 +1,27 @@
+# $Id: Portfile 49795 2009-04-18 09:28:27Z mww@macports.org $
+
+PortSystem 1.0
+
+name			mpop
+version			1.0.17
+categories		mail
+platforms		darwin
+maintainers		mww
+description		small and fast POP3 client
+long_description	mpop is a small and fast POP3 client with header based \
+				mail filtering capabilities.
+
+homepage		http://mpop.sourceforge.net/
+master_sites	sourceforge
+checksums           md5     3698c1a4ad1ff48d38442572e9247859 \
+                    sha1    489b3f2fe7c7baa8e0f471f757e387f44289e7b5 \
+                    rmd160  4bde407b14b3073b6354a9456e2e66fbcba5eef3
+use_bzip2		yes
+
+depends_lib		port:openssl port:libiconv port:zlib port:gettext port:libgsasl
+
+configure.args	--with-libiconv-prefix=${prefix} \
+				--with-ssl=openssl \
+				--mandir=${prefix}/share/man \
+				--infodir=${prefix}/share/info
+

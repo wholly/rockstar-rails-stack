@@ -1,0 +1,10 @@
+# $Id: Portfile 30247 2007-10-23 02:05:08Z jmpp@macports.org $
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup		Cache-Simple-TimedExpiry 0.26
+maintainers		nomaintainer
+description		A lightweight cache with timed expiration
+long_description	${description}
+checksums		md5 f44e43af0a29ac4effb702e016650512
+platforms		darwin

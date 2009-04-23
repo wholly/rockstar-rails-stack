@@ -1,0 +1,46 @@
+# $Id: Portfile 45699 2009-01-20 13:00:00Z css@macports.org $
+
+PortSystem 1.0
+
+name		streamripper
+version		1.64.3
+revision	1
+categories	audio net
+platforms	darwin
+maintainers	css
+description	separate tracks via Shoutcasts title-streaming
+long_description	Streamripper started as a way to separate \
+	tracks via Shoutcasts title-streaming feature. This has   \
+	now been expanded into a much more generic feature, where \
+	part of the program only tries to hint at where one track \
+	starts and another ends, thus allowing a mp3 decoding     \
+	engine to scan for a silent mark, which is used to find   \
+	an exact track separation.
+
+homepage	http://streamripper.sourceforge.net/
+master_sites	${homepage}/files/ sourceforge:${name}
+checksums	md5 ac9caddc37395a0083d8e44a37955053 \
+		sha1 08dff7b4e48e16ad581e0b28fb77bdcddeeee0bb \
+		rmd160 d0d5d18fc7e5086bb768e6a51e566e16f0ced730
+
+depends_lib	port:glib2 \
+		port:libiconv \
+		port:libogg \
+		port:libvorbis
+
+configure.args	--with-ogg=${prefix} --with-vorbis=${prefix} \
+		--with-libiconv-prefix=${prefix} \
+		--with-included-argv \
+		--with-included-libmad \
+		--with-included-tre \
+		--mandir=${prefix}/share/man
+
+pre-destroot {
+	file attributes ${worksrcpath}/install-sh -permissions +rx
+}
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} CHANGES COPYING README THANKS \
+		${destroot}${prefix}/share/doc/${name}
+}
+

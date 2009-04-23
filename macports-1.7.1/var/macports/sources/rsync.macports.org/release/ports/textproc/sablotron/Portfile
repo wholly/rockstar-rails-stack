@@ -1,0 +1,50 @@
+# $Id: Portfile 43259 2008-12-07 20:48:07Z mcalhoun@macports.org $
+
+PortSystem          1.0
+
+name                sablotron
+version             1.0.3
+revision            1
+categories          textproc
+maintainers         nomaintainer
+homepage            http://www.gingerall.org/sablotron.html
+description         XSLT, DOM and XPath processor
+long_description    Sablotron is a fast, compact and portable XML toolkit \
+    implementing XSLT 1.0, DOM Level2 and XPath 1.0. Sablotron is an open \
+    project. The goal of this project is to create a \
+    lightweight, reliable and fast XML library processor conforming to the W3C \
+    specification, which is available for public and can be used as a base for \
+    multi-platform XML applications.
+
+platforms           darwin
+distname            Sablot-${version}
+distfiles	    Sablot-${version}.tar.gz
+worksrcdir          Sablot-${version}
+master_sites        http://download-1.gingerall.cz/download/sablot/
+checksums	    md5 72654c4b832e7562f8240ea675577f5e
+depends_lib         port:libiconv port:expat port:spidermonkey
+
+# Unfortunately, we have to set an internal configure script variable to stop
+# it auto-detecting whether or not to build the API documentation; no configure
+# switch is provided.
+configure.env       BUILD_APIDOCS=no
+configure.args      --mandir=${prefix}/share/man --enable-javascript
+configure.cppflags-append   -I${prefix}/include/js
+
+platform darwin 6   { depends_lib-append lib:libdl:dlcompat }
+				
+variant apidocs description {Install HTML documentation of Sablotron's API} {
+    depends_build-append    path:bin/perl:perl5 port:p5-xml-parser
+    configure.env-append    PERL_PROG=${prefix}/bin/perl
+    configure.env-delete    BUILD_APIDOCS=no
+    configure.env-append    BUILD_APIDOCS=yes
+}
+variant debugger description \
+    {Enable XSLT debugger features; user must accept GPL on all of Sablotron} {
+    # Strictly speaking, sablotron's debugger still works without readline, but
+    # it's worth having the features that readline provides (like command-line
+    # history) to keep users of the debugger sane :-)
+    depends_lib-append      port:ncurses port:readline
+    configure.args-append   --enable-debugger --with-readline
+    configure.env-append    SABLOT_GPL=1
+}

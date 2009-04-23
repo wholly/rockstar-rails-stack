@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::Story#assign_steps_to
+is_singleton: false
+name: assign_steps_to
+params: (assignee)
+visibility: public

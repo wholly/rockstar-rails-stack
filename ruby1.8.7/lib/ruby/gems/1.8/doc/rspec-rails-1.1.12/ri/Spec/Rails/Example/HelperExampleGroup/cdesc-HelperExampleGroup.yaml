@@ -1,0 +1,43 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output_buffer
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: helper
+- !ruby/object:RI::MethodSummary 
+  name: helper_name
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Helper Specs live in $RAILS_ROOT/spec/helpers/.
+- !ruby/struct:SM::Flow::P 
+  body: Helper Specs use Spec::Rails::Example::HelperExampleGroup, which allows you to include your Helper directly in the context and write specs directly against its methods.
+- !ruby/struct:SM::Flow::P 
+  body: HelperExampleGroup also includes the standard lot of ActionView::Helpers in case your helpers rely on any of those.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Example
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class ThingHelper\n    def number_of_things\n      Thing.count\n    end\n  end\n\n  describe &quot;ThingHelper example_group&quot; do\n    include ThingHelper\n    it &quot;should tell you the number of things&quot; do\n      Thing.should_receive(:count).and_return(37)\n      number_of_things.should == 37\n    end\n  end\n"
+constants: []
+
+full_name: Spec::Rails::Example::HelperExampleGroup
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: _assigns_hash_proxy
+- !ruby/object:RI::MethodSummary 
+  name: eval_erb
+- !ruby/object:RI::MethodSummary 
+  name: flash
+- !ruby/object:RI::MethodSummary 
+  name: helper
+- !ruby/object:RI::MethodSummary 
+  name: orig_assigns
+- !ruby/object:RI::MethodSummary 
+  name: protect_against_forgery?
+name: HelperExampleGroup
+superclass: FunctionalExampleGroup

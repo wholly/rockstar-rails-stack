@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 48920 2009-03-31 11:28:38Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                mp3fs
+version             0.13
+categories          fuse
+platforms           darwin
+
+maintainers         mail@uwe-arzt.de
+
+description         A flac to mp3 (read-only) filesystem for FUSE
+long_description    This is a file system for converting flac files \
+                    to mp3 files on the fly. This is useful, if you \
+                    archive your music in flac format, but some \
+                    program (i.e. iTunes) are not capable reading \
+                    flac, but mp3.
+
+homepage            http://mp3fs.sourceforge.net/
+
+master_sites        sourceforge:mp3fs
+checksums           ${distfiles} md5 fb9b5eb4fb6f69f35430ff7e93a84e0b \
+                                 sha1 b246bd747a32256cb8364b7ac0cc8b7a4e1d3f74
+
+depends_build       port:pkgconfig
+
+depends_lib         port:macfuse \
+                    port:flac \
+                    port:lame \
+                    port:libid3tag
+
+
+configure.post_args-append  "id3tag_CFLAGS=-I${prefix}/include id3tag_LIBS='-L${prefix}/lib /opt/local/lib/libid3tag.dylib'"
+
+patchfiles          patch-mp3fs.diff
+# override patch.pre_args since it defaults to -p0
+patch.pre_args      -R -p1

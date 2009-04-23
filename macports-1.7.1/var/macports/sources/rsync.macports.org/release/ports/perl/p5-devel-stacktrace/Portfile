@@ -1,0 +1,23 @@
+# $Id: Portfile 41178 2008-10-27 01:54:46Z narf_tm@macports.org $
+
+PortSystem                1.0
+PortGroup                 perl5 1.0
+
+perl5.setup               Devel-StackTrace 1.20
+epoch                     1
+maintainers               narf_tm openmaintainer
+description               Stack trace and stack trace frame objects
+long_description          The Devel::StackTrace module contains two classes, \
+                          Devel::StackTrace and Devel::StackTraceFrame. The \
+                          goal of this object is to encapsulate the \
+                          information that can found through using the \
+                          caller() function, as well as providing a simple \
+                          interface to this data.
+
+platforms                 darwin
+
+checksums                 md5 86beb2e26a674718264d6c513ca071ff \
+                          sha1 9184d0316254100a5f038c5c1ca5e8faeaa542b9 \
+                          rmd160 4edd38801281edc42b2c400c948bfca83c0f3ec7
+
+perl5.use_module_build

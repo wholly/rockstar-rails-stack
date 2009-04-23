@@ -1,0 +1,12 @@
+# $Id: Portfile 33850 2008-02-06 18:24:26Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		File-Type 0.22
+maintainers		dluke@geeklair.net
+description		This is a Perl extension for determining file types.
+long_description	${description}
+
+checksums		md5 4be3b0b7000b325c60351fcc8a04815d
+platforms		darwin

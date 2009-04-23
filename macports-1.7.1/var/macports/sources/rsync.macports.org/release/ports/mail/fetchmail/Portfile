@@ -1,0 +1,62 @@
+# $Id: Portfile 44336 2008-12-26 14:52:16Z pmq@macports.org $
+
+PortSystem 1.0
+
+name		fetchmail
+version		6.3.9
+categories	mail
+platforms	darwin
+maintainers	pmq
+
+description	Batch mail retrieval utility for IMAP, POP2, POP3, \
+		APOP, KPOP, ETRN, or ODMR
+long_description \
+    Fetchmail is a full-featured IMAP, POP2, POP3, \
+    APOP, KPOP, ETRN, ODMR client with easy \
+    configuration, daemon mode, forwarding via SMTP \
+    or local MDA, and superior reply handling.  It \
+    is used to handle intermittent email connections \
+    by acting as a coupling that seamlessly batch \
+    forwards fetched mail from your mail server to \
+    your local delivery system, allowing you to read \
+    your it with your favourite mail user agent. \
+    Fetchmail also includes useful spam filtering \
+    and multi-user functions.  \
+    A typical use of fetchmail is to connect to your \
+    ISP's POP3 server, downloading your mail into \
+    the INBOX on your local computer.  You may then \
+    read the mail, offline if you want, using Pine, \
+    mutt, or any standard mail user agent.   \
+
+homepage	http://fetchmail.berlios.de
+master_sites	http://download2.berlios.de/${name} \
+		http://download.berlios.de/${name}
+use_bzip2	yes
+
+checksums	sha1 2ed705ffe40afd6d085535cf2af06914507da36a \
+  		rmd160 5fcea0ae97ff64633a50e164270ab68435186fbc
+
+depends_lib	port:gettext
+
+configure.args	--mandir=${prefix}/share/man \
+		--with-libiconv-prefix=${prefix} \
+		--without-ssl --with-kerberos5 --with-gssapi
+post-destroot {
+    if { ! [variant_isset fetchmailconf] } {
+        system "find ${destroot}${prefix} -type f -iname '*fetchmailconf*' -delete"
+    }
+}
+
+variant ssl description "Support secure connections using OpenSSL" {
+    depends_lib-append		port:openssl
+    configure.args-delete	--without-ssl
+    configure.args-append	--with-ssl=${prefix}
+}
+
+variant fetchmailconf description "Install a graphical configurator" {
+    depends_lib-append		port:py-tkinter
+}
+
+variant ntlm description "Enable NTLM authentication" {
+    configure.args-append	--enable-NTLM
+}

@@ -1,0 +1,30 @@
+# $Id: Portfile 36105 2008-04-18 05:36:15Z fenner@macports.org $
+
+PortSystem 1.0
+
+name		libsmi
+version		0.4.7
+categories	net
+platforms	darwin
+maintainers	fenner@macports.org
+description	Library to Access SMI MIB Information
+long_description    The core of the libsmi distribution is a library \
+        that allows management applications to access SMI MIB module \
+        definitions. On top of this library, there are tools to check, \
+        analyze dump, convert, and compare MIB definitions. Finally, the \
+        distribution contains a steadily maintained and revised archive of \
+        all IETF and IANA maintained standard MIB and PIB modules. \
+        The library is internally divided into two layers. The upper layers \
+        represent the API to applications that make use of libsmi. \
+        Furthermore, the upper layer holds the MIB information in common \
+        internal data structures. The lower layer contains the drivers that \
+        implement the access to persistent MIB module repositories. \
+        Currently drivers for SMIv1/v2 MIB module files and for SPPI PIB \
+        module files exist. A driver for an early draft of SMIng is also \
+        present.
+homepage	http://www.ibr.cs.tu-bs.de/projects/libsmi/
+master_sites	ftp://ftp.ibr.cs.tu-bs.de/pub/local/libsmi/
+configure.args	--mandir=${prefix}/share/man
+checksums       md5     c50a61cdcc7709d8f215dce79e64d606 \
+                sha1    ff431b51036d37506d3beead40a3bd8a0afcb48e \
+                rmd160  6d4a40be8c202c5cc3d207e414c5a7ceb973dafa

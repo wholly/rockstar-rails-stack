@@ -1,0 +1,17 @@
+# $Id: Portfile 33853 2008-02-06 18:25:22Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		HTML-Format 2.04
+
+maintainers		dluke@geeklair.net
+description		Perl modules that format HTML as plaintext, PostScript or RTF.
+
+long_description	${description}
+
+checksums		md5 2d287392b77c959f06397371116c2d7e
+platforms		darwin
+
+depends_lib-append	port:p5-html-tree \
+			port:p5-font-afm

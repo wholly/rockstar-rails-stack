@@ -1,0 +1,17 @@
+# $Id: Portfile 33854 2008-02-06 18:25:47Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		HTML-Tree 3.23
+epoch			1
+
+maintainers		dluke@geeklair.net
+description		Perl parser that can build HTML syntax trees.
+long_description	$description
+
+checksums		md5 6352f50be402301f79b580dd235d7762
+platforms		darwin
+
+depends_lib-append	port:p5-html-parser \
+			port:p5-html-tagset

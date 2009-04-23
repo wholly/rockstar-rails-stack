@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets whether or not external subsets should be loaded
+full_name: Nokogiri::XML::load_external_subsets=
+is_singleton: true
+name: load_external_subsets=
+params: (value = true)
+visibility: public

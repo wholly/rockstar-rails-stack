@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Rails::Example::HelperExampleGroup#orig_assigns
+is_singleton: false
+name: orig_assigns
+params: ()
+visibility: public

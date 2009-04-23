@@ -1,0 +1,22 @@
+# $Id: Portfile 33969 2008-02-08 20:16:13Z narf_tm@macports.org $
+
+PortSystem                1.0
+PortGroup                 perl5 1.0
+
+perl5.setup               Apache-Session-Wrapper 0.33
+maintainers               narf_tm openmaintainer
+description               A simple wrapper around Apache::Session
+long_description          This module is a simple wrapper around \
+                          Apache::Session which provides some methods to \
+                          simplify getting and setting the session id.
+
+platforms                 darwin
+
+checksums                 md5 ae6e544ef6ca7235bfda22ab6f99c29c
+
+depends_lib-append        port:p5-apache-session \
+                          port:p5-exception-class \
+                          port:p5-params-validate \
+                          port:p5-class-container
+
+perl5.use_module_build

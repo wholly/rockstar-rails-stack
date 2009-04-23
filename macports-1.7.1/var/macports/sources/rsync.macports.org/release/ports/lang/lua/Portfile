@@ -1,0 +1,68 @@
+# $Id: Portfile 48849 2009-03-30 04:25:39Z mcalhoun@macports.org $
+
+PortSystem              1.0
+
+name                    lua
+version                 5.1.4
+categories              lang
+platforms               darwin
+maintainers             pmq openmaintainer
+
+description             powerful, lightweight programming language
+long_description        Lua is a powerful, light-weight programming language \
+			designed for extending applications. Lua is also frequently \
+			used as a general-purpose, standalone language.
+
+homepage                http://www.lua.org
+master_sites		${homepage}/ftp/
+checksums               sha1 2b11c8e60306efb7f0734b747588f57995493db7 \
+			rmd160 c867c8364295d3e4fb4e4d8ebb27fa2b2312cdef
+
+depends_lib		port:readline
+build.target		macosx
+
+test.run		yes
+test.env		DYLD_LIBRARY_PATH=./lib
+
+post-patch {
+	reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/Makefile
+	reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/src/luaconf.h
+	reinplace "s|/man/man1|/share/man/man1|g" ${worksrcpath}/Makefile
+
+	# for the pkgconfig file
+	reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/etc/lua.pc
+}
+
+configure {
+	reinplace -E "/^MYLDFLAGS=/s|\$| ${configure.ldflags}|" ${worksrcpath}/src/Makefile
+	reinplace -E "/^CFLAGS=/s|\$| ${configure.cflags} ${configure.cppflags}|" ${worksrcpath}/src/Makefile
+	reinplace "s|CC= .*\$|CC= ${configure.cc}|" ${worksrcpath}/src/Makefile
+}
+
+use_parallel_build  yes
+
+destroot.target	install INSTALL_TOP=${destroot}${prefix}
+post-destroot {
+	xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 0644 ${worksrcpath}/README ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 0644 ${worksrcpath}/COPYRIGHT ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 0644 ${worksrcpath}/HISTORY ${destroot}${prefix}/share/doc/${name}
+	xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}/html
+	foreach html [glob ${worksrcpath}/doc/*.html ${worksrcpath}/doc/*.gif] {
+		xinstall -m 0644 ${html} ${destroot}${prefix}/share/doc/${name}/html
+	}
+	xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}/test
+	foreach test [glob ${worksrcpath}/test/README ${worksrcpath}/test/*.lua] {
+		xinstall -m 0644 ${test} ${destroot}${prefix}/share/doc/${name}/test
+	}
+	xinstall -d -m 0755 ${destroot}${prefix}/lib/pkgconfig
+	xinstall -m 0644 ${worksrcpath}/etc/lua.pc ${destroot}${prefix}/lib/pkgconfig/lua.pc
+}
+
+platform darwin 7 {
+	depends_lib-delete port:readline
+	patchfiles-append  patch-readline_darwin7.diff
+}
+
+livecheck.check regex
+livecheck.regex {Lua (\d+(?:\.\d+)*)}

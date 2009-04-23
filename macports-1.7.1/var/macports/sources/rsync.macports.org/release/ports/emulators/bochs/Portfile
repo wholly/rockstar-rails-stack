@@ -1,0 +1,74 @@
+# $Id: Portfile 42041 2008-11-13 20:14:24Z markd@macports.org $
+
+PortSystem 1.0
+
+name		bochs
+version		2.3.7
+categories	emulators
+maintainers	nomaintainer
+description	cross platform ia-32 emulator
+long_description	Bochs is a highly portable open source IA-32 (x86) \
+	PC emulator written in C++, that runs on most popular platforms. \
+	It emulates the Intel x86 CPU, common I/O devices, and a custom BIOS.
+
+platforms	darwin
+homepage	http://bochs.sourceforge.net/
+master_sites     sourceforge
+checksums	md5 a2e5f922505bf16cabd36bb9d571a2c4
+
+patchfiles      patch-.bochsrc.diff
+
+depends_run     port:wget
+
+configure.args	--exec-prefix=${prefix} \
+		--bindir=${prefix}/bin \
+		--mandir=${prefix}/share/man \
+		--enable-all-optimizations \
+		--enable-sb16=osx \
+		--enable-vbe \
+		--enable-cdrom
+
+variant smp description {Enable symmetric multi-processor support} {
+        configure.args-append --enable-smp --enable-cpu-level=6
+}
+
+pre-destroot {
+        xinstall -m 755 -d ${destroot}${prefix}/bin
+        xinstall -m 755 -d ${destroot}${prefix}/share/bochs
+	xinstall -m 755 -d ${destroot}/Applications/MacPorts
+}
+
+post-destroot {
+	file copy ${worksrcpath}/bochs.app ${destroot}${prefix}/share/bochs
+	system "ln -s ${prefix}/share/bochs/bochs.app ${destroot}/Applications/MacPorts/bochs.app"
+	xinstall -m 755 ${worksrcpath}/bochs ${destroot}${prefix}/bin
+	xinstall -m 755 ${worksrcpath}/bximage ${destroot}${prefix}/bin
+	xinstall -m 755 ${worksrcpath}/bxcommit ${destroot}${prefix}/bin
+        reinplace "s|\$BXSHARE/|${prefix}/share/bochs/|g" \
+                ${destroot}${prefix}/share/bochs/bochsrc-sample.txt
+}
+
+post-activate {
+	ui_msg "\n
+
+	**** To prepare bochs for use ****
+
+1) Rename file bochsrc-sample.txt to bochrc.txt for use.
+   -cd ${prefix}/share/bochs
+   -sudo cp bochsrc-sample.txt bochrc.txt
+
+2) Create a disk image for the emulator.
+   -cd ${prefix}/share/bochs
+   -sudo bximage (prompts will guide you)
+   -sudo chmod 777 <diskimg-name>
+
+3) Remove the current 'ata0-master:' statement in ${prefix}/share/bochs/bochsrc.txt
+   and replace it with the 'ata0-master:' string displayed at the end of the bximage
+   process.
+
+4) Format the disk image using FreeDOS (http://bochs.sourceforge.net/diskimages.html)
+   according to the bochs documentation. (http://bochs.sourceforge.net/)
+
+5) Now start bochs using the /Applications/MacPorts/bochs.app program;
+   you may also use the bochs command line utility. \n"
+}

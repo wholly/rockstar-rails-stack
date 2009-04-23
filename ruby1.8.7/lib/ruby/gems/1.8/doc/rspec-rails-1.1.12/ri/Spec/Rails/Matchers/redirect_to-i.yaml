@@ -1,0 +1,24 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Passes if the response is a redirect to the url, action or controller/action. Useful in controller specs (integration or isolation mode).
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  response.should redirect_to(&quot;path/to/action&quot;)\n  response.should redirect_to(&quot;http://test.host/path/to/action&quot;)\n  response.should redirect_to(:action =&gt; 'list')\n"
+full_name: Spec::Rails::Matchers#redirect_to
+is_singleton: false
+name: redirect_to
+params: |
+  response.should redirect_to(url)
+  response.should redirect_to(:action => action_name)
+  response.should redirect_to(:controller => controller_name, :action => action_name)
+  response.should_not redirect_to(url)
+  response.should_not redirect_to(:action => action_name)
+  response.should_not redirect_to(:controller => controller_name, :action => action_name)
+
+visibility: public

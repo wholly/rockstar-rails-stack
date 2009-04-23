@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Runner::Formatter::NestedTextFormatter#described_example_group_chain
+is_singleton: false
+name: described_example_group_chain
+params: ()
+visibility: public

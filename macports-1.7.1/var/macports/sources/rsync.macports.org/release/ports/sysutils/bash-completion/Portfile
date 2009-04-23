@@ -1,0 +1,50 @@
+# $Id: Portfile 41114 2008-10-23 22:04:47Z raimue@macports.org $
+
+PortSystem      1.0
+
+name            bash-completion
+version         20060301
+revision        1
+categories      sysutils
+platforms       darwin
+maintainers     raimue
+description     Programmable bash{2,3} completions.
+long_description \
+    Programmable completion library for bash
+
+homepage        http://www.caliban.org/bash/index.shtml
+master_sites    http://www.caliban.org/files/bash/
+checksums       md5 ed95a89f57357a42b8e4eb95487bf9d0 \
+                sha1 19521f0fde4d9d06401ccd26ed4ec33d7d3aa23d
+
+use_bzip2       yes
+
+use_configure   no
+build           {}
+
+worksrcdir      [strsed $name "s/-/_/"]
+
+post-patch {
+    reinplace "s:/etc/bash_completion:${prefix}/etc/bash_completion:g" \
+        ${worksrcpath}/bash_completion
+}
+
+destroot {
+    xinstall -d ${destroot}${prefix}/etc/bash_completion.d
+    xinstall -m 755 ${worksrcpath}/bash_completion ${destroot}${prefix}/etc/
+    xinstall -m 644 ${filespath}/port.cmd ${destroot}${prefix}/etc/bash_completion.d/port
+}
+destroot.keepdirs   ${destroot}${prefix}/etc/
+
+post-install {
+    ui_msg  "To use bash_completion, add the following lines at the end of your .bash_profile:"
+    ui_msg  ""
+    ui_msg  "    if \[ -f ${prefix}/etc/bash_completion ]; then"
+    ui_msg  "        . ${prefix}/etc/bash_completion"
+    ui_msg  "    fi"
+    ui_msg  ""
+}
+
+livecheck.check     regex
+livecheck.url       ${master_sites}
+livecheck.regex     ${name}-(\[0-9\]+)${extract.suffix}

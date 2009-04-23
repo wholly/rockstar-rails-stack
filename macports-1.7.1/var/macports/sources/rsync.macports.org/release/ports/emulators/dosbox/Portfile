@@ -1,0 +1,41 @@
+# $Id: Portfile 35055 2008-03-16 04:47:27Z eridius@macports.org $
+
+PortSystem 1.0
+
+name			dosbox
+version			0.72
+categories		emulators
+platforms		darwin
+maintainers		nomaintainer
+description		DOS-emulator featuring 386 realmode, filesystem, XMS, EMS
+long_description	DOSBox is a DOS-emulator that uses the SDL-library. \
+				It also emulates CPU:286/386 realmode, directory \
+				file system/XMS/EMS, a SoundBlaster card for excellent \
+				sound compatibility with older games.
+
+homepage		http://dosbox.sourceforge.net/
+master_sites	sourceforge
+patchfiles		patch-nullmodem.cpp
+checksums		sha1 c49fba00187cd871ffdcbcd87ab82a23ea2d5e7d
+
+depends_lib		port:libsdl port:libsdl_net port:libsdl_sound \
+				port:libpng port:zlib
+
+configure.args	--mandir=${prefix}/share/man --disable-sdltest \
+			--disable-alsatest
+configure.cxxflags-append	"-O2 -mdynamic-no-pic"
+
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -W ${worksrcpath} README NEWS AUTHORS COPYING ChangeLog INSTALL \
+		THANKS ${destroot}${prefix}/share/doc/${name}
+}
+
+platform darwin 9 {
+	patchfiles-append patch-midi_coreaudio.h
+}
+
+platform powerpc {
+	configure.args-append --disable-dynamic-x86
+}
+

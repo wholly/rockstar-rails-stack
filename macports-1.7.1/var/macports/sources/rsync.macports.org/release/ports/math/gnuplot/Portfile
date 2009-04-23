@@ -1,0 +1,89 @@
+# $Id: Portfile 49746 2009-04-17 06:25:44Z blb@macports.org $
+
+PortSystem 1.0
+
+name			gnuplot
+version			4.2.5
+categories		math science
+maintainers		pguyot@kallisys.net openmaintainer
+description		A command-driven interactive function plotting program
+long_description	Gnuplot is a command-driven interactive function \
+					plotting program. Plots any number of functions, \
+					built up of C operators, C library functions, and \
+					some things C doesn't have like **, sgn(), etc. \
+					Also support for plotting data files, to compare \
+					actual data to theoretical curves.
+platforms		darwin
+homepage		http://gnuplot.sourceforge.net/
+master_sites	sourceforge
+distfiles		${distname}.tar.gz \
+				${name}.pdf
+extract.only	${distname}.tar.gz
+checksums		${distname}.tar.gz \
+					md5     85d042f8efd7aae3d9cbfd85b14d06d2 \
+					sha1    e7ad6afc1ca7b39a512a18f2dc6f2bcda9bf9128 \
+					rmd160  79ab74627d66c2eff6d69276c1556acca89ec6dd \
+				${name}.pdf \
+					md5 0691424fd274b65eb8a8ab0dc52dbabe \
+					sha1 8926d4cb9a1e2f71f95f69fad65473889f08638f \
+					rmd160 6d92f3473b0896598436e6c993e56e5167b94af5
+
+depends_lib		port:expat \
+				port:fontconfig \
+				port:gd2 \
+				port:jpeg \
+				port:pdflib \
+				port:libiconv \
+				port:libpng \
+				port:ncurses \
+				port:readline \
+				port:xpm \
+				port:zlib
+
+patchfiles		patch-share-LaTeX-Makefile.in
+
+platform darwin {
+	depends_lib-append		port:aquaterm
+	configure.cflags-append	'-DDEFAULTTERM=\\"aqua\\"'
+}
+
+platform darwin 9 { 
+	# http://developer.apple.com/qa/qa2007/qa1567.html 
+	configure.ldflags-append -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib 
+}
+
+configure.cppflags-append	"-no-cpp-precomp"
+configure.args	--with-readline=${prefix} \
+                --with-gd=${prefix} \
+                --with-pdf=${prefix} \
+                --with-png=${prefix} \
+                --with-x \
+				--enable-datastrings --enable-histograms \
+				--infodir='\${prefix}/share/info' \
+				--mandir='\${prefix}/share/man' \
+				--disable-wxwidgets
+
+variant no_x11 {
+	depends_lib-delete		port:xpm
+	configure.args-delete	--with-x
+	configure.args-append	--without-x
+}
+
+variant wxwidgets {
+	depends_lib-append		port:wxWidgets
+	configure.args-delete	--disable-wxwidgets
+	configure.args-append	--with-wx-config=${prefix}/bin/wx-config
+}
+
+variant tutorial description "Build the tutorial (requires a tex install)" {
+	depends_lib-append		bin:tex:texlive_base
+	configure.args-delete	--without-tutorial
+	configure.args-append	--with-tutorial
+}
+
+destroot.destdir	prefix=${destroot}${prefix}
+post-destroot {
+	xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 0644 ${distpath}/gnuplot.pdf \
+		${destroot}${prefix}/share/doc/${name}/
+}

@@ -1,0 +1,39 @@
+# $Id: Portfile 26098 2007-06-12 12:42:51Z takanori@macports.org $
+
+PortSystem      1.0
+PortGroup       perl5 1.0
+perl5.setup     MeCab 0.96
+
+platforms       darwin
+maintainers     rsky0711@gmail.com
+description     a Perl module for MeCab
+long_description ${description}
+
+homepage        http://mecab.sourceforge.net/
+master_sites    sourceforge:mecab
+distname        mecab-perl-${version}
+checksums       md5    ad3ab1ecd917cd765ec54009fcc62c0c \
+                sha1   79eec3056690343a6286106cb3aedd7770208c43 \
+                rmd160 2c614b1d78afd1cf783a8ad00af6e549d316f4b6
+
+categories-append   textproc japanese
+depends_lib-append  port:mecab
+
+platform darwin 7 {
+    build.env       MACOSX_DEPLOYMENT_TARGET=10.3
+}
+
+platform darwin 8 {
+    build.env       MACOSX_DEPLOYMENT_TARGET=10.4
+}
+
+post-extract {
+    reinplace s|\#!/usr/bin/perl|\#!${perl5.bin}|g \
+        ${worksrcpath}/test.pl
+}
+
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}/examples
+    xinstall -m 644 ${worksrcpath}/test.pl \
+        ${destroot}${prefix}/share/doc/${name}/examples
+}

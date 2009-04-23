@@ -1,0 +1,34 @@
+# $Id: Portfile 46666 2009-02-10 00:23:15Z simon@macports.org $
+
+PortSystem 1.0
+
+name             tor-devel
+version          0.2.1.12-alpha
+categories       security
+maintainers      boeyms openmaintainer
+description      anonymizing overlay network for TCP
+long_description \
+	Tor provides a distributed network of servers \
+	(onion routers). Users bounce their TCP streams \
+	(web traffic, FTP, SSH, etc.) around the \
+	routers. This makes it hard for recipients, \
+	observers, and even the onion routers \
+	themselves to track the source of the stream.
+homepage         http://www.torproject.org/
+platforms        darwin
+master_sites     ${homepage}dist/
+distname         tor-${version}
+
+checksums        md5    1f8d8929b2bf1579220ac7934309a5b7 \
+                 sha1   57424ca2416aafee25e5cd6fa4037f440f2a684d \
+                 rmd160 b508351dd4a24c065e4b105b112b6dd190b8a7ef
+depends_lib      port:libevent port:openssl port:zlib
+configure.args   --with-libevent-dir=${prefix} \
+                 --with-openssl-dir=${prefix} \
+                 --with-zlib-dir=${prefix}
+
+test.run         yes
+test.target      check
+livecheck.check  regex
+livecheck.url    ${master_sites}?C=M\;O=D
+livecheck.regex  [suffix tor-(\\d+\\.\\d+\\.\\d+\\.\\d+(-alpha|-beta|-rc)?)]

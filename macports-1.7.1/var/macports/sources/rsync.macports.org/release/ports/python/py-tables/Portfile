@@ -1,0 +1,41 @@
+# $Id: Portfile 31708 2007-12-03 21:03:25Z mww@macports.org $
+
+PortSystem 1.0
+PortGroup python24 1.0
+
+name			py-tables
+version			2.0.2
+categories		python science
+platforms		darwin
+maintainers		nomaintainer
+description		Python package for users to organize scientific data tables
+long_description	The goal of PyTables is to enable the end user to \
+				manipulate easily scientific data tables, numarray \
+				objects and Numerical Python objects in a persistent, \
+				hierarchical structure. The foundation of the \
+				underlying hierachical data organization is the \
+				excellent HDF5 library.
+
+homepage		http://www.pytables.org/
+master_sites		${homepage}/download/stable/
+distname		pytables-${version}
+checksums		md5 9a11b0a453b6dde9ccfeb77dfa497625
+
+depends_lib-append	port:hdf5 port:py-numpy port:bzip2
+
+build.target	build_ext
+build.args		--inplace \
+				--hdf5=${prefix}
+
+test.run		no
+test.cmd		${python.bin} test/test_all.py
+test.env		PYTHONPATH=.
+test.target
+
+destroot.args	--hdf5=${prefix}
+
+post-destroot	{
+	xinstall -m 644 -W ${worksrcpath} ANNOUNCE.txt LICENSE.txt README.txt \
+		MIGRATING_TO_2.x.txt RELEASE_NOTES.txt THANKS TODO.txt \
+		${destroot}${prefix}/share/doc/${name}
+}

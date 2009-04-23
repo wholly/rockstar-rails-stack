@@ -1,0 +1,31 @@
+# $Id: Portfile 41236 2008-10-28 21:24:09Z blb@macports.org $
+
+PortSystem 1.0
+
+name			sdcc
+version			2.8.0
+revision		1
+categories		lang
+platforms		darwin
+maintainers		nomaintainer
+description		ANSI C compiler targeting Intel 8051, Maxim 80DS390, Zilog Z80
+long_description	SDCC is a freeware, retargettable, optimizing ANSI C \
+				compiler that targets the Intel 8051, Maxim 80DS390, and Zilog \
+				Z80 based MCUs. Work is in progress on supporting Motorola \
+				68HC08 as well as Microchip PIC16 and PIC18 series.
+
+homepage		http://sdcc.sourceforge.net/
+master_sites		sourceforge
+checksums		md5 1b9c2e581b92d5e3f13bca37c5784080
+use_bzip2		yes
+distfiles		${name}-src-${version}${extract.suffix}
+
+worksrcdir		${name}
+
+# Setting CPP explicitly is bad, because 'cpp' and 'gcc -E' are not the same.
+configure.cpp		{}
+
+build.type		gnu
+
+destroot.destdir	prefix=${destroot}${prefix} \
+					docdir=${destroot}${prefix}/share/doc/${name}

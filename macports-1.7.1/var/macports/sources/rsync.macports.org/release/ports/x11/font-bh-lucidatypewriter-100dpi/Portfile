@@ -1,0 +1,16 @@
+# $Id: Portfile 47101 2009-02-22 03:12:10Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-bh-lucidatypewriter-100dpi 1.0.0 100dpi
+revision            1
+maintainers         blb openmaintainer
+description         X.org Bigelow & Holmes Lucida Typewriter 100 DPI font
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     c44d3f730564da465993e9292a33c235 \
+                    sha1    0add8e02df2870aef93c742e0402dd7a9e4c76ae \
+                    rmd160  a396ff6fa3d59ca0c8ec4b0a2ecd9b326fdcebfa
+

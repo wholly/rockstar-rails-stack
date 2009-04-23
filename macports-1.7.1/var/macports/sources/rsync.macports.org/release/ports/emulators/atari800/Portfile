@@ -1,0 +1,88 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4
+# $Id: Portfile 48920 2009-03-31 11:28:38Z ryandesign@macports.org $
+# vim: set fileencoding=utf-8 tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab filetype=tcl :
+
+PortSystem 1.0
+
+name						atari800
+version						2.0.3
+revision					2
+platforms					darwin
+categories					emulators
+maintainers					krischik
+description					Atari 800 emulator
+long_description			atari800 is an emulator of the classic Atari 800 8bit computer.
+
+homepage					http://atari800.sourceforge.net/
+master_sites				sourceforge
+
+set prog					atari800-${version}.tar.gz
+set rom						xf25.zip
+
+distfiles					${prog} \
+							${rom}
+
+extract.only				${prog}
+
+checksums					${prog} sha1 e6cfcd22b79874239bd664a476ff287c2d708924   \
+							${rom}  sha1 e65923fd3a4845c1c72d1677db0fda969187eb42
+
+depends_lib					port:libsdl								\
+							port:libpng								\
+							port:libsdl_image						\
+							port:libsdl_sound
+
+configure.args				--target="sdl"							\
+							--mandir='\${prefix}/share/man'			\
+							--datadir='\${prefix}/share/atari800'   \
+							--sysconfdir='\${prefix}/etc/${name}'
+configure.cxxflags-append   "-I${prefix}/include"
+configure.env-append		CFLAGS="-O2 -I${prefix}/include -I${prefix}/include/SDL -D_GNU_SOURCE=1 -D_THREAD_SAFE"
+
+worksrcdir					${name}-${version}/src
+
+use_parallel_build			yes
+build.args					--jobs=${build.jobs}
+
+post-extract {
+    system "unzip -q ${distpath}/${rom} -d ${workpath}/xf25"
+}
+
+post-destroot {
+    xinstall -m 775 -d ${destroot}${prefix}/share/atari800
+
+    xinstall -m 444							\
+		-W ${workpath}/xf25					\
+		ATARIBAS.ROM						\
+		ATARIOSB.ROM						\
+		ATARIXL.ROM							\
+		DEMOS1.XFD							\
+		DEMOS2.XFD							\
+		DOS25.XFD							\
+		MYDOS45D.ATR						\
+		${destroot}${prefix}/share/atari800
+}
+platform macosx {
+    post-destroot {
+	xinstall -m 775 -d ${destroot}${applications_dir}
+	xinstall -m 755 -d ${destroot}${applications_dir}/Atari320XE.app
+	xinstall -m 755 -d ${destroot}${applications_dir}/Atari320XE.app/Contents
+	xinstall -m 755 -d ${destroot}${applications_dir}/Atari320XE.app/Contents/MacOS
+	xinstall -m 755 -d ${destroot}${applications_dir}/Atari320XE.app/Contents/Resources
+		
+	xinstall -m 644 -W ${filespath}														\
+		Atari320XE.app/Contents/Info.plist												\
+		${destroot}${applications_dir}/Atari320XE.app/Contents/Info.plist
+	xinstall -m 644 -W ${filespath}														\
+		Atari320XE.app/Contents/Resources/Atari320XE.icns								\
+		${destroot}${applications_dir}/Atari320XE.app/Contents/Resources/Atari320XE.icns
+	xinstall -m 755 -W ${filespath}														\
+		Atari320XE.app/Contents/MacOS/Atari320XE.command								\
+		${destroot}${applications_dir}/Atari320XE.app/Contents/MacOS/Atari320XE.command
+
+	reinplace																			\
+		s|@PREFIX@|${prefix}|g															\
+		${destroot}${applications_dir}/Atari320XE.app/Contents/MacOS/Atari320XE.command
+    }
+}
+

@@ -1,0 +1,58 @@
+# $Id: Portfile 48911 2009-03-31 10:02:34Z ryandesign@macports.org $
+
+PortSystem      1.0
+
+name            opensync
+version         0.22
+revision        2
+categories      devel
+maintainers     nomaintainer
+description     Synchronization framework
+long_description \
+                OpenSync is a synchronization framework that is platform and \
+                distribution independent.  It consists of a powerful sync-engine and \
+                several plugins that can be used to connect to devices. \
+                \
+                OpenSync is very flexible and capable of synchronizing any type of \
+                data, including contacts, calendar, tasks, notes and files.
+platforms       darwin
+homepage        http://www.opensync.org/
+master_sites    ${homepage}download/releases/${version}/
+use_bzip2       yes
+distname        lib${name}-${version}
+patchfiles      patch-configure.diff
+checksums       md5 f563ce2543312937a9afb4f8445ef932 \
+                sha1 47860a8c6621aa89fbff2af2517787747af7cc30 \
+                rmd160 a1e9715d037a7c474b80d609e6c96a24cbb6692f
+
+depends_build   path:bin/pkg-config:pkgconfig
+depends_lib     port:gettext \
+                path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:libiconv \
+                port:libxml2 \
+                port:py25-gobject \
+                port:py25-numeric \
+                port:python25 \
+                port:sqlite3 \
+                port:swig \
+                port:zlib
+
+post-patch {
+    fs-traverse f ${worksrcpath} {
+        if [string match "*/Makefile.in" ${f}] {
+            reinplace "s|-Werror||" ${f}
+        }
+    }
+}
+
+configure.env   PYTHON=${prefix}/bin/python2.5
+configure.args  --disable-dependency-tracking --enable-python=2.5 --libexecdir=${prefix}/sbin
+
+build.target
+
+post-destroot {
+    delete ${destroot}${prefix}/lib/python2.5/site-packages/opensync.pyc
+
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README TODO ${destroot}${prefix}/share/doc/${name}
+}

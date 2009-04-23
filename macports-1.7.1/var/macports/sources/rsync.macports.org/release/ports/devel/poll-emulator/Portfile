@@ -1,0 +1,21 @@
+# $Id: Portfile 32855 2008-01-14 06:08:03Z ryandesign@macports.org $
+
+PortSystem 1.0
+name		poll-emulator
+version		1.4
+revision	1
+categories	devel
+maintainers	nomaintainer
+description	Library to provide poll(2) functionality
+homepage	http://www.clapper.org/software/poll/
+platforms	darwin freebsd
+master_sites	http://www.clapper.org/software/poll/
+checksums	md5 b00a85c5c46873dc1c1078cdd3c101f3
+patchfiles	patch-Makefile.diff
+configure	{}
+build.pre_args	PREFIX=${prefix}
+
+destroot	{ system "cd ${worksrcpath} && make PREFIX=${destroot}${prefix} install" }
+
+long_description This package implements the System V poll(2) system call for \
+		Unix-like systems that do not support poll.

@@ -1,0 +1,14 @@
+# $Id: Portfile 20290 2006-11-01 17:40:57Z blair@macports.org $
+PortSystem        1.0
+name              uisp
+version           20050207
+checksums	  md5 b1e499d5a1011489635c1a0e482b1627
+categories        devel
+maintainers       evgeni_dobrev@developer.bg
+description       AVR In-System Programmer
+long_description  UISP is a tool for AVR (and AT89S) microcontrollers \
+		  which can interface to many hardware in-system programmers.
+homepage          http://www.nongnu.org/uisp/
+master_sites      http://savannah.nongnu.org/download/uisp/
+
+configure.args	--mandir=${prefix}/share/man

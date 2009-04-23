@@ -1,0 +1,59 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 48935 2009-03-31 14:30:14Z devans@macports.org $
+
+PortSystem      1.0
+
+name            py25-gobject
+platforms       darwin
+set my_name     pygobject
+version         2.16.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+categories      python gnome
+maintainers     nomaintainer
+description     Python bindings for GObject.
+
+long_description \
+    PyGObject provides a convenient wrapper for the GObject+ library \
+    for use in Python programs, and takes care of many of the boring details \
+    such as managing memory and type casting. \
+    When combined with PyGTK, PyORBit and gnome-python, \
+    it can be used to write full featured Gnome applications.
+
+homepage        http://www.pygtk.org/
+master_sites    gnome:sources/${my_name}/${branch}/
+distname        ${my_name}-${version}
+use_bzip2       yes
+
+checksums       md5     8e26f2572e6b72dbd2591677055f8d30 \
+                sha1    12ce140438e7ff7e1a26fe4bba9a26b49f80ec0d \
+                rmd160  37f4075af9c06aba4fca47e2580c5408dbc28845
+
+depends_build   port:pkgconfig
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:libxslt \
+                port:python25
+
+configure.args  --disable-glibtest
+
+configure.python    ${prefix}/bin/python2.5
+
+platform darwin 9 {
+    post-patch {
+        reinplace "s| -export-symbols-regex.*||g" ${worksrcpath}/gobject/Makefile.in
+    }
+}
+
+test.run        yes
+test.env        PYTHONPATH=[glob -nocomplain ${worksrcpath}/build/lib*]
+test.target     check
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}-${version}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README \
+        ${destroot}${docdir}
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${my_name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

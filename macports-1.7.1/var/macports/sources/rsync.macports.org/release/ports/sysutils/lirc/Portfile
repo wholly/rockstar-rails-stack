@@ -1,0 +1,60 @@
+# $Id: Portfile 36536 2008-05-05 15:56:43Z ecronin@macports.org $
+
+PortSystem 1.0
+
+name            lirc
+version         0.8.3
+revision        1
+categories      sysutils net
+maintainers     ecronin
+platforms       darwin
+description     Linux Infrared Remote Control
+long_description \
+    LIRC is a package that allows you to decode and send infra-red \
+    signals of many (but not all) commonly used remote controls. \
+    NOTE: This port does not support any IR devices directly.  You \
+    must connect to a remote lircd (--connect=example.org:8765) or \
+    listen for UDP packets (--driver=udp --device=<portnum>) for \
+    lirc to be of any use locally.
+
+homepage        http://www.lirc.org
+master_sites    sourceforge
+use_bzip2       yes
+checksums       md5 8e78eeded7b31e5ad02e328970437c0f \
+                sha1 4b5aec19fa9ee15bafaeb1f87c154a0d4e045dcc \
+                rmd160 8948efc3e9dc34426ea32a3c63da63c0efa7dce2
+livecheck.distname  LIRC
+
+configure.args  --with-driver=udp --with-devdir=${prefix}/var/run \
+                --sysconfdir=${prefix}/etc --localstatedir=${prefix}/var \
+                --mandir=${prefix}/share/man
+
+post-destroot {
+    xinstall -m 644 ${worksrcpath}/contrib/lircd.conf \
+        ${destroot}${prefix}/etc/lircd.conf.sample
+    xinstall -m 644 ${worksrcpath}/contrib/lircmd.conf \
+        ${destroot}${prefix}/etc/lircmd.conf.sample
+    xinstall -m 644 ${worksrcpath}/contrib/lircrc \
+        ${destroot}${prefix}/etc/lircrc.sample
+    xinstall -m 755 -d ${destroot}${prefix}/var/log
+    destroot.keepdirs ${destroot}${prefix}/var/log
+}
+
+post-activate {
+    ui_msg "Please edit:"
+    ui_msg "  '${prefix}/etc/LaunchDaemons/org.macports.${name}/${name}.wrapper'"
+    ui_msg "and specify a valid driver or remote lircd to connect to."
+    ui_msg "Any clients of lirc must be able to read and write to:"
+    ui_msg "${prefix}/var/run/lircd"
+}
+
+startupitem.create  yes
+startupitem.start   \
+    "#device=\"--connect=example.org:port\"  # remote lircd" \
+    "#device=\"--driver=udp --device=port\"  # UDP listener" \
+    "${prefix}/sbin/lircd --permission=0666 \$\{device\}" \
+    "\[ -r ${prefix}/etc/lircmd.conf \] && \\" \
+    "\t${prefix}/sbin/lircmd"
+startupitem.stop    \
+    "killall -TERM lircd" \
+    "killall -TERM lircmd"

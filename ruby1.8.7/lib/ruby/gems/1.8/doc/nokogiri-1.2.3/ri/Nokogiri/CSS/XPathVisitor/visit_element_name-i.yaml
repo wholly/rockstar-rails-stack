@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::CSS::XPathVisitor#visit_element_name
+is_singleton: false
+name: visit_element_name
+params: (node)
+visibility: public

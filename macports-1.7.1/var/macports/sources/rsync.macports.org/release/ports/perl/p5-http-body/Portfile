@@ -1,0 +1,21 @@
+# $Id: Portfile 43440 2008-12-10 22:43:08Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           HTTP-Body 1.05
+maintainers           narf_tm openmaintainer
+description           HTTP Body Parser
+long_description      HTTP::Body parses chunks of HTTP POST data and \
+                      supports application/octet-stream, \
+                      application/x-www-form-urlencoded, \
+                      and multipart/form-data.
+
+platforms             darwin
+
+checksums             md5 1379184350749d108de4b0f47610a2b7 \
+                      sha1 aa73e0e45b6f4e44d14077561e15b546547d5cf1 \
+                      rmd160 694fe6b422c2c2d3903704c531a042689c1398a6
+
+depends_lib-append    port:p5-libwww-perl \
+                      port:p5-yaml

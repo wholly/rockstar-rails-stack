@@ -1,0 +1,52 @@
+# $Id: Portfile 43790 2008-12-15 04:36:31Z jeremyhu@macports.org $
+
+PortSystem 1.0
+name			cdparanoia
+version			0.9.8
+epoch			20050508
+categories		audio
+maintainers		jrdittmann@wisc.edu
+description		An audio extraction tool for sampling CDs.
+long_description	\
+	Cdparanoia is a Compact Disc Digital Audio (CDDA) extraction tool, \
+	commonly known on the net as a 'ripper'. The application is built \
+	on top of the Paranoia library, which is doing the real work (the \
+	Paranoia source is included in the cdparanoia source distribution). \
+	Like the original cdda2wav, cdparanoia package reads audio from the \
+	CDROM directly as data, with no analog step between, and writes the \
+	data to a file or pipe in WAV, AIFC or raw 16 bit linear PCM. \
+	Cdparanoia is a bit different than most other CDDA extraction \
+	tools. It contains few-to-no 'extra' features, concentrating only \
+	on the ripping process and knowing as much as possible about the \
+	hardware performing it. Cdparanoia will read correct, rock-solid \
+	audio data from inexpensive drives prone to misalignment, frame \
+	jitter and loss of streaming during atomic reads. Cdparanoia will \
+	also read and repair data from CDs that have been damaged in some \
+	way. At the same time, however, cdparanoia turns out to be easy to \
+	use and administrate. It has no compile time configuration, happily \
+	autodetecting the CDROM, its type, its interface and other aspects \
+	of the ripping process at runtime. A single binary can serve the \
+	diverse hardware of the do-it-yourself computer laboratory from Hell...
+
+homepage		http://www.livejournal.com/users/strangehours/9698.html
+platforms		darwin
+
+master_sites		http://permuted.net/software/
+checksums		md5 011e83fdedb536cf4dcabca7c4c0c5c2
+
+patchfiles		patch-include-cdparanoia-paranoia-p_block.h \
+			patch-interface-osx_interface.c
+
+destroot.destdir	prefix=${destroot}${prefix}
+
+depends_build		port:autoconf \
+			port:automake \
+			port:libtool
+
+post-extract {
+	# Or automake will complain / exit 1
+	system "touch ${worksrcpath}/{NEWS,AUTHORS,ChangeLog}"
+}
+
+use_autoreconf  yes
+autoreconf.args	-ifv

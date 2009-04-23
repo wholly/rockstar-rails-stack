@@ -1,0 +1,18 @@
+# $Id: Portfile 33297 2008-01-23 09:32:47Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			flowd
+version			0.9
+categories		net
+platforms		darwin
+maintainers		nomaintainer
+description		flowd is a small, fast and secure NetFlow collector.
+long_description	${description}
+
+homepage		http://www.mindrot.org/flowd.html
+master_sites	http://www2.mindrot.org/files/flowd/
+checksums		sha1 54cb8ecaaa36d2f25105156170680842123b965d
+
+configure.args	--mandir=${prefix}/share/man
+

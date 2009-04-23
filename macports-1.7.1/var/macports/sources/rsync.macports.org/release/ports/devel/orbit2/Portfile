@@ -1,0 +1,44 @@
+# $Id: Portfile 47765 2009-03-05 20:29:27Z devans@macports.org $
+
+PortSystem      1.0
+
+name            orbit2
+set my_name     ORBit2
+version         2.14.17
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     nomaintainer
+categories      devel gnome
+platforms       darwin
+description     Code for an ORB written in C will spontaneously evolve here.
+
+long_description \
+    ${description}
+
+homepage        http://www.gnome.org/projects/ORBit2/
+master_sites    gnome:sources/${my_name}/${branch}/
+distname        ${my_name}-${version}
+use_bzip2       yes
+
+checksums       md5     10bfb957fa4a8935a0b4afaee7d71df7 \
+                sha1    d1f38e9df5efc219f3a5cfb4d0a0cbc1b381fe1c \
+                rmd160  7e76fe543163fe9763e4a7e293640c7c87a160e8
+
+depends_build   port:pkgconfig
+
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:gettext \
+                port:libiconv \
+                port:libidl
+
+use_parallel_build  yes
+
+test.run        yes
+test.target     check
+
+platform darwin 7 {
+    configure.cflags-append -DBIND_8_COMPAT=1
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${my_name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

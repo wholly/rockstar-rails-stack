@@ -1,0 +1,18 @@
+# $Id: Portfile 42313 2008-11-19 00:40:58Z ricci@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         CGI.pm 3.42 CGI/LDS
+name                p5-cgi
+maintainers         markd openmaintainer
+description         An easy-to-use Perl5 library for writing World Wide \
+                    Web CGI scripts
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     63eaadf6745bd575f44d0e6887cb6aea \
+                    sha1    7da38e5bb2b44ac85765ec75101edfb0408bcf07 \
+                    rmd160  85708afaed9dd889eeffe08578401a9fc533d93c
+

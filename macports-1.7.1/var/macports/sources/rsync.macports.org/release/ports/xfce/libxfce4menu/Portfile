@@ -1,0 +1,25 @@
+# $Id: Portfile 50012 2009-04-22 06:31:49Z afb@macports.org $
+
+PortSystem 1.0
+
+name		libxfce4menu
+version		4.6.1
+categories	xfce
+platforms	darwin
+maintainers	afb@macports.org
+description	a freedesktop.org compliant menu implementation for Xfce
+long_description ${description}
+homepage	http://www.xfce.org/
+master_sites	http://www.ca-us.xfce.org/archive/xfce-${version}/src/
+use_bzip2	yes
+checksums	md5 5dc9343885c2c6f931318b2a1cdcc9db \
+		sha1 17348f661c04e8d8d633b8831638d38987269e9a \
+		rmd160 978071d28288bd737219e4a9c4185937b2fbf50b
+
+configure.args	--mandir=${prefix}/share/man
+
+depends_build	path:bin/pkg-config:pkgconfig
+depends_lib	port:libxfce4util port:gtk2
+
+patchfiles      patch-xfce-menu-item-cache.c
+

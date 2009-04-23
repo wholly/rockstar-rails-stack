@@ -1,0 +1,87 @@
+# $Id: Portfile 41808 2008-11-10 23:41:44Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name		eel
+version		2.24.1
+set branch  [join [lrange [split ${version} .] 0 1] .]
+description	Generally useful classes and extensions to GNOME
+long_description        The eel library contains a number of generally \
+			useful classes and functions. Many of them are \
+			extensions to things in glib, gtk, gnome-libs, \
+			and other widely-used GNOME platform libraries. \
+			The long term plan is to move much of this into \
+			the platform libraries themselves.
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    gnome:sources/eel/${branch}/
+checksums	md5 b591df36af8f1b23dd175be33b5de073 \
+		sha1 a2b4514f971c7e24a4e23e6bad1a9eedff24fae6 \
+		rmd160 d522f31897d1f9118b5aae51b16aa560b3b5a5c7
+
+depends_lib \
+	port:gnome-vfs \
+	port:libgnomeui \
+	path:lib/pkgconfig/pango.pc:pango \
+	port:librsvg \
+	port:gnome-desktop \
+	port:gnome-menus \
+	port:gnome-keyring
+
+use_bzip2 	yes
+
+patchfiles \
+            patch-eel-eel-art-gtk-extensions.c.diff \
+            patch-eel-eel-gdk-pixbuf-extensions.c.diff \
+            patch-eel-eel-background.c.diff \
+            patch-eel-eel-gdk-extensions.c.diff \
+            patch-eel-eel-gnome-extensions.c.diff \
+            patch-eel-eel-gtk-extensions.c.diff
+
+
+configure.args  --mandir=${prefix}/share/man --enable-static=no
+configure.cppflags-append "-L${prefix}/lib"
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
+
+if {[variant_isset no_x11]} {
+    default_variants    +quartz
+}
+
+if {![variant_isset quartz]} {
+    default_variants    +x11
+}
+
+pre-fetch {
+    if {![variant_isset quartz] && ![variant_isset x11]} {
+        error "Either +x11 or +quartz is required"
+    }
+}
+
+pre-configure {
+    if {[file exists ${prefix}/lib/gtk-2.0/include/gdkconfig.h]} {
+        set gtk_not_quartz [catch {exec grep -q GDK_WINDOWING_QUARTZ ${prefix}/lib/gtk-2.0/include/gdkconfig.h}]
+        set gtk_not_x11 [catch {exec grep -q GDK_WINDOWING_X11 ${prefix}/lib/gtk-2.0/include/gdkconfig.h}]
+        if {[variant_isset quartz] && ${gtk_not_quartz}} {
+            error "+quartz variant selected, but gtk2+x11 is installed"
+        } elseif {[variant_isset x11] && ${gtk_not_x11}} {
+            error "+x11 variant selected, but gtk2+quartz is installed"
+        }
+    } else {
+        error "Cannot find gdkconfig.h"
+    }
+}
+
+variant quartz requires no_x11 conflicts x11 description {Enable Quartz rendering} {
+    patchfiles-append       patch-configure.diff
+}
+
+variant x11 conflicts quartz description {Enable rendering in X11 (default)} {
+}
+
+variant no_x11 description {Same as +quartz} {
+}

@@ -1,0 +1,18 @@
+# $Id: Portfile 31825 2007-12-09 11:25:48Z rhwood@macports.org $
+
+PortSystem 1.0
+name		regexxer
+version		0.9
+description	A search and replace tool for GNOME.
+long_description	regexxer is a nifty search/replace tool for the \
+			desktop user. It features recursive search through \
+			directory trees and Perl-style regular expressions \
+			(using libpcre).
+maintainers	nomaintainer
+categories	gnome 
+platforms	darwin 
+homepage	http://${name}.sourceforge.net
+#master_sites    gnome:sources/regexxer/0.8/
+master_sites	sourceforge
+checksums	md5 3c45ed51f28c3d1c7228dff7fb904459
+depends_lib	lib:libpcre:pcre port:gconfmm port:libglademm

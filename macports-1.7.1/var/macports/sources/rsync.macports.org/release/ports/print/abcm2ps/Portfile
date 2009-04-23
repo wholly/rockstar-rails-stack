@@ -1,0 +1,30 @@
+# $Id: Portfile 49790 2009-04-18 09:18:41Z mww@macports.org $
+
+PortSystem 1.0
+
+name			abcm2ps
+version			5.9.4
+categories		print audio
+platforms		darwin
+maintainers		mww
+description		abcm2ps converts abc music tunes to postscript
+long_description	abcm2ps is a package that converts music tunes from \
+				ABC format to PostScript. It introduces many \
+				extensions to the ABC language that make it suitable \
+				for classical music.
+
+homepage		http://moinejf.free.fr/
+master_sites		${homepage}
+checksums           md5     781204677e2042947bf56944d5c0dcb5 \
+                    sha1    6fc9daadb7efe99e866469e4dbb22c55b268c192 \
+                    rmd160  c99c98432dd6f1ad0fa87d12734e2b26bff1b664
+patchfiles		patch-Makefile.in.diff
+
+build.target
+
+test.run		yes
+test.target		test
+
+livecheck.check	regex
+livecheck.url	${homepage}
+livecheck.regex	(5\\.\[0-9\]+\\.\[0-9\]+)

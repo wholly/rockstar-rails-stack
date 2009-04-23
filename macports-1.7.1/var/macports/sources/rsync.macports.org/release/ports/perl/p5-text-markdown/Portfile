@@ -1,0 +1,16 @@
+# $Id: Portfile 24142 2007-04-17 10:28:26Z ryandesign@macports.org $
+
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup     Text-Markdown 1.0.3
+categories      perl textproc
+maintainers     paul.totterman@gmail.com
+description     Markdown text-to-HTML filter.
+long_description        Markdown text-to-HTML filter. The text format is most \
+			similar to that of plain text email.
+platforms       darwin
+checksums       md5 cbef6151c4ec798754e4dd21164a4dac
+
+depends_lib-append	port:p5-module-build
+

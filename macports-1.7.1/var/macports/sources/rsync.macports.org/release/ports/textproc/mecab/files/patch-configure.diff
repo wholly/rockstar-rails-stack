@@ -1,0 +1,11 @@
+--- configure.orig	2007-02-24 18:27:13.000000000 +0900
++++ configure	2007-02-25 06:37:10.000000000 +0900
+@@ -25441,7 +25441,7 @@
+   echo "$as_me: failed program was:" >&5
+ sed 's/^/| /' conftest.$ac_ext >&5
+ 
+-	ac_cv_lib_iconv_iconv_open=no
++	ac_cv_lib_iconv_iconv_open=yes
+ fi
+ 
+ rm -f core conftest.err conftest.$ac_objext \

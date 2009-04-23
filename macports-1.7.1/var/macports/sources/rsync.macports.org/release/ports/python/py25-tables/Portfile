@@ -1,0 +1,57 @@
+# $Id: Portfile 47679 2009-03-03 18:04:37Z macsforever2000@macports.org $
+
+PortSystem         1.0
+PortGroup          python25 1.0
+
+name               py25-tables
+version            2.1
+categories-append  python science
+platforms          darwin
+maintainers        dal.ca:tom.duck openmaintainer
+
+description		     Python package for HDF5 file access.
+long_description   PyTables is a python package used to access \
+  HDF5 files, and can efficiently manage extremely large hierarchical \
+  data sets.
+
+homepage           http://www.pytables.org/
+master_sites       ${homepage}download/stable/
+distname           tables-${version}
+
+checksums          md5    68393f93b7307f7ee3dedad74fb53584 \
+                   sha1   45c1d92faf1e8a01e3e695f4ee9f07158240ff9e \
+                   rmd160 762e5812e3f5fe239325167cca5242b3be058706
+
+depends_lib-append port:hdf5-18 \
+                   port:py25-numpy \
+                   port:zlib \
+                   port:bzip2 \
+                   port:py25-scientific
+
+build.target       build_ext
+build.args         --inplace \
+                   --hdf5=${prefix} \
+                   --bzip2=${prefix}
+
+destroot.args      --hdf5=${prefix} \
+                   --bzip2=${prefix}
+
+post-destroot {
+  xinstall -m 644 -W ${worksrcpath} ANNOUNCE.txt LICENSE.txt README.txt \
+    MIGRATING_TO_2.x.txt README.txt RELEASE_NOTES.txt THANKS VERSION \
+    ${destroot}${prefix}/share/doc/${name}
+
+  foreach f {ptdump ptrepack nctoh5} {
+    move ${destroot}${prefix}/bin/${f} ${destroot}${prefix}/bin/${f}-py25
+  }
+}
+
+variant lzo description "Use lzo compression library" {
+  depends_lib-append    port:lzo
+  build.args-append     --lzo=${prefix}
+  destroot.args-append  --lzo=${prefix}
+}
+
+livecheck.check    regex
+livecheck.url      ${homepage}
+livecheck.regex    {PyTables ([0-9]+\.[0-9]+\.[0-9]+) released}

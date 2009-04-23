@@ -1,0 +1,24 @@
+# $Id: Portfile 47190 2009-02-23 04:41:50Z raimue@macports.org $
+
+PortSystem 1.0
+
+name            ddrescue
+version         1.10
+categories      sysutils
+platforms       darwin
+maintainers     ecronin raimue
+description     GNU ddrescue is a data recovery tool.
+
+long_description \
+                ${description} It copies data from one file or block device (hard disc, \
+                cdrom, etc) to another, trying hard to rescue data in case of \
+                read errors.
+
+homepage        http://www.gnu.org/software/ddrescue/ddrescue.html
+master_sites    gnu:ddrescue
+
+checksums       md5     0472d22991a2c6231ac36b03bb49cfd5 \
+                sha1    8fb3f32c648a40de518a2dd3e2eafc330d6f810c \
+                rmd160  506f8082829605d62311c00a40cd88951956cf8b
+
+destroot.target-append  install-man

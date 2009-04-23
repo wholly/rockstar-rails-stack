@@ -1,0 +1,62 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49607 2009-04-13 07:50:54Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name		gst-plugins-bad
+version		0.10.11
+revision	1
+description	This is gst-plugins, a set of plug-ins for GStreamer.
+long_description        ${description}
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    http://gstreamer.freedesktop.org/src/${name}/
+use_bzip2 	yes
+
+checksums           md5     75a3359ece6a1c11a9e5463d79e274e8 \
+                    sha1    0850df0ef0ac64b57866f5275a3794849c7ece82 \
+                    rmd160  59c5b91d1dcd4090073a72a095837bd8e4fdc129
+
+depends_lib	\
+	port:gstreamer \
+	port:gst-plugins-base \
+	port:XviD \
+	port:audiofile \
+	port:gnome-vfs \
+	port:jack \
+	port:libdca \
+	port:libmms \
+	port:libmpeg2 \
+	port:libsndfile \
+	port:faac \
+	port:faad2 \
+	port:libmusicbrainz \
+	port:neon \
+	port:libsdl \
+	port:libsoup \
+	port:soundtouch \
+	port:swfdec \
+	port:x264 \
+	port:xmms
+	# could depend on tons for multimedia stuff +variants
+	# port:mjpegtools
+
+configure.cxx   g++
+configure.args	--disable-quicktime --enable-experimental --enable-static
+configure.cppflags-append "-L${prefix}/lib"
+configure.cflags-append "-no-cpp-precomp -funroll-loops -fstrict-aliasing"
+
+post-extract {
+	reinplace "s|-flat_namespace -undefined suppress|-undefined define_a_way|g" \
+		${worksrcpath}/configure
+	reinplace "s|libSoundTouch|soundtouch-1.0|g" \
+		${worksrcpath}/configure
+}
+
+universal_variant no
+
+livecheck.check regex
+livecheck.url   ${master_sites}
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

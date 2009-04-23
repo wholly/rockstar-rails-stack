@@ -1,0 +1,45 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Spec::Rails::Example extends Spec::Example (RSpec's core Example module) to provide Rails-specific contexts for describing Rails Models, Views, Controllers and Helpers.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Model Examples
+- !ruby/struct:SM::Flow::P 
+  body: These are the equivalent of unit tests in Rails' built in testing. Ironically (for the traditional TDD'er) these are the only specs that we feel should actually interact with the database.
+- !ruby/struct:SM::Flow::P 
+  body: See Spec::Rails::Example::ModelExampleGroup
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Controller Examples
+- !ruby/struct:SM::Flow::P 
+  body: These align somewhat with functional tests in rails, except that they do not actually render views (though you can force rendering of views if you prefer). Instead of setting expectations about what goes on a page, you set expectations about what templates get rendered.
+- !ruby/struct:SM::Flow::P 
+  body: See Spec::Rails::Example::ControllerExampleGroup
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: View Examples
+- !ruby/struct:SM::Flow::P 
+  body: This is the other half of Rails functional testing. View specs allow you to set up assigns and render a template. By assigning mock model data, you can specify view behaviour with no dependency on a database or your real models.
+- !ruby/struct:SM::Flow::P 
+  body: See Spec::Rails::Example::ViewExampleGroup
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Helper Examples
+- !ruby/struct:SM::Flow::P 
+  body: These let you specify directly methods that live in your helpers.
+- !ruby/struct:SM::Flow::P 
+  body: See Spec::Rails::Example::HelperExampleGroup
+constants: []
+
+full_name: Spec::Rails::Example
+includes: []
+
+instance_methods: []
+
+name: Example
+superclass: 

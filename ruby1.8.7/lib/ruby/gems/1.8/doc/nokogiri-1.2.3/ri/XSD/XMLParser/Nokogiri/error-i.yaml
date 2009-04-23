@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: warning
+block_params: 
+comment: 
+full_name: XSD::XMLParser::Nokogiri#error
+is_singleton: false
+name: error
+params: (msg)
+visibility: public

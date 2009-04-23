@@ -1,0 +1,16 @@
+# $Id: Portfile 47137 2009-02-22 16:06:12Z toby@macports.org $
+
+PortSystem 1.0
+name             libmsn
+version          3.2
+categories       net
+maintainers      nomaintainer
+description      MSN Messenger library
+long_description \
+	libmsn is a C++ library for Microsoft's MSN Messenger service. \
+	It provides a high-level interface that allows an application \
+	to access instant messaging features with ease.
+homepage         http://libmsn.bdash.net.nz/
+platforms        darwin
+master_sites     sourceforge
+checksums        md5 6f931cd98522cecae823072f0e346879

@@ -1,0 +1,63 @@
+# $Id: Portfile 47102 2009-02-22 03:15:22Z raimue@macports.org $
+
+PortSystem      1.0
+PortGroup       xcode 1.0
+
+name            libsdl_net-framework
+set my_name     SDL_net
+version         1.2.7
+revision        1
+platforms       macosx
+categories      devel net
+maintainers     nox openmaintainer
+description     cross-platform networking library
+
+long_description \
+    This is a small sample cross-platform networking library, with a sample chat client and server \
+    application. The chat client uses the GUIlib GUI framework library.
+
+homepage        http://www.libsdl.org/projects/SDL_net/
+master_sites    ${homepage}/release/
+distname        ${my_name}-${version}
+dist_subdir     libsdl_net
+
+checksums       md5 6bd4662d1423810f3140d4da21b6d912 \
+                sha1 b46c7e3221621cc34fec1238f1b5f0ce8972274d \
+                rmd160 5c95cf28f35ceb796188323666b92cafa60fba25
+
+depends_lib     port:libsdl-framework
+
+xcode.project       Xcode/${my_name}.xcodeproj
+xcode.target        Framework
+xcode.destroot.type framework
+
+# Dummy configure to enable +universal variant.
+use_configure   yes
+configure       {}
+
+if {! [variant_isset universal]} {
+    set arch ${os.arch}
+    if {! [string compare ${os.arch} powerpc]} {
+        set arch ppc
+    }
+
+    xcode.build.settings-append			ARCHS=${arch}
+    xcode.destroot.settings-append		ARCHS=${arch}
+}
+
+post-extract {
+    system "cd ${worksrcpath} && tar -xvzf Xcode.tar.gz Xcode/{exports/${my_name}.x,Info-Framework__Upgraded_.plist,${my_name}.xcodeproj}"
+}
+
+post-patch {
+    set pbxproj ${worksrcpath}/${xcode.project}/project.pbxproj
+
+    reinplace -E "/(MACOSX_DEPLOYMENT_TARGET|GCC_VERSION|SDKROOT)(_ppc)? =/d" ${pbxproj}
+    reinplace "s|~/Library/Frameworks|./build/Frameworks|g" ${pbxproj}
+    reinplace "s|\$(HOME)/Library/Frameworks|${frameworks_dir}|g" ${pbxproj}
+}
+
+livecheck.check regex
+livecheck.url   ${homepage}
+livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)
+

@@ -1,0 +1,52 @@
+# $Id: Portfile 36123 2008-04-18 21:39:40Z ecronin@macports.org $
+
+PortSystem			1.0
+
+name				potrace
+version				1.8
+categories			graphics
+maintainers			nomaintainer
+description			Transform bitmaps into vector graphics
+long_description \
+	Potrace is a utility for tracing a bitmap, which means, transforming a \
+	bitmap into a smooth, scalable image.  The input is a bitmap (PBM, PGM, \
+	PPM, or BMP), and the default output is one of several vector file \
+	formats.  A typical use is to create EPS files from scanned data, such \
+	as company or university logos, handwritten notes, etc.  The resulting \
+	image is not "jaggy" like a bitmap, but smooth. It can then be rendered \
+	at any resolution.
+
+platforms			darwin
+
+homepage			http://potrace.sourceforge.net/
+master_sites		${homepage}download/
+patch_sites			${master_sites}
+
+patchfiles			potrace-1.8-xfig.patch
+
+checksums			${distfiles} md5 e73b45565737d64011612704dd4d9f86 \
+					            sha1 d76818fc331fb4f842bd4813114e5be01cf46848 \
+                    ${patchfiles} md5 d1a7e64f2f458e42bb090cfd7ec55dd8 \
+                                  sha1 58e1cb9165c52391d71e96490d10c89178f96419
+
+depends_lib			lib:libz:zlib
+
+configure.args		--mandir=${prefix}/share/man
+
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING ChangeLog INSTALL \
+		NEWS README ${destroot}${prefix}/share/doc/${name}
+}
+
+variant metric_default \
+	description {compile potrace with centimeters as the default unit \
+    	instead of inches.} { \
+	configure.args-append	--enable-metric
+}
+
+variant a4_default \
+	description {compile potrace with A4 as the default page size.} { \
+	configure.args-append	--enable-a4
+}
+

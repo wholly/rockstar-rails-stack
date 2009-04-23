@@ -1,0 +1,21 @@
+# $Id: Portfile 30232 2007-10-22 23:05:56Z jmpp@macports.org $
+
+PortSystem 1.0
+name             netwalker-ircc
+version          0.5.0
+categories       irc
+maintainers      nomaintainer
+description      A simple, fast IRC client with an ncurses UI.
+long_description \
+	netwalker-ircc is an IRC client which uses the ncurses library to \
+	print the screen. The code was written completely from scratch.
+homepage         http://lancelot2k.dyndns.org/projects/netwalker/
+platforms        darwin
+
+master_sites     ${homepage}netwalker-src/
+extract.suffix   .tgz
+checksums        md5 1f5a7cc0fb54142c6306651105aedd68
+
+use_configure    no
+
+destroot.destdir DESTDIR=${destroot}${prefix}

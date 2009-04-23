@@ -1,0 +1,44 @@
+# $Id: Portfile 45667 2009-01-19 18:20:20Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name		xorg-libXdmcp
+version		1.0.2
+categories	x11 devel
+maintainers	jeremyhu openmaintainer
+description	X.org libXdmcp
+homepage	http://www.x.org
+platforms	darwin macosx
+long_description X Display Manager Control Protocol routines
+master_sites	 ${homepage}/pub/individual/lib/
+use_parallel_build      yes
+
+distname	libXdmcp-${version}
+checksums	sha1 0e2fd4a0d8e8b94a4b5af85f08a2fff27bf90238
+use_bzip2	yes
+
+depends_build   port:pkgconfig \
+                port:xorg-xproto
+
+livecheck.check regex
+livecheck.url   [lindex ${master_sites} 0]?C=M&O=D
+livecheck.regex libXdmcp-(\\d+(?:\\.\\d+)*)
+
+
+variant system_x11 description {Install a stub package to use the system X11 libraries rather than MacPorts} {
+	if { [file exists ${x11prefix}/lib/libXdmcp.dylib] && ! [string equal ${prefix} ${x11prefix}] } {
+		depends_build
+		depends_lib
+		depends_run
+		fetch           { }
+		checksum        { }
+		extract         { }
+		patch           { }
+		build           { }
+		destroot        {
+			xinstall -d ${destroot}${prefix}/share/doc/${name}
+			system "echo ${long_description} > ${destroot}${prefix}/share/doc/${name}/README.txt"
+		}
+		use_configure no
+	}
+}

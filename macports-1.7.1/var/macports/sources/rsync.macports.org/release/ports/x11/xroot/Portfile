@@ -1,0 +1,39 @@
+# $Id: Portfile 45603 2009-01-18 20:52:41Z jeremyhu@macports.org $
+
+PortSystem          1.0
+name                xroot
+version             1.0
+revision            1
+categories          x11
+maintainers         nomaintainer
+description         A small X -root window
+long_description    Greg Parker wrote 'xroot tool', it creates a small X11 window \
+                    that routes input events to the X11 root window. In particular, \
+                    you can click on it to get window manager menus.\
+                    \
+                    To run:\
+                    ./xroot  -display :0  -geometry 100x100+0-0 -color blue\
+                    (100x100 in lower-left corner, colored blue)
+
+checksums           md5 a4a1f7f2cceea814380cd7e831b47c3b
+platforms           darwin
+homepage            http://sealiesoftware.com/
+master_sites        ${homepage}
+distfiles           xroot.c
+universal_variant   no
+depends_lib \
+	port:xorg-libX11
+
+extract   {}
+use_configure       no
+
+pre-build   {
+    file mkdir ${worksrcpath}
+}
+build       {
+    file copy ${distpath}/${distfile} ${worksrcpath}
+    system "cd ${worksrcpath} && c++ ${distfile} -Wall -L${prefix}/lib -L${x11prefix}/lib -I${prefix}/include -I${x11prefix}/include -lX11 -o xroot"
+}
+destroot    {
+    xinstall -m 755 ${worksrcpath}/xroot ${destroot}${prefix}/bin/
+}

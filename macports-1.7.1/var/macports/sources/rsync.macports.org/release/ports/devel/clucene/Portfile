@@ -1,0 +1,25 @@
+# $Id: Portfile 41840 2008-11-11 02:29:22Z illogic-al@macports.org $
+
+PortSystem 1.0
+
+name                    clucene
+version                 0.9.20
+categories              devel
+platforms               darwin
+maintainers             dinh.viet.hoa@free.fr openmaintainer
+description             Clucene is a C++ port of Lucene: the high-performance, \
+			full-featured text search engine written in Java.
+long_description        ${description}
+
+distfiles				${name}-core-${version}.tar.bz2
+use_bzip2				yes
+worksrcdir				${name}-core-${version}
+homepage                http://clucene.sourceforge.net/
+master_sites    sourceforge
+checksums               sha1 a60a360b9ce9048d65e5de8f0ae21a3f2638b22c
+
+post-configure {
+    if {[variant_isset universal]} {
+        reinplace "s|CC -dynamiclib|CC -dynamiclib ${configure.universal_ldflags}|g" ${worksrcpath}/libtool
+    }
+}

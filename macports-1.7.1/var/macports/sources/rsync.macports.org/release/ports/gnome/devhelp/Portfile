@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 45326 2009-01-13 16:37:18Z devans@macports.org $
+
+PortSystem 1.0
+
+name            devhelp
+version         0.22
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     Devhelp is an API documentation browser for GTK+ and GNOME.
+long_description \
+                Devhelp is an API documentation browser for GTK+ and GNOME. It works \
+                natively with gtk-doc (the API reference framework developed for GTK+ \
+                and used throughout GNOME for API documentation). If you use gtk-doc \
+                with your project, you can use Devhelp to browse the documentation.
+
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+homepage        http://live.gnome.org/${name}
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     7cdd0688dba0184b6dd2688532af24cb \
+                sha1    bed9aef874d72dbff9ff2480e70181b53e69d17c \
+                rmd160  1a701c569dd197d0cf80a99ac220b7982d4d6307
+
+depends_build   port:pkgconfig
+
+depends_lib     port:webkit-gtk \
+                port:gconf  \
+                port:libwnck
+
+post-activate {
+        system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+        system "${prefix}/bin/update-mime-database ${prefix}/share/mime; true"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

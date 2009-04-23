@@ -1,0 +1,31 @@
+# $Id: Portfile 47320 2009-02-25 23:54:10Z ricci@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		MIME-tools 5.425
+revision        1
+
+maintainers		ricci openmaintainer
+description		modules for parsing (and creating!) MIME entities
+long_description	MIME-tools is a collection of Perl5 MIME:: modules \
+					for parsing, decoding, *and generating* single- or \
+					multipart (even nested multipart) MIME messages. \
+					(Yes, kids, that means you can send messages with \
+					attached GIF files).
+checksums		md5 35821ae976e2884f4350dc25d4734655
+platforms		darwin
+
+patchfiles		patch-lib-MIME-Parser.pm.nobinhex.diff \
+				patch-lib-MIME-Parser.pm.useContentTypeName.diff \
+				patch-lib-MIME-Parser.pm.uu_whine.diff	\
+				patch-lib-MIME-Tools.pm.diff
+
+# Depends on these Perl modules
+depends_lib-append	port:p5-io-stringy	\
+					port:p5-mailtools	\
+					port:p5-file-temp
+
+variant doBinHex description {use the (buggy) internal binhex decoder} {
+	patchfiles-delete patch-lib-MIME-Parser.pm.nobinhex.diff
+}

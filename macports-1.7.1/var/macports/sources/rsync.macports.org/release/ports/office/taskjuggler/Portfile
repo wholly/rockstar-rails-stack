@@ -1,0 +1,101 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49435 2009-04-09 21:33:20Z jeremyhu@macports.org $
+
+PortSystem          1.0
+
+name                taskjuggler
+version             2.4.1
+homepage            http://www.taskjuggler.org/
+categories          office project pim
+
+description         A powerful project management tool.
+long_description    TaskJuggler is a modern and powerful, Open Source \
+                    project management tool.
+
+maintainers         rene
+
+platforms           darwin
+
+use_bzip2           yes
+master_sites        http://www.taskjuggler.org/download/:source
+distname            ${name}-${version}
+distfiles           ${distname}${extract.suffix}:source
+checksums           ${distname}${extract.suffix} \
+                        md5 18e0cec8b2ec69220ae7c9a790c16819 \
+                        sha1 f690e57554488b85375ad96cd6a7635bd4ff6507 \
+                        rmd160 e1648e818610776efd0f7f9241e987b92a5413ef \
+                    manual-${version}${extract.suffix} \
+                        md5 ba4e0eead0b198872cfa7447cdc5d1ef \
+                        sha1 4a505bacd2e6719c41e851fbd5a2f6ab87d65f9d \
+                        rmd160 6294c914812cfa45d1ae9894cda8fc2155146921
+
+depends_build       port:automake \
+                    port:autoconf
+
+depends_lib         port:qt3 \
+                    port:fontconfig \
+                    port:jpeg \
+                    port:libpng \
+                    port:kdebase3 \
+                    port:kdelibs3 \
+                    port:kdepim3
+
+configure.args      --enable-mac \
+                    --disable-docs \
+                    --without-arts \
+                    --with-qt-dir=${prefix}/lib/qt3 \
+                    --with-extra-includes=${prefix}/include \
+                    --with-extra-libs=${prefix}/lib
+
+patchfiles          patch-admin-libtool.m4.in.diff \
+                    patch-taskjuggler-ProjectFile.cpp.diff
+
+build.args          DYLD_LIBRARY_PATH=${worksrcpath}/taskjuggler/.libs
+
+platform darwin 9 {
+build.args-append   LDFLAGS=\"-dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib\"
+}
+
+destroot.args       DESTDIR=${destroot}${prefix} \
+                    DYLD_LIBRARY_PATH=${worksrcpath}/taskjuggler/.libs \
+                    kde_locale=${destroot}/share/locale \
+                    docprefix=${destroot}/share/doc
+
+post-destroot {
+    if {[variant_isset docs]} {
+        # move handbook to destroot
+        set manual_path ${prefix}/share/doc/${name}/manual
+        xinstall -d ${destroot}${manual_path}
+        eval xinstall -m 640 [glob ${workpath}/manual-${version}/*.html] \
+            ${destroot}${manual_path}
+    }
+}
+
+variant qt3mac description {Use qt3mac instead of qt3} {
+    configure.args-delete       --with-qt-dir=${prefix}/lib/qt3
+    depends_lib-delete          port:qt3
+    configure.args-append       --with-qt-dir=${prefix}/lib/qt3mac
+    depends_lib-append          port:qt3-mac
+}
+
+variant nokde description {Build the command line version} {
+    configure.args-append       --with-kde-support=no
+    depends_lib-delete          port:kdebase3 \
+                                port:fontconfig \
+                                port:kdelibs3 \
+                                port:kdepim3
+}
+
+variant docs description {Install handbook} {
+    master_sites-append     http://www.taskjuggler.org/download/:docs
+    distfiles-append        manual-${version}${extract.suffix}:docs
+}
+
+variant debug description {Enable debug mode} {
+    configure.args-append       --enable-debug=yes
+}
+
+livecheck.check     regex
+livecheck.url       ${homepage}/download.php
+livecheck.regex     "Latest Stable Taskjuggler \\(Version (\\d+.\\d+.\\d+)\\)"
+

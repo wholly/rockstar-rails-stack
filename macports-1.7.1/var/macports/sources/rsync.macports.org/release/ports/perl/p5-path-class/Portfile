@@ -1,0 +1,15 @@
+# $Id: Portfile 32352 2007-12-27 07:06:28Z jmpp@macports.org $
+PortSystem        1.0
+PortGroup         perl5 1.0
+
+perl5.setup       Path-Class 0.16
+maintainers       nomaintainer
+description       This Perl extension provides cross-platform path \
+                  specification manipulation.
+long_description  Path::Class is a module for manipulation of file and \
+                  directory specifications in a cross-platform manner.
+
+checksums         md5 3a2416d2f5ed1a8a98525baea5c25e1c
+platforms         darwin
+master_sites      http://cpan.perl.org/authors/id/K/KW/KWILLIAMS/
+homepage          http://search.cpan.org/~kwilliams/

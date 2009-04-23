@@ -1,0 +1,40 @@
+# $Id: Portfile 45727 2009-01-20 22:49:45Z mww@macports.org $
+
+PortSystem 1.0
+
+name			botan
+version			1.8.1
+categories		security devel
+platforms		darwin
+maintainers		mww
+description		cryptographic algorithms and formats library in C++
+long_description	Botan is a C++ library implementing a variety of \
+				cryptographic algorithms and formats. At this time, it is \
+				quite stable, and is suitable for use in a wide variety of \
+				programs.
+
+homepage		http://botan.randombit.net/
+master_sites	http://files.randombit.net/botan/
+distfiles		Botan-${version}.tbz
+checksums           md5     23805517630902e0466a42a8eb596f24 \
+                    sha1    34de2dc6bcb19958b0cd8668412f1471a18e0e1d \
+                    rmd160  3aea2b8d2fe5d37ad06f38b390b564d100d8db60
+use_bzip2		yes
+patchfiles		patch-src-build-data-cc-gcc.diff patch-src-build-data-botan-config.in.diff
+
+configure.cmd	./configure.pl
+configure.args	--docdir=share/doc
+# uses CC to select the compiler suite, instead of finding the C-compiler executable
+configure.cc	gcc
+
+destroot.destdir DESTDIR=${destroot}${prefix}
+
+platform darwin   { configure.args-append --os=darwin }
+platform darwin 8 { build.args CXX=/usr/bin/g++-4.0 }
+platform darwin 9 { build.args CXX=/usr/bin/g++-4.0 }
+
+platform ppc    { configure.args-append --cpu=ppc }
+platform ppc64  { configure.args-append --cpu=ppc64 }
+platform i386   { configure.args-append --cpu=ia32 }
+platform x86_64 { configure.args-append --cpu=amd64 }
+

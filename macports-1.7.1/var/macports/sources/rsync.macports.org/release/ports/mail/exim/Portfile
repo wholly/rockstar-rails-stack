@@ -1,0 +1,99 @@
+# $Id: Portfile 42588 2008-11-25 14:32:39Z mcalhoun@macports.org $
+
+PortSystem 1.0
+name            exim
+version         4.66
+revision	1
+categories      mail
+description     complete replacement for sendmail
+long_description        Exim is a mail transfer agent (MTA) developed \
+                        at the University of Cambridge for use on Unix \
+                        systems connected to the Internet. It is freely \
+                        available under the terms of the GNU General \
+                        Public Licence. In overall style it is similar \
+                        to Smail 3, but its facilities are more extensive.
+homepage        http://www.exim.org/
+platforms       darwin
+maintainers     nomaintainer
+master_sites    ftp://ftp.csx.cam.ac.uk/pub/software/email/exim/exim4/ \
+                ftp://ftp.exim.org/pub/exim/exim4/
+use_bzip2       yes
+checksums       md5 01288e44919d8abdde5a7bd2c200449b \
+                sha1 4a2ac2cd51865b57610e2b153e20c305b7f9f504 \
+                rmd160 4481c9ca4932be9ab5f4f0a66b99f3e2f8e6c5fa
+depends_build   path:bin/perl:perl5
+depends_lib     port:db44 port:openssl port:sqlite3
+
+startupitem.create      yes
+startupitem.start       "${prefix}/share/exim/exim.sh start"
+startupitem.stop        "${prefix}/share/exim/exim.sh stop"
+
+set exim_user   exim
+patch.pre_args  -p1
+
+configure   {
+                copy ${worksrcpath}/src/EDITME ${worksrcpath}/Local/Makefile
+                reinplace "s|/usr/exim/bin|${prefix}/sbin|g" ${worksrcpath}/Local/Makefile
+                reinplace "s|/usr/exim/configure|${prefix}/etc/exim/exim.conf|g" ${worksrcpath}/Local/Makefile
+                reinplace "s|EXIM_USER=|EXIM_USER=${exim_user}|g" ${worksrcpath}/Local/Makefile
+                reinplace "s|/var/spool/exim|${prefix}/var/spool/exim|g" ${worksrcpath}/Local/Makefile
+                reinplace "s|EXIM_MONITOR=eximon.bin|#EXIM_MONITOR=eximon.bin|g" ${worksrcpath}/Local/Makefile
+                reinplace "s|# WITH_CONTENT_SCAN=yes|WITH_CONTENT_SCAN=yes|g" ${worksrcpath}/Local/Makefile       
+                reinplace "s|# LOOKUP_PASSWD=yes|LOOKUP_PASSWD=yes|g" ${worksrcpath}/Local/Makefile
+                reinplace "s|# LOOKUP_CDB=yes|LOOKUP_CDB=yes|g" ${worksrcpath}/Local/Makefile
+                reinplace "s|# LOOKUP_DSEARCH=yes|LOOKUP_DSEARCH=yes|g" ${worksrcpath}/Local/Makefile
+                reinplace "s|# SUPPORT_MAILDIR=yes|SUPPORT_MAILDIR=yes|g" ${worksrcpath}/Local/Makefile       
+                reinplace "s|# TLS_LIBS=-L/usr/local/openssl/lib|TLS_LIBS=-L${prefix}/lib|g" ${worksrcpath}/Local/Makefile       
+                reinplace "s|# TLS_INCLUDE=-I/usr/local/openssl/include|TLS_INCLUDE=-I${prefix}/include/openssl|g" ${worksrcpath}/Local/Makefile       
+                reinplace "s|# Exim: OS-specific make file for Darwin (Mac OS X).|INCLUDE=-I${prefix}/include/db44|g" ${worksrcpath}/OS/Makefile-Darwin                
+                reinplace "s|DBMLIB =|DBMLIB=${prefix}/lib/db44/libdb-4.dylib|g" ${worksrcpath}/OS/Makefile-Darwin                
+                reinplace "s|/etc/aliases|${destroot}${prefix}/etc/aliases|g" ${worksrcpath}/scripts/exim_install
+                adduser ${exim_user} gid=[existsgroup mail] }
+
+destroot.destdir    ROOT=${destroot}
+destroot.keepdirs   ${destroot}${prefix}/var/spool/exim
+
+post-destroot { system "mv ${destroot}${prefix}/etc/exim/exim.conf ${destroot}${prefix}/etc/exim/exim.conf.sample"
+                xinstall -o root -m 755 -d ${destroot}${prefix}/share/exim
+                system "cp -R ${worksrcpath}/doc/ ${destroot}${prefix}/share/exim"
+                xinstall -o ${exim_user} -g mail -m 750 -d ${destroot}${prefix}/var/spool/exim
+                xinstall -o root -m 755 -d ${destroot}${prefix}/etc/rc.d
+                xinstall -o root -m 755 -c \
+                  ${portpath}/files/exim.sh ${destroot}${prefix}/share/exim
+                reinplace "s|__PREFIX|${prefix}|g" ${destroot}${prefix}/share/exim/exim.sh }
+
+
+platform darwin 6 {
+
+    if {[variant_isset mysql] || [variant_isset mysql4]} {
+        patchfiles-append patch-EDITME
+        reinplace "s|LOOKUP_LIBS=-lresolv|LOOKUP_LIBS=-L${prefix}/lib/mysql -L${prefix}/lib -L/usr/lib -lmysqlclient|g" ${filespath}/patch-EDITME
+    }
+}
+
+platform darwin 7 { 
+    patchfiles-append   patch-EDITME
+    if {[variant_isset mysql] || [variant_isset mysql4]} {
+        reinplace "s|LOOKUP_LIBS=-lresolv|LOOKUP_LIBS=-L${prefix}/lib/mysql -L${prefix}/lib -L/usr/lib -lresolv -lmysqlclient|g" ${filespath}/patch-EDITME
+    }
+    
+}
+
+variant mysql4 { depends_lib-append      lib:libmysqlclient:mysql4 }
+
+post-configure {
+    reinplace "s|# AUTH_CRAM_MD5=yes|AUTH_CRAM_MD5=yes|g" ${worksrcpath}/Local/Makefile
+    reinplace "s|# AUTH_PLAINTEXT=yes|AUTH_PLAINTEXT=yes|g" ${worksrcpath}/Local/Makefile
+    reinplace "s|# AUTH_SPA=yes|AUTH_SPA=yes|g" ${worksrcpath}/Local/Makefile  
+    reinplace "s|# SUPPORT_TLS=yes|SUPPORT_TLS=yes|g" ${worksrcpath}/Local/Makefile
+    reinplace "s|# TLS_LIBS=-lssl -lcrypto|TLS_LIBS=-lssl -lcrypto|g" ${worksrcpath}/Local/Makefile
+    reinplace "s|# LDAP_LIB_TYPE=OPENLDAP2|LDAP_LIB_TYPE=OPENLDAP2|g" ${worksrcpath}/Local/Makefile
+    reinplace "s|# LOOKUP_LIBS=-L/usr/local/lib -lldap -llber -lmysqlclient -lpq -lgds|LOOKUP_LIBS=-lldap|g" ${worksrcpath}/Local/Makefile
+
+    if {[variant_isset mysql] || [variant_isset mysql4]} {
+        reinplace "s|# LOOKUP_MYSQL=yes|LOOKUP_MYSQL=yes|g" ${worksrcpath}/Local/Makefile
+        reinplace "s|# LOOKUP_INCLUDE=.*|LOOKUP_INCLUDE=-I ${prefix}/include/mysql -I ${prefix}/include -I /usr/include|g" ${worksrcpath}/Local/Makefile
+    }
+
+}
+

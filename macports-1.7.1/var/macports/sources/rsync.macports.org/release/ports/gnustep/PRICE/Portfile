@@ -1,0 +1,16 @@
+# $Id: Portfile 30229 2007-10-22 23:01:24Z jmpp@macports.org $
+
+PortSystem  1.0
+PortGroup   gnustep 1.0
+
+name        PRICE
+version     0.8.1
+platforms   darwin
+maintainers nomaintainer
+homepage    http://price.sourceforge.net/
+description  A high-quality image manipulation and enhancement application.
+long_description ${description}
+
+master_sites  sourceforge:price
+checksums     md5 f5a357f6fd93661f4bf778c388f07bc0
+worksrcdir    ${name}

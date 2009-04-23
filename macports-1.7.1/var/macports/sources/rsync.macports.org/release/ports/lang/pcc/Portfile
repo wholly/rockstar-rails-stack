@@ -1,0 +1,34 @@
+# $Id: Portfile 38802 2008-07-31 20:22:44Z mww@macports.org $
+
+PortSystem 1.0
+
+name			pcc
+set datespec		080731
+version			0.9.9.${datespec}
+categories		lang
+platforms		darwin
+maintainers		mww openmaintainer
+description		the portable C compiler
+long_description	\
+	This compiler is based on the original Portable C Compiler by S. C. \
+	Johnson, written in the late 70's. Even though much of the compiler \
+	has been rewritten, some of the basics still remain. \
+	The intention is to write a C99 compiler while still keeping it small, \
+	simple, fast and understandable.
+
+homepage		http://pcc.ludd.ltu.se/
+master_sites		http://pcc.ludd.ltu.se/ftp/pub/pcc/ freebsd
+distname		${name}-${datespec}
+extract.suffix		.tgz
+checksums		md5 54c5ce5dc2fbf2d806790893334c1a86 \
+			sha1 519b6647c7bb2b83a650ad9118637631c7b2ef61
+
+depends_build		port:flex port:m4 port:bison
+patch { reinplace "s|-Werror||g" ${worksrcpath}/configure }
+
+configure.args		--mandir=${prefix}/share/man
+configure.env		YACC="${prefix}/bin/bison -y"
+
+livecheck.check	moddate
+livecheck.url	http://pcc.ludd.ltu.se/ftp/pub/pcc/
+

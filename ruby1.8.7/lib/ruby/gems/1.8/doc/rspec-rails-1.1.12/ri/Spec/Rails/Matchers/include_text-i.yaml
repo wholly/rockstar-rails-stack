@@ -1,0 +1,22 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Accepts a String, matching using include?
+- !ruby/struct:SM::Flow::P 
+  body: Use this instead of <tt>response.should have_text()</tt> when you either don't know or don't care where on the page this text appears.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  response.should include_text(&quot;This text will be in the actual string&quot;)\n"
+full_name: Spec::Rails::Matchers#include_text
+is_singleton: false
+name: include_text
+params: |
+  response.should include_text(expected)
+  response.should_not include_text(expected)
+
+visibility: public

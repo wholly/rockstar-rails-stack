@@ -1,0 +1,15 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Spec::Rails::Matchers::IncludeText
+includes: []
+
+instance_methods: []
+
+name: IncludeText
+superclass: Object

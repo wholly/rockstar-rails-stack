@@ -1,0 +1,23 @@
+# $Id: Portfile 47277 2009-02-24 15:21:34Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Moose 0.72 ../by-authors/id/D/DR/DROLSKY/
+maintainers           narf_tm openmaintainer
+description           A postmodern object system for Perl 5
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 b78fef11546371f33b99e61fd4c4f5c0 \
+                      sha1 d0a756bb45c981e01e5e0df417a9399336732882 \
+                      rmd160 365e852294e8a9bd0f4c665307911bd8e3dbc552
+
+depends_lib-append    port:p5-test-exception \
+                      port:p5-test-simple \
+                      port:p5-class-mop \
+                      port:p5-list-moreutils \
+                      port:p5-scalar-list-utils \
+                      port:p5-sub-exporter \
+                      port:p5-task-weaken

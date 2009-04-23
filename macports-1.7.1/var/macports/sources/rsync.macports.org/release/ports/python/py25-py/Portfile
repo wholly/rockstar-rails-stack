@@ -1,0 +1,26 @@
+# $Id: Portfile 44419 2008-12-28 09:31:44Z akitada@macports.org $
+
+PortSystem        1.0
+PortGroup         python25 1.0
+
+name              py25-py
+version           0.9.1
+categories        python
+platforms         darwin
+maintainers       akitada openmaintainer
+description       py lib: agile development and test support library
+long_description  the py lib is a development support library featuring \
+                  py.test, ad-hoc distributed execution, micro-threads \
+                  and svn abstractions.
+homepage          http://codespeak.net/py
+master_sites      http://codespeak.net/download/py/
+checksums         md5 d9e3dd3450408c30d152f682502af90f \
+                  sha1 26fc5d69b014ed4b226d5a33b0290c339e352cda \
+                  rmd160 01be3b5f5de8c2f2d80e0e34692185976161ed14
+distname          py-${version}
+
+post-destroot {
+    foreach f [glob -directory ${destroot}${prefix}/bin *] {
+        file rename $f [regsub {(.*?)(\.py)?$} $f {\12.5\2}]
+    }
+}

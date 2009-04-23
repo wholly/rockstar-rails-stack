@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: XSD::XMLParser::Nokogiri#cdata_block
+is_singleton: false
+name: cdata_block
+params: (string)
+visibility: public

@@ -1,0 +1,51 @@
+# $Id: Portfile 46736 2009-02-11 14:24:31Z ram@macports.org $
+
+PortSystem              1.0
+PortGroup               python24 1.0
+
+name                    py-scipy
+version                 0.7.0
+categories              python
+platforms               darwin
+maintainers             nomaintainer
+description             An opensource library of scientific tools for Python
+long_description        ${description}
+
+homepage                http://www.scipy.org/
+master_sites            sourceforge:scipy
+distname                scipy-${version}
+
+checksums               md5 80078ed5f47a48aec2cde3769ba39972 \
+                        sha1 7daef781253bafccf3be54b9eb3541f084503076 \
+                        rmd160 3583901f679cbc7f91560626f437d7edcd2bf6cf
+
+depends_lib-append      port:py-numpy \
+                        port:py-nose \
+                        port:SuiteSparse \
+                        port:swig
+
+worksrcdir              ${distname}
+
+build.env               CCFLAGS="-I${prefix}/include -L${prefix}/lib"
+
+post-patch {
+  reinplace "s|include <\\(umfpack\.*.h\\)>|include <${prefix}/include/ufsparse/\\1>|g" ${worksrcpath}/scipy/sparse/linalg/dsolve/umfpack/umfpack.i
+}
+
+variant gcc42 conflicts gcc43 description "Use gfortran-mp-4.2 as fortran compiler" {
+  depends_lib-append    port:gcc42
+  set fc_options        "config_fc --fcompiler gnu95 --f77exec ${prefix}/bin/gfortran-mp-4.2 --f90exec ${prefix}/bin/gfortran-mp-4.2"
+  build.cmd-append      ${fc_options}
+  destroot.cmd-append   ${fc_options}
+}
+
+variant gcc43 conflicts gcc42 description "Use gfortran-mp-4.3 as fortran compiler" {
+  depends_lib-append    port:gcc43
+  set fc_options        "config_fc --fcompiler gnu95 --f77exec ${prefix}/bin/gfortran-mp-4.3 --f90exec ${prefix}/bin/gfortran-mp-4.3"
+  build.cmd-append      ${fc_options}
+  destroot.cmd-append   ${fc_options}
+}
+
+if { ![variant_isset gcc42] && ![variant_isset gcc43] } {
+  default_variants      +gcc43
+}

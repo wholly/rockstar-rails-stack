@@ -1,0 +1,18 @@
+# $Id: Portfile 32826 2008-01-14 04:24:29Z ryandesign@macports.org $
+
+PortSystem 1.0
+name		angst
+version		0.4b
+revision	2
+categories	net
+maintainers	nomaintainer
+platforms	darwin
+description	an active sniffer
+long_description	${description}
+homepage	http://angst.sourceforge.net/
+master_sites	sourceforge
+checksums	md5 21643cd776bf478c6fbe4ddabb826be8
+depends_lib	lib:libnet:libnet
+configure   	{ reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/Makefile
+		  reinplace "s|${prefix}/sbin|${destroot}${prefix}/sbin|g" ${worksrcpath}/Makefile
+	          reinplace "s|${prefix}/share/man|${destroot}${prefix}/share/man|g" ${worksrcpath}/Makefile }

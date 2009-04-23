@@ -1,0 +1,16 @@
+# $Id: Portfile 47101 2009-02-22 03:12:10Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-bitstream-75dpi 1.0.0 75dpi
+revision            1
+maintainers         blb openmaintainer
+description         X.org Bitstream 75 DPI font
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     beb476657d50d07d17eef7c325a5ed08 \
+                    sha1    ad534d1eaf758f743bcafc6ba30d3169774c672b \
+                    rmd160  b8218eb4bf25a5bda69a5034f8b582824b0b13f4
+

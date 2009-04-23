@@ -1,0 +1,43 @@
+# $Id: Portfile 45461 2009-01-16 14:11:36Z jmr@macports.org $
+
+PortSystem 1.0
+
+name		file-roller
+version		2.24.3
+set branch  [join [lrange [split ${version} .] 0 1] .]
+description	An archive manager for GNOME
+long_description        File Roller is an archive manager for the GNOME \
+			environment. Archive manager means that you can: \
+			* Create and modify archives.  \
+			* View the content of an archive.  \
+			* View a file contained in the archive.  \
+			* Extract files from the archive.
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://fileroller.sourceforge.net/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums	md5 20264b13cd27c6542c8289256d768c9c \
+		sha1 afba08f5b09414506a42dd5d8679748392dfa7a3 \
+		rmd160 494bb520c86cb81d543370a7c621783b8a42ef0e
+
+depends_lib \
+	port:libgnomeui \
+	port:gnome-icon-theme \
+	port:dbus \
+	port:dbus-glib
+depends_build \
+	port:gnome-doc-utils
+
+use_bzip2 	yes
+
+configure.args  --mandir=${prefix}/share/man --disable-scrollkeeper
+
+post-activate {
+	system "${prefix}/bin/scrollkeeper-update"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

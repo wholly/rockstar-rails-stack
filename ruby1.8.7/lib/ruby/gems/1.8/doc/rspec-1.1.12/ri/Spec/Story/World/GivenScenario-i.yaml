@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::World#GivenScenario
+is_singleton: false
+name: GivenScenario
+params: (name)
+visibility: public

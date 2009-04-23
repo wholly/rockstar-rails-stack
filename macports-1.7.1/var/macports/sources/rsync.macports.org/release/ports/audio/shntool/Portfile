@@ -1,0 +1,31 @@
+# $Id: Portfile 30219 2007-10-22 22:40:35Z jmpp@macports.org $
+
+PortSystem 1.0
+name		shntool
+version		3.0.2
+categories	audio
+maintainers	nomaintainer
+description	Multi-purpose .wav/.shn processing utility
+long_description	\
+	shntool is a multi-purpose .wav/.shn processing tool.  Input and \
+	output files are transparent to shntool, meaning that it can perform \
+	its functions upon both .wav and .shn data.
+homepage	http://www.etree.org/shnutils/shntool/
+platforms	darwin
+master_sites	${homepage}dist/src/
+checksums \
+	md5 1b3137a383b43a33191c42d6ecf88bb3 \
+	sha1 c9a42ca63dbb2bce92d134218b4f8efd75056465 \
+	rmd160 f0ddfa8c2b5f5f31588824db283f73c1da5502e8
+depends_lib	\
+	port:expat \
+	port:gettext \
+	port:libiconv \
+	port:shorten
+configure.args	--mandir=${prefix}/share/man
+
+post-destroot {
+	system "install -m 755 -d ${destroot}${prefix}/share/doc/${name}"
+	system "install -m 644 ${worksrcpath}/doc/* \
+		${destroot}${prefix}/share/doc/${name}/"
+}

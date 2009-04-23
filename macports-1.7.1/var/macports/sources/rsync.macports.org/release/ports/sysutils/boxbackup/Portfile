@@ -1,0 +1,137 @@
+# $Id: Portfile 46112 2009-01-29 20:13:19Z ecronin@macports.org $
+
+PortSystem		1.0
+
+name			boxbackup
+version			0.11rc2
+categories		sysutils net
+maintainers		ecronin
+description		completely automatic on-line backup system.
+long_description	The backup daemon, bbackupd, runs on all machines to \
+					be backed up. The store server daemon, bbstored runs \
+					on a central server. Data is sent to the store \
+					server, which stores all data on local filesystems, \
+					that is, only on local hard drives. Tape or other \
+					archive media is not used. \
+					The system is designed to be easy to set up and run, \
+					and cheap to use. Once set up, there should be no \
+					need for user or administrative intervention, apart \
+					from usual system maintenance.
+homepage		http://www.boxbackup.org/
+platforms       darwin
+master_sites	${homepage}svn/box/packages/
+extract.suffix	.tgz
+checksums		md5 68052f963a944c717a50bd65a54375ff \
+				sha1 9ba640b1c1f2531214a54273396f8cf932d17782 \
+				rmd160 5118667aa083898c193b098fe4c876abc6cd4e7c
+
+depends_lib		path:bin/perl:perl5 port:openssl port:readline port:openssl
+
+##### TEMPORARY FIX; REMOVE FOR >= 0.11rc3
+post-patch {
+	reinplace "s|sysconfdir='/etc'||g" ${worksrcpath}/configure
+	reinplace "s|localstatedir='/var/run'||g" ${worksrcpath}/configure
+}
+
+configure.args		--sysconfdir=${prefix}/etc \
+					--localstatedir=${prefix}/var/bbackupd \
+					--enable-gnu-readline
+
+destroot.target		install-backup-client
+destroot.keepdirs	${destroot}${prefix}/etc/box/bbackupd \
+					${destroot}${prefix}/var/bbackupd
+
+post-destroot {
+	xinstall -d -m 0700 ${destroot}${prefix}/etc/box/bbackupd
+	xinstall -d -m 0755 ${destroot}${prefix}/var/bbackupd
+
+    # Install the documentation
+### Broken in 0.11rc2
+#	xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
+#	foreach docname {accounts bbackupctl client license nonroot restore retrieve server serverfix space trouble} {
+#		xinstall -m 0644 ${filespath}/${docname}.html \
+#			${destroot}${prefix}/share/doc/${name}/${docname}.html
+#		reinplace "s|/usr/local|${prefix}|g" \
+#			${destroot}${prefix}/share/doc/${name}/${docname}.html
+#		reinplace "s|/var/run|${prefix}/var/run|g" \
+#			${destroot}${prefix}/share/doc/${name}/${docname}.html
+#		reinplace "s|/var/bbackupd|${prefix}/var/bbackupd|g" \
+#			${destroot}${prefix}/share/doc/${name}/${docname}.html
+#		reinplace "s|/etc/box|${prefix}/etc/box|g" \
+#			${destroot}${prefix}/share/doc/${name}/${docname}.html
+#	}
+}
+
+variant bdb \
+	description {Use Berkeley Data Base to cache bbackupd state} {
+	depends_lib-append		port:db44
+
+	configure.args-append	--with-bdb-headers=${prefix}/include/db44 \
+							--with-bdb-lib=${prefix}/lib/db44
+}
+
+variant server \
+    description {Install bbstored server} {
+	pre-destroot {
+		addgroup bbstored
+		set gid [existsgroup bbstored]
+		adduser bbstored gid=${gid} realname=BoxBackup\ Server home=${prefix}/etc/box/bbstored
+	}
+	destroot.target-append		install-backup-server
+	destroot.keepdirs-append	${destroot}${prefix}/etc/box/bbstored
+	post-destroot {
+		xinstall -o bbstored -g bbstored -d -m 0770 ${destroot}${prefix}/etc/box/bbstored
+	}
+
+	pre-install {
+		addgroup bbstored
+		set gid [existsgroup bbstored]
+		adduser bbstored gid=${gid} realname=BoxBackup\ Server home=${prefix}/etc/box/bbstored
+	}
+}
+
+post-activate {
+	if {[variant_isset server]} {
+		if {![file exists ${prefix}/etc/box/raidfile.conf]} {
+			ui_warn "${prefix}/etc/box/raidfile.conf is missing!"
+			ui_msg "You need to run 'raidfile-config' to create it."
+			ui_msg "See the documentation on server setup for details:"
+			#ui_msg "  file://${prefix}/share/doc/boxbackup/server.html"
+			ui_msg "  http://www.boxbackup.org/server.html"
+		}
+		if {![file exists ${prefix}/etc/box/bbstored.conf]} {
+			ui_warn "${prefix}/etc/box/bbstored.conf is missing!"
+			ui_msg "You need to run 'bbstored-config' to create it."
+			ui_msg "See the documentation on server setup for details:"
+			#ui_msg "  file://${prefix}/share/doc/boxbackup/server.html"
+			ui_msg "  http://www.boxbackup.org/server.html"
+		}
+	}
+	if {![file exists ${prefix}/etc/box/bbackupd.conf]} {
+		ui_warn "${prefix}/etc/box/bbackupd.conf is missing!"
+		ui_msg "You need to run 'bbackupd-config' to create it."
+		ui_msg "See the documentation on client setup for details:"
+		#ui_msg "  file://${prefix}/share/doc/boxbackup/client.html"
+		ui_msg "  http://www.boxbackup.org/client.html"
+	}
+}
+
+test.run		yes
+
+platform darwin {
+	startupitem.create			yes
+	startupitem.name			BoxBackup
+	startupitem.start			"cd ${prefix}/etc/box"
+	if {[variant_isset server]} {
+		startupitem.start-append	"\[ -f \"${prefix}/etc/box/bbstored.conf\" \] \\"
+		startupitem.start-append	"\t&& \[ -f \"${prefix}/etc/box/raidfile.conf\" \] \\"
+		startupitem.start-append	"\t&& ${prefix}/bin/bbstored"
+	}
+	startupitem.start-append	"\[ -f \"${prefix}/etc/box/bbackupd.conf\" \] \\"
+	startupitem.start-append	"\t&& ${prefix}/bin/bbackupd"
+	startupitem.stop			"/usr/bin/killall -SIGUSR1 bbackupd"
+	if {[variant_isset server]} {
+		startupitem.stop-append	"/usr/bin/killall -SIGUSR1 bbstored"
+	}
+}
+

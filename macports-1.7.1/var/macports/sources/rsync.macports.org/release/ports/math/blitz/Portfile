@@ -1,0 +1,24 @@
+# $Id: Portfile 33297 2008-01-23 09:32:47Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			blitz
+version			0.9
+categories		math devel
+platforms		darwin
+maintainers		nomaintainer
+description		A C++ class library for scientific computing
+long_description	Blitz++ is a C++ class library for scientific computing \
+			which provides performance on par with Fortran 77/90. It uses \
+			template techniques to achieve high performance.
+
+homepage		http://www.oonumerics.org/blitz/
+master_sites	sourceforge
+checksums		md5 031df2816c73e2d3bd6d667bbac19eca
+
+configure.args	--infodir=${prefix}/share/info --enable-shared \
+				--disable-doxygen --disable-dot --disable-fortran \
+				--disable-latex-docs 
+
+destroot.args	docdir=${prefix}/share/doc/${name}
+

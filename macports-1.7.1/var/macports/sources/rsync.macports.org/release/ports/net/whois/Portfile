@@ -1,0 +1,100 @@
+# $Id: Portfile 49931 2009-04-20 11:04:24Z ryandesign@macports.org $
+
+################################################################
+# The developer of whois is hostile toward bug reports. Do     #
+# not waste his time and yours by speaking with him about his  #
+# software. If you encounter problems updating this port to a  #
+# newer version, find a workaround and write a patch. Do not   #
+# report upstream. See http://trac.macports.org/ticket/16037   #
+################################################################
+
+PortSystem              1.0
+
+name                    whois
+version                 4.7.33
+categories              net
+maintainers             ryandesign
+homepage                http://www.linux.it/~md/software/
+platforms               darwin
+use_parallel_build      yes
+
+description \
+    A replacement whois client
+
+long_description \
+    whois is an improved whois client that follow the \
+    delegations from the Verisign whois server.
+
+master_sites \
+    http://ftp.debian.org/debian/pool/main/w/${name}/
+
+checksums \
+    md5     740915344c06b5566823d86bb5e12a76 \
+    sha1    0b7ead36d5dd3155ca1563e089371da468894176 \
+    rmd160  0c05765851c68d4ae512a735ab4d3a18e77ec770
+
+distname                ${name}_${version}
+worksrcdir              ${name}-${version}
+
+depends_lib \
+    port:gettext
+
+platform darwin {
+    # -lcrypt cannot be used (and is unnecessary) on Mac OS X
+    patchfiles-append \
+        patch-lcrypt.diff
+}
+
+configure.cmd           make
+configure.pre_args      depend
+
+configure.cflags-append \
+    -DENABLE_NLS
+
+configure.ldflags-append \
+    -lintl
+
+post-configure {
+    reinplace "s|/etc/whois.conf|${prefix}/etc/whois.conf|g" \
+        ${worksrcpath}/whois.1
+}
+
+set my_includes {}
+set my_libs {}
+
+build.target-append pos
+build.env \
+    CC=${configure.cc} \
+    CONFIG_FILE=${prefix}/etc/whois.conf \
+    LOCALEDIR=${prefix}/share/locale
+pre-build {
+    eval lappend my_includes ${configure.cflags} ${configure.cppflags}
+    eval lappend my_libs ${configure.ldflags}
+    build.args \
+        prefix=${prefix} \
+        INCLUDES="${my_includes}" \
+        LIBS="${my_libs}"
+}
+
+destroot.target-append  install-pos
+destroot.args           prefix=${destroot}${prefix}
+post-destroot {
+    xinstall -m 644 -W ${worksrcpath} whois.conf ${destroot}${prefix}/etc/whois.conf.sample
+}
+
+post-activate {
+    if {![file exists ${prefix}/etc/whois.conf]} {
+        ui_msg "To customize which whois servers get used, copy"
+        ui_msg "${prefix}/etc/whois.conf.sample to"
+        ui_msg "${prefix}/etc/whois.conf and then make changes."
+    }
+}
+
+variant universal {
+    eval lappend my_includes ${configure.universal_cflags}
+    eval lappend my_libs ${configure.universal_ldflags}
+}
+
+livecheck.check         regex
+livecheck.url           [lindex ${master_sites} 0]?C=M&O=D
+livecheck.regex         "${name}_(.+?)${extract.suffix}"

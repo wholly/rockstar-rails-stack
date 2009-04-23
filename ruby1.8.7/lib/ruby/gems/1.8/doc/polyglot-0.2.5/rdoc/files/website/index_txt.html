@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: index.txt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>index.txt</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>website/index.txt
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Apr 23 14:40:35 +0600 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+h1. polyglot
+</p>
+<p>
+h2. Poly =&gt; many, glot =&gt; languages
+</p>
+<p>
+h2. What
+</p>
+<p>
+Polyglot provides a registry of file types that can be loaded by calling
+its improved version of &#8216;require&#8217;. Each file extension that can
+be handled by a custom loader is registered by calling
+Polyglot.register(&quot;ext&quot;, &amp;lt;class&amp;gt;), and then you can
+simply require &quot;somefile&quot;, which will find and load
+&quot;somefile.ext&quot; using your custom loader.
+</p>
+<p>
+This supports the creation of DSLs having a syntax that is most appropriate
+to their purpose, instead of abusing the Ruby syntax.
+</p>
+<p>
+Required files are attempted first using the normal Ruby loader, and if
+that fails, Polyglot conducts a search for a file having a supported
+extension.
+</p>
+<p>
+h2. Installing
+</p>
+<p>
+&lt;pre syntax=&quot;ruby&quot;&gt;sudo gem install polyglot&lt;/pre&gt;
+</p>
+<p>
+h2. Example
+</p>
+<p>
+Define and register your file type loader in file rubyglot.rb:
+</p>
+<pre>
+    require 'polyglot'
+    class RubyglotLoader
+        def self.load(filename, options = nil, &amp;block)
+            File.open(filename) {|file|
+                # Load the contents of file as Ruby code:
+                # Implement your parser here instead!
+                Kernel.eval(file.read)
+            }
+        end
+    end
+    Polyglot.register(&quot;rgl&quot;, RubyglotLoader)
+</pre>
+<p>
+This file, hello.rgl, will be loaded (this simple example uses Ruby code):
+</p>
+<pre>
+    puts &quot;Initializing&quot;
+    class Hello
+        def initialize()
+            puts &quot;Hello, world\n&quot;
+        end
+    end
+</pre>
+<p>
+Call it from file test.rb:
+</p>
+<pre>
+    require 'rubyglot'  # Create my file type handler
+    require 'hello'     # Can add extra options or even a block here
+    puts &quot;Ready to go&quot;
+    Hello.new
+</pre>
+<p>
+Run:
+</p>
+<pre>
+    $ ruby test.rb
+    Initializing
+    Ready to go
+    Hello, world
+    $
+</pre>
+<p>
+h2. How to submit patches
+</p>
+<p>
+Read the &quot;8 steps for fixing other people&#8216;s code&quot;:<a
+href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code">drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code</a>/
+and for section &quot;8z: Submit patch&quot;:<a
+href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8z-email">drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8z-email</a>,
+email me on the link below.
+</p>
+<p>
+The trunk repository is <tt>svn://rubyforge.org/var/svn/polyglot/trunk</tt>
+for anonymous access.
+</p>
+<p>
+h2. License
+</p>
+<p>
+This code is free to use under the terms of the MIT license.
+</p>
+<p>
+h2. Contact
+</p>
+<p>
+Comments are welcome. Send an email to &quot;Clifford Heath&quot;:<a
+href="mailto:cjheath@rubyforge.org">cjheath@rubyforge.org</a>
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

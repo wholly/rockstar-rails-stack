@@ -1,0 +1,51 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 43468 2008-12-11 01:08:20Z devans@macports.org $
+
+PortSystem 1.0
+
+name            slv2
+version         0.6.1
+maintainers     devans
+categories      audio
+platforms       darwin
+homepage        http://wiki.drobilla.net/SLV2
+
+description     SLV2 is a library to make the use of LV2 plugins as simple as possible for applications.
+
+long_description \
+                ${description}
+
+master_sites    http://download.drobilla.net/
+
+use_bzip2       yes
+
+checksums       md5     c298b372d2229920a96b5bf2eb5fd5b2 \
+                sha1    8fca1e9923b3939152cac634f1f135da0c126bfa \
+                rmd160  62eb80f6789dda05a232863d07957e1855bd62dc
+
+depends_build   port:pkgconfig
+
+depends_lib     port:rasqal \
+                port:raptor \
+                port:redland \
+                port:jack \
+                port:lv2core
+
+patchfiles      patch-src-plugin.c.diff
+
+configure.cmd   ./waf configure
+
+build.cmd       ./waf
+build.target    build
+
+destroot.cmd    ./waf
+destroot.destdir --destdir=${destroot}
+
+variant docs description {Enable building of API documentation} {
+        configure.args-append --build-docs
+        depends_build-append port:doxygen
+}
+
+livecheck.check regex
+livecheck.url   ${master_sites}
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)"

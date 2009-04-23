@@ -1,0 +1,34 @@
+# $Id: Portfile 47000 2009-02-19 16:46:21Z alakazam@macports.org $
+
+PortSystem           1.0
+PortGroup python26 1.0
+
+name                 py26-opengl
+version              3.0.0c1
+categories           python graphics
+platforms            darwin
+maintainers          jmr openmaintainer
+
+description          Python binding to OpenGL
+long_description     PyOpenGL is the cross platform Python binding to OpenGL \
+                     and related APIs. The binding is created using the \
+                     standard ctypes library and is provided under an \
+                     extremely liberal BSD-style Open-Source licenses.
+
+homepage             http://pyopengl.sourceforge.net/
+
+master_sites         sourceforge:pyopengl
+distname             PyOpenGL-${version}
+
+checksums           md5     51a33cea33f3e8eb2eaf12f574dcb1af \
+                    sha1    557dd43f7c9ca9a49bf0d704fe77dbdcd1978e7a \
+                    rmd160  9ee8598410fb0384ded76b691b8cb89914ea95c7
+
+depends_build-append port:py26-setuptools
+depends_lib-append   port:py26-pil port:py26-numpy
+
+test.run             yes
+
+livecheck.check      sourceforge
+livecheck.name       pyopengl
+livecheck.distname   PyOpenGL

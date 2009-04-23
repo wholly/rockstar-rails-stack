@@ -1,0 +1,37 @@
+# $Id: Portfile 26786 2007-07-07 19:04:05Z markd@macports.org $
+
+PortSystem 1.0
+
+name			AssignmentTrackerX
+version			2.0beta3.1
+categories		aqua
+platforms		darwin
+maintainers		adamw@freebsd.org
+homepage		http://www.atxproject.net/
+description		School assignment tracker
+
+long_description	\
+			AssignmentTracker X is student-targetted software \
+			for Mac OS X to help students manage and track their \
+			assignments and grades throughout all of their classes \
+			with assignment lists, reports and time management features.
+			
+			
+master_sites		sourceforge:asntrackerx
+checksums		md5 d273792b987090af99b723cbb79b4d5b
+
+distname		${name}_2B31_Source
+use_bzip2		yes
+extract.suffix		.tbz
+
+worksrcdir		AssignmentTrackerX
+
+use_configure		no
+
+build.type		pbx
+build.target
+
+destroot {		xinstall -d -m 755 ${destroot}/Applications/MacPorts
+			file copy ${worksrcpath}/build/Release/AssignmentTracker\ X.app \
+				${destroot}/Applications/MacPorts/${name}.app
+			}

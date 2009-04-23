@@ -1,0 +1,57 @@
+# $Id: Portfile 47474 2009-02-28 10:20:34Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    winetricks
+version                 20090227
+categories              x11
+maintainers             ryandesign
+homepage                http://code.google.com/p/winezeug/
+master_sites            http://www.kegel.com/wine/
+platforms               darwin
+distname                ${name}
+dist_subdir             ${name}/${version}
+extract.suffix
+extract.mkdir           yes
+use_configure           no
+universal_variant       no
+use_parallel_build      no
+
+description \
+    downloads and installs various redistributable runtime libraries
+
+long_description \
+    ${name} can help you prepare your system for Windows applications \
+    that mistakenly assume all users' systems have all the needed \
+    redistributable runtime libraries or fonts.
+
+checksums \
+    md5     84ce5bb6608b2516e5521174fe0c063b \
+    sha1    bd317f43898d59e42a60060a53dd5229f998e456 \
+    rmd160  ac09351772fffafdf8b3f8dbbd6c665777e613ef
+
+patchfiles \
+    patch-x11prefix.diff
+
+depends_run \
+    path:bin/wine:wine \
+    port:cabextract \
+    port:openssl \
+    bin:curl:curl
+
+extract {
+    copy ${distpath}/${name} ${worksrcpath}
+}
+
+build {
+    reinplace "s%@X11PREFIX@%${x11prefix}%" ${worksrcpath}/${name}
+}
+
+destroot {
+    xinstall -m 755 ${worksrcpath}/${name} ${destroot}${prefix}/bin/${name}
+}
+
+
+livecheck.check         regex
+livecheck.url           [lindex ${master_sites} 0]${name}
+livecheck.regex         {^VERSION=(\d+)}

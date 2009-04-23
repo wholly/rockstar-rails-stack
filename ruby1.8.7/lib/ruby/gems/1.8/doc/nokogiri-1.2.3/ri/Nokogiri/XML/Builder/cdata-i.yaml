@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::XML::Builder#cdata
+is_singleton: false
+name: cdata
+params: (string)
+visibility: public

@@ -1,0 +1,44 @@
+# $Id: Portfile 32348 2007-12-26 20:23:54Z pmq@macports.org $
+
+PortSystem          1.0
+
+name                bittwist
+categories          net security
+version             1.0
+platforms	    darwin
+maintainers	    pmq
+
+description         Simple yet powerful libpcap-based Ethernet packet generator.
+long_description    \
+    Bit-Twist is a simple yet powerful libpcap-based Ethernet packet generator. \
+    It is designed to compliment tcpdump, which by itself has done a great job \
+    in capturing network traffic. With Bit-Twist, you can now regenerate the \
+    captured traffic onto a live network! Packets are generated from tcpdump \
+    trace file (.pcap file). Bit-Twist also comes with a comprehensive trace \
+    file editor to allow you to change the contents of a trace file.
+
+homepage            http://bittwist.sourceforge.net
+master_sites        sourceforge
+distname	    ${name}-bsd-${version}
+checksums           md5 61848834f51c1f00b0da28cc4afefcaf \
+		    sha1 64575ac50be534695ae5bdd640a6797aacdc3eaf
+
+depends_lib         port:libpcap
+worksrcdir	    ${name}-${version}
+
+livecheck.check	    regex
+livecheck.url	    ${homepage}
+livecheck.regex	    bittwist-bsd-(.*?)${extract.suffix}
+
+configure {
+    reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/Makefile
+}
+
+build.env           CFLAGS="${configure.cflags} -D__BSD_VISIBLE"
+
+destroot {
+    xinstall -m 755 -W ${worksrcpath}/src bittwist bittwistb bittwiste \
+        ${destroot}${prefix}/bin
+    xinstall -m 644 -W ${worksrcpath}/doc bittwist.1 bittwistb.1 bittwiste.1 \
+        ${destroot}${prefix}/share/man/man1
+}

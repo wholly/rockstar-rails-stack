@@ -1,0 +1,24 @@
+# $Id: Portfile 47180 2009-02-23 03:23:44Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Plugin-Session-State-Cookie 0.10
+maintainers           narf_tm openmaintainer
+description           Maintain session IDs using cookies.
+long_description      In order for Catalyst::Plugin::Session to work the \
+                      session ID needs to be stored on the client, and the \
+                      session data needs to be stored on the server.  This \
+                      plugin stores the session ID on the client using the \
+                      cookie mechanism.
+
+platforms             darwin
+
+checksums             md5 0c0f8992eecbe98295f3d36a9b378edc \
+                      sha1 2a319e80807b5eea5929e9ef3857370fbe993712 \
+                      rmd160 de38a2b89fff89d6f81e8e0c1469c44570399f23
+
+depends_lib-append    port:p5-catalyst-runtime \
+                      port:p5-catalyst-plugin-session \
+                      port:p5-test-mockobject \
+                      port:p5-mro-compat

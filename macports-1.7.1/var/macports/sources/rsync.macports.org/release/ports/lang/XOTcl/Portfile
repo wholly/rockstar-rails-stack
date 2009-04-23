@@ -1,0 +1,27 @@
+# $Id: Portfile 30235 2007-10-22 23:13:37Z jmpp@macports.org $
+
+PortSystem 1.0
+name			xotcl
+version			1.1.1
+revision		0
+categories		lang
+maintainers		nomaintainer
+description		Extended Object Tool Command Language
+long_description	XOTcl (XOTcl, pronounced exotickle) is an object-oriented scripting language based on MIT's OTcl. It is intended as a value added replacement for OTcl.
+platforms		darwin
+homepage		http://media.wu-wien.ac.at
+master_sites		${homepage}/download/
+checksums		md5 d8f97042594ffa076813907155c74a2a
+destroot.destdir	DESTDIR=${destroot}
+worksrcdir		${name}-${version}/unix
+depends_lib		lib:libtk8.4:tk
+
+# Use a reasonable default
+set tclconfig ${prefix}/lib
+configure.args		--enable-threads --with-tcl=${tclconfig} --with-tk=${prefix}/lib
+
+platform darwin 7 {
+	global tclconfig
+
+	set tclconfig /System/Library/Frameworks/Tcl.framework
+}

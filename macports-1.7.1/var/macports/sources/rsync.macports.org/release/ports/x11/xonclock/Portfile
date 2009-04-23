@@ -1,0 +1,20 @@
+# $Id: Portfile 33297 2008-01-23 09:32:47Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			xonclock
+version			0.0.7.5
+categories		x11
+platforms		darwin
+maintainers		nomaintainer
+description		X on-screen analog clock displayer with assignable skins
+long_description	${description}
+
+homepage		http://xonclock.sourceforge.net/
+master_sites	sourceforge
+checksums		md5 265279fb4a8ccaf22321f88843f69454
+
+configure.args	--mandir=\\\${prefix}/share/man
+
+destroot.destdir	prefix=${destroot}${prefix}
+

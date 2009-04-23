@@ -1,0 +1,11 @@
+# $Id: Portfile 30247 2007-10-23 02:05:08Z jmpp@macports.org $
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup		MLDBM 2.01
+maintainers		nomaintainer
+description		Store multi-level hash structure in single level tied hash
+long_description	${description}
+checksums		md5 99550ae2cffbc0bb3eb0358631077c10
+platforms		darwin
+depends_lib-append      port:p5-data-dumper

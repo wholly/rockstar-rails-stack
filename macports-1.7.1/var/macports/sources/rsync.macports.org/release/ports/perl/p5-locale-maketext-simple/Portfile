@@ -1,0 +1,14 @@
+# $Id: Portfile 33859 2008-02-06 18:27:27Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		Locale-Maketext-Simple 0.16
+
+maintainers		dluke@geeklair.net
+description		Simple interface to Locale::Maketext::Lexicon.
+
+long_description	${description}
+
+checksums		md5 d6dd0e79802f30d0eef723ec23021f60
+platforms		darwin

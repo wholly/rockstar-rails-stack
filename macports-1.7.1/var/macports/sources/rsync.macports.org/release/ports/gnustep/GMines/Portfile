@@ -1,0 +1,19 @@
+# $Id: Portfile 30229 2007-10-22 23:01:24Z jmpp@macports.org $
+
+PortSystem  1.0
+PortGroup   gnustep 1.0
+
+name        GMines
+version     0.1
+platforms   darwin
+maintainers nomaintainer
+
+description  The well-known minesweeper game.
+long_description \
+    ${description}
+
+homepage        http://www.gnustep.it/marko/${name}/
+master_sites    ${homepage}
+checksums       md5 3e07522f5771f3c516ac34a5ffcc0b4e
+extract.suffix  .tgz
+distname        ${name}

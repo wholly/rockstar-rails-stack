@@ -1,0 +1,25 @@
+# $Id: Portfile 47178 2009-02-23 03:19:25Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Plugin-Session 0.20
+maintainers           narf_tm openmaintainer
+description           Generic Session plugin
+long_description      Generic Session plugin - ties together server \
+                      side storage and client side state required to \
+                      maintain session data.
+
+platforms             darwin
+
+checksums             md5 21b71cd5ff088fa9e83ac3b679cfbce8 \
+                      sha1 dc9e304956ecb3ee340995328cb9e6bd25967bc0 \
+                      rmd160 335a21b89d3112f3f925e6a803c3b2afeaf161a0
+
+depends_lib-append    port:p5-catalyst-runtime \
+                      port:p5-object-signature \
+                      port:p5-test-deep \
+                      port:p5-test-exception \
+                      port:p5-test-mockobject \
+                      port:p5-tie-refhash \
+                      port:p5-mro-compat

@@ -1,0 +1,38 @@
+# $Id: Portfile 49367 2009-04-08 11:56:05Z illogic-al@macports.org $
+
+PortSystem  1.0
+PortGroup   cmake 1.0
+
+name		strigi
+version		0.6.3
+revision    0
+categories	devel
+maintainers	clubjuggler@gmail.com openmaintainer
+description	Fastest and smallest desktop searching program
+long_description Strigi is a daemon which uses a very fast and efficient crawler that can index data on your harddrive. Indexing operations are performed without hammering your system, this makes Strigi the fastest and smallest desktop searching program. Strigi can index different file formats, including the contents of the archive files.
+platforms	darwin
+homepage	http://strigi.sourceforge.net/
+master_sites	sourceforge
+use_bzip2	yes
+patchfiles      strigi-fix-check-gcc-visibility-macro-ccache.patch
+patch.pre_args  -p1
+
+depends_lib     port:bzip2 \
+                port:clucene \
+                port:dbus \
+                port:libxml2 \
+                port:zlib
+
+checksums	md5 56088c25dedacf55cfc11f7ba7c18ba7
+
+# Best practice for CMake dictates that builds should be out of source.
+# However, it appears that strigi uses java to create source files and
+# they don't get put in the right place if you're doing an out of source
+# build, so for now this is an in-source build. That does, however, simplify
+# things because the build and destroot phases can be left at the default
+# values.
+
+post-destroot	{
+		xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+		xinstall -m 644 -W ${worksrcpath} COPYING README AUTHORS ChangeLog TODO ${destroot}${prefix}/share/doc/${name}
+}

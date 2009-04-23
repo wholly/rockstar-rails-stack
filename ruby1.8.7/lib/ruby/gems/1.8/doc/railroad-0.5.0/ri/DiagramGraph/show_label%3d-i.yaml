@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: DiagramGraph#show_label=
+is_singleton: false
+name: show_label=
+params: (value)
+visibility: public

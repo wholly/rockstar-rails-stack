@@ -1,0 +1,14 @@
+# $Id: Portfile 41065 2008-10-22 03:52:05Z ryandesign@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		MIME-Lite 3.021
+maintainers		nomaintainer
+description		a low-calorie MIME generator
+long_description	${description}
+platforms		darwin
+checksums \
+    md5     7b3f4b9b3f8a0023dbc62859ef9a775f \
+    sha1    198c0fffa6d29c28bc0bb3c535116bda37def587 \
+    rmd160  d01f24ecb6d6d154546bedbc73234b3bedf476a4

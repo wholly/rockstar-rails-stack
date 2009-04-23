@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Rails::Example::RenderObserver#warn_deprecation
+is_singleton: false
+name: warn_deprecation
+params: (deprecated_method, new_method)
+visibility: public

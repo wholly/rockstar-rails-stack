@@ -1,0 +1,17 @@
+# $Id: Portfile 30254 2007-10-23 02:22:51Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			timespan
+version			2.0
+categories		sysutils
+platforms		darwin
+maintainers		nomaintainer
+description		calculates time between two specified dates
+long_description	Calculates time (days, hours, minutes, or seconds) between \
+				1 Jan 1970 and the specified date or between two specified dates.
+
+homepage		http://timespan.sourceforge.net/
+master_sites	sourceforge
+checksums		md5 392cba28df38f806af5a3b43b459768f
+use_bzip2		yes

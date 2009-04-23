@@ -1,0 +1,40 @@
+# $Id: Portfile 47553 2009-03-01 00:45:09Z jeremyhu@macports.org $
+
+PortSystem      1.0
+
+name            xforms
+version         1.0.90
+revision        1
+categories      x11
+maintainers     ira.uka.de:raphael openmaintainer
+description     GUI toolkit based on Xlib
+long_description XForms is a GUI toolkit based on Xlib for X Window Systems. \
+                It features a rich set of objects, such as buttons, \
+                scrollbars, and menus etc. integrated into an easy and \
+                efficient object/event callback execution model that allows \
+                fast and easy construction of X-applications. In addition, \
+                the library is extensible and new objects can easily be \
+                created and added to the library.
+homepage        http://savannah.nongnu.org/projects/${name}/
+platforms       darwin
+master_sites    http://download.savannah.nongnu.org/releases/${name}
+livecheck.url   http://savannah.nongnu.org/news/?group=${name}
+livecheck.regex XForms (.*) released
+checksums       md5 558b600402430f207e671e2d0d725b6d \
+                sha1 7ef0655d1ba481a09af643455ec11afdcc28ce8a \
+                rmd160 f709bea1e2c3a867092e7cc4c7c5c1c60055b6e3
+depends_lib \
+	port:xorg-libsm \
+	port:xpm \
+	port:jpeg
+
+# not trivial to autoreconf
+universal_variant no
+
+pre-configure {
+    if { ![file exists ${prefix}/lib/pkgconfig/x11.pc] } {
+        configure.cppflags-append -I${x11prefix}/include
+        configure.ldflags-append  -L${x11prefix}/lib
+    }
+}
+

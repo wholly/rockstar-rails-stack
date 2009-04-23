@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::XML::Reader
+is_singleton: true
+name: Reader
+params: (string, url = nil, encoding = nil, options = 0)
+visibility: public

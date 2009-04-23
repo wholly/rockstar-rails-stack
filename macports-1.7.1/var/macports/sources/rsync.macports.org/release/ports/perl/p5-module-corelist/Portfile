@@ -1,0 +1,17 @@
+# $Id: Portfile 45863 2009-01-23 20:36:03Z narf_tm@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Module-CoreList 2.17
+maintainers         narf_tm openmaintainer
+description         what modules shipped with versions of perl
+long_description    Module::CoreList contains the hash of hashes \
+                    %Module::CoreList::version, that is keyed on perl \
+                    version as indicated in \$].
+
+platforms           darwin
+
+checksums           md5 a006aa836dcc584acfbf3422df62f739 \
+                    sha1 8390235120aa4258834524569f9deddca674d972 \
+                    rmd160 b4f4f6e950ab2790a9fe378a4b56c49751e7cf60

@@ -1,0 +1,16 @@
+# $Id: Portfile 47101 2009-02-22 03:12:10Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-misc-cyrillic 1.0.0 cyrillic
+revision            1
+maintainers         blb openmaintainer
+description         X.org Miscellaneous Cyrillic font
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     3596907d7a2a99c81d8de99bc4552b6a \
+                    sha1    a71b78d4c82ca670bcc483740cc3e63d654fbe1d \
+                    rmd160  807c782b8e498d85fa21e15a3397d072e3dda501
+

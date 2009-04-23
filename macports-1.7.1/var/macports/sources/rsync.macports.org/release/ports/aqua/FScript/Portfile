@@ -1,0 +1,69 @@
+# $Id: Portfile 45908 2009-01-25 00:43:22Z blb@macports.org $
+
+PortSystem 1.0
+name		FScript
+version		1.3.5
+categories	aqua lang
+maintainers	bfulgham@mac.com
+description	Open-source interactive Cocoa scripting environment
+long_description	\
+	F-Script is an open-source interactive and scripting environment \
+	for Cocoa.  Based on Smalltalk, F-Script provides a pure object- \
+	oriented environment that leverages Mac OS X technologies and \
+	frameworks.  It aims to be a useful and fun tool for both \
+	beginners and experts, allowing interactively exploring, testing \
+	and using Cocoa-based objects and frameworks.
+
+set srcdistdate 20070421
+
+homepage	http://www.fscript.org
+platforms	macosx
+master_sites	http://www.fscript.org/download
+distfiles	FScriptSources-${srcdistdate}.tar.gz
+checksums	md5 1e06058c63a7b7e8f8d54eb72efdb5d4
+
+worksrcdir	FScriptSources-${srcdistdate}/FScript
+
+post-extract {
+	reinplace "s|Cocoa/cocoa.h|Cocoa/Cocoa.h|" ${worksrcpath}/F-Script/FScriptAppController.h
+}
+
+use_configure	no
+
+set pkgname	F-Script
+
+build.type 	pbx
+build.target	-target ${pkgname} -target FScriptFramework -target FScriptPalette \
+		-target FSTest1 -target FSTest2 -target TigerAndLaterOnly \
+		-configuration Deployment
+build.args	build -project FScript.xcodeproj
+
+set xcodebuilddir	build
+platform darwin 8	{
+	if {$xcodeversion == "2.1"} {
+		set xcodebuilddir	build/Deployment
+	}
+}
+
+platform darwin 9	{
+	set xcodebuilddir	build/Deployment
+}
+
+destroot	{
+	# Applications
+	xinstall -d -m 755 ${destroot}/Applications/MacPorts/F-Script
+	file copy ${build.dir}/${xcodebuilddir}/${pkgname}.app \
+		${destroot}/Applications/MacPorts/F-Script/${pkgname}.app
+	file copy ${build.dir}/${xcodebuilddir}/FSTest1.app \
+		${destroot}/Applications/MacPorts/F-Script/FSTest1.app
+	file copy ${build.dir}/${xcodebuilddir}/FSTest2.app \
+		${destroot}/Applications/MacPorts/F-Script/FSTest2.app
+
+	# Frameworks
+	xinstall -d -m 755 ${destroot}/Library/Frameworks/
+	file copy ${build.dir}/${xcodebuilddir}/${name}.framework \
+		${destroot}/Library/Frameworks/
+	xinstall -d -m 755 ${destroot}/Developer/Palettes/
+	file copy ${build.dir}/${xcodebuilddir}/${name}Palette.palette \
+		${destroot}/Developer/Palettes/${name}Palette.palette
+}

@@ -1,0 +1,42 @@
+# $Id: Portfile 41548 2008-11-05 22:56:25Z mcalhoun@macports.org $
+
+PortSystem      1.0
+
+name            atool
+version         0.35.0
+categories      archivers
+platforms       darwin
+maintainers     devils.com:expiation
+homepage        http://www.nongnu.org/atool/
+description     An archival front-end
+long_description atool is a script for managing file archives of various \
+                types (tar, tar+gzip, zip etc).
+
+master_sites    http://download.savannah.gnu.org/releases/atool/
+
+checksums       md5 d038450b20d28b773cdcded6e2d1fcc6 \
+                sha1 e1c8ecdb40ce5d5686015c04fc854408f667509a \
+                rmd160 3c7178dc976adca43be5e202ec4ed85f4279b76b
+
+post-patch {
+	# /usr/bin/sed does not work, use ${prefix}/bin/gsed instead
+	reinplace -E \
+		"s|(\[\t \])sed |\\1${prefix}/bin/gsed |g" \
+		${worksrcpath}/configure \
+		${worksrcpath}/Makefile.in
+}
+
+depends_build	port:gsed
+depends_lib	path:bin/perl:perl5
+
+configure.perl  ${prefix}/bin/perl
+
+post-destroot {
+	set docdir ${prefix}/share/doc/${name}
+	xinstall -d ${destroot}${docdir}
+	xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README TODO \
+		${destroot}${docdir}
+}
+
+universal_variant   no
+

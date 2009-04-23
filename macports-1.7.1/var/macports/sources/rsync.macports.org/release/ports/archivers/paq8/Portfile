@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 44259 2008-12-24 09:23:35Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name                paq8
+version             8p
+categories          archivers
+platforms           darwin
+maintainers         jmr openmaintainer
+description         PAQ8, a tight but slow compressor
+long_description    PAQ is a series of open source data compression \
+                    archivers that have evolved through collaborative \
+                    development to top rankings on several benchmarks \
+                    measuring compression ratio (although at the expense \
+                    of speed and memory usage).
+
+homepage            http://cs.fit.edu/~mmahoney/compression/
+master_sites        ${homepage}
+use_zip             yes
+distname            paq${version}
+checksums           md5 52fe1592966cd497975e87ebf926845a \
+                    sha1 60dc8f7cb02e0eb580efb96ab3da4f75b77673fe \
+                    rmd160 baa15a608a993883c919a6b699635a2e6b39e9bf
+
+extract.mkdir       yes
+use_configure       no
+
+build.cmd           ${configure.cxx}
+build.args          -O3 -DUNIX -DNOASM -o paq8
+build.target        paq${version}.cpp
+
+destroot.cmd        install
+destroot.target     paq8
+destroot.destdir    ${destroot}${prefix}/bin
+
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 ${worksrcpath}/readme.txt ${destroot}${prefix}/share/doc/${name}
+}
+
+variant universal {
+    build.args-append   ${configure.universal_cflags}
+}
+
+livecheck.check     regex
+livecheck.url       ${homepage}
+livecheck.regex     "paq(8\[\\w\]+)${extract.suffix}"

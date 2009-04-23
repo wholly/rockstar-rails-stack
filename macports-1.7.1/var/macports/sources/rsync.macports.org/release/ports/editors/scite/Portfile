@@ -1,0 +1,88 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 41961 2008-11-12 16:02:16Z nox@macports.org $
+
+PortSystem      1.0
+
+name            scite
+version         1.77
+categories      editors
+platforms       darwin
+maintainers     nox openmaintainer
+description     SciTE is a SCIntilla based Text Editor.
+
+long_description \
+    Originally built to demonstrate Scintilla, it has grown to be a generally \
+    useful editor with facilities for building and running programs. It is best \
+    used for jobs with simple configurations.
+
+homepage        http://scintilla.sourceforge.net/SciTE.html
+master_sites    sourceforge:scintilla
+distname        ${name}[strsed ${version} {g/\.//}]
+extract.suffix  .tgz
+
+depends_build   port:pkgconfig
+depends_lib     port:gtk2
+
+checksums       md5     ba016919190c12cfb712e1f004df4187 \
+                sha1    9e49b13ada9aba10bed9db6ecdf5925f957caac5 \
+                rmd160  1aabe4899a2d7b57a397c0fdec961d0fdc05169e
+
+worksrcdir      ${name}/gtk
+
+patchfiles      patch-scintilla-gtk-makefile.diff \
+                patch-scite-gtk-makefile.diff
+
+post-patch {
+    reinplace -E "s/#ifdef (PLAT_MACOSX|__APPLE__)/#if PLAT_MACOSX/" \
+        ${workpath}/scintilla/include/Platform.h \
+        ${workpath}/scintilla/src/Editor.cxx
+}
+
+use_configure   no
+
+build.args      prefix=${prefix} GTK2=yes
+
+use_parallel_build  yes
+
+pre-build {
+    if {[variant_isset universal]} {
+        set lipo_args {}
+
+        foreach {arch} {i386 ppc} {
+            system "make -C ${workpath}/scintilla/gtk \
+                GTK2=yes UNIVERSAL_CFLAGS=\"-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ${arch}\""
+
+            file mkdir ${workpath}/scintilla/bin/${arch}
+            move ${workpath}/scintilla/bin/scintilla.a ${workpath}/scintilla/bin/${arch}/scintilla.a
+
+            system "make -C ${workpath}/scintilla/gtk \
+                clean"
+
+            lappend lipo_args -arch ${arch} ${workpath}/scintilla/bin/${arch}/scintilla.a
+        }
+
+        system "lipo -create [join ${lipo_args}] -output ${workpath}/scintilla/bin/scintilla.a"
+    } else {
+        system "make -C ${workpath}/scintilla/gtk \
+            GTK2=yes"
+    }
+}
+
+destroot.destdir    prefix=${destroot}${prefix}
+
+post-destroot {
+    xinstall -m 444 $worksrcpath/../doc/scite.1 $destroot$prefix/share/man/man1
+}
+
+variant universal {
+    post-patch {
+        reinplace -E "/^CXXBASEFLAGS/s|\$| \$(UNIVERSAL_CFLAGS)|" \
+            ${workpath}/scintilla/gtk/makefile
+        reinplace -E "/^CXXBASEFLAGS/s|\$| ${configure.universal_cflags}|" \
+            ${worksrcpath}/makefile
+    }
+
+    build.args-append   "UNIVERSAL_LDFLAGS=\"${configure.universal_ldflags}\""
+}
+
+livecheck.distname  SciTE

@@ -1,0 +1,34 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49372 2009-04-08 16:41:25Z devans@macports.org $
+
+PortSystem 1.0
+
+name            cairomm-devel
+set my_name     cairomm
+version         1.7.2
+revision        2
+categories      graphics
+maintainers     devans openmaintainer
+dist_subdir     ${my_name}
+distname        ${my_name}-${version}
+
+description     Cairo is a vector graphics library with cross-device output support.
+long_description \
+                Cairo is designed to produce identical \
+                output on all output media while taking advantage of \
+                display hardware acceleration when available \
+                (eg. through the X Render Extension).
+homepage        http://cairographics.org/
+master_sites    ${homepage}releases/
+platforms       darwin
+
+checksums       md5     b4758616872cb11068cba4e8d3c38b89 \
+                sha1    d0c84195d7c4f16688283af259dd6438dddb0db6 \
+                rmd160  4587a5e87bd6be171b926cc5f1ba38da6caf4bab
+
+depends_lib     port:cairo \
+                port:libsigcxx2
+
+livecheck.check regex
+livecheck.url   http://cairographics.org/releases/
+livecheck.regex ${my_name}-(\[0-9\]+\\.\[0-9\]*\[13579\]\\.\[0-9\]+)

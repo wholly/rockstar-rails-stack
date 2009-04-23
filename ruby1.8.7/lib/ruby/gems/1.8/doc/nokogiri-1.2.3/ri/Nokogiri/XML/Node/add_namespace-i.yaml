@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Add a namespace with <tt>prefix</tt> using <tt>href</tt>
+full_name: Nokogiri::XML::Node#add_namespace
+is_singleton: false
+name: add_namespace
+params: |
+  add_namespace(prefix, href)
+
+visibility: public

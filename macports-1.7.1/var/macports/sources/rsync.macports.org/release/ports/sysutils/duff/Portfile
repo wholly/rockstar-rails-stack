@@ -1,0 +1,25 @@
+# $Id: Portfile 36451 2008-05-02 18:28:01Z ryandesign@macports.org $
+
+PortSystem        1.0
+
+name              duff
+version           0.4
+categories        sysutils
+platforms         darwin
+maintainers       pmq
+
+description       Unix command-line utility for quickly finding duplicates \
+                  in a given set of files
+long_description  ${description}
+
+homepage          http://duff.sourceforge.net
+master_sites      sourceforge
+checksums         md5 9767e471232c1b4ee553ae40dbe60464 \
+                  sha1 2cb31f54da35469631756544197d33db3115f85c
+use_bzip2         yes
+
+configure.args    --mandir ${prefix}/share/man
+
+pre-destroot {
+    system "cd ${worksrcpath} && chmod a+x install-sh"
+}

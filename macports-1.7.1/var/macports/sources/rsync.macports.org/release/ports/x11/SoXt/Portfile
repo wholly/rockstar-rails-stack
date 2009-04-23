@@ -1,0 +1,50 @@
+# $Id: Portfile 47575 2009-03-01 01:26:25Z jeremyhu@macports.org $
+
+PortSystem		1.0
+name			SoXt
+version			1.2.2
+revision                2
+description		Xt/Motif glue library for Coin
+long_description	SoXt provides the programmer with a high-level \
+	application programmer's interface (API) in C++. The library   \
+	primarily includes a class-hierarchy of viewer components of   \
+	varying functionality and complexity, with various modes for   \
+	the end-user to control the 3D-scene camera interaction.
+
+categories		x11 graphics devel
+homepage		http://www.coin3d.org/lib/soxt/
+platforms		darwin
+maintainers		css
+master_sites		http://ftp.coin3d.org/coin/src/all/
+checksums		md5 25f7d18998e6cc1403e0f3ae0c235500
+
+depends_build \
+	port:doxygen
+
+depends_lib \
+	port:mesa \
+	port:xorg-libXi \
+	port:xorg-libXmu \
+	port:xorg-libXp \
+	port:xpm \
+	lib:libXm:openmotif \
+	port:Coin
+
+configure.args		--enable-man --mandir=${prefix}/share/man \
+			--with-coin=${prefix}
+
+# AC_X_PATH blindly asks xmkmf where X11 is, and it always uses /usr/X11R6.
+# This block helps us link correctly and setup our pc files correctly when we
+# are +system_x11 and x11prefix is somewhere non-standard and should cause
+# AC_X_PATH to let us setup our CPPFLAGS and LDFLAGS without interference
+configure.args-append --x-include=${prefix}/include --x-lib=${prefix}/lib
+if { ![file exists ${prefix}/lib/pkgconfig/x11.pc] } {
+    pre-configure {
+        configure.cppflags-append -I${x11prefix}/include
+        configure.ldflags-append  -L${x11prefix}/lib
+    }
+}
+
+platform darwin {
+	configure.args-append	--enable-darwin-x11
+}

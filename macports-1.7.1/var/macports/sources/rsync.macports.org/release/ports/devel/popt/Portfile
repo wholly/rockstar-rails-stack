@@ -1,0 +1,52 @@
+# $Id: Portfile 41563 2008-11-06 09:37:21Z nox@macports.org $
+
+PortSystem 1.0
+
+name		popt
+version		1.14
+categories	devel
+maintainers	n3npq@mac.com
+description	A getopt(3) like library with a number of enhancements
+
+long_description popt is a command line parsing library. It contains a number of \
+enhancements over getopt(3), including being fully reentrant, allowing users to \
+alias command line arguments, providing convience functions for parsing strings \
+into argv[] style arrays and popt can parse arbitrary argv[] style arrays.
+
+platforms	darwin freebsd
+
+homepage	http://rpm5.org/
+master_sites	${homepage}files/popt/
+
+depends_lib	port:gettext \
+		port:libiconv
+
+post-destroot {
+    if {[file exists ${destroot}${prefix}/share/locale/locale.alias]} {
+        delete ${destroot}${prefix}/share/locale/locale.alias
+    }
+
+    if {[file exists ${destroot}${prefix}/lib/charset.alias]} {
+        delete ${destroot}${prefix}/lib/charset.alias
+    }
+
+	set docdir ${prefix}/share/doc/${name}-${version}
+	xinstall -d ${destroot}${docdir}
+	xinstall -m 0644 -W ${worksrcpath} ABOUT-NLS CHANGES COPYING README \
+		${destroot}${docdir}
+}
+
+test.run    yes
+test.target check
+
+checksums       md5     4f90a07316eb825604dd10ae4f9f3f04 \
+                sha1    af0a7e2b187d600d624515a53d88374c15104e15 \
+                rmd160  5dce0552b249ee9640ccb9089ada1044be94206b
+
+platform darwin 7 {
+        depends_build-append port:autoconf
+}
+
+livecheck.check regex
+livecheck.url   ${master_sites}/?C=M&O=D
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)

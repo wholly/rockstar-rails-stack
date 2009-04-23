@@ -1,0 +1,44 @@
+# $Id: Portfile 42754 2008-11-30 16:17:47Z mcalhoun@macports.org $
+
+PortSystem      1.0
+
+name            system-tools-backends
+version         2.6.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin 
+description     Tools aimed to ease computer administration.
+
+long_description \
+    Formerly known as the Ximian Setup Tools, the GST are \
+    a fully integrated set of tools aimed to make easy the \
+    job that means the computer administration on an UNIX \
+    or Linux system. They're thought to help from the new \
+    Linux or UNIX user to the system administrators. The \
+    GNOME System Tools are free software, licensed under \
+    the terms of the GNU General Public License.
+
+homepage        http://system-tools-backends.freedesktop.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5 faf321012e92b72305878cd684547c54 \
+                sha1 6be9e8c4f8f62e8be363ffb39831901c9a7981f7 \
+                rmd160 6e21e945f3863726f02e665eb0c31512d9b7c021
+
+depends_build   port:pkgconfig \
+                path:bin/perl:perl5 \
+                port:p5-net-dbus
+
+depends_lib     port:libgnomeui \
+                path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:dbus \
+                port:dbus-glib
+
+depends_run     path:bin/perl:perl5 \
+                port:p5-net-dbus
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

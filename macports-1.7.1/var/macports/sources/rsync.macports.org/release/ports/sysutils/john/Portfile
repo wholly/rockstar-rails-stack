@@ -1,0 +1,72 @@
+# $Id: Portfile 30254 2007-10-23 02:22:51Z jmpp@macports.org $
+
+PortSystem          1.0
+name                john
+version             1.7.0.2
+categories          sysutils security
+maintainers         nomaintainer
+description         Featureful Unix password cracker
+long_description    John the Ripper is a UNIX password cracker, currently available for \
+                    UNIX (tested with Linux x86, FreeBSD x86, Solaris 2.x SPARC, OSF/1 \
+                    Alpha), DOS, WinNT/Win95.
+homepage            http://www.openwall.com/john/
+platforms           darwin
+master_sites        http://www.openwall.com/john/f/ \
+                    ftp://ftp2.msk.ru.openwall.com/pub/projects/john/${version}/ \
+                    ftp://ftp.ibiblio.org/pub/linux/distributions/openwall/projects/john/${version}/ \
+                    ftp://ftp.cert.dfn.de/pub/tools/net/Openwall/projects/john/${version}/ \
+                    http://distro.ibiblio.org/pub/linux/distributions/openwall/projects/john/${version}/ \
+                    ftp://ftp.mirrorgeek.com/openwall/projects/john/${version}/ \
+                    http://mirrorgeek.com/openwall/projects/john/${version}/ \
+                    ftp://ftp1.msk.ru.openwall.com/pub/projects/john/${version}/ \
+                    ftp://ftp.spb.ru.openwall.com/pub/projects/john/${version}/ \
+                    ftp://ftp.man.szczecin.pl/pub/Linux/Owl/projects/john/${version}/ \
+                    ftp://ftp.se.openwall.com/pub/projects/john/${version}/ \
+                    http://ftp.sunet.se/pub/security/tools/net/Openwall/projects/john/${version}/ \
+                    ftp://ftp.sunet.se/pub/security/tools/net/Openwall/projects/john/${version}/ \
+                    ftp://ftp.mathematik.uni-marburg.de/pub/mirror/openwall/projects/john/${version}/ \
+                    ftp://ftp.wiretapped.net/pub/openwall/projects/john/${version}/ \
+                    ftp://ftp.ua.openwall.com/pub/projects/john/${version}/ \
+                    ftp://ftp.cz.openwall.com/pub/projects/john/${version}/
+use_bzip2           yes
+checksums           md5 0a87dca1f149493fc087ea8a8b6ae5d5 \
+                    sha1 bc6895c986d65f502366cf93c91f88ba865572b6 \
+                    rmd160 9e75f5fd5561595ec2f3a1a290e85605234b8c41
+worksrcdir          ${distname}/src
+
+post-patch {
+    if {[variant_isset powerpc]} {
+    reinplace "s,CFLAGS =,CFLAGS = -DJOHN_SYSTEMWIDE=1 -DJOHN_SYSTEMWIDE_EXEC=\\\\\\\\\\\\\"${prefix}/share/john\\\\\\\\\\\\\" -DJOHN_SYSTEMWIDE_HOME=\\\\\\\\\\\\\"${prefix}/share/john\\\\\\\\\\\\\",g" ${worksrcpath}/Makefile
+    reinplace "s,CFLAGS=\",CFLAGS=\"-DJOHN_SYSTEMWIDE=1 -DJOHN_SYSTEMWIDE_EXEC=\\\\\\\\\\\\\"${prefix}/share/john\\\\\\\\\\\\\" -DJOHN_SYSTEMWIDE_HOME=\\\\\\\\\\\\\"${prefix}/share/john\\\\\\\\\\\\\" ,g" ${worksrcpath}/Makefile
+    } else {
+        reinplace "s,CFLAGS =,CFLAGS = -DJOHN_SYSTEMWIDE=1 -DJOHN_SYSTEMWIDE_EXEC=\\\\\\\"${prefix}/share/john\\\\\\\" -DJOHN_SYSTEMWIDE_HOME=\\\\\\\"${prefix}/share/john\\\\\\\",g" ${worksrcpath}/Makefile
+        reinplace "s,CFLAGS=\",CFLAGS=\"-DJOHN_SYSTEMWIDE=1 -DJOHN_SYSTEMWIDE_EXEC=\\\\\\\"${prefix}/share/john\\\\\\\" -DJOHN_SYSTEMWIDE_HOME=\\\\\\\"${prefix}/share/john\\\\\\\" ,g" ${worksrcpath}/Makefile
+    }
+}
+use_configure       no
+
+platform powerpc {
+    build.target    "clean macosx-ppc32"
+}
+platform i386 {
+    build.target    "clean macosx-x86-mmx"
+}
+variant altivec conflicts i386 {
+    build.target    "clean macosx-ppc32-altivec"
+}
+
+destroot {
+    xinstall -d ${destroot}${prefix}/bin
+    file copy ${workpath}/${distname}/run ${destroot}${prefix}/share/john
+    system "chmod -R a+rx ${destroot}${prefix}/share/john"
+    system "ln -s ${prefix}/share/john/john ${destroot}${prefix}/bin/john"
+    xinstall -d ${destroot}${prefix}/share/doc
+    file copy ${workpath}/${distname}/doc ${destroot}${prefix}/share/doc/john
+    system "chmod -R a+rx ${destroot}${prefix}/share/doc/john"
+}
+
+post-install {
+    ui_msg  ""
+    ui_msg  "You'll find the john files under ${prefix}/share/john/"
+    ui_msg  ""
+}

@@ -1,0 +1,40 @@
+# $Id: Portfile 34969 2008-03-13 08:56:50Z jmr@macports.org $
+
+PortSystem      1.0
+name            tth
+version         3.80
+categories      textproc print
+maintainers     nomaintainer
+description     a TeX to HTML transaltor
+long_description	\
+	TTH translates TEX, the predominant mark-up language for 	\
+	expressing mathematics, into HTML, the language of 		\
+	world-wide-web browsers. It thereby enables mathematical 	\
+	documents to be made available on the web. Document structure, 	\
+	using either the Plain or LaTeX macro packages, is also 	\
+	translated and incorporated in the form of hyperlinks.
+platforms       darwin freebsd
+homepage        http://hutchinson.belmont.ma.us/tth/
+
+dist_subdir     ${name}/${version}
+
+master_sites    http://hutchinson.belmont.ma.us/tth/tth-noncom/
+# This port is prone to breakage because the author doesn't see fit to make old
+# versions available, or even put a version number in the tarball's name. Sigh.
+checksums       md5 54d0a9fbbe67d7f198288a8cf2c32ad3
+distname        ${name}_C
+extract.suffix  .tgz
+
+use_configure   no
+
+build           {
+	system "cd ${workpath}/${distname} && cc -o ${name} ${name}.c"
+}
+
+destroot        {
+	xinstall -m 755 ${workpath}/${distname}/tth ${destroot}${prefix}/bin
+	xinstall -m 755 ${workpath}/${distname}/latex2gif ${destroot}${prefix}/bin
+	xinstall -m 755 ${workpath}/${distname}/ps2gif ${destroot}${prefix}/bin
+	xinstall -m 755 ${workpath}/${distname}/ps2png ${destroot}${prefix}/bin
+	xinstall -m 644 ${workpath}/${distname}/tth.1 ${destroot}${prefix}/share/man/man1
+}

@@ -1,0 +1,20 @@
+# $Id: Portfile 30247 2007-10-23 02:05:08Z jmpp@macports.org $
+
+PortSystem			1.0
+PortGroup			perl5 1.0
+perl5.setup			Mac-AppleScript-Glue 0.03
+revision			1
+maintainers			nomaintainer
+description			Glue to use AppleScript to communicate with Mac apps
+long_description \
+	This module allows you to write Perl code in object-oriented syntax to \
+	control Mac applications. The module does not actually execute Apple \
+	Events, but actually translates Perl code to AppleScript code and \
+	causes it to be executed.
+
+platforms			darwin
+
+checksums			md5 6b2c7674b061b2053aa529e30a3d1569
+
+depends_lib-append			port:p5-mac-applescript port:p5-test-pod
+

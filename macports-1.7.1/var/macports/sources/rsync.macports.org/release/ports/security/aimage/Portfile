@@ -1,0 +1,32 @@
+# $Id: Portfile 41200 2008-10-27 21:42:19Z ricci@macports.org $
+
+PortSystem 1.0
+
+name		aimage
+version		3.2.0
+revision	0
+categories	security
+maintainers	opendarwin.org@darkart.com
+description	The Advanced Disk Imager
+homepage	http://www.afflib.org/
+platforms	darwin
+
+long_description AFF(R) is an open and extensible file format designed \
+			to store disk images and associated metadata.
+
+master_sites	http://www.afflib.org/downloads/
+
+checksums           md5     58218cfc5cfcfdbabb216f1f8c0f9c39 \
+                    sha1    539be8cd3345c8b559033e37ca090032e63aec2e \
+                    rmd160  d1dc9c4eb875356d51ff722d7d5c5e14e69a15d5
+
+use_bzip2	no
+
+depends_lib	port:libewf	\
+		port:afflib		\
+		port:openssl	\
+		port:zlib
+
+
+#
+##EOF

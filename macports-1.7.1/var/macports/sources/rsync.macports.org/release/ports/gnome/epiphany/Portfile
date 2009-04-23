@@ -1,0 +1,40 @@
+# $Id: Portfile 35821 2008-04-07 17:42:30Z gui_dos@macports.org $
+
+PortSystem 1.0
+
+name		epiphany
+version		2.22.1.1
+description	A GNOME Web browser.
+long_description	A web browser is more than an application, it is a \
+			way of thinking, it is a way of seeing the world. \
+			Epiphany's principles are simplicity and standards \
+			compliance.
+maintainers	nomaintainer
+categories	gnome www
+platforms	darwin
+homepage	http://www.gnome.org/projects/epiphany
+master_sites    gnome:sources/epiphany/2.22/
+use_bzip2	yes
+checksums	md5 24bb8c430a6165b9c43a2ed0452cc6a5
+depends_build   port:gnome-doc-utils
+depends_lib	port:iso-codes \
+                port:libgnomeui \
+                port:firefox-x11 \
+                port:py25-gnome \
+                port:gnome-desktop \
+                port:libgnomeprintui
+#               port:enchant
+
+configure.args  --with-gecko=firefox --disable-scrollkeeper
+configure.python  ${prefix}/bin/python2.5
+
+pre-configure {
+    reinplace "s|--rpath=|-rpath |g" ${worksrcpath}/configure
+}
+
+post-activate {
+        system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+        system "${prefix}/bin/scrollkeeper-update; true"
+        system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications; true"
+        system "${prefix}/bin/update-mime-database ${prefix}/share/mime; true"
+}

@@ -1,0 +1,48 @@
+# $Id: Portfile 45127 2009-01-08 19:53:19Z mcalhoun@macports.org $
+
+PortSystem 1.0
+
+name             boost-jam
+version          3.1.17
+categories       devel
+maintainers      gmail.com:jon.olsson
+description      Boost.Jam (BJam) is a build tool based on FTJam
+long_description \
+        Boost.Jam (BJam) is a build tool based on FTJam, \
+        which in turn is based on Perforce Jam. It contains \
+        significant improvements made to facilitate its use \
+        in the Boost Build System, but should be backward \
+        compatible with Perforce Jam.
+homepage         http://www.boost.org/
+master_sites     sourceforge:boost
+extract.suffix   .tgz
+checksums        md5 f4afd896788f2327fd35c128ddc6e340 \
+                 rmd160 79a265c4427bf48858d288d5b0ac82c5119af7c8 \
+                 sha1 407be994b1239fa944c14c464a9ce7f46f692a1e
+platforms        darwin
+
+patchfiles       patch-strings.c
+post-patch {
+        reinplace "s|/usr/share/boost-build|${prefix}/share/boost-build|" \
+                ${worksrcpath}/jambase.c
+}
+
+use_configure    no
+
+post-configure {
+        reinplace "s|BOOST_JAM_CC=.*|BOOST_JAM_CC=${configure.cc}|" ${worksrcpath}/build.sh
+}
+
+build.env        LOCATE_TARGET=bin
+build.cmd        ./build.sh
+build.target
+
+destroot {
+        xinstall -m 0755 ${worksrcpath}/bin/bjam ${destroot}${prefix}/bin
+
+        # Port netxx still expects to find program jam (removed in r13734)
+        xinstall -d -m 0755 ${destroot}${prefix}/lib/bjam/bin/
+        ln -s ${prefix}/bin/bjam ${destroot}${prefix}/lib/bjam/bin/jam
+}
+
+livecheck.regex "<title>${name} (.*) released.*</title>"

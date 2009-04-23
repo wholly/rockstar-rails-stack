@@ -1,0 +1,38 @@
+# $Id: Portfile 22878 2007-03-17 15:35:56Z pipping@macports.org $
+
+PortSystem		1.0
+name			slrn
+version			0.9.8.1
+categories		news net
+platforms		darwin
+revision		1
+maintainers		olaf@foellinger.de
+homepage		http://slrn.sourceforge.net/
+description		A powerful console-based newsreader
+
+long_description	slrn is an easy to use but powerful NNTP/spool based \
+			newsreader.  It is highly customizable, supports \
+			scoring, free key bindings, and can be extended using \
+			the SLang macro language.
+			
+master_sites 		sourceforge
+checksums		md5 9b613007df537444a5f8a4a2994fadb7
+
+use_bzip2		yes
+
+configure.args		--with-libiconv-prefix=${prefix} \
+			--mandir=${prefix}/share/man
+
+depends_lib		lib:libslang.a:slang \
+			lib:libiconv:libiconv
+
+# adds slrnpull
+variant	pull		{ configure.args-append	--with-slrnpull }
+
+# ssl variant 		(added by ealdrov@math.fsu.edu)
+variant ssl		{ 
+depends_lib		lib:libssl:openssl
+configure.args-append 	--with-ssl \
+			--with-ssl-library=/usr/lib \
+			--with-ssl-includes=/usr/include/openssl
+}

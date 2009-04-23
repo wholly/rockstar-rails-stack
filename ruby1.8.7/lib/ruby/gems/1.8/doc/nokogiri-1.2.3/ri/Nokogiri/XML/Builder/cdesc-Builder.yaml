@@ -1,0 +1,34 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: context
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: doc
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: parent
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Nokogiri::XML::Builder
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: cdata
+- !ruby/object:RI::MethodSummary 
+  name: method_missing
+- !ruby/object:RI::MethodSummary 
+  name: text
+- !ruby/object:RI::MethodSummary 
+  name: to_xml
+name: Builder
+superclass: Object

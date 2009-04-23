@@ -1,0 +1,35 @@
+# $Id: Portfile 47411 2009-02-28 01:49:15Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name		gpsd
+version		2.37
+categories	net
+maintainers	shadow@dementia.org
+description	gps multiplexor daemon
+long_description	\
+	gpsd is a small daemon multiplexes output or information from a GPS \
+        receiver.
+homepage	http://gpsd.berlios.de/
+platforms	darwin
+master_sites	http://download.berlios.de/gpsd/
+checksums	md5 6c96cc0b2df0279cb7baac1ebc5881d3
+
+depends_lib \
+	port:xorg-libXaw \
+	port:Xft2 \
+	port:xorg-libXp \
+	port:libpng \
+	lib:libXm:openmotif
+
+configure.args	--mandir=${prefix}/share/man
+
+variant no_x11 {
+    depends_lib-delete \
+	port:xorg-libXaw \
+	port:Xft2 \
+	port:xorg-libXp \
+	lib:libXm:openmotif
+
+    configure.args-append --without-x
+}

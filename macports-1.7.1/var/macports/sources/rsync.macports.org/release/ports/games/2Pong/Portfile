@@ -1,0 +1,37 @@
+# $Id: Portfile 45610 2009-01-18 22:00:27Z blb@macports.org $
+
+PortSystem              1.0
+
+name                    2Pong
+version                 0.6
+revision                1
+categories              games
+platforms               darwin
+maintainers             nomaintainer
+
+description             Pong game with 2 balls, 2 and 4 player support
+long_description        ${description}
+
+homepage                http://twopong.sourceforge.net/
+master_sites            sourceforge:twopong
+checksums               md5 55d54deb30f079d4b2684b7f7c8ab57f
+use_bzip2               yes
+
+depends_lib             port:libsdl \
+                        port:libsdl_image \
+                        port:libsdl_mixer
+
+use_configure           no
+
+build.args              CFLAGS="-I${prefix}/include -I${prefix}/include/SDL"
+
+destroot.destdir        PRE=${destroot}${prefix}
+
+post-destroot {
+    reinplace s|${destroot}${prefix}|${prefix}|g ${destroot}${prefix}/bin/2Pong
+    xinstall -d ${destroot}${applications_dir}/2Pong.app/Contents/MacOS
+    ln -s ${prefix}/bin/2Pong ${destroot}${applications_dir}/2Pong.app/Contents/MacOS/2Pong
+}
+
+livecheck.version       ${name}-${version}
+livecheck.distname      ${name}

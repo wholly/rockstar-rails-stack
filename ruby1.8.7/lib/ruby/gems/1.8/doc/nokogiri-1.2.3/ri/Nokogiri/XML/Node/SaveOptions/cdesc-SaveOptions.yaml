@@ -1,0 +1,48 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: options
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Save options for serializing nodes
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FORMAT
+  value: "1"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: NO_DECLARATION
+  value: "2"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: NO_EMPTY_TAGS
+  value: "4"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: NO_XHTML
+  value: "8"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: AS_XHTML
+  value: "16"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: AS_XML
+  value: "32"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: AS_HTML
+  value: "64"
+full_name: Nokogiri::XML::Node::SaveOptions
+includes: []
+
+instance_methods: []
+
+name: SaveOptions
+superclass: Object

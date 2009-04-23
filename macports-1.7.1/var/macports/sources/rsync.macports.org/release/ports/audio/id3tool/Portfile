@@ -1,0 +1,16 @@
+# $Id: Portfile 30219 2007-10-22 22:40:35Z jmpp@macports.org $
+
+PortSystem 1.0
+name             id3tool
+version          1.2
+categories       audio
+maintainers      nomaintainer
+description      ID3 editing tool
+long_description \
+	id3tool is a command line utility for easy manipulation \
+	of the ID3 tags present in MPEG Layer 3 audio files.
+homepage         http://nekohako.xware.cx/id3tool/
+platforms        darwin
+master_sites     ${homepage}
+checksums        md5 c6e0bb6ea67a2b656ab358590b76a8ae
+configure.args   --mandir=${prefix}/share/man

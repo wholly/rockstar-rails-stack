@@ -1,0 +1,76 @@
+# $Id: Portfile 46912 2009-02-17 02:20:09Z raimue@macports.org $
+
+PortSystem 1.0
+name            openldap
+version         2.3.35
+revision        1
+categories      databases
+maintainers     landonf@macports.org
+description     OpenLDAP Software 
+long_description	OpenLDAP Software is an open source implementation \
+			of the Lightweight Directory Access Protocol.  
+
+platforms       darwin
+homepage	http://www.openldap.org/
+master_sites	ftp://ftp.OpenLDAP.org/pub/OpenLDAP/openldap-release/ \
+		http://www.openldap.org/software/download/OpenLDAP/openldap-release/ \
+		ftp://ftp.nl.uu.net/pub/unix/db/openldap/openldap-release/
+distfiles	${name}-${version}.tgz
+checksums	md5 91ae33b88bce17a48743da35a0aa04fd
+
+depends_lib	path:bin/perl:perl5 \
+		port:cyrus-sasl2 \
+		port:openssl \
+		port:db44
+
+patchfiles	patch-ltmain
+
+configure.env-append		LANG=C
+configure.cppflags-append	"-I${prefix}/include/db44 -I${prefix}/include/openssl -DBIND_8_COMPAT"
+configure.ldflags-append	-L${prefix}/lib/db44
+
+configure.args	--mandir=${prefix}/share/man \
+		--localstatedir=${prefix}/var \
+		--with-cyrus-sasl \
+		--with-tls \
+		--enable-crypt \
+		--enable-wrappers \
+		--enable-syncprov \
+                --enable-ipv6
+
+startupitem.create      yes
+startupitem.name	slapd
+startupitem.init	"PID=${prefix}/var/run/slapd.pid"
+startupitem.start       "${prefix}/libexec/slapd -u ldap -f ${prefix}/etc/openldap/slapd.conf"
+startupitem.stop        "\[ -r \${PID} \] && kill \$(cat \${PID})"
+
+platform darwin 6 {
+        depends_lib-append      port:dlcompat
+}
+
+variant aci {
+        configure.args-append --enable-aci
+}
+
+pre-build {
+	system "cd ${workpath}/${worksrcdir} && \
+			make depend"
+}
+
+pre-destroot {
+	# should be in pre-deploy....
+	addgroup ldap
+	set gid [existsgroup ldap]
+	adduser ldap gid=${gid}
+}
+
+post-destroot {
+	xinstall -d -g ldap -m 700 -o ldap \
+		"${destroot}${prefix}/var/run/openldap-data"
+# Delete the duplicate .conf files (leaves .conf.default) so upgrades won't overwrite .conf files.
+	file delete -force ${destroot}${prefix}/etc/openldap/slapd.conf
+	file delete -force ${destroot}${prefix}/etc/openldap/ldap.conf
+}
+
+test.run	yes
+test.target	check

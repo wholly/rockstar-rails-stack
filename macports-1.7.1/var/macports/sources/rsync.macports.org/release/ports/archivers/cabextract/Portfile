@@ -1,0 +1,32 @@
+# $Id: Portfile 36715 2008-05-13 10:31:41Z nox@macports.org $
+
+PortSystem          1.0
+
+name                cabextract
+version             1.2
+categories          archivers compression sysutils
+maintainers         boeyms openmaintainer
+description         Extract files from Microsoft cabinet files
+long_description    cabextract can extract Microsoft cabinet files, also \
+                    called .CAB files, on *nix systems.  cabextract supports \
+                    all special features and all compression formats of \
+                    Microsoft cabinet files.
+
+platforms           darwin
+
+homepage            http://www.cabextract.org.uk/
+master_sites        ${homepage}
+
+checksums           md5 dc421a690648b503265c82ade84e143e \
+                    sha1 871b3db4bc2629eb5726659c147aecea1af6a6d0 \
+                    rmd160 55292e287047b14945e69b0be8ab9ff1d4902f71
+
+configure.args      --mandir=${prefix}/share/man
+
+use_parallel_build  yes
+
+post-destroot {
+    xinstall -d ${destroot}${prefix}/share/doc/${name}-${version}
+    xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS \
+        README TODO ${destroot}${prefix}/share/doc/${name}-${version}
+}

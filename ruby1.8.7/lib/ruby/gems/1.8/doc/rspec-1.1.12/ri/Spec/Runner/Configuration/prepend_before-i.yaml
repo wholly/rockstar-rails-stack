@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Prepends a global <tt>before</tt> block to all example groups. See #append_before for filtering semantics."
+full_name: Spec::Runner::Configuration#prepend_before
+is_singleton: false
+name: prepend_before
+params: (*args, &proc)
+visibility: public

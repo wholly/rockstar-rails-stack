@@ -1,0 +1,18 @@
+# $Id: Portfile 48431 2009-03-21 23:38:12Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           haskell 1.0
+haskell.setup       digest 0.0.0.5
+maintainers         blb openmaintainer
+description         Cryptographic hash implementations
+long_description \
+   This package provides efficient cryptographic hash implementations for \
+   strict and lazy bytestrings.  For now, CRC32 and Adler32 are supported, \
+   they are implemented as FFI bindings to efficient code from zlib.
+
+platforms           darwin
+
+checksums           md5     ba60cc9d1ad6d0795ad84390976699d1 \
+                    sha1    90ff7f19328a3cc56864a86bb5028dc34dbb33e5 \
+                    rmd160  09261fc42884bff52d3d017be18c2a689042b9bc
+

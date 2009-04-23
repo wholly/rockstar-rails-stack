@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Rails::Example::ControllerExampleGroup#_assigns_hash_proxy
+is_singleton: false
+name: _assigns_hash_proxy
+params: ()
+visibility: protected

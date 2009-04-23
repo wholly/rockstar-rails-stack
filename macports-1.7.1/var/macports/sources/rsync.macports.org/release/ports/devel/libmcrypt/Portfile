@@ -1,0 +1,41 @@
+# $Id: Portfile 44283 2008-12-24 23:41:35Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                libmcrypt
+version             2.5.8
+revision            1
+categories          devel security
+maintainers         ryandesign openmaintainer
+homepage            http://mcrypt.sourceforge.net/
+use_bzip2           yes
+use_parallel_build  yes
+platforms           darwin
+
+description \
+	The encryption library used by mcrypt
+
+long_description \
+	libmcrypt is the library which implements all the \
+	algorithms and modes found in mcrypt.
+
+master_sites \
+	sourceforge:mcrypt \
+	freebsd
+
+checksums \
+	md5 c4f491dd411a09e9de3b8702ea6f73eb \
+	sha1 b4d4d8851db543e6fda80572a54a4901b4e767da \
+	rmd160 4dba23286aa00d88a7f6763629bb3cde7dd2fe6b
+
+configure.args \
+	--disable-posix-threads \
+	--mandir=${prefix}/share/man \
+	--enable-static
+
+platform darwin 6 {
+	depends_lib-append \
+		lib:libdl:dlcompat
+}
+
+livecheck.distname  Libmcrypt

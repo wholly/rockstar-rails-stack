@@ -1,0 +1,38 @@
+# $Id: Portfile 45603 2009-01-18 20:52:41Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name			fireworkx
+version			1.3
+revision		2
+categories		x11
+platforms		darwin
+maintainers		nomaintainer
+description		pyrotechnic simulation eye-candy for X11
+long_description	${description}
+
+homepage		http://www.ronybc.8k.com/fireworkx.htm
+master_sites	ftp://ftp.rz.uni-karlsruhe.de/pub/mirror/ftp.rus.uni-stuttgart.de/pub/mirror/sunsite.unc.edu/pub/Linux/X11/colors
+distname		${distname}.src
+checksums		md5 634df6e7c37c682897a98bb82c1b75cf
+patchfiles		patch-Makefile
+
+depends_lib \
+	port:xorg-libX11
+
+worksrcdir		${name}-${version}
+
+use_configure	no
+
+destroot	{
+	xinstall -m 755 -s ${worksrcpath}/fireworkx ${destroot}${prefix}/bin
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} ChangeLog.txt LICENSE README.src \
+		${destroot}${prefix}/share/doc/${name}
+}
+
+build.target-append CFLAGS="${configure.cflags} -I${prefix}/include -I${x11prefix}/include" LDFLAGS="${configure.ldflags} -L${prefix}/lib -L${x11prefix}/lib"
+
+variant universal {
+	build.target-append CFLAGS="${configure.cflags} ${configure.universal_cflags} -I${prefix}/include -I${x11prefix}/include" LDFLAGS="${configure.ldflags} ${configure.universal_ldflags} -L${prefix}/lib -L${x11prefix}/lib"
+}

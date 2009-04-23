@@ -1,0 +1,50 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 47886 2009-03-09 14:59:50Z devans@macports.org $
+
+PortSystem      1.0
+
+name            libbonoboui
+version         2.24.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+description     GUI frontend to the libbonobo component of GNOME 2
+
+long_description \
+    Bonobo is a set of language and system independant CORBA \
+    interfaces for creating reusable components and creating compound \
+    documents. libbonoboui includes a Gtk+ based implementation of the \
+    Bonobo interfaces, enabling developers to create reusable \
+    components and applications that can be used to form more complex \
+    documents.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     9ff3ec1c7aefd0b1a15a5b21ecc7b4e4 \
+                sha1    30373b904003c9c20cd19510b05a6c388b3f8b82 \
+                rmd160  6bea00e7ebe4f8601c9bc69e4c8008543064fed0
+
+depends_build \
+    port:pkgconfig
+
+depends_lib \
+    port:gconf \
+    path:lib/pkgconfig/glib-2.0.pc:glib2 \
+    port:gnome-vfs \
+    port:gtk2 \
+    port:libbonobo \
+    port:libglade2 \
+    port:libgnomecanvas \
+    port:libgnome \
+    port:dbus \
+    port:dbus-glib \
+    port:libiconv \
+    port:libxml2 \
+    port:gettext
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

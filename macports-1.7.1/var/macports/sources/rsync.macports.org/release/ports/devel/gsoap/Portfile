@@ -1,0 +1,30 @@
+# $Id: Portfile 33441 2008-01-27 11:46:26Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name				gsoap
+version				2.7.9e
+distfiles			${name}_${version}${extract.suffix}
+categories			devel
+maintainers			stechert@macports.org
+description			offers an XML to C/C++ language binding to ease the \
+				development of SOAP/XML Web services in C and C/C++
+long_description		The gSOAP toolkit is a cross-platform development \
+				environment for C and C++ SOAP/XML Web services (SOAP \
+				1.1/1.2, WSDL 1.1). gSOAP supports XML serialization of \
+				native C/C++ data types. Includes stub/skeleton compiler, \
+				HTTP Web server, and much more.
+homepage			http://www.cs.fsu.edu/~engelen/soap.html
+master_sites			sourceforge
+master_sites.mirror_subdir	gsoap2
+checksums			md5 9cca5f8404e47d1606b589f9eab73f7f \
+				sha1 2b2a89e1c88350e1da9025d7eda556bb04b8fe3e \
+				rmd160 52714b9f16e7d1e6ecce5023e588be947d016c01
+
+worksrcdir			${name}-2.7
+patchfiles			patch-configure.in patch-makemake patch-soapcpp2-Makefile.am patch-soapcpp2-wsdl-Makefile.am
+
+
+pre-configure {
+	system "cd ${worksrcpath} && ./makemake"
+}

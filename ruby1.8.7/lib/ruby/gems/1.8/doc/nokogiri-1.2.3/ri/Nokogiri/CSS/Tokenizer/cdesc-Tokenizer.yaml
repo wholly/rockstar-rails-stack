@@ -1,0 +1,16 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Nokogiri::CSS::Tokenizer
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: scan
+name: Tokenizer
+superclass: GeneratedTokenizer

@@ -1,0 +1,53 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49998 2009-04-22 02:00:38Z nox@macports.org $
+
+PortSystem      1.0
+
+name            findutils
+version         4.4.1
+categories      sysutils
+platforms       darwin
+maintainers     nox openmaintainer
+description     findutils contains GNU find, xargs, and locate
+
+long_description \
+    ${description}
+
+homepage        http://www.gnu.org/software/findutils/
+master_sites    gnu
+
+checksums       md5     5883f569dc021eee765f330bb7a3782d \
+                sha1    01c494cdabb8fc19d4b5d95a58bf99e2e0ab305d \
+                rmd160  0f4749159d172efff997d820397300b6c0942cd6
+
+depends_lib     port:gettext \
+                port:libiconv
+
+configure.env   SORT=/usr/bin/sort
+
+configure.args  --program-prefix=g
+
+use_parallel_build  yes
+
+test.run        yes
+test.target     check
+
+post-destroot {
+    move ${destroot}${prefix}/share/info/find.info ${destroot}${prefix}/share/info/gfind.info
+    delete ${destroot}${prefix}/lib/charset.alias
+
+    set docdir ${prefix}/share/doc/${name}-${version}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README \
+        THANKS TODO ${destroot}${docdir}
+}
+
+variant with_default_names description {Install files without 'g' prefix} {
+    post-destroot {
+        foreach {d} {bin libexec share/info share/man/man1 share/man/man5} {
+            foreach {f} [glob -tails -directory ${destroot}${prefix}/${d} g*] {
+                ln -sf ${f} ${destroot}${prefix}/${d}/[string range ${f} 1 end]
+            }
+        }
+    }
+}

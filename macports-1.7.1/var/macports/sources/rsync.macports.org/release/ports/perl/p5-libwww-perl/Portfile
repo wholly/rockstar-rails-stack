@@ -1,0 +1,35 @@
+# $Id: Portfile 47166 2009-02-23 02:42:27Z narf_tm@macports.org $
+
+PortSystem                   1.0
+PortGroup                    perl5 1.0
+
+perl5.setup                  libwww-perl 5.825 LWP
+maintainers                  narf_tm openmaintainer
+description                  The World-Wide Web library for Perl
+long_description             The libwww-perl collection is a set of Perl \
+                             modules which provides a simple and consistent \
+                             application programming interface to the \
+                             World-Wide Web.  The main focus of the library \
+                             is to provide classes and functions that allow \
+                             you to write WWW clients. The library also \
+                             contain modules that are of more general use \
+                             and even classes that help you implement \
+                             simple HTTP servers.
+
+checksums                    md5 9b383739e58ac8f8234487e62d5c2818 \
+                             sha1 c28ad5df9152881387cad3f2cc89e5cd0e56a92c \
+                             rmd160 c4a142cacb89c8af16938ae8f329d046a22809e2
+
+platforms                    darwin
+
+depends_lib-append           port:p5-compress-zlib \
+                             port:p5-html-parser \
+                             port:p5-html-tagset \
+                             port:p5-uri \
+                             port:p5-crypt-ssleay
+
+configure.pre_args-append    -n
+
+use_parallel_build           yes
+
+universal_variant            no

@@ -1,0 +1,42 @@
+# $Id: Portfile 35275 2008-03-23 15:54:42Z jberry@macports.org $
+
+PortSystem 1.0
+
+name			servlet24-api
+version			5.5.25
+
+categories		java
+maintainers		jberry openmaintainer
+platforms		darwin
+
+description		Java Servlet 2.4 and JSP 2.0 APIs.
+long_description	The Java Servlet and JavaServer Pages specifications \
+				are developed by Sun under the Java Community \
+				Process.  This project provides the servlet \
+				and JSP API jars from Tomcat 5.
+homepage		http://tomcat.apache.org/
+
+distname		apache-tomcat-${version}-src
+master_sites	apache:tomcat/tomcat-5/v${version}/src/
+checksums		md5 2d6cc9a16aceeef4ec3610cd782d5c9d
+
+depends_build	bin:ant:apache-ant
+depends_lib		bin:java:kaffe
+
+worksrcdir		${distname}/build
+
+use_configure		no
+
+build.cmd		ant
+build.target	build-depends
+build.args		-Dbase.path=${worksrcpath}/../repository
+
+destroot	{
+	xinstall -m 755 -d ${destroot}${prefix}/share/java \
+		${destroot}${prefix}/share/doc
+	xinstall -m 644 ${worksrcpath}/../repository/jsp-api-2.0/lib/jsp-api.jar \
+		${destroot}${prefix}/share/java/jsp2-api.jar
+	xinstall -m 644 \
+		${worksrcpath}/../repository/servlet-api-2.4/lib/servlet-api.jar \
+		${destroot}${prefix}/share/java/servlet24-api.jar
+}

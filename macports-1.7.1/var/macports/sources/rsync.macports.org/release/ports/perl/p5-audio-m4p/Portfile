@@ -1,0 +1,20 @@
+# $Id: Portfile 38241 2008-07-13 17:52:18Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Audio-M4P 0.51
+maintainers           narf_tm openmaintainer
+description           QuickTime/MP4/iTunes Music Store audio/video file tools
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 2a90f9ebde565b9f7d03eb7c365e3a77 \
+                      sha1 0e7b21f710b1c13ce0714de6acc4547923c86a20 \
+                      rmd160 15f1a204328bf8793ea7717fb9ffe6d7c09f2db5
+
+depends_lib-append    port:p5-crypt-rijndael \
+                      port:p5-tree-simple \
+                      port:p5-tree-simple-view \
+                      port:p5-tree-simple-visitorfactory

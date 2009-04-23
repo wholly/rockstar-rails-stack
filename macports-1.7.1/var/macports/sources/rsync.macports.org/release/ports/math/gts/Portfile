@@ -1,0 +1,22 @@
+# $Id: Portfile 47188 2009-02-23 04:10:55Z blb@macports.org $
+
+PortSystem 1.0
+name		gts
+version		0.7.6
+categories	math
+platforms	darwin
+maintainers	nomaintainer
+description	The GNU Triangulated Surface library
+long_description	\
+		GTS stands for the GNU Triangulated Surface Library.	\
+		It is an Open Source Free Software Library intended	\
+		to provide a set of useful functions to deal with	\
+		3D surfaces meshed with interconnected triangles.
+
+homepage	http://gts.sourceforge.net/
+master_sites	sourceforge
+
+checksums	md5 9f710aefd2ed9b3cc1b1216171fc5a8a
+
+depends_lib	port:glib2
+

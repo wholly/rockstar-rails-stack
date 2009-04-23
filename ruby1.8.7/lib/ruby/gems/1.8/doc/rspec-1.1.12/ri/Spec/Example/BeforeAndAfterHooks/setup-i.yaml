@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Deprecated. Use before(:each)
+full_name: Spec::Example::BeforeAndAfterHooks#setup
+is_singleton: false
+name: setup
+params: (&block)
+visibility: public

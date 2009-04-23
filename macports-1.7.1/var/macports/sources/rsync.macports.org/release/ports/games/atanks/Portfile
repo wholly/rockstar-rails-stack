@@ -1,0 +1,47 @@
+# $Id: Portfile 45610 2009-01-18 22:00:27Z blb@macports.org $
+
+PortSystem              1.0
+
+name                    atanks
+version                 3.1
+categories              games
+platforms               darwin
+maintainers             nomaintainer
+
+description             atanks is a multi-platform Scorched Earth clone
+long_description        ${description}
+
+homepage                http://atanks.sourceforge.net/
+master_sites            sourceforge
+checksums               md5     16c46685a089e40f1dc69010b4d839a8 \
+                        sha1    3937a1dab9001c60be659bb913d95b9c57817d2c \
+                        rmd160  e51624da4563b9cdc3e77275d6212895cded537f
+worksrcdir              ${name}
+
+depends_lib             port:allegro
+
+patchfiles              patch-Makefile \
+                        patch-src-Makefile \
+                        patch-src-files.cc
+
+post-patch {
+    reinplace s|@PREFIX@|${prefix}|g        ${worksrcpath}/Makefile
+    reinplace s|@DESTROOT@|${destroot}|g    ${worksrcpath}/Makefile
+}
+
+use_configure           no
+
+build.env               CFLAGS=-I${prefix}/include \
+                        LDFLAGS=-L${prefix}/lib
+build.args              PREFIX=${prefix}
+
+platform darwin {
+    post-destroot {
+        xinstall -d ${destroot}${applications_dir}/ATanks.app/Contents/MacOS
+        ln -s ${prefix}/bin/atanks \
+            ${destroot}${applications_dir}/ATanks.app/Contents/MacOS/ATanks
+    }
+}
+
+livecheck.version       [strsed ${version} {g/\.//}]
+livecheck.regex         <title>${name} ${name}-(.*) released.*</title>

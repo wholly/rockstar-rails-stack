@@ -1,0 +1,36 @@
+# $Id: Portfile 43565 2008-12-12 02:42:30Z jeremyhu@macports.org $
+
+PortSystem			1.0
+
+name				lablgtk
+version				1.2.7
+categories			x11
+maintainers			pguyot@kallisys.net openmaintainer
+description			Objective Caml interface to gtk+
+long_description	LablGTK is is an Objective Caml interface to gtk+. \
+					It uses the rich type system of Objective Caml 3 to provide a \
+					strongly typed, yet very comfortable, object-oriented interface to \
+					gtk+. This is not that easy if you know the dynamic typing approach \
+					taken by gtk+.
+homepage			http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
+platforms			darwin
+master_sites		http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/
+checksums			md5 73a797e3a459190fdcaa8288935f6fb9 \
+					sha1 fe43512efdc7ab4e0dafb7dc8254a784857a1ade \
+					rmd160 27be7ff29fe4370bc9a1bbef8c0fa0db590f27c4
+depends_lib			bin:camlp4:ocaml lib:libgtk.1:gtk1
+configure {
+	system "cd ${worksrcpath} && make configure \
+		USE_DOTOPT=1 \
+		INSTALLDIR=${destroot}${prefix}/lib/ocaml/lablgtk \
+		BINDIR=${destroot}${prefix}/bin \
+		DLLDIR=${destroot}${prefix}/lib/ocaml/stublibs && make"
+}
+build.target	opt
+post-destroot {
+	system "ranlib ${destroot}/${prefix}/lib/ocaml/lablgtk/lablgtk.a"
+	system "ranlib ${destroot}/${prefix}/lib/ocaml/lablgtk/liblablgtk.a"
+}
+
+livecheck.check	regex
+livecheck.regex	{<DT> <a href="dist/lablgtk-(1.*?).tar.gz">lablgtk-\1.tar.gz</a>}

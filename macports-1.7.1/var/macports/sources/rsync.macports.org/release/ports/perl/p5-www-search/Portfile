@@ -1,0 +1,21 @@
+# $Id: Portfile 44087 2008-12-21 05:05:51Z raimue@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         WWW-Search 2.507
+maintainers         raimue openmaintainer
+description         WWW::Search provides access to search engines
+long_description    WWW::Search is a collection of Perl modules which provide \
+                    an API to search engines on the world-wide web
+
+platforms           darwin
+
+checksums           md5     5aadc9c62a7cff95e1e595390a0118b4 \
+                    sha1    c62d137ab1f80c26efa219cdf6afacc69c4aa27b \
+                    rmd160  013255065e3fdc8aaf7a36a62654bb5c20560655
+
+depends_lib-append \
+                    port:p5-libwww-perl \
+                    port:p5-uri \
+                    port:p5-html-parser

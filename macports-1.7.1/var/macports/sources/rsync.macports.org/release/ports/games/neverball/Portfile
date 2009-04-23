@@ -1,0 +1,48 @@
+# $Id: Portfile 26898 2007-07-11 05:23:51Z yves@macports.org $
+
+PortSystem 1.0
+
+name		neverball
+version		1.4.0
+revision	1
+categories	games
+platforms	darwin
+maintainers	mvitocruz@gmail.com
+description	Tilt the floor to roll a ball through an obstacle course.
+long_description	\
+		Tilt the floor to roll a ball through an obstacle     \
+		course before time runs out. Neverball is part puzzle \
+		game, part action game, and entirely a test of skill.
+
+homepage	http://icculus.org/neverball/
+master_sites	${homepage}
+checksums	md5 a6cd860f1c2b7d8cecbcfc05ff228ef0
+patchfiles	patch-Makefile.diff patch-ball-main.c patch-putt-main.c
+
+depends_lib	bin:sdl-config:libsdl \
+		lib:libSDL_image:libsdl_image \
+		lib:libSDL_mixer:libsdl_mixer \
+		lib:libSDL_ttf:libsdl_ttf
+
+configure {
+	reinplace "s|./data|${prefix}/share/${name}|g" ${worksrcpath}/share/config.h
+}
+
+destroot {
+	xinstall -d -m 755 ${destroot}${prefix}/share/
+	file copy ${worksrcpath}/data ${destroot}${prefix}/share/${name}
+	xinstall -s -m 755 ${worksrcpath}/neverball ${destroot}${prefix}/bin
+	xinstall -s -m 755 ${worksrcpath}/neverputt ${destroot}${prefix}/bin
+}
+
+platform darwin {
+	pre-destroot {
+		xinstall -d -m 755 \
+			${destroot}/Applications/MacPorts/Neverball.app/Contents/MacOS \
+			${destroot}/Applications/MacPorts/Neverputt.app/Contents/MacOS
+		system "ln -s ${prefix}/bin/neverball \
+			${destroot}/Applications/MacPorts/Neverball.app/Contents/MacOS/Neverball"
+		system "ln -s ${prefix}/bin/neverputt \
+			${destroot}/Applications/MacPorts/Neverputt.app/Contents/MacOS/Neverputt"
+	}
+}

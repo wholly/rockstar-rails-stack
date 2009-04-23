@@ -1,0 +1,30 @@
+# $Id: Portfile 30233 2007-10-22 23:09:00Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			jsch
+version			0.1.22
+categories		java security
+platforms		darwin
+maintainers		nomaintainer
+description		JSch is a pure Java implementation of SSH2.
+long_description	${description}
+
+homepage		http://www.jcraft.com/jsch/
+master_sites	sourceforge
+checksums		md5 682ba97115a5d14c0ce70a621f637235
+use_zip			yes
+
+depends_lib		bin:java:kaffe
+depends_build	bin:ant:apache-ant
+
+use_configure	no
+
+build.cmd		ant
+build.target	dist
+
+destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/java/
+	xinstall -m 644 ${worksrcpath}/dist/lib/jsch-20051019.jar \
+		${destroot}${prefix}/share/java/jsch.jar
+}

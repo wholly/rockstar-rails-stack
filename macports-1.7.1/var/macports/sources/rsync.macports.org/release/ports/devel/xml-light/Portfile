@@ -1,0 +1,30 @@
+# $Id: Portfile 48897 2009-03-31 08:39:33Z blb@macports.org $
+
+PortSystem          1.0
+name                xml-light
+version             2.2
+categories          devel textproc
+maintainers         anil@recoil.org
+description         Objective Caml interface for XML parsing and printing
+long_description    XML Light is a minimal XML parser & printer for OCaml.\
+                    It provide functions to parse an XML document into an OCaml \
+                    data structure, work with it, and print it back to an XML \
+                    document.
+homepage            http://tech.motion-twin.com/xmllight/
+use_configure       no
+platforms           darwin
+master_sites        http://tech.motion-twin.com/zip/
+use_zip             yes
+worksrcdir          ${name}
+use_parallel_build  no
+build.target        all opt
+checksums           md5 7658985cfdaeeb94b579b932eeaa3e00
+depends_lib         bin:camlp4:ocaml
+set instdir         ${destroot}${prefix}/lib/ocaml/
+destroot.args       INSTALLDIR=${instdir}
+pre-destroot {
+        file mkdir ${instdir}
+}
+post-destroot {
+        system "ranlib ${instdir}/xml-light.a"
+}

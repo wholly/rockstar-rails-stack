@@ -1,0 +1,31 @@
+# $Id: Portfile 30239 2007-10-23 01:55:09Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			nsd
+version			2.3.5
+categories		net
+platforms		darwin
+maintainers		nomaintainer
+description		authoritative only, high performance, simple name server
+long_description	NSD is an authoritative only, high performance, simple and \
+				open source name server.
+
+homepage		http://www.nlnetlabs.nl/nsd/
+master_sites	http://www.nlnetlabs.nl/downloads/nsd/
+checksums		sha1 99d3e0a763700ffa130082bb7955ddb6fa1ad5d7
+
+depends_lib		port:openssl
+
+configure.args	--mandir=${prefix}/share/man \
+				--with-ssl=${prefix} \
+				--with-pidfile=${prefix}/var/run/nsd/nsd.pid
+
+pre-destroot {
+	adduser nsd password={\*} uid=[nextuid] \
+		home=${prefix}/var/db/nsd \
+		shell=/usr/bin/false \
+		realname=NSD\ Server
+	xinstall -m 755 -d ${destroot}${prefix}/var/run/nsd/
+}
+destroot.keepdirs	${destroot}${prefix}/var/run/nsd/

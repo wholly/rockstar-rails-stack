@@ -1,0 +1,20 @@
+# $Id: Portfile 39777 2008-09-04 20:52:03Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Plugin-StackTrace 0.09
+maintainers           narf_tm openmaintainer
+description           Display a stack trace on the debug screen
+long_description      This plugin will enhance the standard Catalyst \
+                      debug screen by including a stack trace of your \
+                      appliation up to the point where the error occurred.
+
+platforms             darwin
+
+checksums             md5 f8a06ada342a7bb697044c62302164ef \
+                      sha1 125e33e80e199e308caf48f124495f643e370cbc \
+                      rmd160 72707fbe037c35403efb78dda71bf71c91b1555b
+
+depends_lib-append    port:p5-catalyst-runtime \
+                      port:p5-devel-stacktrace

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Runner::Options#story_formatters
+is_singleton: false
+name: story_formatters
+params: ()
+visibility: public

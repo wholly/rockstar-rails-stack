@@ -1,0 +1,24 @@
+# $Id: Portfile 46746 2009-02-11 22:16:48Z tommyd@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Monotone-AutomateStdio 0.03
+maintainers           tommyd openmaintainer
+description           Perl interface to Monotone via automate stdio
+long_description      The Monotone::AutomateStdio class gives a Perl developer \
+                      access to Monotone's automate stdio facility via an easy \
+                      to use interface. All command, option and output formats \
+                      are handled internally by this class. Any structured \
+                      information returned by Monotone is parsed and returned \
+                      back to the caller as lists of records for ease of \
+                      access or alternatively as one large string.
+
+platforms             darwin
+
+checksums             md5     58e730df404125cead46a81458544954 \
+                      sha1    4a62c6dc1069a9d02fd088fb715f1bd2d9bb4055 \
+                      rmd160  e762aa2c159d96681bd78ea8b9d9f16e68a9c396
+
+depends_run           port:monotone
+

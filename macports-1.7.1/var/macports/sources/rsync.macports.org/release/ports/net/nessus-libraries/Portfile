@@ -1,0 +1,38 @@
+# $Id: Portfile 30204 2007-10-22 21:05:01Z jmpp@macports.org $
+
+PortSystem 1.0
+name		nessus-libraries
+version		2.2.6
+categories	net security
+maintainers	opendarwin.org@darkart.com openmaintainer
+description	Nessus security scanner
+long_description Nessus is a security scanner that crawls across a network, looking \
+                for well-known vulnerabilities and common misconfigurations.
+
+homepage        http://www.nessus.org/
+platforms       darwin
+master_sites    ftp://ftp.nessus.org/pub/nessus/nessus-${version}/src/ \
+                ftp://ftp.gwdg.de/pub/linux/misc/nessus/nessus-${version}/src/ \
+                http://ftp.gwdg.de/pub/linux/misc/nessus/nessus-${version}/src/ \
+                ftp://sunsite.cnlab-switch.ch/mirror/nessus/nessus-${version}/src/ \
+                ftp://ftp.chg.ru/pub/security/nessus/nessus-${version}/src/ \
+                ftp://ftp.sekure.net/pub/nessus/nessus-${version}/src/
+checksums	md5 ac027cd2dfa149a44a6dbb748eb93ce9 \
+		sha1 7552cb5c48ace2e38537d8b58a1c7968172399cc
+worksrcdir      ${name}/
+
+configure.args  --mandir=\\\${prefix}/share/man \
+                --infodir=\\\${prefix}/share/info \
+		--enable-cipher \
+		--with-ssl=${prefix}
+
+depends_lib	port:openssl
+
+variant no_ssl { depends_lib-delete port:openssl
+		configure.args-delete --with-ssl=${prefix}
+		configure.args-append --without-ssl
+		}
+
+variant bpf_sharing {
+		configure.args-append --enable-bpf-sharing
+		}

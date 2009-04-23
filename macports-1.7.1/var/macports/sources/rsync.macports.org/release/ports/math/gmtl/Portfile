@@ -1,0 +1,22 @@
+# $Id: Portfile 26527 2007-06-27 19:27:23Z ryandesign@macports.org $
+PortSystem        1.0
+name              gmtl
+version           0.5.4
+categories        math 
+maintainers       mccdo@iastate.edu
+description       a lightweight math library
+long_description  The math library used by vrjuggler. It is \
+                  implemented with c++ templates.
+homepage          http://ggt.sourceforge.net/
+master_sites      sourceforge:ggt
+checksums         md5 1ba4ceb8e883254b7d7ebe565c124520
+
+depends_build     port:scons
+
+use_configure     no
+
+build.cmd		scons
+build.target            
+destroot.cmd		scons
+destroot.destdir        prefix=${destroot}${prefix}
+destroot.target         install 

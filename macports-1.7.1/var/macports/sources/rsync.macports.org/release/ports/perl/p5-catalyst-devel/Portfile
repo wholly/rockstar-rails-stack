@@ -1,0 +1,29 @@
+# $Id: Portfile 47177 2009-02-23 03:14:17Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Devel 1.10
+maintainers           narf_tm openmaintainer
+description           Catalyst Development Tools
+long_description      The Catalyst::Devel package includes a variety of \
+                      modules useful for the development of Catalyst applications, \
+                      but not required to run them.
+
+platforms             darwin
+
+checksums             md5 eed4274286d91b355d737d129d4c2f01 \
+                      sha1 662e2970f5b85a770ecfac45d33dbfa8b2718e80 \
+                      rmd160 dd8cfe519783eefdaa1c48c9ce1a271848c62c40
+
+depends_lib-append    port:p5-catalyst-runtime \
+                      port:p5-catalyst-action-renderview \
+                      port:p5-catalyst-plugin-configloader \
+                      port:p5-catalyst-plugin-static-simple \
+                      port:p5-class-accessor \
+                      port:p5-config-general \
+                      port:p5-file-copy-recursive \
+                      port:p5-module-install \
+                      port:p5-path-class \
+                      port:p5-template-toolkit \
+                      port:p5-parent

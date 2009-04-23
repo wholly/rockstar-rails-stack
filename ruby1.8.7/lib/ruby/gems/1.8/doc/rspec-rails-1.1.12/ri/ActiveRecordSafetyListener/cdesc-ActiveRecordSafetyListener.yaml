@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: ActiveRecordSafetyListener
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Singleton
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: scenario_failed
+- !ruby/object:RI::MethodSummary 
+  name: scenario_pending
+- !ruby/object:RI::MethodSummary 
+  name: scenario_started
+- !ruby/object:RI::MethodSummary 
+  name: scenario_succeeded
+name: ActiveRecordSafetyListener
+superclass: Object

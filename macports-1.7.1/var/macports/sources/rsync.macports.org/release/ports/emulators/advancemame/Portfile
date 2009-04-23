@@ -1,0 +1,30 @@
+# $Id: Portfile 39996 2008-09-16 13:22:34Z milosh@macports.org $
+
+PortSystem 1.0
+
+name			advancemame
+version			0.106.0
+revision		1
+maintainers		milosh
+categories		emulators games
+description		unofficial MAME version with advanced video support
+long_description	AdvanceMAME is unofficial MAME versions with an advanced \
+			video support for helping the use with TVs, Arcade Monitors, \
+			Fixed Frequencies Monitors and also for PC Monitors.
+homepage		http://advancemame.sourceforge.net/
+platforms		darwin
+
+master_sites		sourceforge:advancemame
+checksums		md5 aa097a4a9046124e17aa83a215e454ea
+
+depends_lib		port:libsdl port:freetype \
+			port:zlib port:expat
+
+configure.args		--mandir=${destroot}${prefix}/share/man
+configure.cflags-append -I${prefix}/include
+destroot.destdir    	prefix=${destroot}${prefix}
+
+platform darwin i386 {
+	patchfiles		patch-configure.ac.diff patch-configure.diff
+	configure.args-append	--enable-asm=no --enable-backtrace=no --enable-ucontexth=no
+}

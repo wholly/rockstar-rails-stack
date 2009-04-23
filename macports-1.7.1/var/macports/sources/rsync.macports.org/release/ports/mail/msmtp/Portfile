@@ -1,0 +1,35 @@
+# $Id: Portfile 45349 2009-01-14 07:20:22Z mww@macports.org $
+
+PortSystem 1.0
+
+name			msmtp
+version			1.4.17
+revision		1
+categories		mail
+platforms		darwin
+maintainers		mww
+description		SMTP client that can be used as an SMTP plugin for Mutt
+long_description	msmtp is an SMTP client that can be used as an SMTP \
+				plugin for Mutt and probably other MUAs (mail user \
+				agents). It forwards mails to an SMTP server which \
+				does the delivery. To use this program, create a \
+				configuration file with your mail account(s) and tell \
+				your MUA to call msmtp instead of /usr/sbin/sendmail.
+
+homepage		http://msmtp.sourceforge.net/
+master_sites	sourceforge
+checksums		sha1 6b7fa1d9c9eee249b571b3f7720ebd779f94f4de
+use_bzip2		yes
+
+depends_lib		port:openssl port:gettext port:gnutls port:libgcrypt \
+				port:libgpg-error port:libgsasl port:libiconv port:libtasn1
+
+
+configure.args	--mandir=${prefix}/share/man \
+				--infodir=${prefix}/share/info \
+				--enable-gsasl
+
+platform macosx {
+   configure.args-append   --with-macosx-keyring
+}
+

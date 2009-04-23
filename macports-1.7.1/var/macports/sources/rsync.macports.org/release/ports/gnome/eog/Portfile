@@ -1,0 +1,51 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49792 2009-04-18 09:21:44Z devans@macports.org $
+
+PortSystem 1.0
+
+name		eog
+version		2.24.1
+revision        1
+set branch	[join [lrange [split ${version} .] 0 1] .]
+description	An image viewing program.
+long_description        This is the Eye of Gnome, an image viewer program. \
+			It is meant to be a fast and functional image viewer \
+			as well as an image cataloging program.
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+checksums	md5 1233b5130e2d56e9d50d39084ae067ef \
+			sha1 f1406dc1ba9a2d7f8527cfbffa3f0889005b6971 \
+			rmd160 b387b05aa2f5adc979d1acdfa78788bed947c126
+
+depends_lib port:gnome-platform-suite \
+        lib:libiconv.2:libiconv port:fontconfig \
+        port:Xft2 lib:libaudiofile:audiofile \
+        port:fontconfig port:gnome-keyring \
+        lib:libexpat:expat \
+        bin:perl:perl5 \
+        port:rarian \
+		lib:libgnomeprintui-2-2:libgnomeprintui port:libexif \
+        port:popt \
+	port:fontconfig \
+	port:gnome-desktop
+
+use_bzip2 	yes
+
+patchfiles	patch-src-main.c.diff
+
+configure.args  --mandir=${prefix}/share/man --disable-scrollkeeper
+
+post-destroot {
+	file delete -force ${destroot}${prefix}/var/scrollkeeper
+}
+
+post-activate {
+	system "scrollkeeper-update"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

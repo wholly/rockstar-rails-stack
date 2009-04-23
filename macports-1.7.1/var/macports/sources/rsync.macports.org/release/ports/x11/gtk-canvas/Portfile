@@ -1,0 +1,36 @@
+# $Id: Portfile 49776 2009-04-18 02:44:12Z raimue@macports.org $
+
+PortSystem 1.0
+
+name                gtk-canvas
+version             0.1.1
+platforms           darwin
+maintainers         erickt openmaintainer
+categories          x11
+description         Straight backport of the GNOME canvas
+homepage            http://www.atai.org
+
+long_description    This is a straight port of the GNOME Canvas from the \
+                    stable gnome-libs 1.2.4 back to gtk+. The widget is \
+                    called GtkCanvas.
+
+depends_lib         lib:libgtk1:gtk1 \
+                    lib:libgnome:gnome-libs \
+                    lib:libart:libart_lgpl \
+                    lib:libtiff:tiff \
+                    lib:libpng:libpng \
+                    lib:libungif:libungif
+
+master_sites        http://www.atai.org/gtk-canvas
+checksums           md5 6872220119a4a3c284fe54a186e2ed57
+
+worksrcdir          ${name}-${version}/gtk-canvas
+
+configure.dir       ${worksrcpath}/..
+configure.pre_args  --prefix '${prefix}'
+
+destroot.destdir    prefix=${destroot}${prefix}
+
+platform darwin {
+  patchfiles patch-gtk-canvas-load.c
+}

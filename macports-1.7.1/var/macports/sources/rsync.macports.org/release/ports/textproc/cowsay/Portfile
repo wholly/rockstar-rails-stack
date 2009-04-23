@@ -1,0 +1,20 @@
+# $Id: Portfile 30256 2007-10-23 02:26:16Z jmpp@macports.org $
+
+PortSystem 1.0
+name		cowsay
+version		3.03
+revision	1
+categories	textproc amusements games
+platforms	darwin freebsd
+maintainers	nomaintainer
+description	Configurable talking characters in ASCII art
+long_description	${description}
+homepage	http://www.nog.net/~tony/warez/
+master_sites	ftp://ftp.nog.net/pub/tony/cowsay/
+checksums	md5 b29169797359420dadb998079021a494
+patchfiles	patch-cowsay patch-install.sh
+configure	{}
+build		{}
+destroot	{system "cd $worksrcpath && sh install.sh ${destroot}${prefix}"
+		reinplace s,${destroot}${prefix},${prefix}, ${destroot}${prefix}/bin/cowsay }
+

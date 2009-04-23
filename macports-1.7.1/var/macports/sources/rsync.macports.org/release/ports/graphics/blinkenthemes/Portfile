@@ -1,0 +1,14 @@
+# $Id: Portfile 20308 2006-11-01 21:23:28Z blair@macports.org $
+PortSystem              1.0
+name                    blinkenthemes
+version                 0.10
+revision                1
+categories              graphics blinkenlights
+maintainers             tim@ccc.de
+description             Blinkenlights simulator themes
+long_description        Themes to use with blinkensim simulator
+homepage                http://www.blinkenlights.de/
+master_sites            http://www.blinkenlights.de/dist/
+checksums               md5 f8964909252737eeeb11c06f4b5decd4
+
+platforms               darwin

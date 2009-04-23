@@ -1,0 +1,55 @@
+# $Id: Portfile 45610 2009-01-18 22:00:27Z blb@macports.org $
+
+PortSystem 1.0
+
+name            stellarium
+version         0.10.0
+revision        2
+categories      science
+platforms       darwin
+maintainers     raimue \
+                openmaintainer
+
+description     Stellarium is a free open source planetarium for your computer.
+long_description \
+    Stellarium is a free open source planetarium for your computer. \
+    It shows a realistic sky in 3D, just like what you see with the naked eye, \
+    binoculars or a telescope. It is being used in planetarium projectors. Just \
+    set your coordinates and go.
+homepage        http://stellarium.org/
+
+master_sites    sourceforge
+extract.suffix  .tgz
+checksums       md5     09465fa11a8caab7a4410f1e5ff6eb8c \
+                sha1    0a90134ffc72d196ec0af97b605f8f27140a1a09 \
+                rmd160  d03cf24ef1b9d24dc21c85d6e4a6832fa90c0706
+
+universal_variant   no
+
+depends_build   port:cmake
+depends_lib     port:boost port:libsdl_mixer port:libsdl port:qt4-mac port:freetype
+
+patch {
+    reinplace "s:/Users/Shared/stellarium/:${applications_dir}/:" ${worksrcpath}/CMakeLists.txt
+}
+
+configure.cmd       cmake
+# cmake is unable to find FreeType2, so specify it here
+configure.pre_args  -DFreeType2_INCLUDE_DIR:PATH=${prefix}/include/freetype2 \
+                    -DFreeType2_LIBRARIES:FILEPATH=${prefix}/lib/libfreetype.dylib
+configure.args      -DQT_QMAKE_EXECUTABLE=${prefix}/libexec/qt4-mac/bin/qmake \
+                    -G \"Unix Makefiles\" .
+
+# This post-destroot phase is similar to the 'make macosx_bundle' target,
+# but it does not copy libraries into the bundle and does not require perl as
+# another dependency
+post-destroot {
+    set appdir ${destroot}${applications_dir}/Stellarium.app/Contents
+
+    move ${appdir}/bin ${appdir}/MacOS
+    move ${appdir}/share ${appdir}/Resources
+    eval move [glob ${appdir}/Resources/stellarium/*] ${appdir}/Resources/
+    delete ${appdir}/Resources/stellarium
+}
+
+livecheck.regex     "<title>Stellarium-sources (.*) released.*</title>"

@@ -1,0 +1,19 @@
+# $Id: Portfile 47646 2009-03-02 22:50:21Z mcalhoun@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+perl5.setup         SOAP-Lite 0.710.07
+maintainers         nomaintainer
+homepage            http://www.soaplite.com/
+description         A simple interface to the Simple Object Access Protocol
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5 ca2db031c82dbb20079ff091b1d20acb
+
+depends_lib-append  port:p5-xml-parser \
+                    port:p5-uri \
+                    port:p5-version \
+                    port:p5-libwww-perl
+

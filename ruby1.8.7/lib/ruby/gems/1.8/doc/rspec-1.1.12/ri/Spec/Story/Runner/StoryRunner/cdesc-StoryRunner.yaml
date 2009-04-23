@@ -1,0 +1,40 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: current_story
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: scenarios
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: stories
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: current_story_runner
+- !ruby/object:RI::MethodSummary 
+  name: current_story_runner=
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: scenario_from_current_story
+comment: 
+constants: []
+
+full_name: Spec::Story::Runner::StoryRunner
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: Story
+- !ruby/object:RI::MethodSummary 
+  name: add_listener
+- !ruby/object:RI::MethodSummary 
+  name: run_stories
+- !ruby/object:RI::MethodSummary 
+  name: scenario_from_current_story
+name: StoryRunner
+superclass: Object

@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: History.txt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>History.txt</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>History.txt
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Apr 23 14:46:49 +0600 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h3>Version 1.1.12 / 2009-01-11</h3>
+<ul>
+<li>2 deprecations
+
+<ul>
+<li>TestResponse#[] is deprecated if you&#8216;re using Rails &lt;= 2.2.x and
+removed if you&#8216;re using Rails 2.3
+
+</li>
+<li>add_stubs(model, {:method =&gt; value}) is deprecated. Use
+model.stub!(:method =&gt; value) instead.
+
+</li>
+</ul>
+</li>
+<li>2 major enhancements
+
+<ul>
+<li>support controller and action path params in view specs (Mike Vincent).
+
+</li>
+<li>use ActiveSupport::TestCase when available, else <a
+href="../classes/Test/Unit/TestCase.html">Test::Unit::TestCase</a> -
+supports Rails 1.2.6 (Brandon Keepers). Closes 620.
+
+</li>
+<li>support form tag helpers in helpers (Ivo Dancet). Closes 641.
+
+</li>
+</ul>
+</li>
+<li>3 minor enhancements
+
+<ul>
+<li>improve rdoc for render_template (Patch from Andrew Premdas). Fixes 571.
+
+</li>
+<li>use more liberal globs to allow for specs in symlinked dirs (Martin Luder).
+Closes 361.
+
+</li>
+<li>Enable loading fixtures from arbitrary locations (Jacek Becela). Closes
+464.
+
+</li>
+</ul>
+</li>
+<li>7 bug fixes
+
+<ul>
+<li>Attempt to load application_controller before falling back to application
+(Geoff Garside). Closes 626.
+
+</li>
+<li>Include _id and reduce quoting of default values in view specs (Steen
+Lehmann). Closes 598.
+
+</li>
+<li>Record calls to render and check rendered[:template] and rendered[:partial]
+for edge rails (&gt; v2.2.2). Closes 633.
+
+</li>
+<li>config.gem &#8216;rspec&#8217; can&#8216;t be unpacked. Closes 629.
+
+</li>
+<li>spec_server not working with Rails 2.2.2 (Andreas Wolff). Closes 631.
+
+</li>
+<li>redirect_to doesn&#8216;t work with http method constrained urls (Maxim
+Kulkin). Closes 648.
+
+</li>
+<li>rescue_with declarations are no longer by-passed (Brandon Keepers). 85
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>Version 1.1.11 / 2008-10-24</h3>
+<ul>
+<li>No changes to rspec-rails - release to align with bug-fix release in rspec
+&#8230; again :(
+
+</li>
+</ul>
+<h3>Version 1.1.10 / 2008-10-24</h3>
+<ul>
+<li>No changes to rspec-rails - release to align with bug-fix release in rspec
+
+</li>
+</ul>
+<h3>Version 1.1.9 / 2008-10-20</h3>
+<ul>
+<li>4 bug fixes
+
+<ul>
+<li>require &#8216;rubygems&#8217; in script/spec
+
+</li>
+<li>fix failure message for error_on and errors_on (Patch from Mike Vincent).
+Fixes 566.
+
+</li>
+<li>fix issues that arise in view spec if passing actual template name to
+render (Patch from Mike Vincent). Fixes 551.
+
+</li>
+<li>fixed bug accessing assigns from helper examples
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>Version 1.1.8 / 2008-10-03</h3>
+<ul>
+<li>2 bug fixes
+
+<ul>
+<li>correctly handle assigns that are false. Fixes 552.
+
+</li>
+<li>ensure that NotYetImplemented examples report as pending (fixed in rspec,
+not rspec-rails). Fixes 553.
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>Version 1.1.7 / 2008-10-02</h3>
+<ul>
+<li>1 bug fix
+
+<ul>
+<li>depend on the correct version of rspec
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>Version 1.1.6 / 2008-10-02</h3>
+<ul>
+<li>1 bug fix
+
+<ul>
+<li>fixed regression where values assigned to the assigns hash were not
+accessible from the example (549)
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>Version 1.1.5 / 2008-09-28</h3>
+<p>
+IMPORTANT: use &#8216;script/autospec&#8217; (or just
+&#8216;autospec&#8217; if you have the rspec gem installed) instead of
+&#8216;autotest&#8217;. We changed the way autotest discovers rspec so the
+autotest executable won&#8216;t automatically load rspec anymore. This
+allows rspec to live side by side other spec frameworks without always
+co-opting autotest through autotest&#8216;s discovery mechanism.
+</p>
+<p>
+ALSO IMPORTANT: Rails v2.1.1 changed assert_select_rjs such that it
+doesn&#8216;t always fail when it should. Please see <a
+href="http://rails.lighthouseapp.com/projects/8994/tickets/982">rails.lighthouseapp.com/projects/8994/tickets/982</a>.
+</p>
+<ul>
+<li>Generated route specs have shorter names, making it less painful to modify
+their implementation
+
+</li>
+<li>Add conditional so Rails 2.1.0 doesn&#8216;t warn about
+cache_template_extensions (patch from James Herdman)
+
+</li>
+<li>Fixed stub_model examples to work with Rails 2.1.0 (the code was fine, just
+the examples needed patching)
+
+</li>
+<li>use hoe for build/release
+
+</li>
+<li>reworked generated examples for rspec_scaffold - thanks to Mikel Lindsaar
+and Dan Manges for their feedback
+
+</li>
+<li>bye, bye translator
+
+</li>
+<li>Added proxy to cookies so you can set them in examples the same way you set
+them in controllers
+
+</li>
+<li>Added script/autospec so you can run autospec without installing the gem
+
+</li>
+<li>Support &#8212;skip-fixture in the rspec_model generator (patches from Alex
+Tomlins and Niels Ganser)
+
+</li>
+<li>Add mock_model#as_new_record (patch from Zach Dennis)
+
+</li>
+<li>mock(:null_object=&gt;true) plays nice with HTML (patch from Gerrit Kaiser)
+
+</li>
+<li>Suppress a deprecation notice in Rails 2.1 (James Herdman)
+
+</li>
+<li>quiet deprecation warning on inflector (RSL)
+
+</li>
+<li>rspec-rails gem (Ben Mabey)
+
+</li>
+<li>updated generated code examples
+
+</li>
+<li>Make rspec_model generator honour &#8212;skip-fixtures tag (Niels Ganser,
+Alex Tomlins)
+
+</li>
+<li>Fix to create new models with attributes in command line (Nicolas)
+
+</li>
+<li>fix to_param in mock_model with stubbed id incorrectly returning
+autogenerated id (Adam Meehan)
+
+</li>
+<li>Call Rail&#8216;s TestCase setup/teardown callbacks (Jonathan del Strother)
+
+</li>
+<li>Only run TestUnitTesting once (Jonathan del Strother)
+
+</li>
+<li>use require_dependency instead of require (Brandon Keepers)
+
+</li>
+<li>Fixed a problem caused by controller action names getting out of sync
+between rspec-dev and rspec-rails for speccing (Matt Patterson)
+
+</li>
+<li>don&#8216;t mutate hash passed to mock_model (Reg Vos)
+
+</li>
+</ul>
+<h3>Version 1.1.4</h3>
+<p>
+Maintenance release.
+</p>
+<ul>
+<li>Moved mock_model and stub_model to their own module: <a
+href="../classes/Spec/Rails/Mocks.html">Spec::Rails::Mocks</a>
+
+</li>
+<li>Setting mock_model object id with stubs hash - patch from Adam Meehan
+
+</li>
+<li>Added as_new_record to stub_model e.g. stub_model(Foo).as_new_record
+
+</li>
+<li>Improved stub_model such that new_record? does &quot;the right thing&quot;
+
+</li>
+<li>Patch from Pat Maddox to get integrate_views to work in nested example
+groups.
+
+</li>
+<li>Patch from Pat Maddox to get controller_name to work in nested example
+groups.
+
+</li>
+<li>Patch from Corey Haines to add include_text matcher
+
+</li>
+<li>Added stub_model method which creates a real model instance with :id
+stubbed and data access prohibited.
+
+</li>
+<li>Applied patch from Pat Maddox to handle redirect_to w/ SSL. Closes 320.
+
+</li>
+<li>Added helper and assigns to helper specs.
+
+</li>
+<li>Applied patch from Bryan Helmkamp to tweak format of generated spec.opts to
+be more obvious. Closes 162.
+
+</li>
+<li>Tweaked list of exceptions (ignores) for autotest
+
+</li>
+<li>Applied patch from Rick Olson to get rspec_on_rails working with rails edge
+(&gt;= 8862)
+
+</li>
+<li>Applied patch from Wincent Colaiuta to invert sense of &quot;spec
+&#8212;diff&quot;. Closes 281.
+
+</li>
+<li>Allow any type of render in view specs. Closes 57.
+
+</li>
+<li>Applied patch from Ian White to get rspec working with edge rails (8804).
+Closes 271.
+
+</li>
+<li>Applied patch from Jon Strother to have spec_server reload fixtures. Closes
+344.
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

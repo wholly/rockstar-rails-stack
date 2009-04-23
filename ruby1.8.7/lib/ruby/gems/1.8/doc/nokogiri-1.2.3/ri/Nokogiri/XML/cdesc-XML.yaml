@@ -1,0 +1,89 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: Reader
+- !ruby/object:RI::MethodSummary 
+  name: load_external_subsets=
+- !ruby/object:RI::MethodSummary 
+  name: parse
+- !ruby/object:RI::MethodSummary 
+  name: substitute_entities=
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Nokogiri::XML
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Parser options
+  name: PARSE_RECOVER
+  value: 1 << 0
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NOENT
+  value: 1 << 1
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_DTDLOAD
+  value: 1 << 2
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_DTDATTR
+  value: 1 << 3
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_DTDVALID
+  value: 1 << 4
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NOERROR
+  value: 1 << 5
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NOWARNING
+  value: 1 << 6
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_PEDANTIC
+  value: 1 << 7
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NOBLANKS
+  value: 1 << 8
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_SAX1
+  value: 1 << 9
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_XINCLUDE
+  value: 1 << 10
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NONET
+  value: 1 << 11
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NODICT
+  value: 1 << 12
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NSCLEAN
+  value: 1 << 13
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NOCDATA
+  value: 1 << 14
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PARSE_NOXINCNODE
+  value: 1 << 15
+full_name: Nokogiri::XML
+includes: []
+
+instance_methods: []
+
+name: XML
+superclass: 

@@ -1,0 +1,33 @@
+# $Id: Portfile 35206 2008-03-20 17:13:00Z markd@macports.org $
+PortSystem      1.0
+
+name                    adodb
+version                 5.04
+categories              databases
+maintainers             markd
+description             Database library for PHP
+long_description        ${description}
+homepage                http://adodb.sourceforge.net/
+platforms               darwin
+master_sites            sourceforge
+checksums               md5 48de49cc803f36bd2a19437d6403ed06
+distfiles		${name}504.tgz
+worksrcdir		${name}5
+
+use_configure		no
+build {}
+
+set adodbdir ${prefix}/share
+set docsdir ${prefix}/share/doc/${name}/cute_icons_for_site
+
+destroot {
+	xinstall -m 755 -d ${destroot}${adodbdir}
+	xinstall -m 755 -d ${destroot}${docsdir}/cute_icons_for_site
+	system "cp -R ${worksrcpath} ${destroot}${adodbdir}"
+	system "cp ${worksrcpath}/docs/* ${destroot}${docsdir}"
+	system "cp ${worksrcpath}/cute_icons_for_site/*.* ${destroot}${docsdir}/cute_icons_for_site"
+}
+
+livecheck.distname adodb-php-4-and-5
+set my-version [string map {. ""} ${version}]
+livecheck.version "adodb-${my-version}-for-php"

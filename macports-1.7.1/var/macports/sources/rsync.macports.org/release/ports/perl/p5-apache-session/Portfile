@@ -1,0 +1,21 @@
+# $Id: Portfile 45093 2009-01-08 14:05:34Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Apache-Session 1.88
+maintainers           narf_tm openmaintainer
+description           A persistence framework for session data
+long_description      Apache::Session is a persistence framework which is \
+                      particularly useful for tracking session data \
+                      between httpd requests.
+
+platforms             darwin
+use_zip               yes
+
+checksums             md5 7a191a87ab9c2f434e3691b992fa2113 \
+                      sha1 5a37ba5ad4aebc94d3717fd261b6e15e32bed698 \
+                      rmd160 bbc3214f79c265ce073a6cb1debdacdd73533175
+
+depends_lib-append    port:p5-test-deep \
+                      port:p5-test-exception

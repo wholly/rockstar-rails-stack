@@ -1,0 +1,28 @@
+# $Id: Portfile 45655 2009-01-19 15:20:49Z mmoll@macports.org $
+
+PortSystem 1.0
+
+name		xmj
+version		1.9
+revision        4
+categories	games x11
+platforms	darwin
+maintainers	mmoll
+description	X graphical mahjong multi-player game
+long_description	\
+	xmj is a multi-player version of the Chinese game of Mah-Jong. \
+	One can play against computer players or against other human \
+	players over the network.
+homepage	http://mahjong.julianbradfield.org
+distname	mj-${version}-src
+master_sites	${homepage}/Source
+checksums	md5 6cf88b7cbe25e99c12addd28e6b76164 \
+		sha1 de8368a8c0bda6cb29db20bfdf76c6f778181468 \
+		rmd160 d001ff72a2101d4dcf115e98594370f9208ddc14
+depends_lib	lib:libgtk:gtk1
+use_configure   no
+build.args	CDEBUGFLAGS=-O2
+destroot.target	install install.man
+destroot.destdir DESTDIR=${destroot}/ BINDIR=${prefix}/bin \
+	MANDIR=${prefix}/share/man/man1
+

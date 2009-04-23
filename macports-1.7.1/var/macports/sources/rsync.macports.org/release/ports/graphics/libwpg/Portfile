@@ -1,0 +1,34 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 40880 2008-10-17 05:01:42Z devans@macports.org $
+
+PortSystem              1.0
+
+name                    libwpg
+version                 0.1.3
+categories              graphics
+maintainers             devans openmaintainer
+platforms               darwin
+homepage                http://libwpg.sourceforge.net/
+master_sites            sourceforge
+
+description \
+    C++ library for reading and parsing graphics in WPG (Word Perfect Graphics) format.
+
+long_description \
+    Libwpg is a C++ library for reading and parsing graphics in WPG (Word Perfect Graphics) \
+    format. WPG is the format used among others in Corel software such as WordPerfect(tm) \
+    and Presentations(tm). Distributed under the LGPL license, libwpg can be used in free \
+    and commercial software.
+
+checksums \
+    md5     db556b750bf3eac8481a4cc5e29e5af1 \
+    sha1    6d350eb0ad57b97499ef8335506f172b0c21375a \
+    rmd160  6e9e0545215af2ee05780887ad57ca1ae7ef78f5
+
+depends_build \
+    port:pkgconfig
+
+depends_lib \
+    port:libwpd
+
+livecheck.regex         <title>${name} ${name}-(\[0-9.\]+) released.*</title>

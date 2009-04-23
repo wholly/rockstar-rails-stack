@@ -1,0 +1,32 @@
+# $Id: Portfile 30219 2007-10-22 22:40:35Z jmpp@macports.org $
+
+PortSystem 1.0
+name		normalize
+version		0.7.7
+categories	audio
+maintainers	nomaintainer
+description	A tool to normalize WAV and MP3 audio
+long_description	\
+	Normalize is an overly complicated tool for adjusting the volume of \
+	wave files to a standard volume level.  This is useful for things \
+	like creating mp3 mixes, where different recording levels on \
+	different albums can cause the volume to vary greatly from song to \
+	song.
+homepage	http://${name}.nongnu.org/
+platforms	darwin
+master_sites    http://savannah.nongnu.org/download/${name}/
+checksums	md5 db5b18bf661a5317fbc507b020b8c643
+depends_lib	\
+	lib:libexpat.0:expat port:gettext port:libiconv
+
+configure.cppflags-append   -no-cpp-precomp
+configure.args	            --without-mad --without-audiofile --mandir=${prefix}/share/man
+
+variant mad {
+	depends_lib-append	lib:libmad:libmad
+	configure.args-append	--with-mad
+}
+variant audiofile {
+	depends_lib-append	lib:libaudiofile.0:audiofile
+	configure.args-append	--with-audiofile
+}

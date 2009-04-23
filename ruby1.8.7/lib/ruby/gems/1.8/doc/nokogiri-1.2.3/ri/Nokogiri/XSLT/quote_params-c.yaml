@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::XSLT::quote_params
+is_singleton: true
+name: quote_params
+params: (params)
+visibility: public

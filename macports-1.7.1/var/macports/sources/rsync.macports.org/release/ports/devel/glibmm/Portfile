@@ -1,0 +1,26 @@
+# $Id: Portfile 48853 2009-03-30 15:01:49Z devans@macports.org $
+
+PortSystem 1.0
+
+name            glibmm
+version         2.18.2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     C++ interface to glib
+long_description \
+                ${description}
+maintainers     nomaintainer
+categories      devel x11
+platforms       darwin
+homepage        http://www.gtkmm.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+checksums       md5     acb1fc7d1afebb7fe64f569eb6ba2aed \
+                sha1    f398374172b3b63160d182d122d541b4fb5d98ac \
+                rmd160  2f564dc7134f1e56b401283acc7960635cba5f33
+
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:libsigcxx2
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/GNOME/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-([0-9\.]+)}

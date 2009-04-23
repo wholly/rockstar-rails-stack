@@ -1,0 +1,51 @@
+# $Id: Portfile 42092 2008-11-15 02:16:32Z blb@macports.org $
+
+PortSystem 1.0
+
+name                mod_fcgid
+version             2.2
+
+categories          www
+platforms           darwin
+maintainers         nomaintainer
+
+description         An alternative FastCGI module for Apache2
+long_description    ${description}
+
+homepage            http://fastcgi.coremail.cn/
+master_sites        sourceforge:mod-fcgid
+
+distname            ${name}.${version}
+checksums           md5     ce7d7b16e69643dbd549d43d85025983 \
+                    sha1    dc817a20ad6528480a441e4b7ad6920ec11c55e0 \
+                    rmd160  9c45c2b25fcf0f4069cee4fb8917493f0a13b338
+patchfiles          patch-fcgid_conf.c
+
+depends_lib         port:apache2
+
+use_configure       no
+
+post-patch {
+   reinplace "s|/usr/local/apache2|${prefix}/apache2|g" \
+      ${worksrcpath}/Makefile
+}
+
+destroot.violate_mtree   yes
+post-destroot {
+   xinstall -m 755 -d ${destroot}${prefix}/apache2/modules \
+      ${destroot}${prefix}/share/doc/${name}
+   xinstall -m 644 -W ${worksrcpath} AUTHOR COPYING ChangeLog INSTALL.txt \
+      ${destroot}${prefix}/share/doc/${name}
+}
+
+post-install {
+   ui_msg "=========="
+   ui_msg "To enable mod_fcgid in Apache, add"
+   ui_msg "   LoadModule fcgid_module modules/mod_fcgid.so"
+   ui_msg "to ${prefix}/apache2/conf/httpd.conf"
+   ui_msg ""
+   ui_msg "For further configuration information please visit"
+   ui_msg "   http://fastcgi.coremail.cn/doc.htm"
+   ui_msg "=========="
+}
+

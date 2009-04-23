@@ -1,0 +1,68 @@
+# $Id: Portfile 45603 2009-01-18 20:52:41Z jeremyhu@macports.org $
+
+####################################################################
+# Marc Lehmann, the developer of rxvt-unicode, has no interest in  #
+# supporting it on Mac OS X. He is hostile about Apple, Mac OS X,  #
+# and Mac users, so do not contact him about his software when     #
+# used on Mac OS X. If you encounter problems updating this port   #
+# to a newer version, find a workaround and write a patch. Do not  #
+# report upstream. See http://trac.macports.org/ticket/17202       #
+####################################################################
+
+PortSystem      1.0
+
+name            rxvt-unicode
+version         9.06
+revision        2
+categories      x11
+maintainers     nomaintainer
+description     Unicode-aware rxvt clone.
+long_description \
+                rxvt-unicode is a clone of the well-known terminal \
+                emulator rxvt. Some of it's main features over rxvt are \
+                use of UCS-2 or UCS-4 to store text internally, \
+                locale-correct in- and output, stability, \
+                completely flicker-free \
+                display, support for Xft and core fonts in any \
+                combination, etc.
+platforms       darwin
+homepage        http://software.schmorp.de/pkg/rxvt-unicode.html
+master_sites    http://dist.schmorp.de/rxvt-unicode/ \
+                http://dist.schmorp.de/rxvt-unicode/Attic/
+use_bzip2       yes
+checksums       md5     4cb9330e99fc0b0b05cebf3581557dd8 \
+                sha1    df623ebdad001de534781721f8298ba1add0df2c \
+                rmd160  ae737ed07e943303318bd81b566146d5426f36bd
+
+depends_build \
+	port:pkgconfig
+
+depends_lib \
+	port:Xft2 \
+	port:expat \
+	port:ncursesw \
+	path:bin/perl:perl5 \
+	port:zlib
+
+configure.perl  ${prefix}/bin/perl
+
+patchfiles      patch-Makefile.in.diff
+
+configure.args  --enable-everything --with-codeset=all \
+                --disable-utmp --disable-afterimage \
+                --mandir=${prefix}/share/man
+
+use_parallel_build  yes
+
+# port:perl5 is not universal
+universal_variant   no
+
+destroot.env    TERMINFO=${destroot}${prefix}/share/terminfo
+pre-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/terminfo
+}
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}/etc
+    xinstall -m 644 -W ${worksrcpath} COPYING Changes INSTALL README.FAQ README.configure ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath}/doc/etc rxvt-unicode.termcap rxvt-unicode.terminfo ${destroot}${prefix}/share/doc/${name}/etc
+}

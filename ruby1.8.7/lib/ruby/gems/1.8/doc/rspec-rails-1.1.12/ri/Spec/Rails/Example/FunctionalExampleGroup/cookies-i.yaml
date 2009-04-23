@@ -1,0 +1,29 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Overrides the <tt>cookies()</tt> method in ActionController::TestResponseBehaviour, returning a proxy that accesses the requests cookies when setting a cookie and the responses cookies when reading one. This allows you to set and read cookies in examples using the same API with which you set and read them in controllers.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples (Rails &gt;= 1.2.6)
+- !ruby/struct:SM::Flow::VERB 
+  body: "  cookies[:user_id] = '1234'\n  get :index\n  assigns[:user].id.should == '1234'\n\n  post :login\n  cookies[:login].expires.should == 1.week.from_now\n"
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples (Rails 2.0 &gt; 2.2)
+- !ruby/struct:SM::Flow::VERB 
+  body: "  cookies[:user_id] = {:value =&gt; '1234', :expires =&gt; 1.minute.ago}\n  get :index\n  response.should be_redirect\n"
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Examples (Rails 2.3)
+- !ruby/struct:SM::Flow::P 
+  body: "Rails 2.3 changes the way cookies are made available to functional tests (and therefore rspec controller specs), only making single values available with no access to other aspects of the cookie. This is backwards-incompatible, so you have to change your examples to look like this:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  cookies[:foo] = 'bar'\n  get :index\n  cookies[:foo].should == 'bar'\n"
+full_name: Spec::Rails::Example::FunctionalExampleGroup#cookies
+is_singleton: false
+name: cookies
+params: ()
+visibility: public

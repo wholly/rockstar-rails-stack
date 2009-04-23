@@ -1,0 +1,52 @@
+# $Id: Portfile 40121 2008-09-21 15:49:41Z jberry@macports.org $
+
+PortSystem 1.0
+
+name				commons-beanutils
+version				1.8.0
+
+categories			java
+maintainers			jberry openmaintainer
+platforms			darwin
+
+description			Jakarta Commons-BeanUtils
+long_description	Commons-BeanUtils provides easy-to-use wrappers around the \
+					Java reflection and introspection APIs.
+homepage			http://commons.apache.org/beanutils/
+				
+distfiles			${distname}-src${extract.suffix}
+
+master_sites		apache:commons/beanutils/source/
+				
+checksums           md5     1bce3cfa4ae33c94686422e78abc0792 \
+                    sha1    a4af85d2cfd04a42d8de9a5bb5336a21f33e30ce
+                    
+depends_build		bin:ant:apache-ant
+depends_lib			bin:java:kaffe \
+					port:junit \
+					port:commons-logging \
+					port:commons-collections
+
+worksrcdir 			${distname}-src
+
+use_configure		no
+
+build.cmd			ant
+build.target		jar javadoc
+build.args			-Dcommons-collections.jar=${prefix}/share/java/commons-collections.jar \
+					-Dcommons-logging.jar=${prefix}/share/java/commons-logging.jar \
+					-Djunit.jar=${prefix}/share/java/junit.jar
+
+destroot	{
+	xinstall -m 755 -d ${destroot}${prefix}/share/java \
+		${destroot}${prefix}/share/doc
+	xinstall -m 644 ${worksrcpath}/dist/commons-beanutils-core-${version}.jar \
+		${destroot}${prefix}/share/java/commons-beanutils-core.jar
+	xinstall -m 644 ${worksrcpath}/dist/commons-beanutils-${version}.jar \
+		${destroot}${prefix}/share/java/commons-beanutils.jar
+	file copy ${worksrcpath}/dist/docs ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.check regex
+livecheck.url   http://commons.apache.org/downloads/download_beanutils.cgi
+livecheck.regex "${name}-(\\d+\\.\\d+(\\.\\d+)?)-src.tar.gz"

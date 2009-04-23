@@ -1,0 +1,15 @@
+# $Id: Portfile 33960 2008-02-08 19:28:39Z narf_tm@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Module-Find 0.06
+maintainers         narf_tm openmaintainer
+description         Find and use installed modules in a (sub)category
+long_description    Module::Find lets you find and use modules in categories.
+
+platforms           darwin
+
+checksums           md5 64254ded9d9aea2845a2c7cf25a2949b \
+                    sha1 b2985eb535744a82122f9f68c3926f047712565a \
+                    rmd160 4ae8b0a288c3716fc498b450d47d681db72c43f2

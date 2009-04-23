@@ -1,0 +1,32 @@
+# $Id: Portfile 42712 2008-11-29 23:41:08Z toby@macports.org $
+
+PortSystem 1.0
+name            ngircd
+version         0.12.1
+categories      irc
+maintainers     nomaintainer
+description     next generation IRC daemon
+long_description \
+    ngIRCd is a free open source daemon for \
+    Internet Relay Chat (IRC). It's written \
+    from scratch and is not based upon the \
+    original IRCd like many others.
+homepage        http://ngircd.barton.de/
+platforms       darwin
+master_sites    ftp://ftp.berlios.de/pub/ngircd/ \
+                ftp://ngircd.barton.de/pub/ngircd/
+checksums       md5 db8618877a4dd5fb2be50402a2cb4a14 \
+                sha1 4ad42011b8ec49aa3fc6ed2fc70f91894944d1ce
+
+configure.args  --mandir=${prefix}/share/man \
+                --with-tcp-wrappers \
+                --with-rendezvous
+
+pre-configure {
+    reinplace s|600|644|g ${worksrcpath}/doc/Makefile.am ${worksrcpath}/doc/Makefile.in
+}
+
+variant ident {
+    depends_lib-append      lib:libident.0:libident
+    configure.args-append   --with-ident
+}

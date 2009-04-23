@@ -1,0 +1,28 @@
+# $Id: Portfile 40704 2008-10-11 16:40:53Z pmq@macports.org $
+
+PortSystem          1.0
+PortGroup	    perl5 1.0
+
+perl5.setup	    Perlbal 1.72
+categories          perl net
+platforms	    darwin
+maintainers	    pmq
+
+description         Perl-based reverse proxy load balancer and web server
+long_description    ${description}
+
+homepage            http://www.danga.com/perlbal
+master_sites        http://search.cpan.org/CPAN/authors/id/B/BR/BRADFITZ \
+		    http://search.cpan.org/CPAN/authors/id/D/DO/DORMANDO
+checksums           md5 041253900d7dfa98beee3d0aab9939b7 \
+		    sha1 bab357488b54c9d26bb9622ff3f0db29be8ee32a
+
+depends_run-append  port:p5-net-netmask port:p5-danga-socket \
+		    port:p5-bsd-resource port:p5-libwww-perl
+
+post-destroot {
+#   set sharedir ${destroot}${prefix}/share/[string tolower ${name}]-${version}
+    set sharedir ${destroot}${prefix}/share/perlbal-${version}
+    xinstall -d ${sharedir}
+    file copy ${worksrcpath}/doc ${worksrcpath}/conf ${sharedir}
+}

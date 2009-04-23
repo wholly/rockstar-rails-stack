@@ -1,0 +1,126 @@
+# $Id: Portfile 40934 2008-10-18 17:22:22Z raimue@macports.org $
+
+PortSystem 1.0
+name                redland
+version             1.0.8
+revision            1
+description         Redland RDF Library
+long_description    Redland is a set of free software libraries that provide \
+                    support for the Resource Description Framework (RDF).
+maintainers         lyle@lylejohnson.name
+categories          www
+platforms           darwin
+homepage            http://librdf.org/
+master_sites        http://download.librdf.org/source/
+
+checksums           md5 ca66e26082cab8bb817185a116db809b \
+                    sha1 9501b95a2b668067e2dcb0ab3bdb59e0376144de \
+                    rmd160 c046aea89945e39e1917f833c35cb8dc272f3f65
+
+depends_lib         port:curl \
+                    port:libiconv \
+                    port:libxml2 \
+                    port:libxslt \
+                    port:openssl \
+                    port:raptor \
+                    port:rasqal \
+                    port:zlib
+
+configure.args      --mandir=${prefix}/share/man \
+                    --with-bdb=no \
+                    --with-mysql=no \
+                    --with-postgresql=no \
+                    --with-sqlite=no
+
+test.run            yes
+test.target         check
+
+default_variants    +db46
+
+variant db41 conflicts db42 db43 db44 db45 db46 {
+    configure.cflags    -I${prefix}/include/db41 -I${prefix}/include
+    configure.ldflags   -L${prefix}/lib/db41 -L${prefix}/lib
+    configure.args-delete --with-bdb=no
+    depends_lib-append port:db41
+}
+
+variant db42 conflicts db41 db43 db44 db45 db46 {
+    configure.cflags    -I${prefix}/include/db42 -I${prefix}/include
+    configure.ldflags   -L${prefix}/lib/db42 -L${prefix}/lib
+    configure.args-delete --with-bdb=no
+    depends_lib-append port:db42
+}
+
+variant db43 conflicts db41 db42 db44 db45 db46 {
+    configure.cflags    -I${prefix}/include/db43 -I${prefix}/include
+    configure.ldflags   -L${prefix}/lib/db43 -L${prefix}/lib
+    configure.args-delete --with-bdb=no
+    depends_lib-append port:db43
+}
+
+variant db44 conflicts db41 db42 db43 db45 db46 {
+    configure.cflags    -I${prefix}/include/db44 -I${prefix}/include
+    configure.ldflags   -L${prefix}/lib/db44 -L${prefix}/lib
+    configure.args-delete --with-bdb=no
+    depends_lib-append port:db44
+}
+
+variant db45 conflicts db41 db42 db43 db44 db46 {
+    configure.cflags    -I${prefix}/include/db45 -I${prefix}/include
+    configure.ldflags   -L${prefix}/lib/db45 -L${prefix}/lib
+    configure.args-delete --with-bdb=no
+    depends_lib-append port:db45
+}
+
+variant db46 conflicts db41 db42 db43 db44 db45 {
+    configure.cflags    -I${prefix}/include/db46 -I${prefix}/include
+    configure.ldflags   -L${prefix}/lib/db46 -L${prefix}/lib
+    configure.args-delete --with-bdb=no
+    depends_lib-append port:db46
+}
+ 
+variant mysql3 conflicts mysql4 mysql5 {
+    configure.args-delete --with-mysql=no
+    depends_lib-append port:mysql3
+}
+
+variant mysql4 conflicts mysql3 mysql5 {
+    configure.args-delete --with-mysql=no
+    depends_lib-append port:mysql4
+}
+
+variant mysql5 conflicts mysql3 mysql4 {
+    configure.args-delete --with-mysql=no
+    depends_lib-append port:mysql5
+}
+
+variant postgresql7 conflicts postgresql80 postgresql81 postgresql82 postgresql83 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql7
+}
+
+variant postgresql80 conflicts postgresql7 postgresql81 postgresql82 postgresql83 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql80
+}
+
+variant postgresql81 conflicts postgresql7 postgresql80 postgresql82 postgresql83 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql81
+}
+
+variant postgresql82 conflicts postgresql7 postgresql80 postgresql81 postgresql83 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql82
+}
+
+variant postgresql83 conflicts postgresql7 postgresql80 postgresql81 postgresql82 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql83
+}
+
+variant sqlite3 {
+    configure.args-delete --with-sqlite=no
+    depends_lib-append port:sqlite3
+}
+

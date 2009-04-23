@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Concats the class description with the example description.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  describe Account do\n    it &quot;should start with a balance of 0&quot; do\n    ...\n\n  full_description\n  =&gt; &quot;Account should start with a balance of 0&quot;\n"
+full_name: Spec::Example::ExampleMethods#full_description
+is_singleton: false
+name: full_description
+params: ()
+visibility: public

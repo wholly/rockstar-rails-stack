@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Serialize this Document with <tt>encoding</tt> using <tt>options</tt>
+full_name: Nokogiri::HTML::Document#serialize
+is_singleton: false
+name: serialize
+params: (encoding = nil, options = XML::Node::SaveOptions::FORMAT | XML::Node::SaveOptions::AS_HTML | XML::Node::SaveOptions::NO_DECLARATION | XML::Node::SaveOptions::NO_EMPTY_TAGS)
+visibility: public

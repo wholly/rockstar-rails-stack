@@ -1,0 +1,33 @@
+# $Id: Portfile 49827 2009-04-18 17:27:01Z macsforever2000@macports.org $
+
+PortSystem      1.0
+
+name            tokyotyrant
+version         1.1.23
+categories      databases
+maintainers     openmaintainer pguyot@kallisys.net
+platforms       darwin
+description     Tokyo Cabinet remote server
+long_description    \
+    Tokyo Tyrant is Tokyo Cabinet remote server.
+homepage        http://tokyocabinet.sourceforge.net/
+master_sites    ${homepage} \
+                sourceforge:tokyocabinet
+checksums       md5     259c6137618a9e5ea688cc211abbbd36 \
+                sha1    ad1b711b66e2d0570416efd66f5609b63c75212a \
+                rmd160  44db1c372be3f965e87f340f1e197451b0fa1b44
+
+depends_lib     port:zlib \
+                port:tokyocabinet
+
+configure.args  --mandir=${prefix}/share/man \
+                --datadir=${prefix}/share/doc
+
+variant lua description {enable lua support} {
+    configure.args-append   --enable-lua
+    depends_lib-append      port:lua
+}
+
+livecheck.check sourceforge
+livecheck.name  tokyocabinet
+livecheck.regex "<title>${name} (.*) released.*</title>"

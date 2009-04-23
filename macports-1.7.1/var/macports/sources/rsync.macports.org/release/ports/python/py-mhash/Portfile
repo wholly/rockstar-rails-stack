@@ -1,0 +1,29 @@
+# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+
+PortSystem 1.0
+PortGroup python24 1.0
+
+name			py-mhash
+version			1.2
+revision		1
+categories		python devel security
+maintainers		nomaintainer
+platforms		darwin freebsd
+description		python interface to the mhash library
+long_description	${description}
+
+homepage		http://mhash.sourceforge.net/
+master_sites	sourceforge:mhash
+distname		python-mhash-${version}
+checksums		md5 b82467ec28cec6ca3258c06cc0ee3e88
+patchfiles		patch-mhash.c.diff
+
+depends_lib-append	lib:mhash:mhash
+
+build.env		CPPFLAGS="-I${prefix}/include" \
+				LDFLAGS="-L${prefix}/lib"
+
+post-destroot	{
+	xinstall -m 644 -W ${worksrcpath} AUTHORS LICENSE NEWS README \
+		${destroot}${prefix}/share/doc/${name}
+}

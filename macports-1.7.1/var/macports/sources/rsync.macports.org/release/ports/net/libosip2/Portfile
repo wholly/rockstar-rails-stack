@@ -1,0 +1,21 @@
+# $Id: Portfile 30239 2007-10-23 01:55:09Z jmpp@macports.org $
+
+PortSystem 1.0
+name             libosip2
+version          2.2.2
+categories       net
+maintainers      nomaintainer
+description      GNU oSIP library
+long_description \
+	oSIP is an implementation of SIP. SIP stands for the \
+	Session Initiation Protocol and is described by the \
+	rfc3261 (wich deprecates rfc2543). This library aims \
+	to provide multimedia and telecom software developers \
+	an easy and powerful interface to initiate and control \
+	SIP based sessions in their applications. SIP is a \
+	open standard replacement from IETF for H323.
+homepage         http://www.gnu.org/software/osip/
+platforms        darwin
+master_sites     gnu:osip
+checksums        md5 40ee3ec89030f0d6dfdb2cf6100e6685
+configure.args	 --enable-mt --mandir=${prefix}/share/man

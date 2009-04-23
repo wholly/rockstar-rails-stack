@@ -1,0 +1,27 @@
+# $Id: Portfile 30184 2007-10-22 19:32:09Z mww@macports.org $
+
+PortSystem 1.0
+
+name		cccc
+version		3.1.4
+categories	lang
+platforms	darwin
+maintainers	mww
+description	tool for measurement of source code related metrics
+long_description	${description}
+
+homepage	http://cccc.sourceforge.net/
+master_sites	sourceforge
+checksums	md5 7bd3ad868913a0beab2fde931737f928
+patchfiles	patch-posixgcc.mak.diff
+
+use_configure	no
+
+build.target	pccts cccc
+
+test.run	yes
+test.target	test
+
+destroot	{
+	xinstall -m 755 -s ${worksrcpath}/cccc/cccc ${destroot}${prefix}/bin
+}

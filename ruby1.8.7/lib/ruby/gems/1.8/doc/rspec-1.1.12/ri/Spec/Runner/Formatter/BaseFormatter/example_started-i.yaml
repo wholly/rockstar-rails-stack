@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This method is invoked when an <tt>example</tt> starts.
+full_name: Spec::Runner::Formatter::BaseFormatter#example_started
+is_singleton: false
+name: example_started
+params: (example)
+visibility: public

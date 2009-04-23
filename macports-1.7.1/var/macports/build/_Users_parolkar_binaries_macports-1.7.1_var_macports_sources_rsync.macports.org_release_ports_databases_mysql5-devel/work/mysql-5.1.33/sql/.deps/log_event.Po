@@ -1,0 +1,578 @@
+log_event.o log_event.o: log_event.cc mysql_priv.h ../include/my_global.h \
+  ../include/my_config.h /usr/include/pthread.h /usr/include/_types.h \
+  /usr/include/sys/_types.h /usr/include/sys/cdefs.h \
+  /usr/include/machine/_types.h /usr/include/i386/_types.h \
+  /usr/include/pthread_impl.h /usr/include/sched.h /usr/include/time.h \
+  /usr/include/_structs.h /usr/include/sys/_structs.h \
+  /usr/include/stdio.h /usr/include/stdlib.h /usr/include/available.h \
+  /usr/include/sys/wait.h /usr/include/sys/signal.h \
+  /usr/include/sys/appleapiopts.h /usr/include/machine/signal.h \
+  /usr/include/i386/signal.h /usr/include/i386/_structs.h \
+  /usr/include/machine/_structs.h /usr/include/mach/i386/_structs.h \
+  /usr/include/sys/resource.h /usr/include/machine/endian.h \
+  /usr/include/i386/endian.h /usr/include/sys/_endian.h \
+  /usr/include/libkern/_OSByteOrder.h \
+  /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h \
+  /usr/include/machine/types.h /usr/include/i386/types.h \
+  /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stddef.h \
+  /usr/include/math.h /usr/include/architecture/i386/math.h \
+  /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/limits.h \
+  /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/syslimits.h \
+  /usr/include/limits.h /usr/include/machine/limits.h \
+  /usr/include/i386/limits.h /usr/include/i386/_limits.h \
+  /usr/include/sys/syslimits.h \
+  /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/float.h \
+  /usr/include/fenv.h /usr/include/architecture/i386/fenv.h \
+  /usr/include/sys/types.h /usr/include/fcntl.h /usr/include/sys/fcntl.h \
+  /usr/include/sys/timeb.h /usr/include/sys/time.h \
+  /usr/include/sys/_select.h /usr/include/unistd.h \
+  /usr/include/sys/unistd.h /usr/include/sys/select.h \
+  /usr/include/errno.h /usr/include/sys/errno.h /usr/include/assert.h \
+  ../include/my_attribute.h ../include/my_dbug.h \
+  /usr/include/sys/socket.h /usr/include/machine/_param.h \
+  /usr/include/i386/_param.h /usr/include/dlfcn.h \
+  /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stdbool.h \
+  /usr/include/AvailabilityMacros.h /usr/include/c++/4.0.0/new \
+  /usr/include/c++/4.0.0/cstddef /usr/include/c++/4.0.0/exception \
+  ../include/mysql_version.h ../include/mysql_embed.h ../include/my_sys.h \
+  ../include/my_pthread.h ../include/m_ctype.h \
+  /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stdarg.h \
+  ../include/typelib.h ../include/my_alloc.h /usr/include/sys/mman.h \
+  ../include/my_time.h ../include/my_global.h ../include/mysql_time.h \
+  ../include/m_string.h /usr/include/strings.h /usr/include/string.h \
+  ../include/hash.h /usr/include/signal.h ../include/thr_lock.h \
+  ../include/my_list.h ../include/my_base.h ../include/queues.h \
+  sql_bitmap.h ../include/my_bitmap.h sql_array.h sql_plugin.h \
+  ../include/mysql/plugin.h scheduler.h ../include/mysql_com.h \
+  ../include/violite.h ../include/my_net.h /usr/include/netinet/in.h \
+  /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stdint.h \
+  /usr/include/netinet6/in6.h /usr/include/arpa/inet.h \
+  /usr/include/sys/poll.h /usr/include/sys/ioctl.h \
+  /usr/include/sys/ttycom.h /usr/include/sys/ioccom.h \
+  /usr/include/sys/filio.h /usr/include/sys/sockio.h \
+  /usr/include/netinet/in_systm.h /usr/include/netinet/ip.h \
+  /usr/include/netinet/tcp.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/opensslv.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ssl.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/e_os2.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/opensslconf.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/comp.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/crypto.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/stack.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/safestack.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ossl_typ.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/symhacks.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/bio.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/x509.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/buffer.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/evp.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/objects.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/obj_mac.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/asn1.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/bn.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ec.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ecdsa.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ecdh.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/rsa.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/dsa.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/dh.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/sha.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/x509_vfy.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/lhash.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/pkcs7.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/pem.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/pem2.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/hmac.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/kssl.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ssl2.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ssl3.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/pq_compat.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/tls1.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/dtls1.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/pqueue.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ssl23.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/err.h unireg.h \
+  ../include/mysqld_error.h structs.h sql_string.h sql_list.h sql_map.h \
+  my_decimal.h ../include/decimal.h handler.h ../include/my_handler.h \
+  ../include/myisampack.h ../include/ft_global.h ../include/keycache.h \
+  parse_file.h table.h sql_error.h field.h protocol.h sql_udf.h \
+  sql_profile.h sql_partition.h partition_info.h partition_element.h \
+  item.h gstream.h spatial.h item_sum.h ../include/my_tree.h \
+  ../include/my_base.h item_func.h item_row.h item_cmpfunc.h \
+  ../regex/my_regex.h item_strfunc.h sql_crypt.h item_geofunc.h \
+  item_timefunc.h item_subselect.h item_xmlfunc.h sql_class.h log.h \
+  rpl_tblmap.h sql_lex.h set_var.h lex_symbol.h log_event.h \
+  rpl_constants.h rpl_record.h rpl_reporting.h rpl_reporting.h \
+  log_event_old.h ../include/myisam.h ../include/my_handler.h sql_acl.h \
+  slave.h rpl_filter.h ../include/mysql.h ../include/mysql_version.h \
+  ../include/mysql_com.h ../include/mysql_time.h ../include/my_list.h \
+  ../include/typelib.h ../include/my_alloc.h tztime.h sql_servers.h \
+  opt_range.h sql_cache.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/des.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/des_old.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ui_compat.h \
+  /Users/parolkar/binaries/macports-1.7.1/include/openssl/ui.h sql_view.h \
+  rpl_rli.h rpl_utility.h rpl_mi.h ../include/my_dir.h \
+  /usr/include/sys/stat.h ../include/base64.h
+
+mysql_priv.h:
+
+../include/my_global.h:
+
+../include/my_config.h:
+
+/usr/include/pthread.h:
+
+/usr/include/_types.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/i386/_types.h:
+
+/usr/include/pthread_impl.h:
+
+/usr/include/sched.h:
+
+/usr/include/time.h:
+
+/usr/include/_structs.h:
+
+/usr/include/sys/_structs.h:
+
+/usr/include/stdio.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/available.h:
+
+/usr/include/sys/wait.h:
+
+/usr/include/sys/signal.h:
+
+/usr/include/sys/appleapiopts.h:
+
+/usr/include/machine/signal.h:
+
+/usr/include/i386/signal.h:
+
+/usr/include/i386/_structs.h:
+
+/usr/include/machine/_structs.h:
+
+/usr/include/mach/i386/_structs.h:
+
+/usr/include/sys/resource.h:
+
+/usr/include/machine/endian.h:
+
+/usr/include/i386/endian.h:
+
+/usr/include/sys/_endian.h:
+
+/usr/include/libkern/_OSByteOrder.h:
+
+/usr/include/libkern/i386/_OSByteOrder.h:
+
+/usr/include/alloca.h:
+
+/usr/include/machine/types.h:
+
+/usr/include/i386/types.h:
+
+/usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stddef.h:
+
+/usr/include/math.h:
+
+/usr/include/architecture/i386/math.h:
+
+/usr/lib/gcc/i686-apple-darwin9/4.0.1/include/limits.h:
+
+/usr/lib/gcc/i686-apple-darwin9/4.0.1/include/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/machine/limits.h:
+
+/usr/include/i386/limits.h:
+
+/usr/include/i386/_limits.h:
+
+/usr/include/sys/syslimits.h:
+
+/usr/lib/gcc/i686-apple-darwin9/4.0.1/include/float.h:
+
+/usr/include/fenv.h:
+
+/usr/include/architecture/i386/fenv.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/fcntl.h:
+
+/usr/include/sys/fcntl.h:
+
+/usr/include/sys/timeb.h:
+
+/usr/include/sys/time.h:
+
+/usr/include/sys/_select.h:
+
+/usr/include/unistd.h:
+
+/usr/include/sys/unistd.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/errno.h:
+
+/usr/include/sys/errno.h:
+
+/usr/include/assert.h:
+
+../include/my_attribute.h:
+
+../include/my_dbug.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/machine/_param.h:
+
+/usr/include/i386/_param.h:
+
+/usr/include/dlfcn.h:
+
+/usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stdbool.h:
+
+/usr/include/AvailabilityMacros.h:
+
+/usr/include/c++/4.0.0/new:
+
+/usr/include/c++/4.0.0/cstddef:
+
+/usr/include/c++/4.0.0/exception:
+
+../include/mysql_version.h:
+
+../include/mysql_embed.h:
+
+../include/my_sys.h:
+
+../include/my_pthread.h:
+
+../include/m_ctype.h:
+
+/usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stdarg.h:
+
+../include/typelib.h:
+
+../include/my_alloc.h:
+
+/usr/include/sys/mman.h:
+
+../include/my_time.h:
+
+../include/my_global.h:
+
+../include/mysql_time.h:
+
+../include/m_string.h:
+
+/usr/include/strings.h:
+
+/usr/include/string.h:
+
+../include/hash.h:
+
+/usr/include/signal.h:
+
+../include/thr_lock.h:
+
+../include/my_list.h:
+
+../include/my_base.h:
+
+../include/queues.h:
+
+sql_bitmap.h:
+
+../include/my_bitmap.h:
+
+sql_array.h:
+
+sql_plugin.h:
+
+../include/mysql/plugin.h:
+
+scheduler.h:
+
+../include/mysql_com.h:
+
+../include/violite.h:
+
+../include/my_net.h:
+
+/usr/include/netinet/in.h:
+
+/usr/lib/gcc/i686-apple-darwin9/4.0.1/include/stdint.h:
+
+/usr/include/netinet6/in6.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/sys/poll.h:
+
+/usr/include/sys/ioctl.h:
+
+/usr/include/sys/ttycom.h:
+
+/usr/include/sys/ioccom.h:
+
+/usr/include/sys/filio.h:
+
+/usr/include/sys/sockio.h:
+
+/usr/include/netinet/in_systm.h:
+
+/usr/include/netinet/ip.h:
+
+/usr/include/netinet/tcp.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/opensslv.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ssl.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/e_os2.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/opensslconf.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/comp.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/crypto.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/stack.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/safestack.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ossl_typ.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/symhacks.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/bio.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/x509.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/buffer.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/evp.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/objects.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/obj_mac.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/asn1.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/bn.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ec.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ecdsa.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ecdh.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/rsa.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/dsa.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/dh.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/sha.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/x509_vfy.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/lhash.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/pkcs7.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/pem.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/pem2.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/hmac.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/kssl.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ssl2.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ssl3.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/pq_compat.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/tls1.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/dtls1.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/pqueue.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ssl23.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/err.h:
+
+unireg.h:
+
+../include/mysqld_error.h:
+
+structs.h:
+
+sql_string.h:
+
+sql_list.h:
+
+sql_map.h:
+
+my_decimal.h:
+
+../include/decimal.h:
+
+handler.h:
+
+../include/my_handler.h:
+
+../include/myisampack.h:
+
+../include/ft_global.h:
+
+../include/keycache.h:
+
+parse_file.h:
+
+table.h:
+
+sql_error.h:
+
+field.h:
+
+protocol.h:
+
+sql_udf.h:
+
+sql_profile.h:
+
+sql_partition.h:
+
+partition_info.h:
+
+partition_element.h:
+
+item.h:
+
+gstream.h:
+
+spatial.h:
+
+item_sum.h:
+
+../include/my_tree.h:
+
+../include/my_base.h:
+
+item_func.h:
+
+item_row.h:
+
+item_cmpfunc.h:
+
+../regex/my_regex.h:
+
+item_strfunc.h:
+
+sql_crypt.h:
+
+item_geofunc.h:
+
+item_timefunc.h:
+
+item_subselect.h:
+
+item_xmlfunc.h:
+
+sql_class.h:
+
+log.h:
+
+rpl_tblmap.h:
+
+sql_lex.h:
+
+set_var.h:
+
+lex_symbol.h:
+
+log_event.h:
+
+rpl_constants.h:
+
+rpl_record.h:
+
+rpl_reporting.h:
+
+rpl_reporting.h:
+
+log_event_old.h:
+
+../include/myisam.h:
+
+../include/my_handler.h:
+
+sql_acl.h:
+
+slave.h:
+
+rpl_filter.h:
+
+../include/mysql.h:
+
+../include/mysql_version.h:
+
+../include/mysql_com.h:
+
+../include/mysql_time.h:
+
+../include/my_list.h:
+
+../include/typelib.h:
+
+../include/my_alloc.h:
+
+tztime.h:
+
+sql_servers.h:
+
+opt_range.h:
+
+sql_cache.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/des.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/des_old.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ui_compat.h:
+
+/Users/parolkar/binaries/macports-1.7.1/include/openssl/ui.h:
+
+sql_view.h:
+
+rpl_rli.h:
+
+rpl_utility.h:
+
+rpl_mi.h:
+
+../include/my_dir.h:
+
+/usr/include/sys/stat.h:
+
+../include/base64.h:

@@ -1,0 +1,26 @@
+# $Id: Portfile 32035 2007-12-14 09:22:10Z afb@macports.org $
+
+PortSystem 1.0
+PortGroup python24 1.0
+
+name			py-yum-metadata-parser
+version			1.1.2
+platforms		darwin
+categories		python
+maintainers		afb@macports.org
+description		Yum metadata parser
+long_description	C-based metadata parser to quickly parse xml metadata into sqlite databases
+
+homepage		http://linux.duke.edu/projects/yum/
+master_sites		${homepage}download/yum-metadata-parser/
+distname		yum-metadata-parser-${version}
+checksums		md5 13df226ef004ea78eebc59022720b536
+
+depends_lib-append	port:py-sqlite port:glib2 port:libxml2 port:sqlite3
+depends_build-append	port:pkgconfig
+
+patchfiles		patch-sqlitecachec.py
+
+livecheck.check regex
+livecheck.url   ${homepage}download.ptml
+livecheck.regex yum-metadata-parser (\[0-9\.-\]+)

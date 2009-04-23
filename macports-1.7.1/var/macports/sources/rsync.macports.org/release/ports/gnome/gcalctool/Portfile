@@ -1,0 +1,34 @@
+# $Id: Portfile 45467 2009-01-16 14:22:04Z jmr@macports.org $
+
+PortSystem 1.0
+
+name		gcalctool
+version		5.24.3
+set branch  [join [lrange [split ${version} .] 0 1] .]
+description	a GNOME 2 desktop calculator.
+long_description        gcalctool is the desktop calculator that has been proposed \
+			for GNOME. It has Basic, Financial and Scientific modes.
+maintainers	nomaintainer
+categories	gnome math
+platforms	darwin
+homepage	http://calctool.sourceforge.net/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums	md5 39c3ff95960fc7588cfc0d0ab5bc1f9f \
+		sha1 b29b43cc01af99b9f60aedcc13e6ca47c77104b0 \
+		rmd160 4278245aca11f9ccf8b7111939a6fb6a22ae9065
+
+use_bzip2	yes
+
+depends_lib 	port:libgnomeui
+depends_build 	port:gnome-doc-utils
+
+configure.args  --disable-scrollkeeper
+
+post-activate	{
+	system "${prefix}/bin/scrollkeeper-update"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

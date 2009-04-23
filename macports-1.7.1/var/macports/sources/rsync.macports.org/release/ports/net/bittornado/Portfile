@@ -1,0 +1,30 @@
+# $Id: Portfile 32185 2007-12-19 11:48:36Z ryandesign@macports.org $
+
+PortSystem 1.0
+PortGroup python24 1.0
+
+name			bittornado
+version			0.3.18
+categories		net python
+platforms		darwin
+maintainers		nomaintainer
+description		bittorrent client and python module with enhancements
+long_description	bittornado is a tool for distributing files. It is based \
+				on the bittorrent tool but has many enhancement over it: \
+				multitracker support - to have redundant tracker, preferences \
+				menu for GUI client, webseed support to have better control of \
+				download, graphical torrent file maker and experimental IPv6 \
+				support.
+
+homepage		http://www.bittornado.com/
+master_sites		http://download2.bittornado.com/download/
+distname		BitTornado-${version}
+checksums		md5 faeb137036cfaaeab91afc7f62c7dc30 \
+				sha1 64c65b69d112f76ba8a024ff5b8671058130b71a \
+				rmd160 77e61f01101c2878d4e993e0581365a71c375892
+
+worksrcdir		BitTornado-CVS
+
+livecheck.check	regex
+livecheck.url	${homepage}
+livecheck.regex	LATEST&nbsp\;VERSION:(?:&nbsp\;)+(\[0-9.\]+)

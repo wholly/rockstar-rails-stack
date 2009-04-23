@@ -1,0 +1,31 @@
+# $Id: Portfile 30224 2007-10-22 22:49:14Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			ustl
+version			0.8
+categories		devel
+platforms		darwin
+maintainers		nomaintainer
+description		micro-STL is a partial implementation of the STL specification
+long_description	uSTL (micro-STL) is a partial implementation of the STL \
+				specification intended to reduce code size of the derivative \
+				programs.
+
+homepage		http://ustl.sourceforge.net/
+master_sites	sourceforge
+distname		${distname}-0
+checksums		md5 dd59483c327f1bd1356273bc5ae4dde0
+use_bzip2		yes
+
+worksrcdir		${name}-${version}
+
+pre-destroot {
+	reinplace "s|${prefix}|${destroot}${prefix}|g" ${worksrcpath}/Common.mk
+}
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} LICENSE \
+		${destroot}${prefix}/share/doc/${name}
+}
+

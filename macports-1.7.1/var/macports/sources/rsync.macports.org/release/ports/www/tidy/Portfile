@@ -1,0 +1,49 @@
+# $Id: Portfile 38580 2008-07-25 10:47:53Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                tidy
+version             20051026
+categories          www
+maintainers         ryandesign
+homepage            http://tidy.sourceforge.net/
+platforms           darwin
+distname            tidy_src_051026
+extract.suffix      .tgz
+worksrcdir          ${name}
+use_parallel_build  yes
+
+description \
+	Fixes and tidies up HTML files
+
+long_description \
+	Tidy is a utility to clean up and fix broken HTML files.
+
+master_sites \
+	${homepage}src/ \
+	${homepage}src/old/
+
+checksums \
+	md5 1e39fafd6808978871346658c8da1454 \
+	sha1 53be36945344af0c4080c34ebc95728bf8617f1c \
+	rmd160 0cae41f8c0cec51d4600d1bf2aac338cf60aa6b9
+
+depends_lib \
+	port:libtool
+
+patchfiles \
+	patch-platform.h.diff
+
+pre-configure {
+	system "cd ${worksrcpath} && /bin/sh ${worksrcpath}/build/gnuauto/setup.sh"
+}
+
+post-destroot {
+	system "ln -fs libtidy-0.99.0.0.0.dylib ${destroot}${prefix}/lib/libtidy.0.dylib"
+}
+
+livecheck.check		regex
+livecheck.url		[lindex ${master_sites} 1]?M=D
+livecheck.regex		tidy_src_(\\d+)
+livecheck.version	[strsed ${version} {/^[0-9][0-9]//}]
+

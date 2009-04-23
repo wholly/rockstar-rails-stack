@@ -1,0 +1,29 @@
+# $Id: Portfile 42042 2008-11-13 20:24:13Z simon@macports.org $
+
+PortSystem          1.0
+
+name                exif
+version             0.6.17
+categories          graphics
+platforms           darwin
+maintainers         simon openmaintainer
+description         Command line tool to read, write, modify and display \
+                    EXIF data
+long_description    Command line utility to read, write, modify and display \
+                    EXIF data found in digital image files written by \
+                    digital cameras.
+
+homepage            http://libexif.sourceforge.net/
+master_sites        sourceforge:libexif
+
+checksums           md5 278ebc2b245712d731fd7290e63f452b \
+                    sha1 b7e28d09deea3cbf3dcf7342cf05ca1765ea9283 \
+                    rmd160 9973aad5ac4992b1cdabe9e0d9546426057d6d5c
+
+depends_build       port:pkgconfig
+depends_lib         port:libexif \
+                    port:popt
+
+configure.args      --with-popt-prefix=${prefix}
+
+livecheck.distname  ${name}

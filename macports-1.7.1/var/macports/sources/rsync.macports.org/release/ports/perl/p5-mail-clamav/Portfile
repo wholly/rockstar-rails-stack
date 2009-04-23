@@ -1,0 +1,24 @@
+# $Id: Portfile 40786 2008-10-14 23:28:38Z ricci@macports.org $
+
+PortSystem			1.0
+
+PortGroup			perl5 1.0
+
+perl5.setup			Mail-ClamAV 0.22
+revision			0
+maintainers			ricci
+description			Perl interface to the clamav virus scanner
+long_description	Clam AntiVirus is an anti-virus toolkit for UNIX. \
+					This module provide a simple interface to its C API.
+
+platforms			darwin
+
+checksums           md5     9153d79dcdf47e5ba9ac1f2e3b5f78dc \
+                    sha1    ce32aa368c34780dd87caf1ee2a1cdc93f3a0d69
+
+
+depends_lib-append	port:clamav \
+					port:p5-inline
+
+patchfiles			patch-ClamAV.pm.diff
+

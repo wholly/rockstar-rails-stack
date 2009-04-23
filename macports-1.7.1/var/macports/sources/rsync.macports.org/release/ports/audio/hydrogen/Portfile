@@ -1,0 +1,48 @@
+# $Id: Portfile 44217 2008-12-23 21:25:51Z mcalhoun@macports.org $
+
+# -*- Mode: Tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+PortSystem       1.0
+
+name             hydrogen
+version          0.9.3.79
+revision         1
+categories       audio
+platforms        macosx
+maintainers      nomaintainer
+homepage         http://www.hydrogen-music.org/
+
+description      Hydrogen is an advanced drum machine.
+long_description \
+    Hydrogen is an advanced drum machine for GNU/Linux. \
+    Its main goal is to provide professional yet simple and intuitive \
+    pattern-based drum programming.
+
+fetch.type      svn
+svn.url         http://svn.assembla.com/svn/hydrogen/trunk
+svn.tag         79
+worksrcdir      trunk
+
+depends_lib     lib:libqt.4:qt4-mac \
+                port:flac \
+                port:libsndfile \
+                port:libtar
+
+post-patch {
+    reinplace "s|/opt/local|${prefix}|g" \
+        ${worksrcpath}/extra/hydrogenPlayer/hydrogenPlayer.pro \
+        ${worksrcpath}/extra/hydrogenSynth/hydrogenSynth.pro \
+        ${worksrcpath}/gui/gui.pro \
+        ${worksrcpath}/libs/hydrogen/hydrogen.pro
+}
+
+configure.pre_args
+configure.env       prefix=${prefix} QTDIR=${prefix}/libexec/qt4-mac
+
+build.target        first
+
+destroot.destdir    INSTALL_ROOT="${destroot}"
+post-destroot {
+    xinstall -d ${destroot}/Applications/MacPorts
+    move ${destroot}${prefix}/bin/hydrogen.app ${destroot}/Applications/MacPorts
+}
+

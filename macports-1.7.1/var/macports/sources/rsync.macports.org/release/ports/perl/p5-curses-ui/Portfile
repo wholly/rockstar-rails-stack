@@ -1,0 +1,16 @@
+# $Id: Portfile 20357 2006-11-02 02:10:08Z blair@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+perl5.setup           Curses-UI 0.95
+maintainers           sal@email.arc.nasa.gov
+description           A curses based OO user interface framework 
+long_description      A UI framework based on the curses library. \
+	Curses::UI contains several widgets which can be used to build a user interface.
+platforms             darwin
+checksums             md5 f1ee30de6cbba611acca785fa668d8b8
+depends_lib-append    port:p5-curses \
+                      port:p5-term-readkey \
+                      port:p5-test-simple \
+                      port:p5-test-pod
+

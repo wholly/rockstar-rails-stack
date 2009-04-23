@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Rails::Matchers::RedirectTo::QueryParameterParser::parse_query_parameters
+is_singleton: true
+name: parse_query_parameters
+params: (query, request)
+visibility: public

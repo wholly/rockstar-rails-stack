@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::Runner::StoryParser#transition_to
+is_singleton: false
+name: transition_to
+params: (key)
+visibility: public

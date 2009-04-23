@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Story::GivenScenario#perform
+is_singleton: false
+name: perform
+params: (instance, ignore_name)
+visibility: public

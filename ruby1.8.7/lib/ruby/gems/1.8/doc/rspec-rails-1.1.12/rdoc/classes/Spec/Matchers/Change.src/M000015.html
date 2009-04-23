@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>evaluate_value_proc_with_ensured_evaluation_of_proxy (Spec::Matchers::Change)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/spec/rails/matchers/change.rb, line 4</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">evaluate_value_proc_with_ensured_evaluation_of_proxy</span>
+        <span class="ruby-identifier">value</span> = <span class="ruby-identifier">evaluate_value_proc_without_ensured_evaluation_of_proxy</span>
+        <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Associations</span><span class="ruby-operator">::</span><span class="ruby-constant">AssociationProxy</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">value</span> <span class="ruby-value">? </span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

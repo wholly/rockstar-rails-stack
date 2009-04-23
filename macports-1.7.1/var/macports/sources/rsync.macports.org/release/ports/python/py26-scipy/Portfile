@@ -1,0 +1,63 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 49244 2009-04-06 02:55:58Z jmr@macports.org $
+
+PortSystem              1.0
+PortGroup python26 1.0
+
+name                    py26-scipy
+version                 0.7.0
+categories              python
+platforms               darwin
+maintainers             jmr openmaintainer
+description             An opensource library of scientific tools for Python
+long_description        ${description}.
+
+homepage                http://www.scipy.org/
+master_sites            sourceforge:scipy
+distname                scipy-${version}
+
+checksums               md5 80078ed5f47a48aec2cde3769ba39972 \
+                        sha1 7daef781253bafccf3be54b9eb3541f084503076 \
+                        rmd160 3583901f679cbc7f91560626f437d7edcd2bf6cf
+
+depends_lib-append      port:py26-numpy \
+                        port:py26-nose \
+                        port:SuiteSparse \
+                        port:swig
+
+worksrcdir              ${distname}
+
+build.env               CCFLAGS="-I${prefix}/include -L${prefix}/lib"
+
+pre-fetch {
+  if {![llength [glob -nocomplain ${prefix}/share/swig/*/python/python.swg]]} {
+    ui_error "The python variant of swig is not installed. Please run"
+    ui_error "the following command:"
+    ui_error "$ sudo port -fn upgrade swig +python"
+    error "python variant of swig required"
+  }
+}
+
+post-patch {
+  reinplace "s|include <\\(umfpack\.*.h\\)>|include <${prefix}/include/ufsparse/\\1>|g" ${worksrcpath}/scipy/sparse/linalg/dsolve/umfpack/umfpack.i
+}
+
+variant gcc42 conflicts gcc43 description "Use gfortran-mp-4.2 as fortran compiler" {
+  depends_lib-append    port:gcc42
+  set fc_options        "config_fc --fcompiler gnu95 --f77exec ${prefix}/bin/gfortran-mp-4.2 --f90exec ${prefix}/bin/gfortran-mp-4.2"
+  build.cmd-append      ${fc_options}
+  destroot.cmd-append   ${fc_options}
+}
+
+variant gcc43 conflicts gcc42 description "Use gfortran-mp-4.3 as fortran compiler" {
+  depends_lib-append    port:gcc43
+  set fc_options        "config_fc --fcompiler gnu95 --f77exec ${prefix}/bin/gfortran-mp-4.3 --f90exec ${prefix}/bin/gfortran-mp-4.3"
+  build.cmd-append      ${fc_options}
+  destroot.cmd-append   ${fc_options}
+}
+
+if { ![variant_isset gcc42] && ![variant_isset gcc43] } {
+  default_variants      +gcc43
+}
+
+livecheck.regex <title>scipy (\\d+(?:\\.\\d+)*) released.*</title>

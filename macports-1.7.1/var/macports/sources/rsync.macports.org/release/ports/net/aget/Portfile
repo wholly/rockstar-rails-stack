@@ -1,0 +1,25 @@
+# $Id: Portfile 30239 2007-10-23 01:55:09Z jmpp@macports.org $
+
+PortSystem       1.0
+name             aget
+version          0.4
+categories       net
+maintainers      nomaintainer
+description      multithreaded HTTP download accelerator
+long_description \
+    Aget is a multithreaded HTTP download accelerator, \
+    similar to the Win32 Project Flashget.
+homepage         http://www.enderunix.org/aget/
+platforms        darwin
+master_sites     ${homepage}
+checksums        md5 1d32390f5ea2ddd82dfbb1794cdfa92f
+
+patchfiles       patch-Head.c
+
+configure {
+    reinplace "s| -pthread||" ${worksrcpath}/Makefile
+}
+
+destroot {
+    xinstall -s -m 555 ${worksrcpath}/aget ${destroot}${prefix}/bin
+}

@@ -1,0 +1,89 @@
+# $Id: Portfile 41808 2008-11-10 23:41:44Z ryandesign@macports.org $
+
+PortSystem        1.0
+name              gnucash-devel
+svn.tag		  16555
+	# see http://svn.gnucash.org/trac/timeline
+version		  2.2.99.svn-${svn.tag}
+#version		  2.1.5
+#revision	  0
+categories        gnome x11
+maintainers       nomaintainer
+description       financial-accounting software
+long_description  GnuCash is a personal and small-business \
+		  financial-accounting software. -- \
+		  gnucash-devel fetches the current developer version, \
+		  then tries to build and install it.  This \
+		  may or may not work.  It cannot be installed along the \
+		  regular (stable) version.  If you want to try it, it is \
+		  recommended that you `port deactivate gnucash', then \
+		  `port install gnucash-devel', so that you can go back \
+		  to a working copy in case anything goes wrong.
+homepage          http://www.gnucash.org/
+
+depends_lib	  lib:XML/Parser.pm:p5-xml-parser \
+		  path:lib/pkgconfig/glib-2.0.pc:glib2 \
+		  port:gconf \
+		  port:guile \
+		  port:slib \
+		  port:slib-guile \
+		  lib:libpopt:popt \
+		  lib:libgnomeui:libgnomeui \
+		  lib:libgnomeprintui:libgnomeprintui \
+		  lib:libgtkhtml-3:libgtkhtml3 \
+		  lib:libgsf:libgsf \
+		  lib:libgoffice-0.3:goffice03 \
+		  lib:aqbanking:aqbanking \
+		  lib:libofx:libofx \
+		  lib:Finance/Quote.pm:p5-finance-quote \
+		  port:gnucash-docs
+depends_build	  bin:glibtoolize:libtool port:automake
+depends_run	  port:evince
+
+#master_sites	  http://www.gnucash.org/pub/gnucash/sources/unstable/2.3.x/
+#distname	  gnucash-${version}
+##worksrcdir	  ${distname}.
+#			# this was a packaging bug in 2.1.0
+#use_bzip2	  yes
+#checksums	  md5 7dfc9a46eb49b744fb7a8c543ef9cccc 
+#		  # gpg signature for 2.1.5 verified
+
+fetch.type	  svn
+svn.url		  http://svn.gnucash.org/repo/gnucash/trunk/
+distname	  trunk
+
+pre-configure {
+	system "cd ${worksrcpath} && LIBTOOLIZE=glibtoolize ./autogen.sh"
+}
+
+configure.args	  --disable-glibtest --disable-debug --disable-profile \
+		  --disable-dependency-tracking --enable-hbci --enable-ofx
+
+default_variants +guile16
+
+variant without_hbci {
+	depends_lib-delete	lib:aqbanking:aqbanking
+	configure.args-delete	--enable-hbci
+	configure.args-append	--disable-hbci
+}
+
+variant without_ofx {
+	depends_lib-delete	lib:libofx:libofx
+	configure.args-delete	--enable-ofx
+	configure.args-append	--disable-ofx
+}
+
+variant without_quotes {
+	depends_lib-delete	lib:Finance/Quote.pm:p5-finance-quote
+}
+
+variant without_docs {
+	depends_lib-delete	port:gnucash-docs
+}
+
+variant guile16 {
+	depends_lib-delete	port:guile
+	depends_lib-delete	port:slib-guile
+	depends_lib-append	port:guile16 \
+				port:slib-guile16
+}

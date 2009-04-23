@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::CSS::Node#find_by_type
+is_singleton: false
+name: find_by_type
+params: (types)
+visibility: public

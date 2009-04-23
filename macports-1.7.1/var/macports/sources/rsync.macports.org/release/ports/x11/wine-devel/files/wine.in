@@ -1,0 +1,5 @@
+#!/bin/sh
+# $Id: wine.in 49040 2009-04-02 08:23:56Z ryandesign@macports.org $
+
+DYLD_FALLBACK_LIBRARY_PATH="@PREFIX@/lib:@X11PREFIX@/lib" \
+"@PREFIX@/libexec/wine/wine" "$@"

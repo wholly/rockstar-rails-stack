@@ -1,0 +1,31 @@
+# $Id: Portfile 49127 2009-04-04 06:23:58Z mcalhoun@macports.org $
+
+PortSystem 1.0
+name		chicken
+version		3.4.0
+categories	lang scheme
+maintainers	gmail.com:arto.bendiken waqar gmail.com:ivan.g.raikov
+description	Compiler for the Scheme programming language
+long_description	\
+	Chicken produces portable, efficient C, supports almost all 	\
+	of the current Scheme language standard, the Revised5 Report 	\
+	on the Algorithmic Language Scheme (R5RS ), and includes many 	\
+	enhancements and extensions.
+homepage	http://www.call-with-current-continuation.org/
+platforms	darwin
+master_sites	http://chicken.wiki.br/releases/${version}
+distfiles	${distname}${extract.suffix}
+checksums	md5 9299e9daa9c39cbd391975ce5e5aa7d9\
+		sha1 6a73186eb01e2aa952056cf2ccb8fa136f9fab4e\
+                rmd160 e28808de5408753df1e0b050dcac19f540567f13
+configure {
+	reinplace "s|C_COMPILER ?= gcc|C_COMPILER ?= ${configure.cc}|"     ${worksrcpath}/defaults.make
+	reinplace "s|CXX_COMPILER ?= g++|C_COMPILER ?= ${configure.cxx}|"  ${worksrcpath}/defaults.make
+}
+pre-build {
+	system "cd ${worksrcpath} && ${build.cmd} ${build.args} bootstrap"
+}
+build.args	PLATFORM=macosx PREFIX=${prefix}
+build.post_args	CHICKEN=./chicken-boot
+use_parallel_build yes
+destroot.args	PLATFORM=macosx PREFIX=${prefix}

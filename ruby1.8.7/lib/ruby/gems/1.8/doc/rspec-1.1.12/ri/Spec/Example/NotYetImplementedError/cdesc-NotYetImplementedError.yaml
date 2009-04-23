@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: MESSAGE
+  value: "\"Not Yet Implemented\""
+- !ruby/object:RI::Constant 
+  comment: 
+  name: RSPEC_ROOT_LIB
+  value: File.expand_path(File.dirname(__FILE__) + "/../..")
+full_name: Spec::Example::NotYetImplementedError
+includes: []
+
+instance_methods: []
+
+name: NotYetImplementedError
+superclass: ExamplePendingError

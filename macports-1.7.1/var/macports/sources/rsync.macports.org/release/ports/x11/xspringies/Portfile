@@ -1,0 +1,27 @@
+# $Id: Portfile 48827 2009-03-29 22:08:37Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name		xspringies
+version		1.1
+revision	1
+description	A mass and spring simulation system
+
+long_description XSpringies is a mass and spring simulation system.  Its intended use is that of a game rather than as a design package.
+
+maintainers	nomaintainer
+categories	x11 games
+platforms	darwin
+master_sites	http://distfiles.macports.org/${name}/
+checksums	md5 0958e74178cdf5c49fa05c640ce16011
+depends_build	path:bin/xmkmf:imake
+use_xmkmf	yes
+patchfiles	patch-Imakefile patch-widget.c
+distfiles	${name}.${version}.tar.Z
+
+destroot.target-append install.man
+
+destroot.destdir-append \
+	BINDIR=${prefix}/bin \
+	MANDIR=${prefix}/share/man \
+	LIBDIR=${prefix}/lib

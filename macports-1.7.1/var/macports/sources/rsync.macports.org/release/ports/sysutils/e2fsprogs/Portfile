@@ -1,0 +1,17 @@
+# $Id: Portfile 42624 2008-11-26 23:07:50Z toby@macports.org $
+PortSystem 1.0
+
+name e2fsprogs
+version 1.41.3
+categories sysutils
+maintainers misc@mandriva.org
+description Utilities used for the second extended (ext2) filesystem
+long_description Utilities to create, check and manipulate extended 2 and 3 filesystem \
+  quite common in the Linux world.
+homepage http://e2fsprogs.sourceforge.net/
+platforms darwin
+master_sites sourceforge:
+destroot.target-append install-libs
+configure.args-append --enable-bsd-shlibs
+checksums md5 b21d26fc46c584021dc9c444933ee1c2
+patchfiles patch-lib__Makefile.darwin-lib

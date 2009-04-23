@@ -1,0 +1,13 @@
+# $Id: Portfile 33894 2008-02-07 02:45:08Z narf_tm@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Test-Manifest 1.22
+maintainers         narf_tm openmaintainer
+description         interact with a t/test_manifest file
+long_description    ${description}
+
+checksums           md5 298156323748c74decdca79904ebd881
+
+platforms           darwin

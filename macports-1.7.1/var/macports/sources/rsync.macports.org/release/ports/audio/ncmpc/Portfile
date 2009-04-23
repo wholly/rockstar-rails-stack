@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 46285 2009-02-02 03:42:40Z rmsfisher@macports.org $
+
+PortSystem          1.0
+
+name                ncmpc
+version             0.13
+categories          audio
+maintainers         gmail.com:phirince rmsfisher
+description         curses Music Player Daemon (MPD) client
+long_description    ncmpc is  a client for MPD, the Music Player Daemon.
+homepage            http://mpd.wikia.com/wiki/Client:Ncmpc
+platforms           darwin
+master_sites        sourceforge:musicpd
+use_bzip2           yes
+checksums           md5    5ef1c45d62fad85b7d42ab5c9bcde33e \
+                    sha1   b7a16751612bcec57f134848a4630352f2fc1cfe \
+                    rmd160 535e643d89615d4dddbd5ab56a9ef5c11bc1ceb4
+depends_lib         port:glib2 \
+                    port:ncurses
+configure.args      --mandir=${prefix}/share/man
+configure.cflags-append    -fnested-functions
+livecheck.check   regex
+livecheck.url     http://mpd.wikia.com/wiki/Client:Ncmpc
+livecheck.regex   ncmpc-(\[0-9.\]+)\\.tar\\.bz2

@@ -1,0 +1,24 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Spec::Runner::Formatter::Story::ProgressBarFormatter
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: run_ended
+- !ruby/object:RI::MethodSummary 
+  name: run_started
+- !ruby/object:RI::MethodSummary 
+  name: scenario_ended
+- !ruby/object:RI::MethodSummary 
+  name: story_ended
+- !ruby/object:RI::MethodSummary 
+  name: story_started
+name: ProgressBarFormatter
+superclass: PlainTextFormatter

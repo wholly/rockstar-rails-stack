@@ -1,0 +1,31 @@
+# $Id: Portfile 30248 2007-10-23 02:08:47Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name           fondu
+version        060102
+platforms      darwin
+description    A set of programs to interconvert between mac font formats and pfb, ttf, otf and bdf files on unix.  
+
+long_description \
+Dealing with mac fonts is hard on other operating systems because mac fonts are stored \
+in the resource fork, and other operating systems do not support this concept. Fondu \
+will extract the resource fork from either a macbinary file or a binhex file. Ufond will \
+create a resource fork inside a macbinary file.
+
+categories     print 
+homepage       http://fondu.sourceforge.net/
+master_sites   http://fondu.sourceforge.net/
+checksums      md5 e20861beacddc1ab392bef7813641bf8	
+maintainers    nomaintainer
+distname       fondu_src-${version}
+extract.suffix   .tgz
+worksrcdir     fondu-${version}
+
+configure.args  --bindir=${prefix}/bin --mandir=${prefix}/share/man
+
+post-destroot {
+ 	foreach manpage [glob ${worksrcpath}/*.1] {
+ 		xinstall ${manpage} ${destroot}${prefix}/share/man/man1/
+ 	}
+ }

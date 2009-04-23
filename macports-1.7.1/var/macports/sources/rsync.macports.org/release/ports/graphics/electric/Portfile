@@ -1,0 +1,68 @@
+# $Id: Portfile 38911 2008-08-02 10:43:45Z ryandesign@macports.org $
+
+PortSystem			1.0
+name				electric
+version				7.00
+categories			graphics electronics science
+maintainers			nomaintainer
+description			CAD system for VLSI circuit design
+long_description \
+	Electric designs MOS and bipolar integrated circuits, printed-circuit \
+	boards, or any type of circuit you choose. It has many editing styles \
+	including layout, schematics, artwork, and architectural specifications.
+
+platforms			darwin
+
+homepage			http://www.staticfreesoft.com/
+master_sites		gnu
+
+checksums			md5 64c89f820467b418d24ddf6c7e206c08
+
+patchfiles			patch-Makefile.in_paths patch-src_include_config.h_paths \
+					patch-src_include_global.h patch-src_db_dbtext.c
+
+post-patch {
+	reinplace "s|@PREFIX@|${prefix}|g" ${worksrcpath}/src/include/config.h
+}
+
+destroot.target		install install.html
+
+# Need to select some HI variant, so we'll try and be clever here
+if {[variant_isset darwin]} {
+	default_variants	+qt3-mac
+} else {
+	default_variants	+qt3-x11
+}
+
+variant motif {
+	depends_lib-append		lib:libXm.4:openmotif
+	patchfiles-append		patch-Makefile.in_motif \
+							patch-src_include_config.h_macx11
+}
+
+variant qt3_mac conflicts qt3_x11 {
+	depends_lib-append		lib:libqt-mt:qt3-mac
+	patchfiles-append		patch-Makefile.in_qt3_mac \
+							patch-src_graph_graphqt.cpp_macqt
+	build.args-append		QTDIR=${prefix}
+	destroot {
+		set dpApps ${destroot}/Applications/MacPorts
+		xinstall -m 755 -d ${dpApps}
+		file copy ${worksrcpath}/electric.app ${dpApps}
+		file copy ${worksrcpath}/lib ${dpApps}/electric.app/Contents
+	}
+}
+
+variant qt3_x11 conflicts qt3_mac {
+	depends_lib-append		lib:libqt-mt:qt3
+	patchfiles-append		patch-Makefile.in_qt3_x11 \
+							patch-src_include_config.h_macx11 \
+							patch-src_graph_graphqt.cpp_macx11
+	build.args-append		QTDIR=${prefix}
+	destroot.args-append	QTDIR=${prefix}
+}
+
+platform darwin {
+	patchfiles-append		patch-src_graph_graphunixx11.c
+}
+

@@ -1,0 +1,104 @@
+# $Id: Portfile 46681 2009-02-10 08:37:35Z gwright@macports.org $
+
+PortSystem 1.0
+
+name		sbcl
+version		1.0.25
+categories	lang
+maintainers	gwright@macports.org waqar@macports.org
+platforms	darwin
+description	The Steel Bank Common Lisp system
+long_description	\
+		Steel Bank Common Lisp (SBCL) is a Open Source		\
+		development system for ANSI Common Lisp. It provides an	\
+		interactive environment including an integrated native	\
+		compiler, interpreter, and debugger. (And it, and its	\
+		generated code, can also play nicely with Unix when	\
+		running noninteractively.)
+
+homepage	http://www.sbcl.org
+master_sites	sourceforge
+use_bzip2	yes
+
+platform powerpc {
+		   set bootversion 1.0.22
+		   distfiles-append ${name}-${bootversion}-powerpc-darwin-binary${extract.suffix}
+		   checksums-append ${name}-${bootversion}-powerpc-darwin-binary${extract.suffix} \
+			md5 61179259f7a7cccfa731f652f5edd29c
+
+		   global host_lisp
+		   set host_lisp	"\"${workpath}/${name}-${bootversion}-powerpc-darwin/src/runtime/sbcl --core ${workpath}/${name}-${bootversion}-powerpc-darwin/output/sbcl.core --disable-debugger --sysinit /dev/null --userinit /dev/null\" "
+}
+
+platform darwin 8 i386     {
+		   set bootversion 1.0.10
+		   distfiles-append ${name}-${bootversion}-x86-darwin-binary${extract.suffix}
+		   checksums-append ${name}-${bootversion}-x86-darwin-binary${extract.suffix} \
+			md5 8684c781efd9667280f49b354cc83275
+
+		   global host_lisp
+		   set host_lisp	"\"${workpath}/${name}-${bootversion}-x86-darwin/src/runtime/sbcl --core ${workpath}/${name}-${bootversion}-x86-darwin/output/sbcl.core --disable-debugger --sysinit /dev/null --userinit /dev/null\" "
+}
+
+platform darwin 9 i386     {
+		   set bootversion 1.0.12
+		   distfiles-append ${name}-${bootversion}-x86-darwin-binary${extract.suffix}
+		   checksums-append ${name}-${bootversion}-x86-darwin-binary${extract.suffix} \
+			md5 5c8e50fad3994ab5fb619d76260bd619
+
+		   global host_lisp
+		   set host_lisp	"\"${workpath}/${name}-${bootversion}-x86-darwin/src/runtime/sbcl --core ${workpath}/${name}-${bootversion}-x86-darwin/output/sbcl.core --disable-debugger --sysinit /dev/null --userinit /dev/null\" "
+}
+
+patchfiles	patch-use-mach-exception-handler.diff
+
+		
+distfiles	${name}-${version}-source${extract.suffix}
+
+distname	${name}-${version}-source
+worksrcdir	${name}-${version}
+
+checksums	${name}-${version}-source${extract.suffix}		\
+		md5     676571e0b0d6ad63a1716102ad582afe		\
+		sha1    ef30a8e10886ba44305c2fb28f77358b5e9d7d65	\
+		rmd160  81b63faa177c9b9c1b5659652b3b7ef26f737054
+
+post-patch	{
+	reinplace "s|/usr/local/lib/${name}|${prefix}/lib/${name}|g" \
+                            ${worksrcpath}/src/runtime/runtime.c
+	reinplace "s|/usr/local/lib/${name}|${prefix}/lib/${name}|g" \
+                            ${worksrcpath}/doc/sbcl.1
+}
+
+use_configure	no
+
+
+build		{
+	system "ulimit -s 8192"
+	system "unset LD_PREBIND && unset LD_PREBIND_ALLOW_OVERLAP && sh make.sh ${host_lisp}"
+}
+
+post-build {
+	if {[variant_isset html]} {
+		system "cd ${worksrcpath}/doc; INSTALL_ROOT=${destroot}${prefix} sh ${worksrcpath}/doc/make-doc.sh"
+	}
+}
+
+default_variants	+test +html
+
+variant html description {Builds the SBCL and ASDF documentation as HTML} {} 
+
+variant test description {enable test suite} {
+	test.run	yes
+	test.dir	${worksrcpath}/tests
+	test.cmd	sh
+	test.target	run-tests.sh
+}
+
+destroot	{ system "cd ${worksrcpath}; INSTALL_ROOT=${destroot}/${prefix} sh ${worksrcpath}/install.sh"
+}
+
+variant threads description {enable threaded runtime} {
+	patchfiles-append patch-base-target-features.diff
+}
+

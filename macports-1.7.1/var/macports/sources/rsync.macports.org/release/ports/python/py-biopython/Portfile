@@ -1,0 +1,42 @@
+# $Id: Portfile 43287 2008-12-08 07:11:22Z blb@macports.org $
+
+PortSystem 1.0
+PortGroup python24 1.0
+
+name			py-biopython
+version			1.49
+categories		python science
+maintainers		mww
+platforms		darwin
+description		python tools for computational molecular biology
+long_description	python tools for computational molecular biology: \
+				parsers for various file formats, interfaces for programs, \
+				tools for performing common operations on sequences, etc.
+
+homepage		http://www.biopython.org/
+master_sites	${homepage}/DIST
+distname		biopython-${version}
+checksums		md5     d233d4944f0c17d5927ca32c5a30d5b3 \
+				sha1    f2ea7f3b8985facdf8f4d4c86ee300e4a8f1a5fb \
+				rmd160  3d6893cd788c39512a314345bb2ea441c715c17d
+
+depends_lib-append	port:py-numpy \
+				port:py-mx \
+				port:py-reportlab
+
+build.env	CFLAGS=-I${python.include}
+
+test.run		no
+test.cmd		${build.cmd}
+test.target		test
+
+post-destroot	{
+	file delete -force ${destroot}${prefix}/share/doc/${name}
+	file copy ${worksrcpath}/Doc ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} CONTRIB DEPRECATED LICENSE NEWS README \
+		${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.check	regex
+livecheck.url	http://biopython.org/wiki/Download
+livecheck.regex	biopython-(\[0-9\.\]+).tar.gz

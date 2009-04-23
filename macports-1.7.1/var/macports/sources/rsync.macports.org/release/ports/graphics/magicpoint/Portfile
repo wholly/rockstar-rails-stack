@@ -1,0 +1,51 @@
+# $Id: Portfile 47581 2009-03-01 03:31:34Z macsforever2000@macports.org $
+PortSystem 1.0
+
+name		magicpoint
+version		1.10a
+revision        1
+categories	graphics
+maintainers	fenner@macports.org
+homepage	http://www.mew.org/mgp/
+master_sites	http://cvs.fedoraproject.org/repo/dist/MagicPoint/magicpoint-1.10a.tar.gz/7a5d91b2b3bdabea704ee3cb6505d772/
+checksums	md5 7a5d91b2b3bdabea704ee3cb6505d772
+platforms	macosx darwin
+description	An X11 based presentation tool.
+long_description Magic Point is an X11 based presentation tool. It \
+ is designed to make simple presentations easy while to make complicated \
+ presentations possible.  Its presentation file (whose suffix is \
+ typically .mgp) is just text so that you can create presentation \
+ files quickly with your favorite editor (e.g. Emacs, vi).
+
+patchfiles	patch-config.guess patch-image.h patch-new.c patch-parse.c \
+		patch-default.mgp patch-configure patch-freetype.patch
+
+depends_build	port:pkgconfig \
+		bin:xmkmf:imake
+
+depends_lib	port:Xft2 \
+		lib:libpng12.0:libpng \
+		path:include/gif_lib.h:giflib
+
+universal_variant no
+
+# LOCALPREFIX= is for configure to find libungif.
+configure.env	PKG_CONFIG_PATH=${x11prefix}/lib/pkgconfig LOCALPREFIX=${prefix}
+configure.args	--enable-gif --mandir=${prefix}/share/man
+
+post-configure {
+	# unusual port: uses not just autoconf but also Imake
+	system "cd \"${worksrcpath}\" && xmkmf && make Makefiles"
+}
+
+destroot.target	install install.man
+
+build.args-append \
+	EXTRA_LIBRARIES=-L${prefix}/lib
+
+destroot.destdir \
+        DESTDIR=${destroot} \
+        BINDIR=${prefix}/bin \
+        LIBDIR=${prefix}/lib/X11 \
+        FONTDIR=${prefix}/lib/X11/fonts \
+        MANPATH=${prefix}/share/man

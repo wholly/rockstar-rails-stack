@@ -1,0 +1,59 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 48813 2009-03-29 15:04:35Z raimue@macports.org $
+
+PortSystem 1.0
+
+name		glib1
+version		1.2.10
+revision	6
+categories	devel
+maintainers	nomaintainer
+description	Library with data structure functions and other constructs
+homepage	http://www.gtk.org/
+platforms	darwin freebsd
+
+long_description General-purpose library from the GTK+ team, includes \
+		 support routines for C such as lists, trees, hashes, \
+		 memory allocation, and many other things.
+
+master_sites	gnome:sources/glib/1.2/ \
+				ftp://ftp.gtk.org/pub/gtk/v1.2/ \
+		macports:lt:lt
+
+set filename	glib-${version}${extract.suffix}
+distfiles	${filename} ltconfig13:lt ltmain13:lt
+checksums	${filename} md5 6fe30dad87c77b91b632def29dd69ef9 \
+		ltconfig13 md5 ea53f42a550c9f9e653758a8ed91574e \
+		ltmain13 md5 e094ae92724c4015dbab97de151c2525
+extract.only	${filename}
+worksrcdir	glib-${version}
+
+depends_lib	port:gettext
+depends_build	port:pkgconfig
+
+# fails, see #16716
+universal_variant   no
+
+pre-patch	{ system "cp ${distpath}/ltconfig13 ${worksrcpath}/ltconfig"
+		  system "cp ${distpath}/ltmain13 ${worksrcpath}/ltmain.sh" }
+
+patchfiles	patch-configure patch-config.guess patch-config.sub \
+		patch-gmain.c patch-glib.h patch-gutils.c patch-glib.m4
+
+configure.ccache    no
+configure.cflags-append	"-I${prefix}/include"
+configure.args	--disable-static --mandir=${prefix}/share/man \
+		--infodir=${prefix}/share/info
+
+post-destroot	{ system "ln -sf libglib-1.2.0.0.10.dylib \
+		    ${destroot}${prefix}/lib/libglib.1.dylib"
+		  system "ln -sf libgmodule-1.2.0.0.10.dylib \
+		    ${destroot}${prefix}/lib/libgmodule.1.dylib"
+		  system "ln -sf libgthread-1.2.0.0.10.dylib \
+		    ${destroot}${prefix}/lib/libgthread.1.dylib" }
+
+platform darwin 6 {	depends_lib-append	lib:libdl:dlcompat }
+
+livecheck.check regex
+livecheck.url   ftp://ftp.gtk.org/pub/gtk/v1.2/
+livecheck.regex "glib-(\\d+(?:\\.\\d+)*)${extract.suffix}"

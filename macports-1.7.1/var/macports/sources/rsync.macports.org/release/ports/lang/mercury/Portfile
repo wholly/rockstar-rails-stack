@@ -1,0 +1,62 @@
+# $Id: Portfile 40561 2008-10-06 21:16:22Z jmr@macports.org $
+
+PortSystem 1.0
+
+name		mercury
+version		0.13.1
+categories	lang
+maintainers	nomaintainer
+platforms	darwin
+description	The Mercury Programming Language
+long_description	\
+		Mercury is a new logic/functional programming	\
+		language, which combines the clarity and	\
+		expressiveness of declarative programming with	\
+		advanced static analysis and error detection	\
+		features. Its highly optimized execution	\
+		algorithm delivers efficiency far in excess of	\
+		existing logic programming systems, and close	\
+		to conventional programming systems. Mercury	\
+		addresses the problems of large-scale program	\
+		development, allowing modularity, separate	\
+		compilation, and numerous optimization/time	\
+		trade-offs.
+
+homepage	http://www.${name}.cs.mu.oz.au/
+master_sites	${homepage}download/files/
+
+distname	${name}-compiler-${version}
+
+checksums	md5 f75f2241a974792d30c18c4325c763d0
+
+worksrcdir	${name}-${version}
+post-extract	{ file rename \
+			${workpath}/${name}-compiler-${version} \
+			${workpath}/${name}-${version}
+		}
+
+post-patch	{ reinplace \
+			s|\$(INSTALL_ELISP_DIR)|${prefix}/lib/${name}/elisp| \
+			${worksrcpath}/Mmakefile
+		}
+
+depends_lib	port:readline
+depends_build	port:gcc34
+
+configure.cc	gcc-dp-3.4
+
+configure.args	--mandir=${prefix}/share/man \
+		--infodir=${prefix}/share/info
+
+# Note that most of the building actually takes place in the
+# destroot phase.  This is a consequence of the mercury build
+# scheme.
+
+build		{
+		  system "cd ${worksrcpath} && make INSTALL_PREFIX=${destroot}${prefix}"
+		}
+
+destroot	{
+		  system "cd ${worksrcpath} && make INSTALL_PREFIX=${destroot}${prefix} \
+			       MERCURY_COMPILER=${worksrcpath}/compiler/mercury_compile install"
+		}

@@ -1,0 +1,15 @@
+# $Id: Portfile 20310 2006-11-01 21:38:15Z blair@macports.org $
+
+PortSystem 1.0
+
+name				gifsicle
+version				1.42
+categories			graphics
+maintainers			nigel@cofa.unsw.edu.au
+description			GIF image/animation creator/editor.
+long_description	Gifsicle is a UNIX command-line tool for creating, \
+					editing, and getting information about GIF images and \
+					animations.
+homepage			http://www.lcdf.org/gifsicle/
+master_sites		${homepage}
+checksums			md5 9150da4459ed54e02a51b172176cc604

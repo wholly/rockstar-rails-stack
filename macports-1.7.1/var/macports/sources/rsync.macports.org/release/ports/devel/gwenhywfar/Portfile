@@ -1,0 +1,34 @@
+# $Id: Portfile 47501 2009-02-28 19:58:04Z macsforever2000@macports.org $
+
+PortSystem        1.0
+
+name              gwenhywfar
+version           3.7.2
+# this is specific to this port and *version* for downloading it
+set release       20
+platforms         darwin
+
+categories        devel net finance
+maintainers       nomaintainer
+
+description       a utility library required by aqbanking and related software
+long_description  ${description}
+
+homepage          http://www2.aquamaniac.de/sites/aqbanking/index.php
+master_sites      http://www2.aquamaniac.de/sites/download/download.php?package=01&release=${release}&file=01&dummy=
+
+checksums         md5     5eb9f615c30fb9ec4709253b0c2ac631 \
+                  sha1    43a2b1065ed5964ac8dd062f849bfcee867b6e76 \
+                  rmd160  bd749f9b346baf0c960f3f7a88e91af811595b89
+
+depends_lib       port:openssl \
+                  port:libgcrypt \
+                  port:gettext \
+                  port:libxml2 \
+                  port:gnutls
+depends_build     port:libtool
+
+variant enable_local_install description "Enable local installation mode (plugins, data, locale and config are located relatively to the binary)" {
+    configure.args-append   --enable-local-install \
+                            --enable-static
+}

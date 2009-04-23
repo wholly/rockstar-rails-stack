@@ -1,0 +1,31 @@
+# $Id: Portfile 36407 2008-04-30 21:37:50Z ricci@macports.org $
+
+PortSystem                      1.0
+PortGroup                       perl5 1.0
+version                         1.13
+revision                        0
+perl5.setup                     CAM-PDF ${version}
+maintainers                     ricci
+description                     Reads and writes any document that conforms to PDF v1.4
+long_description                This package reads and writes any document that \
+	conforms to the PDF specification generously provided by Adobe at \
+	http://partners.adobe.com/asn/developer/acrosdk/docs/filefmtspecs/PDFReference.pdf \
+	(3rd edition, for PDF v1.4 as of May 2002)
+
+platforms                 darwin
+
+patchfiles			patch-lib-CAM-PDF.pm
+
+checksums           md5     497e1b2b5d84defd0b39c262be832915 \
+                    sha1    ccda2d9482e53911ff31045a54b701e16e62c1f5 \
+                    rmd160  abab079bdf72e7179e415e88be97790c86eeee15
+
+
+depends_lib-append              port:p5-crypt-rc4 \
+                                port:p5-text-pdf
+
+master_sites                    http://search.cpan.org/CPAN/authors/id/C/CD/CDOLAN/
+distfiles                       CAM-PDF-${version}.tar.gz
+
+## Note: CAM-PDF requires Digest::MD5, this is present in base perl 5.8.8.
+

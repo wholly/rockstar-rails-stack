@@ -1,0 +1,23 @@
+# $Id: Portfile 21298 2007-01-19 22:10:26Z ryandesign@macports.org $
+PortSystem        1.0
+name              py-omniORBpy
+version           3.0
+
+categories        python devel
+maintainers       gr281@cam.ac.uk
+description       Python binding for omniORB
+long_description  omniORB is a robust high performance CORBA ORB for C++ and \
+                  Python. omniORB is largely CORBA 2.6 compliant.
+homepage          http://omniorb.sourceforge.net/
+
+distname          omniORBpy-${version}
+master_sites      sourceforge:omniorb
+checksums         md5 3914979dd6e36e4124033ac094cf8f17
+
+depends_lib       port:omniORB
+patchfiles        patch-dir.mk
+
+variant ssl {
+	configure.args-append --with-openssl
+	depends_lib-append    lib:libssl:openssl
+}

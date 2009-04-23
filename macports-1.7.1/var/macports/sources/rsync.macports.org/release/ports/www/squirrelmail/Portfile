@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 47802 2009-03-06 20:06:06Z snc@macports.org $
+
+PortSystem          1.0
+
+name                squirrelmail
+version             1.4.17
+categories          www mail php
+maintainers         snc openmaintainer
+
+description         A webmail system which accesses mail over IMAP
+long_description    SquirrelMail is a standards-based webmail package written \
+                    in PHP4. It includes built-in pure PHP support for the \
+                    IMAP and SMTP protocols, and all pages render in pure HTML \
+                    4.0 (with no JavaScript) for maximum compatibility across \
+                    browsers. It has very few requirements and is very easy to \
+                    configure and install. SquirrelMail has all the \
+                    functionality you would want from an email client, \
+                    including strong MIME support, address books, and folder \
+                    manipulation.
+homepage            http://www.squirrelmail.org/
+
+platforms           darwin freebsd
+depends_lib         port:apache2
+
+master_sites        sourceforge
+checksums           md5 97a492c0cfed90679ce6683d7760d68e \
+                    sha1 ac2ed4ac009405b3ab256b3b6724d7368082bee1 \
+                    rmd160 273b0e18f17f15504a61357b7f050531c9442cb1
+
+use_configure       no
+
+build               {}
+
+variant apache description {Include apache 1.x} {
+    depends_lib-append    port:apache
+    depends_lib-delete    port:apache2
+}
+
+set docpath ${destroot}${prefix}/www/${name}
+
+destroot {
+    xinstall -m 755 -d ${docpath}
+    eval file copy [glob ${workpath}/${distname}/*] ${docpath}
+}

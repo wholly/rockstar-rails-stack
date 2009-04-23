@@ -1,0 +1,19 @@
+# $Id: Portfile 34715 2008-03-03 18:57:31Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-View-JSON 0.24
+maintainers           narf_tm openmaintainer
+description           JSON view for your data
+long_description      Catalyst::View::JSON is a Catalyst View handler that \
+                      returns stash data in JSON format.
+
+platforms             darwin
+
+checksums             md5 65cfb99bc13dd59f4be3aa6ff1cb718b \
+                      sha1 d728ebbdcecc740dc794442f775d520849fb3345 \
+                      rmd160 c760d916289d23df56c252d7418b2e04e231b7e6
+
+depends_lib-append    port:p5-catalyst-runtime \
+                      port:p5-json-any

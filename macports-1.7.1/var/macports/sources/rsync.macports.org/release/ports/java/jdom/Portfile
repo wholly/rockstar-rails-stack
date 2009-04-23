@@ -1,0 +1,33 @@
+# $Id: Portfile 32154 2007-12-18 11:57:20Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			jdom
+version			1.0
+categories		java devel textproc
+platforms		darwin
+maintainers		nomaintainer
+description		JDOM is a Java API for manipulating XML the Java way.
+long_description	${description}
+
+homepage		http://www.jdom.org/
+master_sites	${homepage}dist/source/ \
+				${homepage}dist/source/archive/
+checksums		md5 ce29ecc05d63fdb419737fd00c04c281
+
+depends_build	bin:ant:apache-ant
+depends_lib		bin:java:kaffe
+
+use_configure	no
+
+build.cmd		ant
+build.target	package javadoc
+
+destroot	{
+	xinstall -d -m 755 ${destroot}${prefix}/share/java/ \
+		${destroot}${prefix}/share/doc/
+	xinstall -m 644 ${worksrcpath}/build/jdom.jar \
+		${destroot}${prefix}/share/java/jdom.jar
+	file copy ${worksrcpath}/build/apidocs \
+		${destroot}${prefix}/share/doc/${name}
+}

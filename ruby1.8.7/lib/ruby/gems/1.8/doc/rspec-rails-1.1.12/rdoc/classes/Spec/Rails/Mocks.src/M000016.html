@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>mock_model (Spec::Rails::Mocks)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/spec/rails/mocks.rb, line 11</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mock_model</span>(<span class="ruby-identifier">model_class</span>, <span class="ruby-identifier">options_and_stubs</span> = {})
+        <span class="ruby-identifier">id</span> = <span class="ruby-identifier">options_and_stubs</span>[<span class="ruby-identifier">:id</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">next_id</span>
+        <span class="ruby-identifier">options_and_stubs</span> = <span class="ruby-identifier">options_and_stubs</span>.<span class="ruby-identifier">reverse_merge</span>({
+          <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>,
+          <span class="ruby-identifier">:to_param</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>,
+          <span class="ruby-identifier">:new_record?</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+          <span class="ruby-identifier">:errors</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">stub</span>(<span class="ruby-value str">&quot;errors&quot;</span>, <span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+        })
+        <span class="ruby-identifier">m</span> = <span class="ruby-identifier">mock</span>(<span class="ruby-node">&quot;#{model_class.name}_#{id}&quot;</span>, <span class="ruby-identifier">options_and_stubs</span>)
+        <span class="ruby-identifier">m</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:__mock_proxy</span>).<span class="ruby-identifier">instance_eval</span> <span class="ruby-value str">&quot;def @target.as_new_record\nself.stub!(:id).and_return nil\nself.stub!(:to_param).and_return nil\nself.stub!(:new_record?).and_return true\nself\nend\ndef @target.is_a?(other)\n\#{model_class}.ancestors.include?(other)\nend\ndef @target.kind_of?(other)\n\#{model_class}.ancestors.include?(other)\nend\ndef @target.instance_of?(other)\nother == \#{model_class}\nend\ndef @target.class\n\#{model_class}\nend\n&quot;</span>
+        <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">m</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+        <span class="ruby-identifier">m</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

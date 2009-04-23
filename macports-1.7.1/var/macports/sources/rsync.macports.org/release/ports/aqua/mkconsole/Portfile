@@ -1,0 +1,60 @@
+# $Id: Portfile 27859 2007-08-15 11:02:03Z nox@macports.org $
+
+PortSystem		1.0
+PortGroup		xcode 1.0
+
+name			mkconsole
+set my_name		MkConsole
+version			1.10
+categories		aqua
+maintainers		nomaintainer
+description		application that displays logfiles on your desktop
+
+long_description \
+	This is a little application that displays logfiles on your \
+	desktop. Really useful if you have to monitor servers or you \
+	just want to keep an eye on what's going on on your machine. \
+	In its standard configuration it displays entries from any \
+	number of logfiles interleaved in a single window. Have a \
+	look at some screenshots. MkConsole is smart enough to close \
+	and reopen files every now and then to deal with rotating \
+	files and it transparently works around stale NFS handles \
+	which often exist after your Mac wakes up from sleep and \
+	tries to read from a logfile mounted via NFS. If you don't \
+	mind hacking the user defaults (rather than using the \
+	preferences panel) you can also configure multiple windows \
+	with multiple logifiles each.
+
+homepage		http://www.mulle-kybernetik.com/software/${my_name}/
+master_sites	${homepage}Downloads/
+distname		${name}-${version}-s
+
+checksums		md5 ded91a1455b454ea7f029afef985bc7b \
+				sha1 4926efca81e5548b09b5ec931904f0640b82af23 \
+				rmd160 f5e238825e17d7b0964bb5a57bc9b9926614c4ba
+
+worksrcdir		${my_name}
+
+# Dummy configure to enable universal variant
+use_configure	yes
+configure		{}
+
+if {! [variant_isset universal]} {
+	set arch ${os.arch}
+	if {! [string compare ${os.arch} powerpc]} {
+		set arch ppc
+	}
+
+	xcode.build.settings-append		ARCHS=${arch}
+	xcode.destroot.settings-append	ARCHS=${arch}
+}
+
+xcode.destroot.settings-append SKIP_INSTALL=no
+
+platform darwin 7 {
+	xcode.configuration "Deployment 10.3"
+}
+
+livecheck.check	regex
+livecheck.url	${homepage}
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)-s"

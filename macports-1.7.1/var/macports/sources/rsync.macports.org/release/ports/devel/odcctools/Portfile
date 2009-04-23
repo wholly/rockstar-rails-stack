@@ -1,0 +1,59 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 42018 2008-11-13 16:31:37Z devans@macports.org $
+
+PortSystem 1.0
+
+name            odcctools
+version         20061117
+categories      devel
+maintainers     nomaintainer
+homepage        http://odcctools.macosforge.org/
+platforms       darwin
+
+description     Darwin cctools build system.
+long_description \
+    The odcctools project is geared towards improving the \
+    Darwin cctools build system and code base to support \
+    Darwin development. Darwin cctools has several \
+    components, including the assembler odas(1), the \
+    static linker odld(1), various tools for manipulating \
+    and analyzing Mach-O and fat files, and support \
+    libraries.
+
+fetch.type      svn
+svn.tag         150
+svn.url         http://svn.macosforge.org/repository/${name}/trunk ${name}
+
+worksrcdir      ${name}/${name}
+
+set od_extract  ""
+extract {
+    system "cd ${workpath}/${name} && ./extract.sh $od_extract"
+}
+
+depends_build   bin:svn:subversion
+
+configure.args  --mandir=${prefix}/share/man \
+                --program-prefix=od
+
+build.target    default
+
+post-destroot {
+    set mandir ${destroot}${prefix}/share/man/man1
+    foreach manpage [glob -d ${mandir} *.1] {
+        file rename ${manpage} [strsed ${manpage} "s%${mandir}/%${mandir}/od%"]
+    }
+}
+
+variant nosdk description {Without SDK} {
+    set od_extract "--nosdk"
+}
+
+platform darwin 7 {
+    depends_build-append    port:gnutar
+    pre-extract {
+        system "cd ${workpath}/${name} && patch -p0 < ${filespath}/patch-extract.sh"
+    }
+}
+
+livecheck.check none

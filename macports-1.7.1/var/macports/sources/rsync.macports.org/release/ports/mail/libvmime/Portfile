@@ -1,0 +1,24 @@
+# $Id: Portfile 30236 2007-10-22 23:15:10Z jmpp@macports.org $
+
+PortSystem 1.0
+
+name			libvmime
+version			0.7.1
+categories		mail devel
+platforms		darwin
+maintainers		nomaintainer
+description		library for dealing with RFC-822, 2822, MIME messages
+long_description	VMime is a C++ class library for parsing, generating, or \
+				editing Internet RFC-822, 2822 and MIME messages. It is \
+				designed to provide a fast and an easy way to manipulate \
+				Internet mail messages.
+
+homepage		http://www.vmime.org/
+master_sites	sourceforge:vmime
+checksums		md5 81f06a771d2de01d5982635838eb5f6a
+use_bzip2		yes
+
+post-destroot {
+	file rename ${destroot}${prefix}/share/doc/vmime \
+		${destroot}${prefix}/share/doc/${name}
+}

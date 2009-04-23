@@ -1,0 +1,58 @@
+# $Id: Portfile 48505 2009-03-24 02:09:19Z macsforever2000@macports.org $
+
+PortSystem 1.0
+
+name                    unittest-cpp
+version                 1.4
+categories              devel
+platforms               darwin
+maintainers             uni-koblenz.de:guidolorenz \
+                        openmaintainer
+description             lightweight unit testing framework for C++
+long_description        UnitTest++ is a lightweight unit testing framework for C++. \
+                        It was designed to do test-driven development on a wide variety \
+                        of platforms. Simplicity, portability, speed, and small footprint \
+                        are all very important aspects of UnitTest++.\
+
+homepage                http://unittest-cpp.sourceforge.net/
+
+master_sites            sourceforge
+checksums               md5 bd373a53403ed51ea1bbb60b1952d7e3 \
+                        sha1 dad944159e2e135aea74039987490eaaee00f2ad \
+                        rmd160 fe55f111e7551af5cb05890888f32814b51c70e0
+
+use_zip                 yes
+worksrcdir              UnitTest++
+
+use_configure           no
+
+destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/include/unittest++/Posix
+    eval xinstall -m 640 [glob ${worksrcpath}/src/*.h] \
+        ${destroot}${prefix}/include/unittest++
+    eval xinstall -m 640 [glob ${worksrcpath}/src/Posix/*.h] \
+        ${destroot}${prefix}/include/unittest++/Posix
+    xinstall -m 640 ${worksrcpath}/libUnitTest++.a \
+        ${destroot}${prefix}/lib
+}
+
+variant universal {
+    build {
+        # Build and test the library for the native architecture,
+        # just to check if everything is fine.
+        system "cd ${worksrcpath} && ${build.cmd} TestUnitTest++"
+        system "cd ${worksrcpath} && ${build.cmd} clean"
+        
+        # Now build the library for all universal architectures.
+        set lipo_args {}
+        foreach arch ${universal_archs} {
+            system "cd ${worksrcpath} && ${build.cmd} libUnitTest++.a CXXFLAGS='-arch ${arch}' LDFLAGS='-arch ${arch}'"
+            move ${worksrcpath}/libUnitTest++.a ${worksrcpath}/libUnitTest++.a.${arch}
+            system "cd ${worksrcpath} && ${build.cmd} clean"
+            lappend lipo_args -arch ${arch} ${worksrcpath}/libUnitTest++.a.${arch}
+        }
+        
+        # Roll a universal binary.
+        system "lipo ${lipo_args} -create -output ${worksrcpath}/libUnitTest++.a"
+    }
+}

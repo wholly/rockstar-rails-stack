@@ -1,0 +1,58 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: controller
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: request
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: response
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: controller_name
+- !ruby/object:RI::MethodSummary 
+  name: integrate_views
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Controller Examples live in $RAILS_ROOT/spec/controllers/.
+- !ruby/struct:SM::Flow::P 
+  body: "Controller Examples use Spec::Rails::Example::ControllerExampleGroup, which supports running specs for Controllers in two modes, which represent the tension between the more granular testing common in TDD and the more high level testing built into rails. BDD sits somewhere in between: we want to a balance between specs that are close enough to the code to enable quick fault isolation and far enough away from the code to enable refactoring with minimal changes to the existing specs."
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Isolation mode (default)
+- !ruby/struct:SM::Flow::P 
+  body: No dependencies on views because none are ever rendered. The benefit of this mode is that can spec the controller completely independent of the view, allowing that responsibility to be handled later, or by somebody else. Combined w/ separate view specs, this also provides better fault isolation.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Integration mode
+- !ruby/struct:SM::Flow::P 
+  body: "To run in this mode, include the <tt>integrate_views</tt> declaration in your controller context:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  describe ThingController do\n    integrate_views\n    ...\n"
+- !ruby/struct:SM::Flow::P 
+  body: In this mode, controller specs are run in the same way that rails functional tests run - one set of tests for both the controllers and the views. The benefit of this approach is that you get wider coverage from each spec. Experienced rails developers may find this an easier approach to begin with, however we encourage you to explore using the isolation mode and revel in its benefits.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Expecting Errors
+- !ruby/struct:SM::Flow::P 
+  body: Rspec on Rails will raise errors that occur in controller actions and are not rescued or handeled with rescue_from.
+constants: []
+
+full_name: Spec::Rails::Example::ControllerExampleGroup
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: ControllerInstanceMethods
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: _assigns_hash_proxy
+- !ruby/object:RI::MethodSummary 
+  name: params_from
+- !ruby/object:RI::MethodSummary 
+  name: route_for
+name: ControllerExampleGroup
+superclass: FunctionalExampleGroup

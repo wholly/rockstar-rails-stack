@@ -1,0 +1,53 @@
+# $Id: Portfile 35275 2008-03-23 15:54:42Z jberry@macports.org $
+
+PortSystem 1.0
+
+name				commons-daemon
+version				1.0.1
+
+categories			java
+maintainers			jberry openmaintainer
+platforms			darwin
+
+description			Jakarta Commons-Daemon
+long_description	An alternative invocation mechanism for unix-daemon-like \
+					java code.
+homepage			http://commons.apache.org/daemon/
+
+distname			daemon-${version}
+master_sites		apache:commons/daemon/source/
+checksums			md5 df3eb5aafa53ca530843a09d40b8a1c0
+
+patchfiles			patch-native-dso-dyld.c
+
+depends_build		bin:ant:apache-ant
+depends_lib			bin:java:kaffe \
+					port:junit
+
+use_configure		no
+
+build {
+	# First build the java code
+	system "cd ${worksrcpath} && \
+		ant dist -Djunit.jar=${prefix}/share/java/junit.jar"		
+
+	# Then build the native code jsvc tool
+	system "cd ${worksrcpath}/src/native/unix && \
+		./configure && make"
+}
+
+destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/java \
+		${destroot}${prefix}/share/doc \
+		${destroot}${prefix}/bin
+	xinstall -m 644 ${worksrcpath}/dist/commons-daemon.jar \
+		${destroot}${prefix}/share/java/
+	xinstall -m 755 ${worksrcpath}/src/native/unix/jsvc \
+		${destroot}${prefix}/bin/
+	file copy ${worksrcpath}/dist/docs \
+		${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.check regex
+livecheck.url   http://commons.apache.org/downloads/download_daemon.cgi
+livecheck.regex "daemon-(\\d+\\.\\d+(\\.\\d+)?).tar.gz"

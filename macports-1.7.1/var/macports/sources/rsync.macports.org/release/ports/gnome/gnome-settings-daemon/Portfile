@@ -1,0 +1,36 @@
+# $Id: Portfile 43419 2008-12-10 20:49:53Z jmr@macports.org $
+
+PortSystem 1.0
+
+name            gnome-settings-daemon
+version         2.24.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     Gnome 2 settings daemon.
+long_description ${description}
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+checksums       md5 841447fa690a3a4712e9ddaec2584824 \
+                sha1 d0dbf6ba82cdc1e814d6c46bdc363e61ee9fd0f3 \
+                rmd160 27d432cd217a836fcef0deac5f80f638a73cda7c
+
+depends_lib     port:libgnomeui \
+                port:esound \
+                port:gnome-desktop \
+                port:libgnomekbd \
+                port:gst-plugins-good \
+                port:dbus-glib
+depends_build	port:gnome-doc-utils
+use_bzip2 	yes
+
+pre-configure {
+    reinplace "s|-bundle|-bundle -undefined dynamic_lookup|g" ${worksrcpath}/configure
+}
+
+configure.args  --enable-gstreamer
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/GNOME/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-([0-9\.]+)}

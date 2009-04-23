@@ -1,0 +1,29 @@
+# $Id: Portfile 42645 2008-11-27 20:55:19Z simon@macports.org $
+
+PortSystem          1.0
+PortGroup           python25 1.0
+
+name                bkchem
+version             0.12.5
+categories          science python
+platforms           darwin
+maintainers         simon openmaintainer
+description         Free chemical drawing program.
+long_description    Free chemical drawing program written in Python by Beda \
+                    Kosata.
+
+homepage            http://bkchem.zirael.org/
+master_sites        ${homepage}download/
+checksums           md5 affe99c8c581bdef9a74e8608d811da8 \
+                    sha1 0a3ea20ef4aa1348553a0ae2eded2cfc01180f8e \
+                    rmd160 3489f9c39171befa4d89df54667becef61f9657c
+
+depends_lib-append  port:py25-tkinter
+
+patchfiles          patch-setup.py.diff
+
+post-patch {
+    reinplace "s|__PREFIX__|${prefix}|g" ${worksrcpath}/setup.py
+    reinplace "s|__PYTHON__|${python.bin}|g" ${worksrcpath}/setup.py
+    reinplace "s|__PYTHON_PKGD__|${python.pkgd}|g" ${worksrcpath}/setup.py
+}

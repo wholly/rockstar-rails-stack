@@ -1,0 +1,31 @@
+# $Id: Portfile 43414 2008-12-10 19:59:28Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            gnome-media
+version         2.24.0.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     A collection of utilities for simple multimedia handling.
+long_description	\
+	The GNOME media utilities provide simple applications for basic \
+	multimedia tasks, such as CD playback, volume control or audio \
+	recording.
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+checksums       md5 d0a9b0784872cecd09038aceea22e16f \
+                sha1 2704b4cd13b7f776a358e517a5baf5d97455b85b \
+                rmd160 695f4cf9b170a381c243846749f5fad916f8bbca
+use_bzip2       yes
+
+depends_lib     port:libgnomeui \
+                port:gst-plugins-good
+#               port:nautilus-cd-burner
+
+depends_build	port:gnome-doc-utils
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

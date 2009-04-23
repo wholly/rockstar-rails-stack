@@ -1,0 +1,34 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 47870 2009-03-09 06:16:34Z jmr@macports.org $
+
+PortSystem          1.0
+PortGroup python26 1.0
+
+name                py26-macholib
+version             1.2
+categories-append   devel
+maintainers         jmr openmaintainer
+description         Mach-O header analysis and editing
+long_description \
+    macholib can be used to analyze and edit Mach-O headers, the executable \
+    format used by Mac OS X. \
+    It is typically used as a dependency analysis tool, and also to rewrite \
+    dylib references in Mach-O headers to be @executable_path relative. \
+    Though this tool targets a platform specific file format, it is pure \
+    python code that is platform and endian independent.
+
+platforms       darwin
+
+homepage        http://undefined.org/python/#macholib
+master_sites    http://pypi.python.org/packages/source/m/macholib/
+distname        macholib-${version}
+
+depends_lib-append  port:py26-altgraph
+
+checksums       md5 cf3cef1216be35e88172b73f9a1a222a \
+                sha1 7dcbc360b46bac2c108825997b8900390fe85577\
+                rmd160 73c6f45240ca847ef0cd1590c64b2a92756afb7a
+
+livecheck.check regex
+livecheck.url   http://pypi.python.org/pypi/macholib/
+livecheck.regex macholib (1\.\[0-9\]+)

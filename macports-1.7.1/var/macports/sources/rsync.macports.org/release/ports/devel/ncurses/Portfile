@@ -1,0 +1,90 @@
+# $Id: Portfile 47789 2009-03-06 05:28:48Z mcalhoun@macports.org $
+
+PortSystem 1.0
+PortGroup  muniversal 1.0
+
+name            ncurses
+version         5.7
+categories      devel
+platforms       darwin freebsd
+maintainers     imajes@macports.org
+description     emulation of curses in System V Release 4.0
+long_description \
+    The Ncurses (new curses) library is a free software emulation of    \
+    curses in System V Release 4.0, and more. It uses Terminfo format,  \
+    supports pads and color and multiple highlights and forms           \
+    characters and function-key mapping, and has all the other          \
+    SYSV-curses enhancements over BSD Curses.
+
+homepage        http://www.gnu.org/software/ncurses/ncurses.html
+master_sites    gnu
+
+checksums		md5		cce05daf61a64501ef6cd8da1f727ec6 \
+				sha1	8233ee56ed84ae05421e4e6d6db6c1fe72ee6797 \
+				rmd160	a19ca026d32255f5a4d22eb006d65182041e0234
+
+# required for terminfo
+depends_run     port:ncursesw
+
+configure.cppflags
+configure.ldflags
+configure.args  --with-shared \
+                --disable-rpath \
+                --without-debug  \
+                --without-ada \
+                --enable-safe-sprintf \
+                --enable-sigwinch \
+                --without-progs \
+                --mandir=${prefix}/share/delete-me \
+                --with-manpage-format=normal
+
+post-destroot {
+    # terminfo & manpages also do come with ncursesw
+    delete ${destroot}${prefix}/lib/terminfo ${destroot}${prefix}/share
+}
+
+platform freebsd {
+    depends_build-append    lib:libncursesw:ncursesw
+    destroot.env-append     LD_LIBRARY_PATH=${prefix}/lib
+}
+
+if {[variant_isset universal]} {
+    pre-destroot {
+        global merger_dont_diff
+        # These tests must be done in pre-destroot to ensure universal_archs_to_use has the correct values.
+        if { [llength ${universal_archs_to_use}] > 2 } {
+            lappend merger_dont_diff ${prefix}/include/${name}/curses.h
+        }
+    }
+
+    # When cross-compiling, force configure script to assume file system is the same on build and host architectures.
+    #     We can not use --enable-mixed-case=[yes,no] since HFS+ case sensitivity is not known.
+    patchfiles-append  patch-configure.diff
+
+    # Build process requires compiler and pre-processor to build binaries which run on build architecture.
+    lappend cross_configure_args  --with-build-cc='${configure.cc}'
+    lappend cross_configure_args  --with-build-cpp='${configure.cpp}'
+
+    # Unless, _XOPEN_SOURCE_EXTENDED is defined, include/curses.h will not include some system header files,
+    #     which in turn will cause problems with ncurses/curses.priv.h.
+    lappend cross_configure_args  --with-build-cppflags=-D_XOPEN_SOURCE_EXTENDED
+
+    # Configure script attempts to run a test program which allocates a chunk of memory and writes to it.
+    #     If cross-compiling, default does not assume the program would succeed (safest option).
+    lappend cross_configure_args  --enable-big-core
+
+    # For chtype, configure script chooses between int and long for smallest data type which can hold, up to version 5.7, 31 bits.
+    #     If sizeof(unsigned long)==sizeof(unsigned int), configure script chooses long.
+    # For booltype, configure script tries to find data type xxx with sizeof(bool)==sizeof(xxx).
+    if { ${os.arch}=="i386" } {
+        if { ${os.major} >= 10 } {
+            set merger_configure_args(ppc)   "${cross_configure_args} --with-chtype=long  --with-bool='unsigned int'"
+        }
+        set merger_configure_args(ppc64)   "${cross_configure_args} --with-chtype=int  --with-bool='unsigned char'"
+    } else {
+        set merger_configure_args(i386)    "${cross_configure_args} --with-chtype=long --with-bool='unsigned char'"
+        set merger_configure_args(x86_64)  "${cross_configure_args} --with-chtype=int  --with-bool='unsigned char'"
+    }
+}
+
+use_parallel_build	yes

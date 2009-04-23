@@ -1,0 +1,32 @@
+# $Id: Portfile 48854 2009-03-30 15:21:42Z devans@macports.org $
+
+PortSystem 1.0
+
+name		liboil
+version		0.3.16
+description	A library of simple functions that are optimized for various CPUs.
+long_description	${description}
+maintainers	landonf
+categories	devel
+platforms	darwin
+homepage        http://liboil.freedesktop.org/
+master_sites    http://liboil.freedesktop.org/download/
+checksums       md5     febb1d9f9bc4c440fcf622dc90f8b6b7 \
+                sha1    0d6530ccb22d805c5209a185a94b575111ec34f3 \
+                rmd160  5add00151e24ee8cc5a8dfb40223936a576cbffd
+
+patchfiles      patch-configure.diff
+
+depends_build	port:pkgconfig
+depends_lib	path:lib/pkgconfig/glib-2.0.pc:glib2
+
+universal_variant no
+
+variant doc description {Install documentation} {
+    depends_build-append   port:gtk-doc
+    configure.args-append  --enable-gtk-doc
+}
+
+livecheck.check         regex
+livecheck.url           [lindex ${master_sites} 0]?C=M&O=D
+livecheck.regex         ${name}-(\\d(?:\\.\\d+)*)

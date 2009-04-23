@@ -1,0 +1,172 @@
+# $Id: Portfile 28540 2007-09-03 11:42:45Z mww@macports.org $
+
+PortSystem 1.0
+name		ghc-devel
+version		6.7
+revision	2
+categories	lang
+maintainers	gwright@macports.org
+platforms	darwin
+description	The Glorious Glasgow Haskell Compilation System (development version)
+long_description	\
+		The Glasgow Haskell Compiler is a robust,		\
+		fully-featured, optimising compiler and interactive	\
+		environment for Haskell 98, GHC compiles Haskell to	\
+		either native code or C.  It implements numerous	\
+		experimental language extensions to Haskell 98,		\
+		for example: concurrency, a foreign language interface,	\
+		multi-parameter type classes, scoped type variables,	\
+		existential and universal quantification, unboxed	\
+		types, exceptions, weak pointers, and so on.		\
+		GHC comes with a generational garbage collector,	\
+		and a space and time profiler. 
+
+homepage	http://www.haskell.org/ghc/
+set darcs_site	http://darcs.haskell.org/
+
+set worksrcdir	ghc
+
+platform darwin 6 {}
+pre-fetch {
+    if {[variant_isset darwin_6]} {
+        return -code error "ghc-devel is not supported on Jaguar (OS X 10.2.x)"
+    }
+}
+
+fetch		{ cd ${workpath}
+		  system "darcs get --partial ${darcs_site}ghc"
+
+		  cd ${worksrcdir}
+		  system "chmod +x ./darcs-all"
+		  system "./darcs-all get"
+		  if { [variant_isset extra] } {
+		  	system "./darcs-all --extra get"
+		  }
+}
+
+variant extra	{ ui_msg "extra libraries will be built" }
+variant test	{ ui_msg "testsuite and nofib benchmarks will be built" }
+
+post-fetch	{ cd ${worksrcpath}
+		  if { [variant_isset test] } {
+		  	system "darcs get --partial ${darcs_site}testsuite"
+			system "darcs get --partial ${darcs_site}nofib"
+		  }
+
+		  system "./darcs-all pull -a"
+		}
+
+extract		{ }
+checksum	{ }
+
+depends_build	port:ghc	\
+		port:alex	\
+		port:darcs	\
+		port:happy
+
+depends_lib	port:readline	\
+		port:gmp
+
+#user_notes	All of the executables have the version as a suffix,	\
+#		so you must invoke ghc-6.7 or ghci-6.7 or hsc2hs-6.7...	\
+#		Not all of the files in /bin are different from the	\
+#		production version, but it seems safer not to overwrite	\
+#		the versions that are officially supported.
+
+#bugs		GHC does not support DESTDIR. Instead, we install	\
+#		everything into ${destroot}/${prefix}, and then fix up	\
+#		the five scripts which actually have the installation	\
+#		path hard coded.
+
+platform darwin 7 {
+                depends_build-append	path:${prefix}/bin/gmake:gmake
+
+		pre-configure   {
+			set cfg [open "${worksrcpath}/mk/build.mk" w]
+			puts $cfg "#"
+			puts $cfg "# Local configuration overrides for MacPorts"
+			puts $cfg "#"
+		  	puts $cfg "SRC_CC_OPTS += -I${prefix}/include"
+		  	puts $cfg "SRC_HC_OPTS += -I${prefix}/include -I/usr/include -L${prefix}/lib -L/usr/lib"
+		  	puts $cfg "EXTRA_HSC2HS_OPTS += -I${prefix}/include"
+		  	puts $cfg "EXTRA_LD_OPTS += -L${prefix}/lib"
+		  	puts $cfg "EXTRA_LD_OPTS += -L/usr/lib"
+			close $cfg
+
+			cd ${worksrcpath}
+			system "sh boot"
+		}
+
+                build.cmd       gmake
+        }
+
+
+platform darwin 8 {
+		pre-configure   {
+			set cfg [open "${worksrcpath}/mk/build.mk" w]
+			puts $cfg "#"
+			puts $cfg "# Local configuration overrides for MacPorts"
+			puts $cfg "#"
+		  	puts $cfg "SRC_CC_OPTS += -I${prefix}/include"
+		  	puts $cfg "SRC_HC_OPTS += -I${prefix}/include -I/usr/include -L${prefix}/lib -L/usr/lib"
+		  	puts $cfg "EXTRA_HSC2HS_OPTS += -I${prefix}/include"
+		  	puts $cfg "EXTRA_LD_OPTS += -L${prefix}/lib"
+		  	puts $cfg "EXTRA_LD_OPTS += -L/usr/lib"
+			close $cfg
+
+			cd ${worksrcpath}
+			system "sh boot"
+		}
+}
+
+configure.env	DYLD_FALLBACK_LIBRARY_PATH=${prefix}/lib
+configure.cflags-append	"-I${prefix}/include"
+
+configure.args	--prefix=${destroot}/${prefix}			\
+		--mandir=${destroot}/${prefix}/share/man/	\
+		--with-readline-includes=${prefix}/include	\
+		--with-readline-libraries=${prefix}/lib		\
+		--with-gmp-includes=${prefix}/include		\
+		--with-gmp-libraries=${prefix}/lib		\
+		--disable-openal				\
+		--disable-alut
+
+variant noopengl	{ configure.args-append --disable-hopengl }
+
+build	{
+	system "env DYLD_FALLBACK_LIBRARY_PATH=${prefix}/lib ${build.cmd} ${build.target}"
+}
+
+post-destroot	{ cd ${destroot}${prefix}/bin
+		  set ghc_script     [ glob ghc-${version}.* ]
+		  set ghci_script    [ glob ghci-${version}.* ]
+		  set ghc-pkg_script [ glob ghc-pkg-${version}.* ]
+
+		  foreach script_name [concat ${ghc_script} ${ghci_script} ${ghc-pkg_script} ] {
+			reinplace s|${destroot}/${prefix}|${prefix}|g ${destroot}${prefix}/bin/${script_name}
+		  }
+
+		  foreach script_name { ghcprof hsc2hs-ghc } {
+			reinplace s|${destroot}/${prefix}|${prefix}|g ${destroot}${prefix}/bin/${script_name}
+		  }
+
+		  reinplace "s|\\\$@\"\}|\\\$@\"\} -L${prefix}/lib -I${prefix}/include |" ${destroot}${prefix}/bin/ghc
+
+		  cd ${destroot}${prefix}/lib
+		  set ghc_libdir [ glob ghc-${version}.* ]
+                  reinplace s|${destroot}/${prefix}|${prefix}|g ${destroot}${prefix}/lib/${ghc_libdir}/package.conf
+
+		  file delete ${destroot}/${prefix}/bin/ghc
+		  file delete ${destroot}/${prefix}/bin/ghci
+		  file delete ${destroot}/${prefix}/bin/ghc-pkg
+
+		  set ghc_date [ lindex [ split ${ghc_libdir} "." ] 2 ]
+
+		  foreach bin_name { ghcprof hasktags hp2ps hsc2hs-ghc runghc } {
+			file rename ${destroot}/${prefix}/bin/${bin_name} ${destroot}${prefix}/bin/${bin_name}-${version}.${ghc_date}
+		  }
+
+		  cd ${destroot}${prefix}/lib/${ghc_libdir}
+		  system "ranlib *.a"
+}
+

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::CSS::Parser#on_error
+is_singleton: false
+name: on_error
+params: (error_token_id, error_value, value_stack)
+visibility: public

@@ -1,0 +1,31 @@
+# $Id: Portfile 30252 2007-10-23 02:19:43Z jmpp@macports.org $
+
+PortSystem 1.0
+name             libtomcrypt
+version          1.12
+categories       security
+maintainers      nomaintainer
+description      cryptographic toolkit
+long_description \
+	LibTomCrypt is a fairly comprehensive, modular and portable \
+	cryptographic toolkit that provides developers with a vast \
+	array of well known published block ciphers, one-way hash \
+	functions, chaining modes, pseudo-random number generators, \
+	public key cryptography and a plethora of other routines.
+homepage         http://libtomcrypt.org/
+platforms        darwin
+master_sites     http://libtomcrypt.com/files/
+distname         crypt-${version}
+use_bzip2        yes
+checksums        sha1 db2bfed6b5194f919c93c1915e48a76379681f92
+
+worksrcdir       ${name}-${version}
+
+patchfiles		patch-makefile
+
+use_configure    no
+
+build.target
+
+destroot.args    LIBPATH=${prefix}/lib INCPATH=${prefix}/include \
+				USER=`id -u` GROUP=`id -g`

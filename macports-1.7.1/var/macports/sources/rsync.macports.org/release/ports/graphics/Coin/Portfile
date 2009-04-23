@@ -1,0 +1,57 @@
+# $Id: Portfile 45603 2009-01-18 20:52:41Z jeremyhu@macports.org $
+
+PortSystem		1.0
+
+name			Coin
+version			2.5.0
+revision		2
+description		cross platform C++ OpenGL scene graph library
+long_description	Coin is a high-level 3D graphics library with a   \
+	C++ Application Programming Interface. Coin uses scene-graph data \
+	structures to render real-time graphics suitable for mostly all   \
+	kinds of scientific and engineering visualization applications.
+
+categories		graphics devel
+homepage		http://www.coin3d.org/lib/coin/
+platforms		darwin
+maintainers		css
+master_sites		http://ftp.coin3d.org/coin/src/all/
+checksums		md5 1e7cb6afa69f6eed034a64021f7d1bfc \
+			sha1 19dc61398d843bff120aec9c640ea814c827b577
+
+depends_lib		port:simage \
+			port:xorg-libsm \
+			port:xorg-libXext
+
+use_configure		yes
+configure.args		--with-simage=${prefix} --mandir=${prefix}/share/man
+
+platform darwin {
+	configure.args-append	--without-framework --enable-darwin-x11
+}
+
+variant aqua requires darwin {
+	configure.args-delete	--without-framework --enable-darwin-x11
+	configure.args-append	--with-framework=${destroot}/Library/Frameworks  --without-x
+	depends_lib-delete	port:xorg-libsm \
+				port:xorg-libXext
+}
+
+variant devel description {Activate developer features, including debug libraries.} {
+	configure.args-append	--enable-next-minor --enable-debug
+}
+
+variant manpages description {Include API documentation in manpages.} {
+	depends_build-append	port:doxygen
+	configure.args-append	--enable-man --mandir=${prefix}/share/man
+	post-destroot {
+		file rename ${destroot}${prefix}/share/man/man3/threads.3 \
+			${destroot}${prefix}/share/man/man3/threads-coin.3
+		file rename ${destroot}${prefix}/share/man/man3/manips.3 \
+			${destroot}${prefix}/share/man/man3/manips-coin.3
+	}
+}
+
+variant threadsafe description {Allow threadsafe scene graph traversals.} {
+	configure.args-append	--enable-threadsafe
+}

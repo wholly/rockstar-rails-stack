@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse an XML document. See Nokogiri.XML.
+full_name: Nokogiri::XML::parse
+is_singleton: true
+name: parse
+params: (string_or_io, url = nil, encoding = nil, options = 2159)
+visibility: public

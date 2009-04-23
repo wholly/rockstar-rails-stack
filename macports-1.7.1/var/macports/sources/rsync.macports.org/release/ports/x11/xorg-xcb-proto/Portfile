@@ -1,0 +1,47 @@
+# $Id: Portfile 46925 2009-02-17 22:50:32Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name		xorg-xcb-proto
+version		1.4
+categories	x11 devel
+maintainers	jeremyhu openmaintainer
+description	X.org xcb-proto
+homepage	http://xcb.freedesktop.org
+platforms	darwin macosx
+long_description XML-XCB protocol descriptions
+master_sites	 ${homepage}/dist/
+
+distname	xcb-proto-${version}
+checksums           md5     45a599289a81189b9812ccb00911eed8 \
+                    sha1    ab9bb7c875558a3324673bb749e0502046f31083 \
+                    rmd160  a344ca302a1cbefd98dcd289abf8704667a4b536
+use_bzip2	yes
+
+universal_variant no
+
+depends_run     port:libxml2
+
+variant python25 conflicts python26 python30 description {Use python 2.5 for xcbgen} {
+    depends_run-append      port:python25
+    configure.python        ${prefix}/bin/python2.5
+}
+
+variant python26 conflicts python25 python30 description {Use python 2.6 for xcbgen} {
+    depends_run-append      port:python26
+    configure.python        ${prefix}/bin/python2.6
+}
+
+variant python30 conflicts python25 python26 description {Use python 3.0 for xcbgen} {
+    depends_run-append      port:python30
+    configure.python        ${prefix}/bin/python3.0
+}
+
+# Default to 2.6 since 2.5 fails universal for me on Leopard... Ticket #17501
+if {![variant_isset python25] && ![variant_isset python30]} {
+    default_variants +python26
+}
+
+livecheck.check regex
+livecheck.url   ${master_sites}?C=M&O=D
+livecheck.regex xcb-proto-(\\d+(?:\\.\\d+)*)

@@ -1,0 +1,32 @@
+# $Id: Portfile 46363 2009-02-03 17:09:03Z mww@macports.org $
+
+PortSystem 1.0
+
+name		cscope
+version		15.7
+categories	devel
+platforms	darwin freebsd
+maintainers	mww
+description	development tool for browsing source code
+long_description	Cscope is a developer's tool for browsing source code. \
+			It has an impeccable Unix pedigree, having been \
+			originally developed at Bell Labs back in the days of \
+			the PDP-11. Cscope was part of the official AT&T Unix \
+			distribution for many years, and has been used to \
+			manage projects involving 20 million lines of code.
+
+homepage	http://cscope.sourceforge.net/
+master_sites	sourceforge
+checksums	sha1 293196c4e2a7eec5633a9019e39544dc9894b827
+
+use_bzip2	yes
+
+patchfiles	patch-constants.h
+
+depends_lib	port:ncurses
+
+configure.args	--mandir=${prefix}/share/man --with-flex --with-ncurses=${prefix}
+
+post-destroot	{
+	system "strip ${destroot}${prefix}/bin/cscope"
+}

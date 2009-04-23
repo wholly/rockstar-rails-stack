@@ -1,0 +1,20 @@
+# $Id: Portfile 38185 2008-07-11 20:13:37Z narf_tm@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Test-Warn 0.11
+maintainers           narf_tm openmaintainer
+description           A few convenience methods for testing warning-based code
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 1000ef6d94b54ca9eb75fb994a7e8bec \
+                      sha1 3cad88de96528d9c0154fbd3a23540d115f383d6 \
+                      rmd160 08fac10bed9152cbcf5ff5f4cd8f85f15d4555c8
+
+depends_lib-append    port:p5-test-exception \
+                      port:p5-sub-uplevel \
+                      port:p5-array-compare \
+                      port:p5-tree-dag_node

@@ -1,0 +1,26 @@
+# $Id: Portfile 42015 2008-11-13 16:21:57Z narf_tm@macports.org $
+
+PortSystem                1.0
+PortGroup                 perl5 1.0
+
+perl5.setup               Time-y2038 20081111
+maintainers               narf_tm openmaintainer
+description               Versions of Perl's time functions which work beyond 2038
+long_description          On many computers, Perl's time functions will not \
+                          work past the year 2038. This is a design fault \
+                          in the underlying C libraries Perl uses. \
+                          Time::y2038 provides replacements for those \
+                          functions which will work accurately \
+                          +/1 142 million years.
+
+platforms                 darwin
+
+checksums                 md5 3383bd68955935133c85e6ca5fa77ff1 \
+                          sha1 b5ccd8851211f902f7b82c458207e544b8dadcdd \
+                          rmd160 8611363797b6ae70ecec45c7dcc85fc737bc00a2
+
+depends_lib-append        port:p5-extutils-cbuilder \
+                          port:p5-test-exception \
+                          port:p5-test-warn
+
+perl5.use_module_build

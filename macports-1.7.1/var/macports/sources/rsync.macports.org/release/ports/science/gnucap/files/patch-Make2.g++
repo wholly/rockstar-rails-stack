@@ -1,0 +1,10 @@
+--- ibis/Make2.g++.old	Thu Feb 12 00:45:01 2004
++++ ibis/Make2.g++	Thu Feb 12 00:45:35 2004
+@@ -25,6 +25,7 @@
+ 
+ CCC = g++
+ CCFLAGS = \
++-DNEEDS_IS_INF -DNEEDS_IS_NAN \
+ -DUNIX -O2 -DNDEBUG -I.. -I. -fexceptions -W
+ LIBS = -lm
+ LDFLAGS =

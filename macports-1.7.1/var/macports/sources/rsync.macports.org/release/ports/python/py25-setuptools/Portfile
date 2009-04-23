@@ -1,0 +1,41 @@
+# $Id: Portfile 41957 2008-11-12 15:35:29Z nox@macports.org $
+
+PortSystem			1.0
+PortGroup			python25 1.0
+
+name				py25-setuptools
+version				0.6c9
+categories-append	devel
+maintainers			stechert@macports.org
+description			distutils enhancement for build and distribution
+long_description \
+	setuptools is a collection of enhancements to the Python distutils that \
+	allow you to more easily build and distribute Python packages, \
+	especially ones that have dependencies on other packages.
+
+platforms			darwin
+
+homepage			http://peak.telecommunity.com/DevCenter/setuptools
+master_sites		http://cheeseshop.python.org/packages/source/s/setuptools/
+distname			setuptools-${version}
+
+depends_build			port:py25-hashlib
+
+depends_lib-append		port:py25-zlib
+
+checksums           md5     3864c01d9c719c8924c455714492295e \
+                    sha1    79086433b341f0c1df45e10d586a7d3cc25089f1 \
+                    rmd160  bc0ee3821e76b57fd13425b16c4419dbccf95ed9
+
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} EasyInstall.txt api_tests.txt \
+		pkg_resources.txt setuptools.txt \
+		${destroot}${prefix}/share/doc/${name}
+	# To avoid conflict between py-setuptools and py25-setuptools (See r31503)
+	file delete ${destroot}${prefix}/bin/easy_install
+}
+
+livecheck.check     regex
+livecheck.url       $master_sites
+livecheck.regex     {setuptools-(\d+(?:\.\d+)*(?:[a-z]\d))}

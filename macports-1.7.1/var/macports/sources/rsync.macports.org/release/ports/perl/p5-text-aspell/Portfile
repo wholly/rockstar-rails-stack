@@ -1,0 +1,11 @@
+# $Id: Portfile 20370 2006-11-02 19:03:25Z blair@macports.org $
+
+PortSystem	1.0
+PortGroup	perl5 1.0
+perl5.setup	Text-Aspell 0.06
+maintainers	tkay@uoregon.edu
+description	perl interface to GNU aspell.
+long_description	${description} 	
+platforms	darwin
+checksums   md5 5db5e671d9a426da90b83e9b752e8552
+depends_build port:aspell

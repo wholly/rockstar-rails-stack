@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: wrapper for a nested assert_select
+- !ruby/struct:SM::Flow::VERB 
+  body: "  response.should have_tag(&quot;div#form&quot;) do\n    with_tag(&quot;input#person_name[name=?]&quot;, &quot;person[name]&quot;)\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: see documentation for assert_select at http://api.rubyonrails.org/
+full_name: Spec::Rails::Matchers#with_tag
+is_singleton: false
+name: with_tag
+params: (*args, &block)
+visibility: public

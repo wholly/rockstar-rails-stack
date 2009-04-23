@@ -1,0 +1,32 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Nokogiri::Decorators::Hpricot::Node
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: /
+- !ruby/object:RI::MethodSummary 
+  name: convert_to_xpath
+- !ruby/object:RI::MethodSummary 
+  name: get_element_by_id
+- !ruby/object:RI::MethodSummary 
+  name: get_elements_by_tag_name
+- !ruby/object:RI::MethodSummary 
+  name: raw_attributes
+- !ruby/object:RI::MethodSummary 
+  name: search
+- !ruby/object:RI::MethodSummary 
+  name: target
+- !ruby/object:RI::MethodSummary 
+  name: to_original_html
+- !ruby/object:RI::MethodSummary 
+  name: xpath
+name: Node
+superclass: 

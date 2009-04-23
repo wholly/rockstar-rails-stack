@@ -1,0 +1,48 @@
+# $Id: Portfile 33550 2008-01-30 00:09:33Z eridius@macports.org $
+
+PortSystem        1.0
+name              unison
+version           2.27.57
+categories        net
+maintainers       eridius@macports.org
+description       Unison File Synchronizer
+long_description  Unison is a file-synchronization tool for Unix and \
+                  Windows. It allows two replicas of a collection of \
+                  files and directories to be stored on different hosts \
+                  (or different disks on the same host), modified \
+                  separately, and then brought up to date by propagating \
+                  the changes in each replica to the other.
+homepage          http://www.cis.upenn.edu/~bcpierce/unison/
+master_sites      ${homepage}/download/releases/stable/
+platforms         darwin openbsd
+checksums         md5 4ba0a3e4bf4b4ad0c063f86391371f78 \
+                  sha1 9892680d8bd3e3c50031451cc6e77eb5431768ea
+patchfiles        patch-Makefile
+
+use_configure	no
+
+build.args		UISTYLE=text NATIVE=true THREADS=true
+depends_build	bin:camlp4:ocaml
+
+destroot.args	PREFIX=${prefix} UISTYLE=text NATIVE=true THREADS=true
+
+variant x11 {
+	depends_lib-append		port:lablgtk2
+
+	build.args-delete		UISTYLE=text
+	build.args-append		UISTYLE=gtk2
+
+	destroot.args-delete	UISTYLE=text
+	destroot.args-append	UISTYLE=gtk2
+}
+
+variant aqua {
+	build.args-delete		UISTYLE=text
+	build.args-append		UISTYLE=macnew
+	destroot {
+		xinstall -d -m 0755 ${destroot}/Applications/MacPorts
+		system "cd ${worksrcpath}/uimacnew/build && mv Default/* . || true"
+		file copy ${worksrcpath}/uimacnew/build/Unison.app \
+			${destroot}/Applications/MacPorts/
+	}
+}

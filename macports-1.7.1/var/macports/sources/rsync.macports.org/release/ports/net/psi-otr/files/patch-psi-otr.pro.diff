@@ -1,0 +1,14 @@
+--- psi-otr.pro	2008-05-12 19:42:05.000000000 +0200
++++ psi-otr.pro	2008-12-31 19:23:29.000000000 +0100
+@@ -8,9 +8,10 @@
+ LIBS += -lotr
+ DEPENDPATH += .
+ INCLUDEPATH += .
++INCLUDEPATH += /opt/local/include
+ QT += xml
+ DESTDIR	= .
+-target.path = /usr/local/share/psi/plugins
++target.path = /opt/local/share/psi/plugins
+ INSTALLS += target
+ 
+ # Input

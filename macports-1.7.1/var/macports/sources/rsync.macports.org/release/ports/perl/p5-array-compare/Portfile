@@ -1,0 +1,17 @@
+# $Id: Portfile 43997 2008-12-19 15:15:09Z narf_tm@macports.org $
+
+PortSystem                1.0
+PortGroup                 perl5 1.0
+
+perl5.setup               Array-Compare 1.17
+maintainers               narf_tm openmaintainer
+description               Perl module which allows you to compare two arrays
+long_description          ${description}
+
+platforms                 darwin
+
+checksums                 md5 0159ebb79529528db4cc68051532d22d \
+                          sha1 eacbc8fd9ddfc701f3b71beadea3c1593c37bf83 \
+                          rmd160 391a81412ddc1b1208359fe4a5937391483ff677
+
+perl5.use_module_build

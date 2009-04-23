@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Spec::Runner::Configuration#use_instantiated_fixtures=
+is_singleton: false
+name: use_instantiated_fixtures=
+params: (value)
+visibility: public

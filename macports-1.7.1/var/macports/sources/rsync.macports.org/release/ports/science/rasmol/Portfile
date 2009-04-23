@@ -1,0 +1,35 @@
+# $Id: Portfile 47464 2009-02-28 10:05:36Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name                rasmol
+version             2.7.1.1
+revision            3
+description         Molecular graphics visualisation tool
+categories          science graphics
+maintainers         nomaintainer
+distname            RasMol_${version}
+master_sites        http://www.bernstein-plus-sons.com/software/
+checksums           md5 0d5c99eeda079d8cbf413944d284740b 
+depends_lib         port:xorg-libXi
+patchfiles          patch-Imakefile.diff
+post-patch          { reinplace "s|@PREFIX@|${prefix}|g" ${worksrcpath}/Imakefile }
+worksrcdir          ${distname}/src
+configure.cmd       xmkmf
+configure.pre_args
+build.target        rasmol
+destroot             { xinstall -d ${destroot}${prefix}/share/man/man1
+                     xinstall -W ${workpath}/${distname} doc/rasmol.1.gz ${destroot}${prefix}/share/man/man1
+                     xinstall -W ${workpath}/${distname} src/rasmol ${destroot}${prefix}/bin
+                     xinstall -d ${destroot}${prefix}/lib/rasmol
+                     xinstall -W ${workpath}/${distname} doc/rasmol.hlp ${destroot}${prefix}/lib/rasmol
+                     file copy ${workpath}/${distname}/data ${destroot}${prefix}/lib/rasmol
+ }
+ 
+platform darwin 6 { depends_lib-append lib:libdl:dlcompat }
+
+long_description \
+RasMol is a molecular graphics program  intended  for  the \
+visualisation  of  proteins,  nucleic  acids  and  small \
+molecules.  The program is aimed at display, teaching  and \
+generation of publication quality images. 

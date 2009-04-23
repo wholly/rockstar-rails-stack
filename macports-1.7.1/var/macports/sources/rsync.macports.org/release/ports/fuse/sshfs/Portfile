@@ -1,0 +1,83 @@
+# $Id: Portfile 49254 2009-04-06 07:35:27Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name                sshfs
+version             2.2
+categories          fuse
+platforms           darwin
+maintainers         eridius@macports.org
+description         SSH filesystem for FUSE
+long_description    This is a filesystem client based on the \
+                    SSH File Transfer Protocol. Since most SSH \
+                    servers already support this protocol it is \
+                    very easy to set up: i.e. on the server side \
+                    there's nothing to do.  On the client side \
+                    mounting the filesystem is as easy as logging \
+                    into the server with ssh.
+
+homepage            http://fuse.sourceforge.net/sshfs.html
+
+distname            sshfs-fuse-${version}
+master_sites        sourceforge:fuse
+checksums           ${distfiles} md5 26e9206eb5169e87e6f95f54bc005a4f \
+                                 sha1 5c75cc747f97fd4fa031059346c25282027e5bc9
+
+livecheck.distname  sshfs-fuse
+
+depends_build       path:bin/pkg-config:pkgconfig
+depends_lib         port:gettext \
+                    path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:macfuse \
+                    port:libiconv \
+                    port:openssh
+
+configure.cppflags-append     -DDARWIN_SEMAPHORE_COMPAT
+configure.post_args-append --disable-dependency-tracking
+
+platform darwin {
+    patch_sites         http://macfuse.googlecode.com/svn/tags/macfuse-2.0/filesystems/sshfs
+    patchfiles          sshfs-fuse-${version}-macosx.patch
+    checksums-append    sshfs-fuse-${version}-macosx.patch md5 08330f4c10e25052b3a5c26d180e4752 \
+                                                           sha1 24e6721c25fb883c945550ac62e20f4c35f4393e
+    
+    # override patch.pre_args since it defaults to -p0
+    patch.pre_args -p1
+}
+
+pre-fetch {
+    if {[variant_isset darwin]} {
+        patch_checksum
+    }
+}
+
+proc patch_checksum {} {
+    global checksums_array UI_PREFIX
+    # assume we only have one patchfile, because at the moment that's true
+    set patchfile [option patchfiles]
+    # do our own checksumming of an existing $patchfile because URL changes between revisions
+    # if the checksum fails, delete the patchfile
+    # a lot of this code is copied from checksum_main
+    # Eventually this technique should be replaced with a patchfile dist subdir
+    if {[file exists [option distpath]/$patchfile]} {
+        ui_info "$UI_PREFIX $patchfile exists, checksumming to detect URL change"
+        if {[parse_checksums [option checksums]] == "yes"} {
+            ui_info "$UI_PREFIX [format [msgcat::mc "Checksumming %s"] $patchfile]"
+            set fullpath [file join [option distpath] $patchfile]
+            if {[info exists checksums_array($patchfile)]} {
+                set checksums $checksums_array($patchfile)
+                
+                foreach {type sum} $checksums {
+                    set calculated_sum [calc_$type $fullpath]
+                    if {![string equal $sum $calculated_sum]} {
+                        ui_debug "Checksum mismatch for $patchfile"
+                        delete $fullpath
+                        break
+                    }
+                }
+            }
+        } else {
+            return -code error "Unable to parse checksum string"
+        }
+    }
+}

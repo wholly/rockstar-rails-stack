@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Alias for #errors_on"
+full_name: ActiveRecord::Base#error_on
+is_singleton: false
+name: error_on
+params: (attribute)
+visibility: public

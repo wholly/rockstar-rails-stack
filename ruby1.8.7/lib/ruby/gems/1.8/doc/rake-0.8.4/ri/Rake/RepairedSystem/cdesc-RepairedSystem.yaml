@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: define_module_function
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Alternate implementations of system() and backticks `` for Windows.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: BINARY_EXTS
+  value: "%w[com exe]"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: BATCHFILE_EXTS
+  value: "%w[bat] +       if (t = ENV[\"COMSPEC\"]) and t =~ %r!command\\.exe\\Z!i"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: RUNNABLE_EXTS
+  value: BINARY_EXTS + BATCHFILE_EXTS
+- !ruby/object:RI::Constant 
+  comment: 
+  name: BATCHFILE_PATTERN
+  value: "[RUNNABLE_EXTS, BINARY_EXTS, BATCHFILE_EXTS].map { |exts|         if exts.size > 1"
+full_name: Rake::RepairedSystem
+includes: []
+
+instance_methods: []
+
+name: RepairedSystem
+superclass: 

@@ -1,0 +1,12 @@
+# $Id: Portfile 39081 2008-08-07 15:49:58Z markd@macports.org $
+
+PortSystem              1.0
+PortGroup               perl5 1.0
+
+perl5.setup             Crypt-OpenSSL-X509 0.7
+maintainers             nomaintainer
+description             Perl extension to OpenSSL's X509 API.
+long_description        ${description}
+
+checksums               md5 49d9481c82e764fa8fdd955a48b6c250
+platforms               darwin

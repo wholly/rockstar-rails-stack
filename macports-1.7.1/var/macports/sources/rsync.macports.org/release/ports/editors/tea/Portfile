@@ -1,0 +1,20 @@
+# $Id: Portfile 41342 2008-10-31 05:18:20Z jmr@macports.org $
+PortSystem 1.0
+name		tea
+version		11.0
+description	TEA is the powerful text editor for GNU/Linux and *BSD.
+long_description	${description}
+maintainers	nomaintainer
+categories	editors
+platforms	darwin 
+homepage	http://tea.linux.kiev.ua
+master_sites	${homepage}
+checksums	md5 8b65e6b169c0f256144367e61c146b61 \
+		sha1  286bdd718e378ca9298f78e6dceef49ebbba14a7 
+depends_lib	port:gtk2
+use_bzip2 	yes
+distname	${name}-${version}
+worksrcdir	${name}-${version}
+configure.args	--mandir=${prefix}/share/man 
+configure.cppflags-append	"-L${prefix}/lib"
+configure.cflags-append	-no-cpp-precomp

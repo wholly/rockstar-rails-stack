@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>params_from (Spec::Rails::Example::ControllerExampleGroup)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/spec/rails/example/controller_example_group.rb, line 135</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">params_from</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">path</span>)
+          <span class="ruby-identifier">ensure_that_routes_are_loaded</span>
+          <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Routing</span><span class="ruby-operator">::</span><span class="ruby-constant">Routes</span>.<span class="ruby-identifier">recognize_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">method</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

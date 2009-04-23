@@ -1,0 +1,90 @@
+# $Id: Portfile 47546 2009-03-01 00:26:47Z jeremyhu@macports.org $
+
+PortSystem      1.0
+
+name            openmotif
+version         2.3.1-1
+revision        2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+set subdir      [lindex [split ${version} -] 0]
+worksrcdir      ${name}-${subdir}
+categories      x11
+platforms       darwin
+maintainers     nomaintainer
+description     The Open Motif toolkit for X11
+
+long_description \
+    This is The Open Group's full version of Motif based on \
+    the original OSF sources.
+
+homepage        http://www.motifzone.net/
+master_sites    http://ftp.ics.com/openmotif/${branch}/${subdir}/ \
+                ftp://ftp.ics.com/openmotif/${branch}/${subdir}/
+fetch.use_epsv  no
+
+checksums       md5     1372108f50f3554ee2f28367ff76bd32 \
+                sha1    3245375f4bd8e2d2eb02c2636d5491e834d8bb1a \
+                rmd160  e03422204b6077fa6556894f194236d40e92e42b
+
+depends_build \
+	port:pkgconfig
+
+depends_lib \
+	port:jpeg \
+	port:libpng \
+	port:libiconv \
+	port:xorg-libsm \
+	port:xorg-libXext \
+	port:Xft2 \
+	port:xorg-libXmu \
+	port:xorg-libXp \
+	port:xorg-libXt
+
+patchfiles      patch-demos-programs-peridoc-Makefile.in.diff \
+                patch-lib-Mrm-Makefile.in.diff
+
+post-patch {
+    reinplace "s|iconv_open|libiconv_open|g" ${worksrcpath}/configure
+    reinplace -E "/^LDFLAGS/s|\$| @LDFLAGS@|" ${worksrcpath}/lib/Xm/Makefile.in
+}
+
+configure.args  --mandir=${prefix}/share/man	\
+                --enable-xft	\
+                --enable-jpeg	\
+                --enable-png
+
+# AC_X_PATH blindly asks xmkmf where X11 is, and it always uses /usr/X11R6.
+# This block helps us link correctly and setup our pc files correctly when we   
+# are +system_x11 and x11prefix is somewhere non-standard and should cause
+# AC_X_PATH to let us setup our CPPFLAGS and LDFLAGS without interference
+configure.args-append --x-include=${prefix}/include --x-lib=${prefix}/lib
+if { ![file exists ${prefix}/lib/pkgconfig/x11.pc] } {
+    pre-configure {
+        configure.cppflags-append -I${x11prefix}/include
+        configure.ldflags-append  -L${x11prefix}/lib
+    }
+
+    # And this will similarly get ports that use pkgconfig to find our pkgconfig-less libX11
+    post-destroot {
+        if {![file exists ${x11prefix}/lib/pkgconfig/x11.pc]} {
+            foreach pc [glob ${destroot}${prefix}/lib/pkgconfig/*.pc] {
+                reinplace "s:-lX11:-L${prefix}/lib -L${x11prefix}/lib -lX11:g" ${pc}
+            }
+        }
+    }
+}
+
+build.env       LANG=C
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}-${version}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} BUGREPORT COPYRIGHT.MOTIF ChangeLog LICENSE \
+        README RELNOTES TODO ${destroot}${docdir}
+}
+
+platform darwin 7 {
+    patchfiles-append   patch-freetype.diff
+}
+
+livecheck.check none

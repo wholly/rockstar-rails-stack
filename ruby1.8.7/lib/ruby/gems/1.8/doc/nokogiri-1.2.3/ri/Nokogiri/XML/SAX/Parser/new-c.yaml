@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::XML::SAX::Parser::new
+is_singleton: true
+name: new
+params: (doc = XML::SAX::Document.new, encoding = 'ASCII')
+visibility: public
