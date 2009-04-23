@@ -1,0 +1,27 @@
+h1{color:red}. Rockstar's Rails Stack
+
+If you are a software development house or an individual rails developer, who spent hours together to setup dev environment on fresh machines either for yourself or for your staff, then you will certainly fall in love with this project which saves tremendous amount of your time with effortless configuration of  *fully loaded* development stack.
+
+h2. Why is it so special?
+
+p. It is initially stolen from the machines of rockstar developers at Whol.ly and given enough eyeballs from opensource community to include best practices of stack configuration management such that developers can avoid wasting time in configuration issues while having fun with multiple version installation of stable (or experimental) apps/frameworks/libs/rubygems etc.
+
+h2. Ok!, so how easy is it?
+
+p. Here you go..
+
+<pre>
+<code>
+  git clone git://github.com/wholly/rockstar-rails-stack.git ~/binaries
+  cd ~/binaries ; ./make_me_rockstar
+</code>
+</pre>
+
+h2. Alright!, What do I really get?
+
+* Ruby , RubyGems , MacPorts installed in a single directory
+* mysql server + mysql gem pre-installed.
+* No Rails? ... No! because being rails rockstar, you are encouraged to grab latest "rails":http://github.com/rails/rails/tree/master and freeze  rails version in your specific apps.
+* You can keep installing your favorite gems , libs , or native dependencies (with MacPorts, eg. graphviz , imagemagick) and all of this can be instantly backed up by grabbing one single directory. Hence if your system crashes or you are moving to different computer , your personal development stack is restored with no surprises.    
+
+

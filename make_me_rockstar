@@ -1,0 +1,6 @@
+#! /bin/bash
+echo "Setting up Rockstar Rails Stack ..."
+echo "===Lines inserted by Rockstar Rails Stack (http://github.com/wholly/rockstar-rails-stack)===" >> ~/.profile
+cat ~/binaries/config/.profile >> ~/.profile
+ln -s ~/binaries/config/.gem ~/.gem
+echo "Done!"
