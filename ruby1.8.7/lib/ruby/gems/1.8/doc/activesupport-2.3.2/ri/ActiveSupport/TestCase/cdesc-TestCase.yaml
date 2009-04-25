@@ -1,0 +1,31 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: Assertion
+  value: MiniTest::Assertion
+- !ruby/object:RI::Constant 
+  comment: 
+  name: Assertion
+  value: Test::Unit::AssertionFailedError
+full_name: ActiveSupport::TestCase
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Rails::BacktraceFilterForTestUnit
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::Testing::Default
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::Testing::SetupAndTeardown
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::Testing::Assertions
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::Testing::Deprecation
+instance_methods: []
+
+name: TestCase
+superclass: "::Test::Unit::TestCase"

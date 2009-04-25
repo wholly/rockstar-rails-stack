@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the response's content MIME type, or nil if content type has been set.
+full_name: ActionController::Response#content_type
+is_singleton: false
+name: content_type
+params: ()
+visibility: public

@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the current cycle string after a cycle has been started. Useful for complex table highlighing or any other design need which requires the current cycle string in more than one place.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Example
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # Alternate background colors\n  @items = [1,2,3,4]\n  &lt;% @items.each do |item| %&gt;\n    &lt;div style=&quot;background-color:&lt;%= cycle(&quot;red&quot;,&quot;white&quot;,&quot;blue&quot;) %&gt;&quot;&gt;\n      &lt;span style=&quot;background-color:&lt;%= current_cycle %&gt;&quot;&gt;&lt;%= item %&gt;&lt;/span&gt;\n    &lt;/div&gt;\n  &lt;% end %&gt;\n"
+full_name: ActionView::Helpers::TextHelper#current_cycle
+is_singleton: false
+name: current_cycle
+params: (name = "default")
+visibility: public

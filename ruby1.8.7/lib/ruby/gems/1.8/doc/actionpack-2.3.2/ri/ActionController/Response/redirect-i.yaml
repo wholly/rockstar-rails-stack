@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Response#redirect
+is_singleton: false
+name: redirect
+params: (url, status)
+visibility: public

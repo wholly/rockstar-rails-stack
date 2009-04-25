@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the domain part of the email address
+- !ruby/struct:SM::Flow::P 
+  body: "For Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " email = TMail::Address.parse(&quot;mikel@lindsaar.net&quot;)\n email.local\n #=&gt; &quot;lindsaar.net&quot;\n"
+full_name: TMail::Address#domain
+is_singleton: false
+name: domain
+params: ()
+visibility: public

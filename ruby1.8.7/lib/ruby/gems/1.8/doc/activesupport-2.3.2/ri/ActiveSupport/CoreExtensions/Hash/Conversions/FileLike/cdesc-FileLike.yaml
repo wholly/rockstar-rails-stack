@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This module exists to decorate files deserialized using Hash.from_xml with the <tt>original_filename</tt> and <tt>content_type</tt> methods.
+constants: []
+
+full_name: ActiveSupport::CoreExtensions::Hash::Conversions::FileLike
+includes: []
+
+instance_methods: []
+
+name: FileLike
+superclass: 

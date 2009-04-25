@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Render output including the HTTP Digest authentication header
+full_name: ActionController::HttpAuthentication::Digest::ControllerMethods#request_http_digest_authentication
+is_singleton: false
+name: request_http_digest_authentication
+params: (realm = "Application", message = nil)
+visibility: public

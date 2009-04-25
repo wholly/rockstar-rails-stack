@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Alias for #insert"
+full_name: ActionController::MiddlewareStack#insert_before
+is_singleton: false
+name: insert_before
+params: (index, *args, &block)
+visibility: public

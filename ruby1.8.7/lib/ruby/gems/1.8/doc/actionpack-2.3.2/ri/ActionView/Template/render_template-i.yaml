@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::Template#render_template
+is_singleton: false
+name: render_template
+params: (view, local_assigns = {})
+visibility: public

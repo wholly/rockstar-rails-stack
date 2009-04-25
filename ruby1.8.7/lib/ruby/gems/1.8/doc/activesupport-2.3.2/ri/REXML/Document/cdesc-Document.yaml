@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: entity_expansion_limit=
+comment: 
+constants: []
+
+full_name: REXML::Document
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: record_entity_expansion!
+name: Document
+superclass: Element

@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: hash
+- !ruby/object:RI::AliasName 
+  name: tv_sec
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#to_i
+is_singleton: false
+name: to_i
+params: ()
+visibility: public

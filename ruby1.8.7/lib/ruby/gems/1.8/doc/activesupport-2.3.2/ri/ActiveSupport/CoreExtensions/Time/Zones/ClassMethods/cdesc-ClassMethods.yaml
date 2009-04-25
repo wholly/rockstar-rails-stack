@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: zone_default
+  rw: RW
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: ActiveSupport::CoreExtensions::Time::Zones::ClassMethods
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: current
+- !ruby/object:RI::MethodSummary 
+  name: use_zone
+- !ruby/object:RI::MethodSummary 
+  name: zone
+- !ruby/object:RI::MethodSummary 
+  name: zone=
+name: ClassMethods
+superclass: 

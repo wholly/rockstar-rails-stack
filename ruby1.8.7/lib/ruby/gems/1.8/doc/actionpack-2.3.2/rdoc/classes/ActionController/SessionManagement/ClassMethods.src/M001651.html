@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>session (ActionController::SessionManagement::ClassMethods)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_controller/session_management.rb, line 45</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">session</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+        <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(
+          <span class="ruby-value str">&quot;Disabling sessions for a single controller has been deprecated. &quot;</span> <span class="ruby-operator">+</span>
+          <span class="ruby-value str">&quot;Sessions are now lazy loaded. So if you don't access them, &quot;</span> <span class="ruby-operator">+</span>
+          <span class="ruby-value str">&quot;consider them off. You can still modify the session cookie &quot;</span> <span class="ruby-operator">+</span>
+          <span class="ruby-value str">&quot;options with request.session_options.&quot;</span>, <span class="ruby-identifier">caller</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

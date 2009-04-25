@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_continuum_for (MemCache)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_support/vendor/memcache-client-1.6.5/memcache.rb, line 679</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_continuum_for</span>(<span class="ruby-identifier">servers</span>)
+    <span class="ruby-identifier">total_weight</span> = <span class="ruby-identifier">servers</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">memo</span>, <span class="ruby-identifier">srv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">memo</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">srv</span>.<span class="ruby-identifier">weight</span> }
+    <span class="ruby-identifier">continuum</span> = []
+
+    <span class="ruby-identifier">servers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">server</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">entry_count_for</span>(<span class="ruby-identifier">server</span>, <span class="ruby-identifier">servers</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">total_weight</span>).<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{server.host}:#{server.port}:#{idx}&quot;</span>)
+        <span class="ruby-identifier">value</span> = <span class="ruby-constant">Integer</span>(<span class="ruby-node">&quot;0x#{hash[0..7]}&quot;</span>)
+        <span class="ruby-identifier">continuum</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Continuum</span><span class="ruby-operator">::</span><span class="ruby-constant">Entry</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">server</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">continuum</span>.<span class="ruby-identifier">sort</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">value</span> }
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

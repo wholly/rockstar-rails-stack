@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Increments the value for <tt>key</tt> by <tt>amount</tt> and returns the new value. <tt>key</tt> must already exist. If <tt>key</tt> is not an integer, it is assumed to be 0.
+full_name: MemCache#incr
+is_singleton: false
+name: incr
+params: (key, amount = 1)
+visibility: public

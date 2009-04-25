@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Caches the <tt>actions</tt> using the page-caching approach that'll store the cache in a path within the page_cache_directory that matches the triggering url.
+- !ruby/struct:SM::Flow::P 
+  body: "Usage:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # cache the index action\n  caches_page :index\n\n  # cache the index action except for JSON requests\n  caches_page :index, :if =&gt; Proc.new { |c| !c.request.format.json? }\n"
+full_name: ActionController::Caching::Pages::ClassMethods#caches_page
+is_singleton: false
+name: caches_page
+params: (*actions)
+visibility: public

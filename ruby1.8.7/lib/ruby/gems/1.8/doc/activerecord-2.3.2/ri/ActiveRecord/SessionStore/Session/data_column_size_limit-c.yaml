@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::SessionStore::Session::data_column_size_limit
+is_singleton: true
+name: data_column_size_limit
+params: ()
+visibility: public

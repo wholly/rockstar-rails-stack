@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Find the closest index in Continuum with value &lt;= the given value
+full_name: Continuum::binary_search
+is_singleton: true
+name: binary_search
+params: (ary, value, &block)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: When true, infer_extension will look up the cache path extension from the request's path &amp; format. This is desirable when reading and writing the cache, but not when expiring the cache - expire_action should expire the same files regardless of the request format.
+full_name: ActionController::Caching::Actions::ActionCachePath::new
+is_singleton: true
+name: new
+params: (controller, options = {}, infer_extension = true)
+visibility: public

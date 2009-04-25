@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: CONTENT_ROOT
+  value: "'__content__'"
+full_name: ActiveSupport::XmlMini_Nokogiri::Conversions::Node
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: attributes_as_hash
+- !ruby/object:RI::MethodSummary 
+  name: to_hash
+name: Node
+superclass: 

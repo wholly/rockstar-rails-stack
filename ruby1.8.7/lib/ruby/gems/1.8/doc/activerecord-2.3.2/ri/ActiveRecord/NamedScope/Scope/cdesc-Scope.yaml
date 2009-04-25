@@ -1,0 +1,45 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: current_scoped_methods_when_defined
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: proxy_options
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: proxy_scope
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: NON_DELEGATE_METHODS
+  value: "%w(nil? send object_id class extend find size count sum average maximum minimum paginate first last empty? any? respond_to?).to_set"
+full_name: ActiveRecord::NamedScope::Scope
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: any?
+- !ruby/object:RI::MethodSummary 
+  name: empty?
+- !ruby/object:RI::MethodSummary 
+  name: first
+- !ruby/object:RI::MethodSummary 
+  name: last
+- !ruby/object:RI::MethodSummary 
+  name: proxy_found
+- !ruby/object:RI::MethodSummary 
+  name: reload
+- !ruby/object:RI::MethodSummary 
+  name: respond_to?
+- !ruby/object:RI::MethodSummary 
+  name: size
+name: Scope
+superclass: Object

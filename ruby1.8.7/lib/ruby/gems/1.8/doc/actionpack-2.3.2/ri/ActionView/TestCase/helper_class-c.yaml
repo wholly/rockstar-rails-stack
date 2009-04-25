@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::TestCase::helper_class
+is_singleton: true
+name: helper_class
+params: ()
+visibility: public

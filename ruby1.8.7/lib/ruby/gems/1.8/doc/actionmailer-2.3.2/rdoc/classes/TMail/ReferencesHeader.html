@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: TMail::ReferencesHeader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">TMail::ReferencesHeader</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/header_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/header.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="StructuredHeader.html">
+                StructuredHeader
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M002806">each_id</a>&nbsp;&nbsp;
+      <a href="#M002808">each_phrase</a>&nbsp;&nbsp;
+      <a href="#M002807">ids</a>&nbsp;&nbsp;
+      <a href="#M002809">phrases</a>&nbsp;&nbsp;
+      <a href="#M002805">refs</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M002806" class="method-detail">
+        <a name="M002806"></a>
+
+        <div class="method-heading">
+          <a href="ReferencesHeader.src/M002806.html" target="Code" class="method-signature"
+            onclick="popupCode('ReferencesHeader.src/M002806.html');return false;">
+          <span class="method-name">each_id</span><span class="method-args">() {|i if MESSAGE_ID === i| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002808" class="method-detail">
+        <a name="M002808"></a>
+
+        <div class="method-heading">
+          <a href="ReferencesHeader.src/M002808.html" target="Code" class="method-signature"
+            onclick="popupCode('ReferencesHeader.src/M002808.html');return false;">
+          <span class="method-name">each_phrase</span><span class="method-args">() {|i unless MESSAGE_ID === i| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002807" class="method-detail">
+        <a name="M002807"></a>
+
+        <div class="method-heading">
+          <a href="ReferencesHeader.src/M002807.html" target="Code" class="method-signature"
+            onclick="popupCode('ReferencesHeader.src/M002807.html');return false;">
+          <span class="method-name">ids</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002809" class="method-detail">
+        <a name="M002809"></a>
+
+        <div class="method-heading">
+          <a href="ReferencesHeader.src/M002809.html" target="Code" class="method-signature"
+            onclick="popupCode('ReferencesHeader.src/M002809.html');return false;">
+          <span class="method-name">phrases</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002805" class="method-detail">
+        <a name="M002805"></a>
+
+        <div class="method-heading">
+          <a href="ReferencesHeader.src/M002805.html" target="Code" class="method-signature"
+            onclick="popupCode('ReferencesHeader.src/M002805.html');return false;">
+          <span class="method-name">refs</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

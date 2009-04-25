@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendTranslateTest#test_translate_given_an_array_of_inexistent_keys_it_raises_missing_translation_data
+is_singleton: false
+name: test_translate_given_an_array_of_inexistent_keys_it_raises_missing_translation_data
+params: ()
+visibility: public

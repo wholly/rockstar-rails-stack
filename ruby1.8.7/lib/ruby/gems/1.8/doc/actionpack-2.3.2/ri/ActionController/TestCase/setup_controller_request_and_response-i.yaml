@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::TestCase#setup_controller_request_and_response
+is_singleton: false
+name: setup_controller_request_and_response
+params: ()
+visibility: public

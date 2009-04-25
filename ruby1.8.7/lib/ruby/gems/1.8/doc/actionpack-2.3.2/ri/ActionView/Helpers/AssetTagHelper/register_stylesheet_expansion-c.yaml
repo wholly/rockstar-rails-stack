@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Register one or more stylesheet files to be included when <tt>symbol</tt> is passed to <tt>stylesheet_link_tag</tt>. This method is typically intended to be called from plugin initialization to register stylesheet files that the plugin installed in <tt>public/stylesheets</tt>.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion :monkey =&gt; [&quot;head&quot;, &quot;body&quot;, &quot;tail&quot;]\n\n  stylesheet_link_tag :monkey # =&gt;\n    &lt;link href=&quot;/stylesheets/head.css&quot;  media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;\n    &lt;link href=&quot;/stylesheets/body.css&quot;  media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;\n    &lt;link href=&quot;/stylesheets/tail.css&quot;  media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;\n"
+full_name: ActionView::Helpers::AssetTagHelper::register_stylesheet_expansion
+is_singleton: true
+name: register_stylesheet_expansion
+params: (expansions)
+visibility: public

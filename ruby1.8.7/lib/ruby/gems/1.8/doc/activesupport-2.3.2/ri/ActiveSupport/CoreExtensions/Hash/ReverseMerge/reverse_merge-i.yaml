@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Performs the opposite of <tt>merge</tt>, with the keys and values from the first hash taking precedence over the second.
+full_name: ActiveSupport::CoreExtensions::Hash::ReverseMerge#reverse_merge
+is_singleton: false
+name: reverse_merge
+params: (other_hash)
+visibility: public

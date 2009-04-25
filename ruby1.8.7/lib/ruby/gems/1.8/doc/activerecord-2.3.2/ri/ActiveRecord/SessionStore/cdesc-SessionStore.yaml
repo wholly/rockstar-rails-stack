@@ -1,0 +1,44 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A session store backed by an Active Record class. A default class is provided, but any object duck-typing to an Active Record Session class with text <tt>session_id</tt> and <tt>data</tt> attributes is sufficient.
+- !ruby/struct:SM::Flow::P 
+  body: "The default assumes a <tt>sessions</tt> tables with columns:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  <tt>id</tt> (numeric primary key),\n  <tt>session_id</tt> (text, or longtext if your session data exceeds 65K), and\n  <tt>data</tt> (text or longtext; careful if your session data exceeds 65KB).\n"
+- !ruby/struct:SM::Flow::P 
+  body: The <tt>session_id</tt> column should always be indexed for speedy lookups. Session data is marshaled to the <tt>data</tt> column in Base64 format. If the data you write is larger than the column's size limit, ActionController::SessionOverflowError will be raised.
+- !ruby/struct:SM::Flow::P 
+  body: "You may configure the table name, primary key, and data column. For example, at the end of <tt>config/environment.rb</tt>:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  ActiveRecord::SessionStore::Session.table_name = 'legacy_session_table'\n  ActiveRecord::SessionStore::Session.primary_key = 'session_id'\n  ActiveRecord::SessionStore::Session.data_column_name = 'legacy_session_data'\n"
+- !ruby/struct:SM::Flow::P 
+  body: Note that setting the primary key to the <tt>session_id</tt> frees you from having a separate <tt>id</tt> column if you don't want it. However, you must set <tt>session.model.id = session.session_id</tt> by hand! A before filter on ApplicationController is a good place.
+- !ruby/struct:SM::Flow::P 
+  body: Since the default class is a simple Active Record, you get timestamps for free if you add <tt>created_at</tt> and <tt>updated_at</tt> datetime columns to the <tt>sessions</tt> table, making periodic session expiration a snap.
+- !ruby/struct:SM::Flow::P 
+  body: You may provide your own session class implementation, whether a feature-packed Active Record or a bare-metal high-performance SQL store, by setting
+- !ruby/struct:SM::Flow::VERB 
+  body: "  ActiveRecord::SessionStore.session_class = MySessionClass\n"
+- !ruby/struct:SM::Flow::P 
+  body: "You must implement these methods:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  self.find_by_session_id(session_id)\n  initialize(hash_of_session_id_and_data)\n  attr_reader :session_id\n  attr_accessor :data\n  save\n  destroy\n"
+- !ruby/struct:SM::Flow::P 
+  body: The example SqlBypass class is a generic SQL session store. You may use it as a basis for high-performance database-specific stores.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: SESSION_RECORD_KEY
+  value: "'rack.session.record'.freeze"
+full_name: ActiveRecord::SessionStore
+includes: []
+
+instance_methods: []
+
+name: SessionStore
+superclass: ActionController::Session::AbstractStore

@@ -1,0 +1,16 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: dispatch_cgi
+comment: 
+constants: []
+
+full_name: ActionController::CGIHandler
+includes: []
+
+instance_methods: []
+
+name: CGIHandler
+superclass: Object

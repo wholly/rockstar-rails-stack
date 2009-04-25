@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: isdst
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#dst?
+is_singleton: false
+name: dst?
+params: ()
+visibility: public

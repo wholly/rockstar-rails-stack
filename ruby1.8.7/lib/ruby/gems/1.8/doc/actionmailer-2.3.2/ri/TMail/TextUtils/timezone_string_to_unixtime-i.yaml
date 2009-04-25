@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Takes a time zone string from an EMail and converts it to Unix Time (seconds)
+full_name: TMail::TextUtils#timezone_string_to_unixtime
+is_singleton: false
+name: timezone_string_to_unixtime
+params: ( str )
+visibility: public

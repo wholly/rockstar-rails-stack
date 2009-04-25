@@ -1,0 +1,52 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: domain
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: expires
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: http_only
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: name
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: path
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: secure
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: value
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: parse
+comment: 
+constants: []
+
+full_name: CGI::Cookie
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: http_only=
+- !ruby/object:RI::MethodSummary 
+  name: respond_to?
+- !ruby/object:RI::MethodSummary 
+  name: secure=
+- !ruby/object:RI::MethodSummary 
+  name: to_s
+name: Cookie
+superclass: DelegateClass(Array)

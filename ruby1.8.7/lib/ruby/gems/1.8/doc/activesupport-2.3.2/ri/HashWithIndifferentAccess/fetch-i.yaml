@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Fetches the value for the specified key, same as doing hash[key]
+full_name: HashWithIndifferentAccess#fetch
+is_singleton: false
+name: fetch
+params: (key, *extras)
+visibility: public

@@ -1,0 +1,21 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Deletes the row with a primary key matching the <tt>id</tt> argument, using a SQL <tt>DELETE</tt> statement, and returns the number of rows deleted. Active Record objects are not instantiated, so the object's callbacks are not executed, including any <tt>:dependent</tt> association options or Observer methods.
+- !ruby/struct:SM::Flow::P 
+  body: You can delete multiple rows at once by passing an Array of <tt>id</tt>s.
+- !ruby/struct:SM::Flow::P 
+  body: "Note: Although it is often much faster than the alternative, <tt>#destroy</tt>, skipping callbacks might bypass business logic in your application that ensures referential integrity or performs other essential jobs."
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # Delete a single row\n  Todo.delete(1)\n\n  # Delete multiple rows\n  Todo.delete([2,3,4])\n"
+full_name: ActiveRecord::Base::delete
+is_singleton: true
+name: delete
+params: (id)
+visibility: public

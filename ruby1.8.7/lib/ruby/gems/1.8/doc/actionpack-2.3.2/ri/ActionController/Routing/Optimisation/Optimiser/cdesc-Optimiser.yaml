@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: kind
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: route
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: GLOBAL_GUARD_CONDITIONS
+  value: "[           \"(!defined?(default_url_options) || default_url_options.blank?)\",           \"(!defined?(controller.default_url_options) || controller.default_url_options.blank?)\",           \"defined?(request)\",           \"request\""
+full_name: ActionController::Routing::Optimisation::Optimiser
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: applicable?
+- !ruby/object:RI::MethodSummary 
+  name: generation_code
+- !ruby/object:RI::MethodSummary 
+  name: guard_conditions
+- !ruby/object:RI::MethodSummary 
+  name: source_code
+name: Optimiser
+superclass: Object

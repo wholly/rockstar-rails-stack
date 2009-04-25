@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a symbolized version of the <tt>:format</tt> parameter of the request. If no \format is given it returns <tt>:js</tt>for Ajax requests and <tt>:html</tt> otherwise.
+full_name: ActionController::Request#template_format
+is_singleton: false
+name: template_format
+params: ()
+visibility: public

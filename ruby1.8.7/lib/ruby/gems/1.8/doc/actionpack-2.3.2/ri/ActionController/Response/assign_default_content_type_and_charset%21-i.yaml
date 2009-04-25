@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Response#assign_default_content_type_and_charset!
+is_singleton: false
+name: assign_default_content_type_and_charset!
+params: ()
+visibility: public

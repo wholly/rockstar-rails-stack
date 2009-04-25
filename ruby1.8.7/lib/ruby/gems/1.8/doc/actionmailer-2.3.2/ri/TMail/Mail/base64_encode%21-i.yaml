@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Convert the Mail object's body into a Base64 encoded email returning the modified Mail object
+full_name: TMail::Mail#base64_encode!
+is_singleton: false
+name: base64_encode!
+params: ()
+visibility: public

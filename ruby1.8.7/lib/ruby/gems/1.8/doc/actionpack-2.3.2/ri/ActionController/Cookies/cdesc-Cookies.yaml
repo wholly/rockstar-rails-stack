@@ -1,0 +1,60 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Cookies are read and written through ActionController#cookies.
+- !ruby/struct:SM::Flow::P 
+  body: The cookies being read are the ones received along with the request, the cookies being written will be sent out with the response. Reading a cookie does not get the cookie object itself back, just the value it holds.
+- !ruby/struct:SM::Flow::P 
+  body: "Examples for writing:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # Sets a simple session cookie.\n  cookies[:user_name] = &quot;david&quot;\n\n  # Sets a cookie that expires in 1 hour.\n  cookies[:login] = { :value =&gt; &quot;XJ-122&quot;, :expires =&gt; 1.hour.from_now }\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Examples for reading:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  cookies[:user_name] # =&gt; &quot;david&quot;\n  cookies.size        # =&gt; 2\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Example for deleting:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  cookies.delete :user_name\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Please note that if you specify a :domain when setting a cookie, you must also specify the domain when deleting the cookie:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " cookies[:key] = {\n   :value =&gt; 'a yummy cookie',\n   :expires =&gt; 1.year.from_now,\n   :domain =&gt; 'domain.com'\n }\n\n cookies.delete(:key, :domain =&gt; 'domain.com')\n"
+- !ruby/struct:SM::Flow::P 
+  body: "The option symbols for setting cookies are:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:value</tt> - The cookie's value or list of values (as an array).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:path</tt> - The path for which this cookie applies. Defaults to the root of the application.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:domain</tt> - The domain for which this cookie applies.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:expires</tt> - The time at which this cookie expires, as a Time object.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:secure</tt> - Whether this cookie is a only transmitted to HTTPS servers. Default is <tt>false</tt>.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:httponly</tt> - Whether this cookie is accessible via scripting or only HTTP. Defaults to <tt>false</tt>.
+  type: :BULLET
+constants: []
+
+full_name: ActionController::Cookies
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: cookies
+name: Cookies
+superclass: 

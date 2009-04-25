@@ -1,0 +1,86 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a link tag of the given <tt>name</tt> using a URL created by the set of <tt>options</tt>. See the valid options in the documentation for url_for. It's also possible to pass a string instead of an options hash to get a link tag that uses the value of the string as the href for the link, or use <tt>:back</tt> to link to the referrer - a JavaScript back link will be used in place of a referrer if none exists. If nil is passed as a name, the link itself will become the name.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Signatures
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to(name, options = {}, html_options = nil)\n  link_to(options = {}, html_options = nil) do\n    # name\n  end\n"
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Options
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:confirm =&gt; 'question?'</tt> - This will add a JavaScript confirm prompt with the question specified. If the user accepts, the link is processed normally, otherwise no action is taken.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:popup =&gt; true || array of window options</tt> - This will force the link to open in a popup window. By passing true, a default browser window will be opened with the URL. You can also specify an array of options that are passed-thru to JavaScripts window.open method.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:method =&gt; symbol of HTTP verb</tt> - This modifier will dynamically create an HTML form and immediately submit the form for processing using the HTTP verb specified. Useful for having links perform a POST operation in dangerous actions like deleting a record (which search bots can follow while spidering your site). Supported verbs are <tt>:post</tt>, <tt>:delete</tt> and <tt>:put</tt>. Note that if the user has JavaScript disabled, the request will fall back to using GET. If you are relying on the POST behavior, you should check for it in your controller's action by using the request object's methods for <tt>post?</tt>, <tt>delete?</tt> or <tt>put?</tt>.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: The <tt>html_options</tt> will accept a hash of html attributes for the link tag.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: Note that if the user has JavaScript disabled, the request will fall back to using GET. If <tt>:href =&gt; '#'</tt> is used and the user has JavaScript disabled clicking the link will have no effect. If you are relying on the POST behavior, your should check for it in your controller's action by using the request object's methods for <tt>post?</tt>, <tt>delete?</tt> or <tt>put?</tt>.
+- !ruby/struct:SM::Flow::P 
+  body: You can mix and match the <tt>html_options</tt> with the exception of <tt>:popup</tt> and <tt>:method</tt> which will raise an ActionView::ActionViewError exception.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::P 
+  body: Because it relies on <tt>url_for</tt>, <tt>link_to</tt> supports both older-style controller/action/id arguments and newer RESTful routes. Current Rails style favors RESTful routes whenever possible, so base your application on resources and use
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Profile&quot;, profile_path(@profile)\n  # =&gt; &lt;a href=&quot;/profiles/1&quot;&gt;Profile&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: or the even pithier
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Profile&quot;, @profile\n  # =&gt; &lt;a href=&quot;/profiles/1&quot;&gt;Profile&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: in place of the older more verbose, non-resource-oriented
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Profile&quot;, :controller =&gt; &quot;profiles&quot;, :action =&gt; &quot;show&quot;, :id =&gt; @profile\n  # =&gt; &lt;a href=&quot;/profiles/show/1&quot;&gt;Profile&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: Similarly,
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Profiles&quot;, profiles_path\n  # =&gt; &lt;a href=&quot;/profiles&quot;&gt;Profiles&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: is better than
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Profiles&quot;, :controller =&gt; &quot;profiles&quot;\n  # =&gt; &lt;a href=&quot;/profiles&quot;&gt;Profiles&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "You can use a block as well if your link target is hard to fit into the name parameter. ERb example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% link_to(@profile) do %&gt;\n    &lt;strong&gt;&lt;%= @profile.name %&gt;&lt;/strong&gt; -- &lt;span&gt;Check it out!!&lt;/span&gt;\n  &lt;% end %&gt;\n  # =&gt; &lt;a href=&quot;/profiles/1&quot;&gt;&lt;strong&gt;David&lt;/strong&gt; -- &lt;span&gt;Check it out!!&lt;/span&gt;&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Classes and ids for CSS are easy to produce:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Articles&quot;, articles_path, :id =&gt; &quot;news&quot;, :class =&gt; &quot;article&quot;\n  # =&gt; &lt;a href=&quot;/articles&quot; class=&quot;article&quot; id=&quot;news&quot;&gt;Articles&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Be careful when using the older argument style, as an extra literal hash is needed:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Articles&quot;, { :controller =&gt; &quot;articles&quot; }, :id =&gt; &quot;news&quot;, :class =&gt; &quot;article&quot;\n  # =&gt; &lt;a href=&quot;/articles&quot; class=&quot;article&quot; id=&quot;news&quot;&gt;Articles&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Leaving the hash off gives the wrong link:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;WRONG!&quot;, :controller =&gt; &quot;articles&quot;, :id =&gt; &quot;news&quot;, :class =&gt; &quot;article&quot;\n  # =&gt; &lt;a href=&quot;/articles/index/news?class=article&quot;&gt;WRONG!&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "<tt>link_to</tt> can also produce links with anchors or query strings:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Comment wall&quot;, profile_path(@profile, :anchor =&gt; &quot;wall&quot;)\n  # =&gt; &lt;a href=&quot;/profiles/1#wall&quot;&gt;Comment wall&lt;/a&gt;\n\n  link_to &quot;Ruby on Rails search&quot;, :controller =&gt; &quot;searches&quot;, :query =&gt; &quot;ruby on rails&quot;\n  # =&gt; &lt;a href=&quot;/searches?query=ruby+on+rails&quot;&gt;Ruby on Rails search&lt;/a&gt;\n\n  link_to &quot;Nonsense search&quot;, searches_path(:foo =&gt; &quot;bar&quot;, :baz =&gt; &quot;quux&quot;)\n  # =&gt; &lt;a href=&quot;/searches?foo=bar&amp;amp;baz=quux&quot;&gt;Nonsense search&lt;/a&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "The three options specific to <tt>link_to</tt> (<tt>:confirm</tt>, <tt>:popup</tt>, and <tt>:method</tt>) are used as follows:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  link_to &quot;Visit Other Site&quot;, &quot;http://www.rubyonrails.org/&quot;, :confirm =&gt; &quot;Are you sure?&quot;\n  # =&gt; &lt;a href=&quot;http://www.rubyonrails.org/&quot; onclick=&quot;return confirm('Are you sure?');&quot;&gt;Visit Other Site&lt;/a&gt;\n\n  link_to &quot;Help&quot;, { :action =&gt; &quot;help&quot; }, :popup =&gt; true\n  # =&gt; &lt;a href=&quot;/testing/help/&quot; onclick=&quot;window.open(this.href);return false;&quot;&gt;Help&lt;/a&gt;\n\n  link_to &quot;View Image&quot;, @image, :popup =&gt; ['new_window_name', 'height=300,width=600']\n  # =&gt; &lt;a href=&quot;/images/9&quot; onclick=&quot;window.open(this.href,'new_window_name','height=300,width=600');return false;&quot;&gt;View Image&lt;/a&gt;\n\n  link_to &quot;Delete Image&quot;, @image, :confirm =&gt; &quot;Are you sure?&quot;, :method =&gt; :delete\n  # =&gt; &lt;a href=&quot;/images/9&quot; onclick=&quot;if (confirm('Are you sure?')) { var f = document.createElement('form');\n       f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;\n       var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method');\n       m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;&quot;&gt;Delete Image&lt;/a&gt;\n"
+full_name: ActionView::Helpers::UrlHelper#link_to
+is_singleton: false
+name: link_to
+params: (*args, &block)
+visibility: public

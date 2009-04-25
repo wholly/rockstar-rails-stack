@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: attribute_names
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: scope
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: match
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: ActiveRecord::DynamicScopeMatch
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: scope?
+name: DynamicScopeMatch
+superclass: Object

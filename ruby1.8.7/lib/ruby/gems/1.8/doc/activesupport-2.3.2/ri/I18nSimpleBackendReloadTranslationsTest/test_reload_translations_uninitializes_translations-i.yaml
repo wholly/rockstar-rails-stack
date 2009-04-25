@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendReloadTranslationsTest#test_reload_translations_uninitializes_translations
+is_singleton: false
+name: test_reload_translations_uninitializes_translations
+params: ()
+visibility: public

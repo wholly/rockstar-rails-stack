@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the directory in which the data files are stored
+full_name: ActiveSupport::Multibyte::UnicodeDatabase::dirname
+is_singleton: true
+name: dirname
+params: ()
+visibility: public

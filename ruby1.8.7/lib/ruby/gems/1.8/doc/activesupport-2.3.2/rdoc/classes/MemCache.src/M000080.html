@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>with_socket_management (MemCache)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_support/vendor/memcache-client-1.6.5/memcache.rb, line 604</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_socket_management</span>(<span class="ruby-identifier">server</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">check_multithread_status!</span>
+
+    <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">lock</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@multithread</span>
+    <span class="ruby-identifier">retried</span> = <span class="ruby-keyword kw">false</span>
+
+    <span class="ruby-keyword kw">begin</span>
+      <span class="ruby-identifier">socket</span> = <span class="ruby-identifier">server</span>.<span class="ruby-identifier">socket</span>
+
+      <span class="ruby-comment cmt"># Raise an IndexError to show this server is out of whack. If were inside</span>
+      <span class="ruby-comment cmt"># a with_server block, we'll catch it and attempt to restart the operation.</span>
+
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-node">&quot;No connection to server (#{server.status})&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">socket</span>.<span class="ruby-identifier">nil?</span>
+
+      <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">socket</span>)
+
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">SocketError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+      <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;Socket failure: #{err.message}&quot;</span> } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">logger</span>
+      <span class="ruby-identifier">server</span>.<span class="ruby-identifier">mark_dead</span>(<span class="ruby-identifier">err</span>)
+      <span class="ruby-identifier">handle_error</span>(<span class="ruby-identifier">server</span>, <span class="ruby-identifier">err</span>)
+
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">MemCacheError</span>, <span class="ruby-constant">SystemCallError</span>, <span class="ruby-constant">IOError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+      <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;Generic failure: #{err.class.name}: #{err.message}&quot;</span> } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">logger</span>
+      <span class="ruby-identifier">handle_error</span>(<span class="ruby-identifier">server</span>, <span class="ruby-identifier">err</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">retried</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">socket</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">retried</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">retry</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">ensure</span>
+    <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">unlock</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@multithread</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

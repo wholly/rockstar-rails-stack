@@ -1,0 +1,82 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Nested Attributes
+- !ruby/struct:SM::Flow::P 
+  body: Nested attributes allow you to save attributes on associated records through the parent. By default nested attribute updating is turned off, you can enable it using the accepts_nested_attributes_for class method. When you enable nested attributes an attribute writer is defined on the model.
+- !ruby/struct:SM::Flow::P 
+  body: "The attribute writer is named after the association, which means that in the following example, two new methods are added to your model: <tt>author_attributes=(attributes)</tt> and <tt>pages_attributes=(attributes)</tt>."
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Book &lt; ActiveRecord::Base\n    has_one :author\n    has_many :pages\n\n    accepts_nested_attributes_for :author, :pages\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: Note that the <tt>:autosave</tt> option is automatically enabled on every association that accepts_nested_attributes_for is used for.
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: One-to-one
+- !ruby/struct:SM::Flow::P 
+  body: "Consider a Member model that has one Avatar:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Member &lt; ActiveRecord::Base\n    has_one :avatar\n    accepts_nested_attributes_for :avatar\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Enabling nested attributes on a one-to-one association allows you to create the member and avatar in one go:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  params = { :member =&gt; { :name =&gt; 'Jack', :avatar_attributes =&gt; { :icon =&gt; 'smiling' } } }\n  member = Member.create(params)\n  member.avatar.id # =&gt; 2\n  member.avatar.icon # =&gt; 'smiling'\n"
+- !ruby/struct:SM::Flow::P 
+  body: "It also allows you to update the avatar through the member:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  params = { :member' =&gt; { :avatar_attributes =&gt; { :id =&gt; '2', :icon =&gt; 'sad' } } }\n  member.update_attributes params['member']\n  member.avatar.icon # =&gt; 'sad'\n"
+- !ruby/struct:SM::Flow::P 
+  body: By default you will only be able to set and update attributes on the associated model. If you want to destroy the associated model through the attributes hash, you have to enable it first using the <tt>:allow_destroy</tt> option.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Member &lt; ActiveRecord::Base\n    has_one :avatar\n    accepts_nested_attributes_for :avatar, :allow_destroy =&gt; true\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Now, when you add the <tt>_delete</tt> key to the attributes hash, with a value that evaluates to <tt>true</tt>, you will destroy the associated model:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  member.avatar_attributes = { :id =&gt; '2', :_delete =&gt; '1' }\n  member.avatar.marked_for_destruction? # =&gt; true\n  member.save\n  member.avatar #=&gt; nil\n"
+- !ruby/struct:SM::Flow::P 
+  body: Note that the model will <em>not</em> be destroyed until the parent is saved.
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: One-to-many
+- !ruby/struct:SM::Flow::P 
+  body: "Consider a member that has a number of posts:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Member &lt; ActiveRecord::Base\n    has_many :posts\n    accepts_nested_attributes_for :posts\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: You can now set or update attributes on an associated post model through the attribute hash.
+- !ruby/struct:SM::Flow::P 
+  body: For each hash that does <em>not</em> have an <tt>id</tt> key a new record will be instantiated, unless the hash also contains a <tt>_delete</tt> key that evaluates to <tt>true</tt>.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  params = { :member =&gt; {\n    :name =&gt; 'joe', :posts_attributes =&gt; [\n      { :title =&gt; 'Kari, the awesome Ruby documentation browser!' },\n      { :title =&gt; 'The egalitarian assumption of the modern citizen' },\n      { :title =&gt; '', :_delete =&gt; '1' } # this will be ignored\n    ]\n  }}\n\n  member = Member.create(params['member'])\n  member.posts.length # =&gt; 2\n  member.posts.first.title # =&gt; 'Kari, the awesome Ruby documentation browser!'\n  member.posts.second.title # =&gt; 'The egalitarian assumption of the modern citizen'\n"
+- !ruby/struct:SM::Flow::P 
+  body: "You may also set a :reject_if proc to silently ignore any new record hashes if they fail to pass your criteria. For example, the previous example could be rewritten as:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "   class Member &lt; ActiveRecord::Base\n     has_many :posts\n     accepts_nested_attributes_for :posts, :reject_if =&gt; proc { |attributes| attributes['title'].blank? }\n   end\n\n  params = { :member =&gt; {\n    :name =&gt; 'joe', :posts_attributes =&gt; [\n      { :title =&gt; 'Kari, the awesome Ruby documentation browser!' },\n      { :title =&gt; 'The egalitarian assumption of the modern citizen' },\n      { :title =&gt; '' } # this will be ignored because of the :reject_if proc\n    ]\n  }}\n\n  member = Member.create(params['member'])\n  member.posts.length # =&gt; 2\n  member.posts.first.title # =&gt; 'Kari, the awesome Ruby documentation browser!'\n  member.posts.second.title # =&gt; 'The egalitarian assumption of the modern citizen'\n"
+- !ruby/struct:SM::Flow::P 
+  body: "If the hash contains an <tt>id</tt> key that matches an already associated record, the matching record will be modified:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  member.attributes = {\n    :name =&gt; 'Joe',\n    :posts_attributes =&gt; [\n      { :id =&gt; 1, :title =&gt; '[UPDATED] An, as of yet, undisclosed awesome Ruby documentation browser!' },\n      { :id =&gt; 2, :title =&gt; '[UPDATED] other post' }\n    ]\n  }\n\n  member.posts.first.title # =&gt; '[UPDATED] An, as of yet, undisclosed awesome Ruby documentation browser!'\n  member.posts.second.title # =&gt; '[UPDATED] other post'\n"
+- !ruby/struct:SM::Flow::P 
+  body: "By default the associated records are protected from being destroyed. If you want to destroy any of the associated records through the attributes hash, you have to enable it first using the <tt>:allow_destroy</tt> option. This will allow you to also use the <tt>_delete</tt> key to destroy existing records:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Member &lt; ActiveRecord::Base\n    has_many :posts\n    accepts_nested_attributes_for :posts, :allow_destroy =&gt; true\n  end\n\n  params = { :member =&gt; {\n    :posts_attributes =&gt; [{ :id =&gt; '2', :_delete =&gt; '1' }]\n  }}\n\n  member.attributes = params['member']\n  member.posts.detect { |p| p.id == 2 }.marked_for_destruction? # =&gt; true\n  member.posts.length #=&gt; 2\n  member.save\n  member.posts.length # =&gt; 1\n"
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: Saving
+- !ruby/struct:SM::Flow::P 
+  body: All changes to models, including the destruction of those marked for destruction, are saved and destroyed automatically and atomically when the parent model is saved. This happens inside the transaction initiated by the parents save method. See ActiveRecord::AutosaveAssociation.
+constants: []
+
+full_name: ActiveRecord::NestedAttributes::ClassMethods
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: accepts_nested_attributes_for
+name: ClassMethods
+superclass: 

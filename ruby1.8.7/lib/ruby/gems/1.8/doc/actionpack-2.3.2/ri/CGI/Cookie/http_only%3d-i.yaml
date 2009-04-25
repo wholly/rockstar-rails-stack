@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets whether the Cookie is an HTTP only cookie or not.
+full_name: CGI::Cookie#http_only=
+is_singleton: false
+name: http_only=
+params: (val)
+visibility: public

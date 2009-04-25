@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>assert_difference (ActiveSupport::Testing::Assertions)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_support/testing/assertions.rb, line 34</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">difference</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-identifier">b</span> = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:binding</span>)
+        <span class="ruby-identifier">exps</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">expression</span>)
+        <span class="ruby-identifier">before</span> = <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">b</span>) }
+
+        <span class="ruby-keyword kw">yield</span>
+
+        <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;#{e.inspect} didn't change by #{difference}&quot;</span>
+          <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;#{message}.\n#{error}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">message</span>
+          <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">before</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">difference</span>, <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">b</span>), <span class="ruby-identifier">error</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

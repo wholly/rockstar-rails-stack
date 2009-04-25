@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This is the proxy that handles a has many association.
+- !ruby/struct:SM::Flow::P 
+  body: If the association has a <tt>:through</tt> option further specialization is provided by its child HasManyThroughAssociation.
+constants: []
+
+full_name: ActiveRecord::Associations::HasManyAssociation
+includes: []
+
+instance_methods: []
+
+name: HasManyAssociation
+superclass: AssociationCollection

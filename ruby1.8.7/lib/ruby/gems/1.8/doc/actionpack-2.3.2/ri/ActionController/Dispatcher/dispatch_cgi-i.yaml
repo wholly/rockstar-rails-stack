@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "DEPRECATE: Remove CGI support"
+full_name: ActionController::Dispatcher#dispatch_cgi
+is_singleton: false
+name: dispatch_cgi
+params: (cgi, session_options)
+visibility: public

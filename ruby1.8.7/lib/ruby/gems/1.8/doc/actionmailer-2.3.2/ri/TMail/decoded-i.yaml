@@ -1,0 +1,19 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: to_s
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the TMail object decoded and ready to be used by you, your program etc.
+- !ruby/struct:SM::Flow::P 
+  body: You should call this before you are packaging up your email to correctly escape all the values that need escaping in the email, line wrap the email etc.
+- !ruby/struct:SM::Flow::P 
+  body: "For Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " email = TMail::Load(my_email_file)\n email_to_send = email.encoded\n"
+full_name: TMail#decoded
+is_singleton: false
+name: decoded
+params: ( eol = "\n", charset = 'e', dest = nil )
+visibility: public

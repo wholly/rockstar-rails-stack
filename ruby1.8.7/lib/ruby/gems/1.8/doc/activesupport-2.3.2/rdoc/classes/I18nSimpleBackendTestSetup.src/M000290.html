@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>add_datetime_translations (I18nSimpleBackendTestSetup)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 29</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_datetime_translations</span>
+    <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">store_translations</span> <span class="ruby-value str">'de'</span><span class="ruby-value str">'de'</span>, {
+      <span class="ruby-identifier">:date</span> =<span class="ruby-operator">&gt;</span> {
+        <span class="ruby-identifier">:formats</span> =<span class="ruby-operator">&gt;</span> {
+          <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;%d.%m.%Y&quot;</span>,
+          <span class="ruby-identifier">:short</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;%d. %b&quot;</span>,
+          <span class="ruby-identifier">:long</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;%d. %B %Y&quot;</span>,
+        },
+        <span class="ruby-identifier">:day_names</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w(Sonntag Montag Dienstag Mittwoch Donnerstag Freitag Samstag)</span>,
+        <span class="ruby-identifier">:abbr_day_names</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w(So Mo Di Mi Do Fr  Sa)</span>,
+        <span class="ruby-identifier">:month_names</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w(Januar Februar März April Mai Juni Juli August September Oktober November Dezember)</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-keyword kw">nil</span>),
+        <span class="ruby-identifier">:abbr_month_names</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w(Jan Feb Mar Apr Mai Jun Jul Aug Sep Okt Nov Dez)</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-keyword kw">nil</span>),
+        <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:day</span>, <span class="ruby-identifier">:month</span>, <span class="ruby-identifier">:year</span>]
+      },
+      <span class="ruby-identifier">:time</span> =<span class="ruby-operator">&gt;</span> {
+        <span class="ruby-identifier">:formats</span> =<span class="ruby-operator">&gt;</span> {
+          <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;%a, %d. %b %Y %H:%M:%S %z&quot;</span>,
+          <span class="ruby-identifier">:short</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;%d. %b %H:%M&quot;</span>,
+          <span class="ruby-identifier">:long</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;%d. %B %Y %H:%M&quot;</span>,
+        },
+        <span class="ruby-identifier">:am</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'am'</span>,
+        <span class="ruby-identifier">:pm</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'pm'</span>
+      },
+      <span class="ruby-identifier">:datetime</span> =<span class="ruby-operator">&gt;</span> {
+        <span class="ruby-identifier">:distance_in_words</span> =<span class="ruby-operator">&gt;</span> {
+          <span class="ruby-identifier">:half_a_minute</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'half a minute'</span>,
+          <span class="ruby-identifier">:less_than_x_seconds</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'less than 1 second'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'less than {{count}} seconds'</span>
+          },
+          <span class="ruby-identifier">:x_seconds</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'1 second'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'{{count}} seconds'</span>
+          },
+          <span class="ruby-identifier">:less_than_x_minutes</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'less than a minute'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'less than {{count}} minutes'</span>
+          },
+          <span class="ruby-identifier">:x_minutes</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'1 minute'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'{{count}} minutes'</span>
+          },
+          <span class="ruby-identifier">:about_x_hours</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'about 1 hour'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'about {{count}} hours'</span>
+          },
+          <span class="ruby-identifier">:x_days</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'1 day'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'{{count}} days'</span>
+          },
+          <span class="ruby-identifier">:about_x_months</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'about 1 month'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'about {{count}} months'</span>
+          },
+          <span class="ruby-identifier">:x_months</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'1 month'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'{{count}} months'</span>
+          },
+          <span class="ruby-identifier">:about_x_years</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'about 1 year'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'about {{count}} year'</span>
+          },
+          <span class="ruby-identifier">:over_x_years</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'over 1 year'</span>,
+            <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'over {{count}} years'</span>
+          }
+        }
+      }
+    }
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

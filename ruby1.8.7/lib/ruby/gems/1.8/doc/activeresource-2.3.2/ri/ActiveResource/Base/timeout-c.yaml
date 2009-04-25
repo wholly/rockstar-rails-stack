@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Gets the number of seconds after which requests to the REST API should time out.
+full_name: ActiveResource::Base::timeout
+is_singleton: true
+name: timeout
+params: ()
+visibility: public

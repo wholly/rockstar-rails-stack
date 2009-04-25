@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>validate_digest_response (ActionController::HttpAuthentication::Digest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_controller/http_authentication.rb, line 189</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_digest_response</span>(<span class="ruby-identifier">request</span>, <span class="ruby-identifier">realm</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">password_procedure</span>)
+        <span class="ruby-identifier">credentials</span> = <span class="ruby-identifier">decode_credentials_header</span>(<span class="ruby-identifier">request</span>)
+        <span class="ruby-identifier">valid_nonce</span> = <span class="ruby-identifier">validate_nonce</span>(<span class="ruby-identifier">request</span>, <span class="ruby-identifier">credentials</span>[<span class="ruby-identifier">:nonce</span>])
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">valid_nonce</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">realm</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">credentials</span>[<span class="ruby-identifier">:realm</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">opaque</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">credentials</span>[<span class="ruby-identifier">:opaque</span>]
+          <span class="ruby-identifier">password</span> = <span class="ruby-identifier">password_procedure</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">credentials</span>[<span class="ruby-identifier">:username</span>])
+
+         [<span class="ruby-keyword kw">true</span>, <span class="ruby-keyword kw">false</span>].<span class="ruby-identifier">any?</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">password_is_ha1</span><span class="ruby-operator">|</span>
+           <span class="ruby-identifier">expected</span> = <span class="ruby-identifier">expected_response</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-value str">'REQUEST_METHOD'</span>], <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-value str">'REQUEST_URI'</span>], <span class="ruby-identifier">credentials</span>, <span class="ruby-identifier">password</span>, <span class="ruby-identifier">password_is_ha1</span>)
+           <span class="ruby-identifier">expected</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">credentials</span>[<span class="ruby-identifier">:response</span>]
+         <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the message ID for this mail object instance.
+- !ruby/struct:SM::Flow::P 
+  body: If the message_id field does not exist, returns nil by default or you can pass in as the parameter for what you want the default value to be.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.message_id #=&gt; nil\n mail.message_id(TMail.new_message_id) #=&gt; &quot;&lt;47404c5326d9c_2ad4fbb80161@baci.local.tmail&gt;&quot;\n mail.message_id = TMail.new_message_id\n mail.message_id #=&gt; &quot;&lt;47404c5326d9c_2ad4fbb80161@baci.local.tmail&gt;&quot;\n"
+full_name: TMail::Mail#message_id
+is_singleton: false
+name: message_id
+params: ( default = nil )
+visibility: public

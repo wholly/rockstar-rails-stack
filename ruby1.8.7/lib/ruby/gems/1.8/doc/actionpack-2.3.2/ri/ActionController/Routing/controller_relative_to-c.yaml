@@ -1,0 +1,35 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Returns a controller path for a new <tt>controller</tt> based on a <tt>previous</tt> controller path. Handles 4 scenarios:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "stay in the previous controller:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  controller_relative_to( nil, &quot;groups/discussion&quot; ) # =&gt; &quot;groups/discussion&quot;\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "stay in the previous namespace:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  controller_relative_to( &quot;posts&quot;, &quot;groups/discussion&quot; ) # =&gt; &quot;groups/posts&quot;\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "forced move to the root namespace:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  controller_relative_to( &quot;/posts&quot;, &quot;groups/discussion&quot; ) # =&gt; &quot;posts&quot;\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "previous namespace is root:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  controller_relative_to( &quot;posts&quot;, &quot;anything_with_no_slashes&quot; ) # =&gt;&quot;posts&quot;\n"
+  type: :BULLET
+full_name: ActionController::Routing::controller_relative_to
+is_singleton: true
+name: controller_relative_to
+params: (controller, previous)
+visibility: public

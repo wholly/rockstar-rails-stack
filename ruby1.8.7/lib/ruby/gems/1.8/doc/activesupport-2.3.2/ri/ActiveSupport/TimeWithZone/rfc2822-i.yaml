@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: rfc822
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#rfc2822
+is_singleton: false
+name: rfc2822
+params: ()
+visibility: public

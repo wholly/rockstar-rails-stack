@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: MemCache#raise_on_error_response!
+is_singleton: false
+name: raise_on_error_response!
+params: (response)
+visibility: protected

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>to_sentence (ActiveSupport::CoreExtensions::Array::Conversions)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_support/core_ext/array/conversions.rb, line 9</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_sentence</span>(<span class="ruby-identifier">options</span> = {})
+          <span class="ruby-identifier">default_words_connector</span>     = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'support.array.words_connector'</span><span class="ruby-value str">'support.array.words_connector'</span>,     <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>])
+          <span class="ruby-identifier">default_two_words_connector</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'support.array.two_words_connector'</span><span class="ruby-value str">'support.array.two_words_connector'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>])
+          <span class="ruby-identifier">default_last_word_connector</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'support.array.last_word_connector'</span><span class="ruby-value str">'support.array.last_word_connector'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>])
+
+          <span class="ruby-comment cmt"># Try to emulate to_senteces previous to 2.3</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:connector</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:skip_last_comma</span>)
+            <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">&quot;:connector has been deprecated. Use :words_connector instead&quot;</span>, <span class="ruby-identifier">caller</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">:connector</span>
+            <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">&quot;:skip_last_comma has been deprecated. Use :last_word_connector instead&quot;</span>, <span class="ruby-identifier">caller</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">:skip_last_comma</span>
+
+            <span class="ruby-identifier">skip_last_comma</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">:skip_last_comma</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">connector</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:connector</span>)
+              <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:last_word_connector</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">skip_last_comma</span> <span class="ruby-value">? </span><span class="ruby-identifier">connector</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;, #{connector}&quot;</span>
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:last_word_connector</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">skip_last_comma</span> <span class="ruby-value">? </span><span class="ruby-identifier">default_two_words_connector</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">default_last_word_connector</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-identifier">:words_connector</span>, <span class="ruby-identifier">:two_words_connector</span>, <span class="ruby-identifier">:last_word_connector</span>, <span class="ruby-identifier">:locale</span>)       
+          <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge!</span> <span class="ruby-identifier">:words_connector</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_words_connector</span>, <span class="ruby-identifier">:two_words_connector</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_two_words_connector</span>, <span class="ruby-identifier">:last_word_connector</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_last_word_connector</span>
+          
+          <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">length</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-value">0</span>
+              <span class="ruby-value str">&quot;&quot;</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-value">1</span>
+              <span class="ruby-keyword kw">self</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-value">2</span>
+              <span class="ruby-node">&quot;#{self[0]}#{options[:two_words_connector]}#{self[1]}&quot;</span>
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-node">&quot;#{self[0...-1].join(options[:words_connector])}#{options[:last_word_connector]}#{self[-1]}&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

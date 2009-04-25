@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: gmt_offset
+- !ruby/object:RI::AliasName 
+  name: gmtoff
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#utc_offset
+is_singleton: false
+name: utc_offset
+params: ()
+visibility: public

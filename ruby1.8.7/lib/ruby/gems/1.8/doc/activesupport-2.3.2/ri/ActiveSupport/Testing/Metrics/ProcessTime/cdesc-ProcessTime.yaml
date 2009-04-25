@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: Mode
+  value: RubyProf::PROCESS_TIME
+full_name: ActiveSupport::Testing::Metrics::ProcessTime
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: measure
+name: ProcessTime
+superclass: Time

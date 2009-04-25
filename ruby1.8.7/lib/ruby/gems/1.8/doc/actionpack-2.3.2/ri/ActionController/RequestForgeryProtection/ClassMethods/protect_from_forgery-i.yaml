@@ -1,0 +1,24 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Turn on request forgery protection. Bear in mind that only non-GET, HTML/JavaScript requests are checked.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class FooController &lt; ApplicationController\n    protect_from_forgery :except =&gt; :index\n\n    # you can disable csrf protection on controller-by-controller basis:\n    skip_before_filter :verify_authenticity_token\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Valid Options:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:only/:except</tt> - Passed to the <tt>before_filter</tt> call. Set which actions are verified.
+  type: :BULLET
+full_name: ActionController::RequestForgeryProtection::ClassMethods#protect_from_forgery
+is_singleton: false
+name: protect_from_forgery
+params: (options = {})
+visibility: public

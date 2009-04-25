@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::MessageEncryptor#encrypt_and_sign
+is_singleton: false
+name: encrypt_and_sign
+params: (value)
+visibility: public

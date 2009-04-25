@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::Template::Path::new_and_loaded
+is_singleton: true
+name: new_and_loaded
+params: (path)
+visibility: public

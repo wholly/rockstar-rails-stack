@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeZone#utc_offset
+is_singleton: false
+name: utc_offset
+params: ()
+visibility: public

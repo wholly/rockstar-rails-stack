@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::Base::respond_to?
+is_singleton: true
+name: respond_to?
+params: (method_id, include_private = false)
+visibility: public

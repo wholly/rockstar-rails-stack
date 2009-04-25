@@ -1,0 +1,15 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: t
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Delegates to I18n#translate but also performs two additional functions. First, it'll catch MissingTranslationData exceptions and turn them into inline spans that contains the missing key, such that you can see in a view what is missing where.
+- !ruby/struct:SM::Flow::P 
+  body: Second, it'll scope the key by the current partial if the key starts with a period. So if you call translate(&quot;.foo&quot;) from the people/index.html.erb template, you'll actually be calling I18n.translate(&quot;people.index.foo&quot;). This makes it less repetitive to translate many keys within the same partials and gives you a simple framework for scoping them consistently. If you don't prepend the key with a period, nothing is converted.
+full_name: ActionView::Helpers::TranslationHelper#translate
+is_singleton: false
+name: translate
+params: (key, options = {})
+visibility: public

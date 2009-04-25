@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output_buffer
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: determine_default_helper_class
+- !ruby/object:RI::MethodSummary 
+  name: helper_class
+- !ruby/object:RI::MethodSummary 
+  name: tests
+comment: 
+constants: []
+
+full_name: ActionView::TestCase
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: ActionController::TestCase::Assertions
+- !ruby/object:RI::IncludedModule 
+  name: ActionController::TestProcess
+- !ruby/object:RI::IncludedModule 
+  name: ActionView::Helpers
+- !ruby/object:RI::IncludedModule 
+  name: ActionController::PolymorphicRoutes
+- !ruby/object:RI::IncludedModule 
+  name: ActionController::RecordIdentifier
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: setup_with_helper_class
+name: TestCase
+superclass: ActiveSupport::TestCase

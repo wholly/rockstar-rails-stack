@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::ConnectionAdapters::PostgreSQLAdapter#supports_ddl_transactions?
+is_singleton: false
+name: supports_ddl_transactions?
+params: ()
+visibility: public

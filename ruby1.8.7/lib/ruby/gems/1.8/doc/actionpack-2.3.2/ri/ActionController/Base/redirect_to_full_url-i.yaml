@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Base#redirect_to_full_url
+is_singleton: false
+name: redirect_to_full_url
+params: (url, status)
+visibility: protected

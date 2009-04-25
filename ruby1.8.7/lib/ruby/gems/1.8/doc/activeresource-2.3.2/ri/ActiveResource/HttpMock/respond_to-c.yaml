@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: mock
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Accepts a block which declares a set of requests and responses for the HttpMock to respond to. See the main ActiveResource::HttpMock description for a more detailed explanation.
+full_name: ActiveResource::HttpMock::respond_to
+is_singleton: true
+name: respond_to
+params: (pairs = {}) {|mock| ...}
+visibility: public

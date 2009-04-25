@@ -1,0 +1,34 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nExceptionsTest
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: test_invalid_locale_message
+- !ruby/object:RI::MethodSummary 
+  name: test_invalid_locale_stores_locale
+- !ruby/object:RI::MethodSummary 
+  name: test_invalid_pluralization_data_message
+- !ruby/object:RI::MethodSummary 
+  name: test_invalid_pluralization_data_stores_entry_and_count
+- !ruby/object:RI::MethodSummary 
+  name: test_missing_interpolation_argument_message
+- !ruby/object:RI::MethodSummary 
+  name: test_missing_interpolation_argument_stores_key_and_string
+- !ruby/object:RI::MethodSummary 
+  name: test_missing_translation_data_message
+- !ruby/object:RI::MethodSummary 
+  name: test_missing_translation_data_stores_locale_key_and_options
+- !ruby/object:RI::MethodSummary 
+  name: test_reserved_interpolation_key_message
+- !ruby/object:RI::MethodSummary 
+  name: test_reserved_interpolation_key_stores_key_and_string
+name: I18nExceptionsTest
+superclass: Test::Unit::TestCase

@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: query_parameters
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Override Rack's GET method to support indifferent access
+full_name: ActionController::Request#GET
+is_singleton: false
+name: GET
+params: ()
+visibility: public

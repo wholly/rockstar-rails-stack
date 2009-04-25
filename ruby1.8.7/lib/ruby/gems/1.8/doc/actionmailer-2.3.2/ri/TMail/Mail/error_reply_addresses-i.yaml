@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the &quot;sender&quot; field as an array -&gt; useful to find out who to send an error email to.
+full_name: TMail::Mail#error_reply_addresses
+is_singleton: false
+name: error_reply_addresses
+params: ( default = nil )
+visibility: public

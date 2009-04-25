@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Provides a unique hash value for this record against the local and domain parts, ignores the name/phrase value
+- !ruby/struct:SM::Flow::VERB 
+  body: " email = TMail::Address.parse(&quot;mikel@lindsaar.net&quot;)\n email.hash\n #=&gt; 18767598\n"
+full_name: TMail::Address#hash
+is_singleton: false
+name: hash
+params: ()
+visibility: public

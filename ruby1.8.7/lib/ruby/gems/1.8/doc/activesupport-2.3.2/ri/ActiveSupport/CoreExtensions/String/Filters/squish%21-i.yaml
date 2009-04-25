@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Performs a destructive squish. See String#squish.
+full_name: ActiveSupport::CoreExtensions::String::Filters#squish!
+is_singleton: false
+name: squish!
+params: ()
+visibility: public

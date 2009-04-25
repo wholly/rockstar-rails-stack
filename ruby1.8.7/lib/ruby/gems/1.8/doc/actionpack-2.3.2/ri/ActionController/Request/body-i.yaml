@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The request body is an IO input stream. If the RAW_POST_DATA environment variable is already set, wrap it in a StringIO.
+full_name: ActionController::Request#body
+is_singleton: false
+name: body
+params: ()
+visibility: public

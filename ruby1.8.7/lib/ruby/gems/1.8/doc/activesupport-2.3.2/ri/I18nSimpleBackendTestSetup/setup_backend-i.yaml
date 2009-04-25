@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: setup
+block_params: 
+comment: 
+full_name: I18nSimpleBackendTestSetup#setup_backend
+is_singleton: false
+name: setup_backend
+params: ()
+visibility: public

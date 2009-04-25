@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Request#if_modified_since
+is_singleton: false
+name: if_modified_since
+params: ()
+visibility: public

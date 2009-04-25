@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: determine_default_mailer
+- !ruby/object:RI::MethodSummary 
+  name: mailer_class
+- !ruby/object:RI::MethodSummary 
+  name: tests
+comment: 
+constants: []
+
+full_name: ActionMailer::TestCase
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Quoting
+- !ruby/object:RI::IncludedModule 
+  name: TestHelper
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: initialize_test_deliveries
+- !ruby/object:RI::MethodSummary 
+  name: set_expected_mail
+name: TestCase
+superclass: ActiveSupport::TestCase

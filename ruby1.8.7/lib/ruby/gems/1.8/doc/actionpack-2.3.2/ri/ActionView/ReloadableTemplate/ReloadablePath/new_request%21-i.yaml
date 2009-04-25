@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: load!
+block_params: 
+comment: 
+full_name: ActionView::ReloadableTemplate::ReloadablePath#new_request!
+is_singleton: false
+name: new_request!
+params: ()
+visibility: public

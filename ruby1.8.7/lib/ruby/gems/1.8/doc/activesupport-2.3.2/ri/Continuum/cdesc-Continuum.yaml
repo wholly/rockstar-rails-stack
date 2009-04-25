@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: binary_search
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: POINTS_PER_SERVER
+  value: "160"
+full_name: Continuum
+includes: []
+
+instance_methods: []
+
+name: Continuum
+superclass: 

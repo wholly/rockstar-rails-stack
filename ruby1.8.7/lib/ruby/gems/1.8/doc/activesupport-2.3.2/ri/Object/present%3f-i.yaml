@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: An object is present if it's not blank.
+full_name: Object#present?
+is_singleton: false
+name: present?
+params: ()
+visibility: public

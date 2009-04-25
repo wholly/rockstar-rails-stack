@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the value of a parameter in an existing content-disposition header
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail.set_disposition(&quot;attachment&quot;, {:filename =&gt; &quot;test.rb&quot;})\n mail['content-disposition'].to_s #=&gt; &quot;attachment; filename=test.rb&quot;\n mail.disposition_param(&quot;filename&quot;) #=&gt; &quot;test.rb&quot;\n mail.disposition_param(&quot;missing_param_key&quot;) #=&gt; nil\n mail.disposition_param(&quot;missing_param_key&quot;, false) #=&gt; false\n mail.disposition_param(&quot;missing_param_key&quot;, &quot;Nothing to see here&quot;) #=&gt; &quot;Nothing to see here&quot;\n"
+full_name: TMail::Mail#disposition_param
+is_singleton: false
+name: disposition_param
+params: ( name, default = nil )
+visibility: public

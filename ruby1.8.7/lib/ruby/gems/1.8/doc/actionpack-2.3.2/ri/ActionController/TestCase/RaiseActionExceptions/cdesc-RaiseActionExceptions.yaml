@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: When the request.remote_addr remains the default for testing, which is 0.0.0.0, the exception is simply raised inline (bystepping the regular exception handling from rescue_action). If the request.remote_addr is anything else, the regular rescue_action process takes place. This means you can test your rescue_action code by setting remote_addr to something else than 0.0.0.0.
+- !ruby/struct:SM::Flow::P 
+  body: The exception is stored in the exception accessor for further inspection.
+constants: []
+
+full_name: ActionController::TestCase::RaiseActionExceptions
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: rescue_action_without_handler
+name: RaiseActionExceptions
+superclass: 

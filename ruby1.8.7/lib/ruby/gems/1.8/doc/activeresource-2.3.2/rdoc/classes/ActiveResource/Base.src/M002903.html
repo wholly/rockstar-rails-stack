@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>site (ActiveResource::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_resource/base.rb, line 213</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">site</span>
+        <span class="ruby-comment cmt"># Not using superclass_delegating_reader because don't want subclasses to modify superclass instance</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt"># With superclass_delegating_reader</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt">#   Parent.site = 'http://anonymous@test.com'</span>
+        <span class="ruby-comment cmt">#   Subclass.site # =&gt; 'http://anonymous@test.com'</span>
+        <span class="ruby-comment cmt">#   Subclass.site.user = 'david'</span>
+        <span class="ruby-comment cmt">#   Parent.site # =&gt; 'http://david@test.com'</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt"># Without superclass_delegating_reader (expected behaviour)</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt">#   Parent.site = 'http://anonymous@test.com'</span>
+        <span class="ruby-comment cmt">#   Subclass.site # =&gt; 'http://anonymous@test.com'</span>
+        <span class="ruby-comment cmt">#   Subclass.site.user = 'david' # =&gt; TypeError: can't modify frozen object</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@site</span>)
+          <span class="ruby-ivar">@site</span>
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">superclass</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Object</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">superclass</span>.<span class="ruby-identifier">site</span>
+          <span class="ruby-identifier">superclass</span>.<span class="ruby-identifier">site</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">freeze</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

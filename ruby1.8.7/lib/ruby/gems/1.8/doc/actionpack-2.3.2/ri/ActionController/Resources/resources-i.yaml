@@ -1,0 +1,170 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates named routes for implementing verb-oriented controllers for a collection \resource.
+- !ruby/struct:SM::Flow::P 
+  body: "For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  map.resources :messages\n"
+- !ruby/struct:SM::Flow::P 
+  body: "will map the following actions in the corresponding controller:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class MessagesController &lt; ActionController::Base\n    # GET messages_url\n    def index\n      # return all messages\n    end\n\n    # GET new_message_url\n    def new\n      # return an HTML form for describing a new message\n    end\n\n    # POST messages_url\n    def create\n      # create a new message\n    end\n\n    # GET message_url(:id =&gt; 1)\n    def show\n      # find and return a specific message\n    end\n\n    # GET edit_message_url(:id =&gt; 1)\n    def edit\n      # return an HTML form for editing a specific message\n    end\n\n    # PUT message_url(:id =&gt; 1)\n    def update\n      # find and update a specific message\n    end\n\n    # DELETE message_url(:id =&gt; 1)\n    def destroy\n      # delete a specific message\n    end\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Along with the routes themselves, <tt>resources</tt> generates named routes for use in controllers and views. <tt>map.resources :messages</tt> produces the following named routes and helpers:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Named Route   Helpers\n  ============  =====================================================\n  messages      messages_url, hash_for_messages_url,\n                messages_path, hash_for_messages_path\n\n  message       message_url(id), hash_for_message_url(id),\n                message_path(id), hash_for_message_path(id)\n\n  new_message   new_message_url, hash_for_new_message_url,\n                new_message_path, hash_for_new_message_path\n\n  edit_message  edit_message_url(id), hash_for_edit_message_url(id),\n                edit_message_path(id), hash_for_edit_message_path(id)\n"
+- !ruby/struct:SM::Flow::P 
+  body: "You can use these helpers instead of <tt>url_for</tt> or methods that take <tt>url_for</tt> parameters. For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  redirect_to :controller =&gt; 'messages', :action =&gt; 'index'\n  # and\n  &lt;%= link_to &quot;edit this message&quot;, :controller =&gt; 'messages', :action =&gt; 'edit', :id =&gt; @message.id %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "now become:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  redirect_to messages_url\n  # and\n  &lt;%= link_to &quot;edit this message&quot;, edit_message_url(@message) # calls @message.id automatically\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Since web browsers don't support the PUT and DELETE verbs, you will need to add a parameter '_method' to your form tags. The form helpers make this a little easier. For an update form with a <tt>@message</tt> object:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;%= form_tag message_path(@message), :method =&gt; :put %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: or
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% form_for :message, @message, :url =&gt; message_path(@message), :html =&gt; {:method =&gt; :put} do |f| %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: or
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% form_for @message do |f| %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: which takes into account whether <tt>@message</tt> is a new record or not and generates the path and method accordingly.
+- !ruby/struct:SM::Flow::P 
+  body: "The <tt>resources</tt> method accepts the following options to customize the resulting routes:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:collection</tt> - Add named routes for other actions that operate on the collection. Takes a hash of <tt>#{action} =&gt; #{method}</tt>, where method is <tt>:get</tt>/<tt>:post</tt>/<tt>:put</tt>/<tt>:delete</tt>, an array of any of the previous, or <tt>:any</tt> if the method does not matter. These routes map to a URL like /messages/rss, with a route of <tt>rss_messages_url</tt>."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:member</tt> - Same as <tt>:collection</tt>, but for actions that operate on a specific member.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:new</tt> - Same as <tt>:collection</tt>, but for actions that operate on the new \resource action.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:controller</tt> - Specify the controller name for the routes.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:singular</tt> - Specify the singular name used in the member routes.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:requirements</tt> - Set custom routing parameter requirements; this is a hash of either
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  regular expressions (which must match for the route to match) or extra parameters. For example:\n\n    map.resource :profile, :path_prefix =&gt; ':name', :requirements =&gt; { :name =&gt; /[a-zA-Z]+/, :extra =&gt; 'value' }\n\n  will only match if the first part is alphabetic, and will pass the parameter :extra to the controller.\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:conditions</tt> - Specify custom routing recognition conditions. \Resources sets the <tt>:method</tt> value for the method-specific routes.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:as</tt> - Specify a different \\resource name to use in the URL path. For example:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  # products_path == '/productos'\n  map.resources :products, :as =&gt; 'productos' do |product|\n    # product_reviews_path(product) == '/productos/1234/comentarios'\n    product.resources :product_reviews, :as =&gt; 'comentarios'\n  end\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:has_one</tt> - Specify nested \resources, this is a shorthand for mapping singleton \resources beneath the current.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:has_many</tt> - Same has <tt>:has_one</tt>, but for plural \resources.
+  - !ruby/struct:SM::Flow::P 
+    body: "You may directly specify the routing association with <tt>has_one</tt> and <tt>has_many</tt> like:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  map.resources :notes, :has_one =&gt; :author, :has_many =&gt; [:comments, :attachments]\n"
+  - !ruby/struct:SM::Flow::P 
+    body: "This is the same as:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  map.resources :notes do |notes|\n    notes.resource  :author\n    notes.resources :comments\n    notes.resources :attachments\n  end\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:path_names</tt> - Specify different names for the 'new' and 'edit' actions. For example:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  # new_products_path == '/productos/nuevo'\n  map.resources :products, :as =&gt; 'productos', :path_names =&gt; { :new =&gt; 'nuevo', :edit =&gt; 'editar' }\n"
+  - !ruby/struct:SM::Flow::P 
+    body: "You can also set default action names from an environment, like this:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  config.action_controller.resources_path_names = { :new =&gt; 'nuevo', :edit =&gt; 'editar' }\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:path_prefix</tt> - Set a prefix to the routes with required route variables.
+  - !ruby/struct:SM::Flow::P 
+    body: "Weblog comments usually belong to a post, so you might use <tt>resources</tt> like:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  map.resources :articles\n  map.resources :comments, :path_prefix =&gt; '/articles/:article_id'\n"
+  - !ruby/struct:SM::Flow::P 
+    body: "You can nest <tt>resources</tt> calls to set this automatically:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  map.resources :articles do |article|\n    article.resources :comments\n  end\n"
+  - !ruby/struct:SM::Flow::P 
+    body: The comment \resources work the same, but must now include a value for <tt>:article_id</tt>.
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  article_comments_url(@article)\n  article_comment_url(@article, @comment)\n\n  article_comments_url(:article_id =&gt; @article)\n  article_comment_url(:article_id =&gt; @article, :id =&gt; @comment)\n"
+  - !ruby/struct:SM::Flow::P 
+    body: "If you don't want to load all objects from the database you might want to use the <tt>article_id</tt> directly:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  articles_comments_url(@comment.article_id, @comment)\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:name_prefix</tt> - Define a prefix for all generated routes, usually ending in an underscore. Use this if you have named routes that may clash.
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  map.resources :tags, :path_prefix =&gt; '/books/:book_id', :name_prefix =&gt; 'book_'\n  map.resources :tags, :path_prefix =&gt; '/toys/:toy_id',   :name_prefix =&gt; 'toy_'\n"
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "You may also use <tt>:name_prefix</tt> to override the generic named routes in a nested \\resource:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  map.resources :articles do |article|\n    article.resources :comments, :name_prefix =&gt; nil\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "This will yield named \\resources like so:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  comments_url(@article)\n  comment_url(@article, @comment)\n"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:shallow</tt> - If true, paths for nested resources which reference a specific member (ie. those with an :id parameter) will not use the parent path prefix or name prefix.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: The <tt>:shallow</tt> option is inherited by any nested resource(s).
+- !ruby/struct:SM::Flow::P 
+  body: "For example, 'users', 'posts' and 'comments' all use shallow paths with the following nested resources:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  map.resources :users, :shallow =&gt; true do |user|\n    user.resources :posts do |post|\n      post.resources :comments\n    end\n  end\n  # --&gt; GET /users/1/posts (maps to the PostsController#index action as usual)\n  #     also adds the usual named route called &quot;user_posts&quot;\n  # --&gt; GET /posts/2 (maps to the PostsController#show action as if it were not nested)\n  #     also adds the named route called &quot;post&quot;\n  # --&gt; GET /posts/2/comments (maps to the CommentsController#index action)\n  #     also adds the named route called &quot;post_comments&quot;\n  # --&gt; GET /comments/2 (maps to the CommentsController#show action as if it were not nested)\n  #     also adds the named route called &quot;comment&quot;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "You may also use <tt>:shallow</tt> in combination with the <tt>has_one</tt> and <tt>has_many</tt> shorthand notations like:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  map.resources :users, :has_many =&gt; { :posts =&gt; :comments }, :shallow =&gt; true\n"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:only</tt> and <tt>:except</tt> - Specify which of the seven default actions should be routed to.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: <tt>:only</tt> and <tt>:except</tt> may be set to <tt>:all</tt>, <tt>:none</tt>, an action name or a list of action names. By default, routes are generated for all seven actions.
+- !ruby/struct:SM::Flow::P 
+  body: "For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  map.resources :posts, :only =&gt; [:index, :show] do |post|\n    post.resources :comments, :except =&gt; [:update, :destroy]\n  end\n  # --&gt; GET /posts (maps to the PostsController#index action)\n  # --&gt; POST /posts (fails)\n  # --&gt; GET /posts/1 (maps to the PostsController#show action)\n  # --&gt; DELETE /posts/1 (fails)\n  # --&gt; POST /posts/1/comments (maps to the CommentsController#create action)\n  # --&gt; PUT /posts/1/comments/1 (fails)\n"
+- !ruby/struct:SM::Flow::P 
+  body: If <tt>map.resources</tt> is called with multiple resources, they all get the same options applied.
+- !ruby/struct:SM::Flow::P 
+  body: "Examples:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  map.resources :messages, :path_prefix =&gt; &quot;/thread/:thread_id&quot;\n  # --&gt; GET /thread/7/messages/1\n\n  map.resources :messages, :collection =&gt; { :rss =&gt; :get }\n  # --&gt; GET /messages/rss (maps to the #rss action)\n  #     also adds a named route called &quot;rss_messages&quot;\n\n  map.resources :messages, :member =&gt; { :mark =&gt; :post }\n  # --&gt; POST /messages/1/mark (maps to the #mark action)\n  #     also adds a named route called &quot;mark_message&quot;\n\n  map.resources :messages, :new =&gt; { :preview =&gt; :post }\n  # --&gt; POST /messages/new/preview (maps to the #preview action)\n  #     also adds a named route called &quot;preview_new_message&quot;\n\n  map.resources :messages, :new =&gt; { :new =&gt; :any, :preview =&gt; :post }\n  # --&gt; POST /messages/new/preview (maps to the #preview action)\n  #     also adds a named route called &quot;preview_new_message&quot;\n  # --&gt; /messages/new can be invoked via any request method\n\n  map.resources :messages, :controller =&gt; &quot;categories&quot;,\n        :path_prefix =&gt; &quot;/category/:category_id&quot;,\n        :name_prefix =&gt; &quot;category_&quot;\n  # --&gt; GET /categories/7/messages/1\n  #     has named route &quot;category_message&quot;\n"
+- !ruby/struct:SM::Flow::P 
+  body: The <tt>resources</tt> method sets HTTP method restrictions on the routes it generates. For example, making an HTTP POST on <tt>new_message_url</tt> will raise a RoutingError exception. The default route in <tt>config/routes.rb</tt> overrides this and allows invalid HTTP methods for \resource routes.
+full_name: ActionController::Resources#resources
+is_singleton: false
+name: resources
+params: (*entities, &block)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The format to be used when choosing between multiple templates with the same name but differing formats. See +Request#template_format+ for more details.
+full_name: ActionView::Base#template_format
+is_singleton: false
+name: template_format
+params: ()
+visibility: public

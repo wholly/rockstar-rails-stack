@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::XmlMini#backend=
+is_singleton: false
+name: backend=
+params: (name)
+visibility: public

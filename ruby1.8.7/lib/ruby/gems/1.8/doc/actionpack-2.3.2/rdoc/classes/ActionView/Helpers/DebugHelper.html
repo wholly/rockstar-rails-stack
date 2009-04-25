@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionView::Helpers::DebugHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionView::Helpers::DebugHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/action_view/helpers/debug_helper_rb.html">
+                lib/action_view/helpers/debug_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Provides a set of methods for making it easier to <a
+href="DebugHelper.html#M002276">debug</a> Rails objects.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M002276">debug</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M002276" class="method-detail">
+        <a name="M002276"></a>
+
+        <div class="method-heading">
+          <a href="DebugHelper.src/M002276.html" target="Code" class="method-signature"
+            onclick="popupCode('DebugHelper.src/M002276.html');return false;">
+          <span class="method-name">debug</span><span class="method-args">(object)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a YAML representation of <tt>object</tt> wrapped with &lt;pre&gt;
+and &lt;/pre&gt;. If the object cannot be converted to YAML using
+<tt>to_yaml</tt>, <tt>inspect</tt> will be called instead. Useful for
+inspecting an object at the time of rendering.
+</p>
+<h4>Example</h4>
+<pre>
+  @user = User.new({ :username =&gt; 'testing', :password =&gt; 'xyz', :age =&gt; 42}) %&gt;
+  debug(@user)
+  # =&gt;
+  &lt;pre class='debug_dump'&gt;--- !ruby/object:User
+  attributes:
+  &amp;nbsp; updated_at:
+  &amp;nbsp; username: testing
+
+  &amp;nbsp; age: 42
+  &amp;nbsp; password: xyz
+  &amp;nbsp; created_at:
+  attributes_cache: {}
+
+  new_record: true
+  &lt;/pre&gt;
+</pre>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Provides a new email boundary to separate parts of the email. This is a random string based off the current time, so should be fairly unique.
+- !ruby/struct:SM::Flow::P 
+  body: "For Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " TMail.new_boundary\n #=&gt; &quot;mimepart_47bf656968207_25a8fbb80114&quot;\n TMail.new_boundary\n #=&gt; &quot;mimepart_47bf66051de4_25a8fbb80240&quot;\n"
+full_name: TMail::new_boundary
+is_singleton: true
+name: new_boundary
+params: ()
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendInterpolateTest#test_interpolate_given_a_values_hash_with_nil_values_interpolates_the_string
+is_singleton: false
+name: test_interpolate_given_a_values_hash_with_nil_values_interpolates_the_string
+params: ()
+visibility: public

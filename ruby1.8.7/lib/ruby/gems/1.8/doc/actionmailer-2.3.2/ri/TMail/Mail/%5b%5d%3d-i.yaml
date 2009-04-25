@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: store
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Allows you to set or delete TMail header objects at will. Examples:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " @mail = TMail::Mail.new\n @mail['to'].to_s       # =&gt; 'mikel@test.com.au'\n @mail['to'] = 'mikel@elsewhere.org'\n @mail['to'].to_s       # =&gt; 'mikel@elsewhere.org'\n @mail.encoded          # =&gt; &quot;To: mikel@elsewhere.org\\r\\n\\r\\n&quot;\n @mail['to'] = nil\n @mail['to'].to_s       # =&gt; nil\n @mail.encoded          # =&gt; &quot;\\r\\n&quot;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Note: setting mail[] = nil actually deletes the header field in question from the object, it does not just set the value of the hash to nil"
+full_name: TMail::Mail#[]=
+is_singleton: false
+name: "[]="
+params: ( key, val )
+visibility: public

@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+constants: []
+
+full_name: ActiveSupport::Testing::SetupAndTeardown
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::Callbacks
+- !ruby/object:RI::IncludedModule 
+  name: ForMiniTest
+- !ruby/object:RI::IncludedModule 
+  name: ForClassicTestUnit
+instance_methods: []
+
+name: SetupAndTeardown
+superclass: 

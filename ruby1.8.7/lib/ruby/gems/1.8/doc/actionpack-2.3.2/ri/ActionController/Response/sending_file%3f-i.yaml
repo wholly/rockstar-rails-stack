@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Response#sending_file?
+is_singleton: false
+name: sending_file?
+params: ()
+visibility: public

@@ -1,0 +1,110 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: cache_asset_timestamps
+- !ruby/object:RI::MethodSummary 
+  name: cache_asset_timestamps=
+- !ruby/object:RI::MethodSummary 
+  name: register_javascript_expansion
+- !ruby/object:RI::MethodSummary 
+  name: register_javascript_include_default
+- !ruby/object:RI::MethodSummary 
+  name: register_stylesheet_expansion
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "This module provides methods for generating HTML that links views to assets such as images, javascripts, stylesheets, and feeds. These methods do not verify the assets exist before linking to them:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  image_tag(&quot;rails.png&quot;)\n  # =&gt; &lt;img alt=&quot;Rails src=&quot;/images/rails.png?1230601161&quot; /&gt;\n  stylesheet_link_tag(&quot;application&quot;)\n  # =&gt; &lt;link href=&quot;/stylesheets/application.css?1232285206&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;\n"
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: Using asset hosts
+- !ruby/struct:SM::Flow::P 
+  body: "By default, Rails links to these assets on the current host in the public folder, but you can direct Rails to link to assets from a dedicated asset server by setting ActionController::Base.asset_host in the application configuration, typically in <tt>config/environments/production.rb</tt>. For example, you'd define <tt>assets.example.com</tt> to be your asset host this way:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  ActionController::Base.asset_host = &quot;assets.example.com&quot;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Helpers take that into account:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  image_tag(&quot;rails.png&quot;)\n  # =&gt; &lt;img alt=&quot;Rails&quot; src=&quot;http://assets.example.com/images/rails.png?1230601161&quot; /&gt;\n  stylesheet_link_tag(&quot;application&quot;)\n  # =&gt; &lt;link href=&quot;http://assets.example.com/stylesheets/application.css?1232285206&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: Browsers typically open at most two simultaneous connections to a single host, which means your assets often have to wait for other assets to finish downloading. You can alleviate this by using a <tt>%d</tt> wildcard in the <tt>asset_host</tt>. For example, &quot;assets%d.example.com&quot;. If that wildcard is present Rails distributes asset requests among the corresponding four hosts &quot;assets0.example.com&quot;, ..., &quot;assets3.example.com&quot;. With this trick browsers will open eight simultaneous connections rather than two.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  image_tag(&quot;rails.png&quot;)\n  # =&gt; &lt;img alt=&quot;Rails&quot; src=&quot;http://assets0.example.com/images/rails.png?1230601161&quot; /&gt;\n  stylesheet_link_tag(&quot;application&quot;)\n  # =&gt; &lt;link href=&quot;http://assets2.example.com/stylesheets/application.css?1232285206&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: To do this, you can either setup four actual hosts, or you can use wildcard DNS to CNAME the wildcard to a single asset host. You can read more about setting up your DNS CNAME records from your ISP.
+- !ruby/struct:SM::Flow::P 
+  body: "Note: This is purely a browser performance optimization and is not meant for server load balancing. See http://www.die.net/musings/page_load_time/ for background."
+- !ruby/struct:SM::Flow::P 
+  body: "Alternatively, you can exert more control over the asset host by setting <tt>asset_host</tt> to a proc like this:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  ActionController::Base.asset_host = Proc.new { |source|\n    &quot;http://assets#{rand(2) + 1}.example.com&quot;\n  }\n  image_tag(&quot;rails.png&quot;)\n  # =&gt; &lt;img alt=&quot;Rails&quot; src=&quot;http://assets0.example.com/images/rails.png?1230601161&quot; /&gt;\n  stylesheet_link_tag(&quot;application&quot;)\n  # =&gt; &lt;link href=&quot;http://assets1.example.com/stylesheets/application.css?1232285206&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: The example above generates &quot;http://assets1.example.com&quot; and &quot;http://assets2.example.com&quot; randomly. This option is useful for example if you need fewer/more than four hosts, custom host names, etc.
+- !ruby/struct:SM::Flow::P 
+  body: As you see the proc takes a <tt>source</tt> parameter. That's a string with the absolute path of the asset with any extensions and timestamps in place, for example &quot;/images/rails.png?1230601161&quot;.
+- !ruby/struct:SM::Flow::VERB 
+  body: "   ActionController::Base.asset_host = Proc.new { |source|\n     if source.starts_with?('/images')\n       &quot;http://images.example.com&quot;\n     else\n       &quot;http://assets.example.com&quot;\n     end\n   }\n  image_tag(&quot;rails.png&quot;)\n  # =&gt; &lt;img alt=&quot;Rails&quot; src=&quot;http://images.example.com/images/rails.png?1230601161&quot; /&gt;\n  stylesheet_link_tag(&quot;application&quot;)\n  # =&gt; &lt;link href=&quot;http://assets.example.com/stylesheets/application.css?1232285206&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: Alternatively you may ask for a second parameter <tt>request</tt>. That one is particularly useful for serving assets from an SSL-protected page. The example proc below disables asset hosting for HTTPS connections, while still sending assets for plain HTTP requests from asset hosts. If you don't have SSL certificates for each of the asset hosts this technique allows you to avoid warnings in the client about mixed media.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  ActionController::Base.asset_host = Proc.new { |source, request|\n    if request.ssl?\n      &quot;#{request.protocol}#{request.host_with_port}&quot;\n    else\n      &quot;#{request.protocol}assets.example.com&quot;\n    end\n  }\n"
+- !ruby/struct:SM::Flow::P 
+  body: You can also implement a custom asset host object that responds to <tt>call</tt> and takes either one or two parameters just like the proc.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  config.action_controller.asset_host = AssetHostingWithMinimumSsl.new(\n    &quot;http://asset%d.example.com&quot;, &quot;https://asset1.example.com&quot;\n  )\n"
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: Using asset timestamps
+- !ruby/struct:SM::Flow::P 
+  body: By default, Rails appends asset's timestamps to all asset paths. This allows you to set a cache-expiration date for the asset far into the future, but still be able to instantly invalidate it by simply updating the file (and hence updating the timestamp, which then updates the URL as the timestamp is part of that, which in turn busts the cache).
+- !ruby/struct:SM::Flow::P 
+  body: "It's the responsibility of the web server you use to set the far-future expiration date on cache assets that you need to take advantage of this feature. Here's an example for Apache:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # Asset Expiration\n  ExpiresActive On\n  &lt;FilesMatch &quot;\\.(ico|gif|jpe?g|png|js|css)$&quot;&gt;\n    ExpiresDefault &quot;access plus 1 year&quot;\n  &lt;/FilesMatch&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: Also note that in order for this to work, all your application servers must return the same timestamps. This means that they must have their clocks synchronized. If one of them drifts out of sync, you'll see different timestamps at random and the cache won't work. In that case the browser will request the same assets over and over again even thought they didn't change. You can use something like Live HTTP Headers for Firefox to verify that the cache is indeed working.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ASSETS_DIR
+  value: "defined?(Rails.public_path) ? Rails.public_path : \"public\""
+- !ruby/object:RI::Constant 
+  comment: 
+  name: JAVASCRIPTS_DIR
+  value: "\"#{ASSETS_DIR}/javascripts\""
+- !ruby/object:RI::Constant 
+  comment: 
+  name: STYLESHEETS_DIR
+  value: "\"#{ASSETS_DIR}/stylesheets\""
+- !ruby/object:RI::Constant 
+  comment: 
+  name: JAVASCRIPT_DEFAULT_SOURCES
+  value: "['prototype', 'effects', 'dragdrop', 'controls'].freeze unless const_defined?(:JAVASCRIPT_DEFAULT_SOURCES)"
+full_name: ActionView::Helpers::AssetTagHelper
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: auto_discovery_link_tag
+- !ruby/object:RI::MethodSummary 
+  name: image_path
+- !ruby/object:RI::MethodSummary 
+  name: image_tag
+- !ruby/object:RI::MethodSummary 
+  name: javascript_include_tag
+- !ruby/object:RI::MethodSummary 
+  name: javascript_path
+- !ruby/object:RI::MethodSummary 
+  name: path_to_image
+- !ruby/object:RI::MethodSummary 
+  name: path_to_javascript
+- !ruby/object:RI::MethodSummary 
+  name: path_to_stylesheet
+- !ruby/object:RI::MethodSummary 
+  name: stylesheet_link_tag
+- !ruby/object:RI::MethodSummary 
+  name: stylesheet_path
+name: AssetTagHelper
+superclass: 

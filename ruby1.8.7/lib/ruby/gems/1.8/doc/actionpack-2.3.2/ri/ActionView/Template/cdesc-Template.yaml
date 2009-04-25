@@ -1,0 +1,77 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: base_path
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: extension
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: filename
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: format
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: load_path
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: locale
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: name
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: template_path
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: exempt_from_layout
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: ActionView::Template
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Renderable
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: accessible_paths
+- !ruby/object:RI::MethodSummary 
+  name: content_type
+- !ruby/object:RI::MethodSummary 
+  name: exempt_from_layout?
+- !ruby/object:RI::MethodSummary 
+  name: format_and_extension
+- !ruby/object:RI::MethodSummary 
+  name: load!
+- !ruby/object:RI::MethodSummary 
+  name: method_segment
+- !ruby/object:RI::MethodSummary 
+  name: mime_type
+- !ruby/object:RI::MethodSummary 
+  name: multipart?
+- !ruby/object:RI::MethodSummary 
+  name: path
+- !ruby/object:RI::MethodSummary 
+  name: path_without_extension
+- !ruby/object:RI::MethodSummary 
+  name: path_without_format_and_extension
+- !ruby/object:RI::MethodSummary 
+  name: relative_path
+- !ruby/object:RI::MethodSummary 
+  name: render_template
+- !ruby/object:RI::MethodSummary 
+  name: source
+name: Template
+superclass: Object

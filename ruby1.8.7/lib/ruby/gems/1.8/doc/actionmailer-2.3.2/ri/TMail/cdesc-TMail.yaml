@@ -1,0 +1,51 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new_boundary
+- !ruby/object:RI::MethodSummary 
+  name: new_message_id
+comment: 
+- !ruby/struct:SM::Flow::H 
+  level: 1
+  text: TMail - The EMail Swiss Army Knife for Ruby
+- !ruby/struct:SM::Flow::P 
+  body: The TMail library provides you with a very complete way to handle and manipulate EMails from within your Ruby programs.
+- !ruby/struct:SM::Flow::P 
+  body: Used as the backbone for email handling by the Ruby on Rails and Nitro web frameworks as well as a bunch of other Ruby apps including the Ruby-Talk mailing list to newsgroup email gateway, it is a proven and reliable email handler that won't let you down.
+- !ruby/struct:SM::Flow::P 
+  body: Originally created by Minero Aoki, TMail has been recently picked up by Mikel Lindsaar and is being actively maintained. Numerous backlogged bug fixes have been applied as well as Ruby 1.9 compatibility and a swath of documentation to boot.
+- !ruby/struct:SM::Flow::P 
+  body: TMail allows you to treat an email totally as an object and allow you to get on with your own programming without having to worry about crafting the perfect email address validation parser, or assembling an email from all it's component parts.
+- !ruby/struct:SM::Flow::P 
+  body: TMail handles the most complex part of the email - the header. It generates and parses headers and provides you with instant access to their innards through simple and logically named accessor and setter methods.
+- !ruby/struct:SM::Flow::P 
+  body: TMail also provides a wrapper to Net/SMTP as well as Unix Mailbox handling methods to directly read emails from your unix mailbox, parse them and use them.
+- !ruby/struct:SM::Flow::P 
+  body: Following is the comprehensive list of methods to access TMail::Mail objects. You can also check out TMail::Mail, TMail::Address and TMail::Headers for other lists.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: MhLoader
+  value: MhMailbox
+- !ruby/object:RI::Constant 
+  comment: 
+  name: MboxLoader
+  value: UNIXMbox
+- !ruby/object:RI::Constant 
+  comment: 
+  name: MaildirLoader
+  value: Maildir
+full_name: TMail
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: decoded
+- !ruby/object:RI::MethodSummary 
+  name: encoded
+- !ruby/object:RI::MethodSummary 
+  name: to_s
+name: TMail
+superclass: 

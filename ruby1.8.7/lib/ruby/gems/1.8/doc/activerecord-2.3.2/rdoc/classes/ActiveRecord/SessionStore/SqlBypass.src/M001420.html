@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>destroy (ActiveRecord::SessionStore::SqlBypass)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_record/session_store.rb, line 273</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@new_record</span>
+          <span class="ruby-ivar">@@connection</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value str">&quot;DELETE FROM \#{@@table_name}\nWHERE \#{@@connection.quote_column_name(@@session_id_column)}=\#{@@connection.quote(session_id)}\n&quot;</span>, <span class="ruby-value str">'Destroy session'</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

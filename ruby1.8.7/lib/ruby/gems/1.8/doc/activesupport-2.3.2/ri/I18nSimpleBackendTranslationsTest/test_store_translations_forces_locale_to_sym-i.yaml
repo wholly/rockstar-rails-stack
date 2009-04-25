@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendTranslationsTest#test_store_translations_forces_locale_to_sym
+is_singleton: false
+name: test_store_translations_forces_locale_to_sym
+params: ()
+visibility: public

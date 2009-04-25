@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Execute a HEAD request. Used to obtain meta-information about resources, such as whether they exist and their size (via response headers).
+full_name: ActiveResource::Connection#head
+is_singleton: false
+name: head
+params: (path, headers = {})
+visibility: public

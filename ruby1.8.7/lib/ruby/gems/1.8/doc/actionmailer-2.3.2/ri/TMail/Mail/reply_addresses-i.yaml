@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns an array of reply to addresses that the Mail object has, or if the Mail message has no reply-to, returns an array of the Mail objects from addresses. Else returns the default which can either be passed as a parameter or defaults to nil
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail.from = &quot;Mikel &lt;mikel@lindsaar.net&gt;&quot;\n mail.reply_to = nil\n mail.reply_addresses #=&gt; [&quot;&quot;]\n"
+full_name: TMail::Mail#reply_addresses
+is_singleton: false
+name: reply_addresses
+params: ( default = nil )
+visibility: public

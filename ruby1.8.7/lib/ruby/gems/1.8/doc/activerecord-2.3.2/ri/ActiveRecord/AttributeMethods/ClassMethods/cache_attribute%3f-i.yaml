@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns <tt>true</tt> if the provided attribute is being cached.
+full_name: ActiveRecord::AttributeMethods::ClassMethods#cache_attribute?
+is_singleton: false
+name: cache_attribute?
+params: (attr_name)
+visibility: public

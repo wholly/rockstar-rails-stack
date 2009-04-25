@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Asserts that the request was rendered with the appropriate template file or partials
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # assert that the &quot;new&quot; view template was rendered\n  assert_template &quot;new&quot;\n\n  # assert that the &quot;_customer&quot; partial was rendered twice\n  assert_template :partial =&gt; '_customer', :count =&gt; 2\n\n  # assert that no partials were rendered\n  assert_template :partial =&gt; false\n"
+full_name: ActionController::Assertions::ResponseAssertions#assert_template
+is_singleton: false
+name: assert_template
+params: (options = {}, message = nil)
+visibility: public

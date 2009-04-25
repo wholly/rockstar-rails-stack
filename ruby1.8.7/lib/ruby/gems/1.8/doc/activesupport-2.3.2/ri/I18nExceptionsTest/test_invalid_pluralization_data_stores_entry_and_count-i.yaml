@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nExceptionsTest#test_invalid_pluralization_data_stores_entry_and_count
+is_singleton: false
+name: test_invalid_pluralization_data_stores_entry_and_count
+params: ()
+visibility: public

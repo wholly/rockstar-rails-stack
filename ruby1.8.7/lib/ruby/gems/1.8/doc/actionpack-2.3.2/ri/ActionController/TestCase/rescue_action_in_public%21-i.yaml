@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Cause the action to be rescued according to the regular rules for rescue_action when the visitor is not local
+full_name: ActionController::TestCase#rescue_action_in_public!
+is_singleton: false
+name: rescue_action_in_public!
+params: ()
+visibility: public

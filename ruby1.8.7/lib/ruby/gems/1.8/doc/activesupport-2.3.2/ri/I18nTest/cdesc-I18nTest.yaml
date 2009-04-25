@@ -1,0 +1,58 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nTest
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: setup
+- !ruby/object:RI::MethodSummary 
+  name: test_can_set_backend
+- !ruby/object:RI::MethodSummary 
+  name: test_can_set_default_locale
+- !ruby/object:RI::MethodSummary 
+  name: test_can_set_exception_handler
+- !ruby/object:RI::MethodSummary 
+  name: test_can_set_locale_to_thread_current
+- !ruby/object:RI::MethodSummary 
+  name: test_delegates_localize_to_backend
+- !ruby/object:RI::MethodSummary 
+  name: test_delegates_translate_to_backend
+- !ruby/object:RI::MethodSummary 
+  name: test_localize_nil_raises_argument_error
+- !ruby/object:RI::MethodSummary 
+  name: test_localize_object_raises_argument_error
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_a_bogus_key_raises_missing_translation_data
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_no_locale_uses_i18n_locale
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_on_nested_symbol_keys_works
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_with_array_as_scope_works
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_with_array_containing_dot_separated_strings_as_scope_works
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_with_dot_separated_key_array_and_scope_works
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_with_key_array_and_dot_separated_scope_works
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_with_nested_string_keys_works
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_with_options_using_scope_works
+- !ruby/object:RI::MethodSummary 
+  name: test_uses_custom_exception_handler
+- !ruby/object:RI::MethodSummary 
+  name: test_uses_default_locale_as_locale_by_default
+- !ruby/object:RI::MethodSummary 
+  name: test_uses_en_us_as_default_locale_by_default
+- !ruby/object:RI::MethodSummary 
+  name: test_uses_simple_backend_set_by_default
+name: I18nTest
+superclass: Test::Unit::TestCase

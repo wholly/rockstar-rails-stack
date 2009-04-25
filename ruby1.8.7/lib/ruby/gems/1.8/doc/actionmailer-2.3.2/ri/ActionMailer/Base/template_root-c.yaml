@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionMailer::Base::template_root
+is_singleton: true
+name: template_root
+params: ()
+visibility: public

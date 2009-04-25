@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sometimes you need to parse an address, TMail can do it for you and provide you with a fairly robust method of detecting a valid address.
+- !ruby/struct:SM::Flow::P 
+  body: Takes in a string, returns a TMail::Address object.
+- !ruby/struct:SM::Flow::P 
+  body: Raises a TMail::SyntaxError on invalid email format
+full_name: TMail::Address::parse
+is_singleton: true
+name: parse
+params: ( str )
+visibility: public

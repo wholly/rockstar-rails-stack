@@ -1,0 +1,39 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nSimpleBackendLocalizeDateTest
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: I18nSimpleBackendTestSetup
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: setup
+- !ruby/object:RI::MethodSummary 
+  name: test_localize_nil_raises_argument_error
+- !ruby/object:RI::MethodSummary 
+  name: test_localize_object_raises_argument_error
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_a_day_name_format_it_returns_a_day_name
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_a_month_name_format_it_returns_a_month_name
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_an_abbr_day_name_format_it_returns_an_abbrevated_day_name
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_an_abbr_month_name_format_it_returns_an_abbrevated_month_name
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_an_unknown_format_it_does_not_fail
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_no_format_it_does_not_fail
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_the_default_format_it_uses_it
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_the_long_format_it_uses_it
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_the_short_format_it_uses_it
+name: I18nSimpleBackendLocalizeDateTest
+superclass: Test::Unit::TestCase

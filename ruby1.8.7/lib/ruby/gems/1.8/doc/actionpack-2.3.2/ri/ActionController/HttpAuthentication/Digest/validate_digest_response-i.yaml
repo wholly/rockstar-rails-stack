@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Raises error unless the request credentials response value matches the expected value. First try the password as a ha1 digest password. If this fails, then try it as a plain text password.
+full_name: ActionController::HttpAuthentication::Digest#validate_digest_response
+is_singleton: false
+name: validate_digest_response
+params: (request, realm, &password_procedure)
+visibility: public

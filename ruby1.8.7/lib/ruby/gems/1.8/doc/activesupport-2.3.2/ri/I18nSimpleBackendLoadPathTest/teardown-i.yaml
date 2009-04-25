@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendLoadPathTest#teardown
+is_singleton: false
+name: teardown
+params: ()
+visibility: public

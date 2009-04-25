@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>request_method (ActionController::Request)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_controller/request.rb, line 34</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">request_method</span>
+      <span class="ruby-ivar">@request_method</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">HTTP_METHOD_LOOKUP</span>[<span class="ruby-keyword kw">super</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">UnknownHttpMethod</span>, <span class="ruby-node">&quot;#{super}, accepted HTTP methods are #{HTTP_METHODS.to_sentence(:locale =&gt; :en)}&quot;</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Attempts to render a static error page based on the <tt>status_code</tt> thrown, or just return headers if no such file exists. At first, it will try to render a localized static page. For example, if a 500 error is being handled Rails and locale is :da, it will first attempt to render the file at <tt>public/500.da.html</tt> then attempt to render <tt>public/500.html</tt>. If none of them exist, the body of the response will be left empty.
+full_name: ActionController::Rescue#render_optional_error_file
+is_singleton: false
+name: render_optional_error_file
+params: (status_code)
+visibility: protected

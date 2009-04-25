@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the position <em>needle</em> in the string, counting in codepoints. Returns <tt>nil</tt> if <em>needle</em> isn't found.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  'Caf\xC3\xA9 p\xC3\xA9rifer\xC3\xB4l'.mb_chars.index('\xC3\xB4') #=&gt; 12\n  'Caf\xC3\xA9 p\xC3\xA9rifer\xC3\xB4l'.mb_chars.index(/\\w/u) #=&gt; 0\n"
+full_name: ActiveSupport::Multibyte::Chars#index
+is_singleton: false
+name: index
+params: (needle, offset=0)
+visibility: public

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActionController::Dispatcher</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActionController::Dispatcher</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/action_controller/dispatcher_rb.html">
+                lib/action_controller/dispatcher.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../Object.html">
+                Object
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Dispatches requests to the appropriate controller and takes care of
+reloading the app after each request when Dependencies.load? is true.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001884">_call</a>&nbsp;&nbsp;
+      <a href="#M001883">call</a>&nbsp;&nbsp;
+      <a href="#M001879">cleanup_application</a>&nbsp;&nbsp;
+      <a href="#M001874">define_dispatcher_callbacks</a>&nbsp;&nbsp;
+      <a href="#M001881">dispatch</a>&nbsp;&nbsp;
+      <a href="#M001875">dispatch</a>&nbsp;&nbsp;
+      <a href="#M001882">dispatch_cgi</a>&nbsp;&nbsp;
+      <a href="#M001885">flush_logger</a>&nbsp;&nbsp;
+      <a href="#M001880">new</a>&nbsp;&nbsp;
+      <a href="#M001878">reload_application</a>&nbsp;&nbsp;
+      <a href="#M001877">run_prepare_callbacks</a>&nbsp;&nbsp;
+      <a href="#M001876">to_prepare</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">ActiveSupport::Callbacks</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M001879" class="method-detail">
+        <a name="M001879"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001879.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001879.html');return false;">
+          <span class="method-name">cleanup_application</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001874" class="method-detail">
+        <a name="M001874"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001874.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001874.html');return false;">
+          <span class="method-name">define_dispatcher_callbacks</span><span class="method-args">(cache_classes)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001875" class="method-detail">
+        <a name="M001875"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001875.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001875.html');return false;">
+          <span class="method-name">dispatch</span><span class="method-args">(cgi = nil, session_options = CgiRequest::DEFAULT_SESSION_OPTIONS, output = $stdout)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+DEPRECATE: Remove CGI support
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001880" class="method-detail">
+        <a name="M001880"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001880.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001880.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(output = $stdout, request = nil, response = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+DEPRECATE: Remove arguments, since they are only used by CGI
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001878" class="method-detail">
+        <a name="M001878"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001878.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001878.html');return false;">
+          <span class="method-name">reload_application</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001877" class="method-detail">
+        <a name="M001877"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001877.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001877.html');return false;">
+          <span class="method-name">run_prepare_callbacks</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001876" class="method-detail">
+        <a name="M001876"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001876.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001876.html');return false;">
+          <span class="method-name">to_prepare</span><span class="method-args">(identifier = nil, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Add a preparation callback. Preparation callbacks are run before every
+request in development mode, and before the first request in production
+mode.
+</p>
+<p>
+An optional identifier may be supplied for the callback. If provided, <a
+href="Dispatcher.html#M001876">to_prepare</a> may be called again with the
+same identifier to replace the existing callback. Passing an identifier is
+a suggested practice if the code adding a preparation block may be
+reloaded.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001884" class="method-detail">
+        <a name="M001884"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001884.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001884.html');return false;">
+          <span class="method-name">_call</span><span class="method-args">(env)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001883" class="method-detail">
+        <a name="M001883"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001883.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001883.html');return false;">
+          <span class="method-name">call</span><span class="method-args">(env)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001881" class="method-detail">
+        <a name="M001881"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001881.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001881.html');return false;">
+          <span class="method-name">dispatch</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001882" class="method-detail">
+        <a name="M001882"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001882.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001882.html');return false;">
+          <span class="method-name">dispatch_cgi</span><span class="method-args">(cgi, session_options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+DEPRECATE: Remove CGI support
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001885" class="method-detail">
+        <a name="M001885"></a>
+
+        <div class="method-heading">
+          <a href="Dispatcher.src/M001885.html" target="Code" class="method-signature"
+            onclick="popupCode('Dispatcher.src/M001885.html');return false;">
+          <span class="method-name">flush_logger</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

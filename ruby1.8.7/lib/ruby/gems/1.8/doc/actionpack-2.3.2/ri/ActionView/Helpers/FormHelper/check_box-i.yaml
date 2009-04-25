@@ -1,0 +1,34 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a checkbox tag tailored for accessing a specified attribute (identified by <tt>method</tt>) on an object assigned to the template (identified by <tt>object</tt>). This object must be an instance object (@object) and not a local object. It's intended that <tt>method</tt> returns an integer and if that integer is above zero, then the checkbox is checked. Additional options on the input tag can be passed as a hash with <tt>options</tt>. The <tt>checked_value</tt> defaults to 1 while the default <tt>unchecked_value</tt> is set to 0 which is convenient for boolean values.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Gotcha
+- !ruby/struct:SM::Flow::P 
+  body: "The HTML specification says unchecked check boxes are not successful, and thus web browsers do not send them. Unfortunately this introduces a gotcha: if an Invoice model has a <tt>paid</tt> flag, and in the form that edits a paid invoice the user unchecks its check box, no <tt>paid</tt> parameter is sent. So, any mass-assignment idiom like"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  @invoice.update_attributes(params[:invoice])\n"
+- !ruby/struct:SM::Flow::P 
+  body: wouldn't update the flag.
+- !ruby/struct:SM::Flow::P 
+  body: To prevent this the helper generates a hidden field with the same name as the checkbox after the very check box. So, the client either sends only the hidden field (representing the check box is unchecked), or both fields. Since the HTML specification says key/value pairs have to be sent in the same order they appear in the form and Rails parameters extraction always gets the first occurrence of any given key, that works in ordinary forms.
+- !ruby/struct:SM::Flow::P 
+  body: Unfortunately that workaround does not work when the check box goes within an array-like parameter, as in
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% fields_for &quot;project[invoice_attributes][]&quot;, invoice, :index =&gt; nil do |form| %&gt;\n    &lt;%= form.check_box :paid %&gt;\n    ...\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: because parameter name repetition is precisely what Rails seeks to distinguish the elements of the array.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # Let's say that @post.validated? is 1:\n  check_box(&quot;post&quot;, &quot;validated&quot;)\n  # =&gt; &lt;input type=&quot;checkbox&quot; id=&quot;post_validated&quot; name=&quot;post[validated]&quot; value=&quot;1&quot; /&gt;\n  #    &lt;input name=&quot;post[validated]&quot; type=&quot;hidden&quot; value=&quot;0&quot; /&gt;\n\n  # Let's say that @puppy.gooddog is &quot;no&quot;:\n  check_box(&quot;puppy&quot;, &quot;gooddog&quot;, {}, &quot;yes&quot;, &quot;no&quot;)\n  # =&gt; &lt;input type=&quot;checkbox&quot; id=&quot;puppy_gooddog&quot; name=&quot;puppy[gooddog]&quot; value=&quot;yes&quot; /&gt;\n  #    &lt;input name=&quot;puppy[gooddog]&quot; type=&quot;hidden&quot; value=&quot;no&quot; /&gt;\n\n  check_box(&quot;eula&quot;, &quot;accepted&quot;, { :class =&gt; 'eula_check' }, &quot;yes&quot;, &quot;no&quot;)\n  # =&gt; &lt;input type=&quot;checkbox&quot; class=&quot;eula_check&quot; id=&quot;eula_accepted&quot; name=&quot;eula[accepted]&quot; value=&quot;yes&quot; /&gt;\n  #    &lt;input name=&quot;eula[accepted]&quot; type=&quot;hidden&quot; value=&quot;no&quot; /&gt;\n"
+full_name: ActionView::Helpers::FormHelper#check_box
+is_singleton: false
+name: check_box
+params: (object_name, method, options = {}, checked_value = "1", unchecked_value = "0")
+visibility: public

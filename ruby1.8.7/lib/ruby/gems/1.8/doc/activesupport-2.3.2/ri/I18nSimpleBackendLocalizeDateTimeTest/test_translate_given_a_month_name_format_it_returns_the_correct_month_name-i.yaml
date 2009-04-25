@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendLocalizeDateTimeTest#test_translate_given_a_month_name_format_it_returns_the_correct_month_name
+is_singleton: false
+name: test_translate_given_a_month_name_format_it_returns_the_correct_month_name
+params: ()
+visibility: public

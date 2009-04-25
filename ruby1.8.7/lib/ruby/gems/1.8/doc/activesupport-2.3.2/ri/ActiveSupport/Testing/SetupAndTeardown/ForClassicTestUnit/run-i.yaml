@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (Test::Unit::TestCase::STARTED, name)
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "This redefinition is unfortunate but test/unit shows us no alternative. Doubly unfortunate: hax to support Mocha's hax."
+full_name: ActiveSupport::Testing::SetupAndTeardown::ForClassicTestUnit#run
+is_singleton: false
+name: run
+params: (result) {|Test::Unit::TestCase::STARTED, name| ...}
+visibility: public

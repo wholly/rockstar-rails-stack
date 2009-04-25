@@ -1,0 +1,86 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: builder.new(object_name, object, self, options, block)
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a scope around a specific model object like form_for, but doesn't create the form tags themselves. This makes fields_for suitable for specifying additional model objects in the same form.
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: Generic Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% form_for @person, :url =&gt; { :action =&gt; &quot;update&quot; } do |person_form| %&gt;\n    First name: &lt;%= person_form.text_field :first_name %&gt;\n    Last name : &lt;%= person_form.text_field :last_name %&gt;\n\n    &lt;% fields_for @person.permission do |permission_fields| %&gt;\n      Admin?  : &lt;%= permission_fields.check_box :admin %&gt;\n    &lt;% end %&gt;\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "...or if you have an object that needs to be represented as a different parameter, like a Client that acts as a Person:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% fields_for :person, @client do |permission_fields| %&gt;\n    Admin?: &lt;%= permission_fields.check_box :admin %&gt;\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "...or if you don't have an object, just a name of the parameter:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% fields_for :person do |permission_fields| %&gt;\n    Admin?: &lt;%= permission_fields.check_box :admin %&gt;\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Note: This also works for the methods in FormOptionHelper and DateHelper that are designed to work with an object as base, like FormOptionHelper#collection_select and DateHelper#datetime_select."
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: Nested Attributes Examples
+- !ruby/struct:SM::Flow::P 
+  body: When the object belonging to the current scope has a nested attribute writer for a certain attribute, fields_for will yield a new scope for that attribute. This allows you to create forms that set or change the attributes of a parent object and its associations in one go.
+- !ruby/struct:SM::Flow::P 
+  body: "Nested attribute writers are normal setter methods named after an association. The most common way of defining these writers is either with <tt>accepts_nested_attributes_for</tt> in a model definition or by defining a method with the proper name. For example: the attribute writer for the association <tt>:address</tt> is called <tt>address_attributes=</tt>."
+- !ruby/struct:SM::Flow::P 
+  body: Whether a one-to-one or one-to-many style form builder will be yielded depends on whether the normal reader method returns a <em>single</em> object or an <em>array</em> of objects.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: One-to-one
+- !ruby/struct:SM::Flow::P 
+  body: "Consider a Person class which returns a <em>single</em> Address from the <tt>address</tt> reader method and responds to the <tt>address_attributes=</tt> writer method:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Person\n    def address\n      @address\n    end\n\n    def address_attributes=(attributes)\n      # Process the attributes hash\n    end\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "This model can now be used with a nested fields_for, like so:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% form_for @person, :url =&gt; { :action =&gt; &quot;update&quot; } do |person_form| %&gt;\n    ...\n    &lt;% person_form.fields_for :address do |address_fields| %&gt;\n      Street  : &lt;%= address_fields.text_field :street %&gt;\n      Zip code: &lt;%= address_fields.text_field :zip_code %&gt;\n    &lt;% end %&gt;\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "When address is already an association on a Person you can use <tt>accepts_nested_attributes_for</tt> to define the writer method for you:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Person &lt; ActiveRecord::Base\n    has_one :address\n    accepts_nested_attributes_for :address\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "If you want to destroy the associated model through the form, you have to enable it first using the <tt>:allow_destroy</tt> option for <tt>accepts_nested_attributes_for</tt>:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Person &lt; ActiveRecord::Base\n    has_one :address\n    accepts_nested_attributes_for :address, :allow_destroy =&gt; true\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Now, when you use a form element with the <tt>_delete</tt> parameter, with a value that evaluates to <tt>true</tt>, you will destroy the associated model (eg. 1, '1', true, or 'true'):"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% form_for @person, :url =&gt; { :action =&gt; &quot;update&quot; } do |person_form| %&gt;\n    ...\n    &lt;% person_form.fields_for :address do |address_fields| %&gt;\n      ...\n      Delete: &lt;%= address_fields.check_box :_delete %&gt;\n    &lt;% end %&gt;\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: One-to-many
+- !ruby/struct:SM::Flow::P 
+  body: "Consider a Person class which returns an <em>array</em> of Project instances from the <tt>projects</tt> reader method and responds to the <tt>projects_attributes=</tt> writer method:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Person\n    def projects\n      [@project1, @project2]\n    end\n\n    def projects_attributes=(attributes)\n      # Process the attributes hash\n    end\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "This model can now be used with a nested fields_for. The block given to the nested fields_for call will be repeated for each instance in the collection:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% form_for @person, :url =&gt; { :action =&gt; &quot;update&quot; } do |person_form| %&gt;\n    ...\n    &lt;% person_form.fields_for :projects do |project_fields| %&gt;\n      &lt;% if project_fields.object.active? %&gt;\n        Name: &lt;%= project_fields.text_field :name %&gt;\n      &lt;% end %&gt;\n    &lt;% end %&gt;\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "It's also possible to specify the instance to be used:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% form_for @person, :url =&gt; { :action =&gt; &quot;update&quot; } do |person_form| %&gt;\n    ...\n    &lt;% @person.projects.each do |project| %&gt;\n      &lt;% if project.active? %&gt;\n        &lt;% person_form.fields_for :projects, project do |project_fields| %&gt;\n          Name: &lt;%= project_fields.text_field :name %&gt;\n        &lt;% end %&gt;\n      &lt;% end %&gt;\n    &lt;% end %&gt;\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "When projects is already an association on Person you can use <tt>accepts_nested_attributes_for</tt> to define the writer method for you:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Person &lt; ActiveRecord::Base\n    has_many :projects\n    accepts_nested_attributes_for :projects\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "If you want to destroy any of the associated models through the form, you have to enable it first using the <tt>:allow_destroy</tt> option for <tt>accepts_nested_attributes_for</tt>:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Person &lt; ActiveRecord::Base\n    has_many :projects\n    accepts_nested_attributes_for :projects, :allow_destroy =&gt; true\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "This will allow you to specify which models to destroy in the attributes hash by adding a form element for the <tt>_delete</tt> parameter with a value that evaluates to <tt>true</tt> (eg. 1, '1', true, or 'true'):"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% form_for @person, :url =&gt; { :action =&gt; &quot;update&quot; } do |person_form| %&gt;\n    ...\n    &lt;% person_form.fields_for :projects do |project_fields| %&gt;\n      Delete: &lt;%= project_fields.check_box :_delete %&gt;\n    &lt;% end %&gt;\n  &lt;% end %&gt;\n"
+full_name: ActionView::Helpers::FormHelper#fields_for
+is_singleton: false
+name: fields_for
+params: (record_or_name_or_array, *args, &block) {|builder.new(object_name, object, self, options, block)| ...}
+visibility: public

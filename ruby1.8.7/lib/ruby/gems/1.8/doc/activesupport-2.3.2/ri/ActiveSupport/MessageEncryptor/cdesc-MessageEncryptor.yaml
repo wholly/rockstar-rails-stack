@@ -1,0 +1,32 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: MessageEncryptor is a simple way to encrypt values which get stored somewhere you don't trust.
+- !ruby/struct:SM::Flow::P 
+  body: The cipher text and initialization vector are base64 encoded and returned to you.
+- !ruby/struct:SM::Flow::P 
+  body: This can be used in situations similar to the MessageVerifier, but where you don't want users to be able to determine the value of the payload.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: OpenSSLCipherError
+  value: "OpenSSL::Cipher.const_defined?(:CipherError) ? OpenSSL::Cipher::CipherError : OpenSSL::CipherError"
+full_name: ActiveSupport::MessageEncryptor
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: decrypt
+- !ruby/object:RI::MethodSummary 
+  name: decrypt_and_verify
+- !ruby/object:RI::MethodSummary 
+  name: encrypt
+- !ruby/object:RI::MethodSummary 
+  name: encrypt_and_sign
+name: MessageEncryptor
+superclass: Object

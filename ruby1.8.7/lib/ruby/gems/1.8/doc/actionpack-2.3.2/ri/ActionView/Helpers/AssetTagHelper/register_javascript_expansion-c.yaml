@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Register one or more javascript files to be included when <tt>symbol</tt> is passed to <tt>javascript_include_tag</tt>. This method is typically intended to be called from plugin initialization to register javascript files that the plugin installed in <tt>public/javascripts</tt>.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  ActionView::Helpers::AssetTagHelper.register_javascript_expansion :monkey =&gt; [&quot;head&quot;, &quot;body&quot;, &quot;tail&quot;]\n\n  javascript_include_tag :monkey # =&gt;\n    &lt;script type=&quot;text/javascript&quot; src=&quot;/javascripts/head.js&quot;&gt;&lt;/script&gt;\n    &lt;script type=&quot;text/javascript&quot; src=&quot;/javascripts/body.js&quot;&gt;&lt;/script&gt;\n    &lt;script type=&quot;text/javascript&quot; src=&quot;/javascripts/tail.js&quot;&gt;&lt;/script&gt;\n"
+full_name: ActionView::Helpers::AssetTagHelper::register_javascript_expansion
+is_singleton: true
+name: register_javascript_expansion
+params: (expansions)
+visibility: public

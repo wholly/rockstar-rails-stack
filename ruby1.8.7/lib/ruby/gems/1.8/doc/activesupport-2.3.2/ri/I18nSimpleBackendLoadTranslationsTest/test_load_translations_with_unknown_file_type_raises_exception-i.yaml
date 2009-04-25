@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendLoadTranslationsTest#test_load_translations_with_unknown_file_type_raises_exception
+is_singleton: false
+name: test_load_translations_with_unknown_file_type_raises_exception
+params: ()
+visibility: public

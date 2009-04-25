@@ -1,0 +1,28 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Performs a GET request with the given parameters.
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "-"
+    body: "<tt>path</tt>: The URI (as a String) on which you want to perform a GET request."
+  - !ruby/struct:SM::Flow::LI 
+    label: "-"
+    body: "<tt>parameters</tt>: The HTTP parameters that you want to pass. This may be <tt>nil</tt>, a Hash, or a String that is appropriately encoded (<tt>application/x-www-form-urlencoded</tt> or <tt>multipart/form-data</tt>)."
+  - !ruby/struct:SM::Flow::LI 
+    label: "-"
+    body: "<tt>headers</tt>: Additional HTTP headers to pass, as a Hash. The keys will automatically be upcased, with the prefix 'HTTP_' added if needed."
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: This method returns an Response object, which one can use to inspect the details of the response. Furthermore, if this method was called from an ActionController::IntegrationTest object, then that object's <tt>@response</tt> instance variable will point to the same response object.
+- !ruby/struct:SM::Flow::P 
+  body: You can also perform POST, PUT, DELETE, and HEAD requests with <tt>post</tt>, <tt>put</tt>, <tt>delete</tt>, and <tt>head</tt>.
+full_name: ActionController::Integration::Session#get
+is_singleton: false
+name: get
+params: (path, parameters = nil, headers = nil)
+visibility: public

@@ -1,0 +1,36 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ENV_SESSION_KEY
+  value: "'rack.session'.freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ENV_SESSION_OPTIONS_KEY
+  value: "'rack.session.options'.freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: HTTP_COOKIE
+  value: "'HTTP_COOKIE'.freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: SET_COOKIE
+  value: "'Set-Cookie'.freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: DEFAULT_OPTIONS
+  value: "{         :key =>           '_session_id',         :path =>          '/',         :domain =>        nil,         :expire_after =>  nil,         :secure =>        false,         :httponly =>      true,         :cookie_only =>   true"
+full_name: ActionController::Session::AbstractStore
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: call
+name: AbstractStore
+superclass: Object

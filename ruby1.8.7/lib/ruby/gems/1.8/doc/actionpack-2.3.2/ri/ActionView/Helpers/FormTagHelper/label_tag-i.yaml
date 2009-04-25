@@ -1,0 +1,26 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a label field
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Options
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Creates standard HTML attributes for the tag.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  label_tag 'name'\n  # =&gt; &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;\n\n  label_tag 'name', 'Your name'\n  # =&gt; &lt;label for=&quot;name&quot;&gt;Your Name&lt;/label&gt;\n\n  label_tag 'name', nil, :class =&gt; 'small_label'\n  # =&gt; &lt;label for=&quot;name&quot; class=&quot;small_label&quot;&gt;Name&lt;/label&gt;\n"
+full_name: ActionView::Helpers::FormTagHelper#label_tag
+is_singleton: false
+name: label_tag
+params: (name, text = nil, options = {})
+visibility: public

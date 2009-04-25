@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a new email in reply to self. Sets the In-Reply-To and References headers for you automagically.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.load(&quot;my_email&quot;)\n forward_email = mail.create_forward\n forward_email.class         #=&gt; TMail::Mail\n forward_email.content_type  #=&gt; &quot;multipart/mixed&quot;\n forward_email.body          #=&gt; &quot;Attachment: (unnamed)&quot;\n forward_email.encoded       #=&gt; Returns the original email as a MIME attachment\n"
+full_name: TMail::Mail#create_forward
+is_singleton: false
+name: create_forward
+params: ()
+visibility: public

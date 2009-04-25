@@ -1,0 +1,28 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Destroys the records matching <tt>conditions</tt> by instantiating each record and calling its <tt>destroy</tt> method. Each object's callbacks are executed (including <tt>:dependent</tt> association options and <tt>before_destroy</tt>/<tt>after_destroy</tt> Observer methods). Returns the collection of objects that were destroyed; each will be frozen, to reflect that no changes should be made (since they can't be persisted).
+- !ruby/struct:SM::Flow::P 
+  body: "Note: Instantiation, callback execution, and deletion of each record can be time consuming when you're removing many records at once. It generates at least one SQL <tt>DELETE</tt> query per record (or possibly more, to enforce your callbacks). If you want to delete many rows quickly, without concern for their associations or callbacks, use <tt>delete_all</tt> instead."
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Parameters
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>conditions</tt> - A string, array, or hash that specifies which records to destroy. If omitted, all records are destroyed. See the Conditions section in the introduction to ActiveRecord::Base for more information.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Person.destroy_all(&quot;last_login &lt; '2004-04-04'&quot;)\n  Person.destroy_all(:status =&gt; &quot;inactive&quot;)\n"
+full_name: ActiveRecord::Base::destroy_all
+is_singleton: true
+name: destroy_all
+params: (conditions = nil)
+visibility: public

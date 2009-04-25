@@ -1,0 +1,20 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: records
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Yields each batch of records that was found by the find <tt>options</tt> as an array. The size of each batch is set by the <tt>batch_size</tt> option; the default is 1000.
+- !ruby/struct:SM::Flow::P 
+  body: You can control the starting point for the batch processing by supplying the <tt>start</tt> option. This is especially useful if you want multiple workers dealing with the same processing queue. You can make worker 1 handle all the records between id 0 and 10,000 and worker 2 handle from 10,000 and beyond (by setting the <tt>start</tt> option on that worker).
+- !ruby/struct:SM::Flow::P 
+  body: It's not possible to set the order. That is automatically set to ascending on the primary key (&quot;id ASC&quot;) to make the batch ordering work. This also mean that this method only works with integer-based primary keys. You can't set the limit either, that's used to control the the batch sizes.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Person.find_in_batches(:conditions =&gt; &quot;age &gt; 21&quot;) do |group|\n    sleep(50) # Make sure it doesn't get too crowded in there!\n    group.each { |person| person.party_all_night! }\n  end\n"
+full_name: ActiveRecord::Batches::ClassMethods#find_in_batches
+is_singleton: false
+name: find_in_batches
+params: (options = {}) {|records| ...}
+visibility: public

@@ -1,0 +1,20 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a String, which Action Pack uses for constructing an URL to this object. The default implementation returns this record's id as a String, or nil if this record's unsaved.
+- !ruby/struct:SM::Flow::P 
+  body: "For example, suppose that you have a User model, and that you have a <tt>map.resources :users</tt> route. Normally, <tt>user_path</tt> will construct a path with the user object's 'id' in it:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  user = User.find_by_name('Phusion')\n  user_path(user)  # =&gt; &quot;/users/1&quot;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "You can override <tt>to_param</tt> in your model to make <tt>user_path</tt> construct a path using the user's name instead of the user's id:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class User &lt; ActiveRecord::Base\n    def to_param  # overridden\n      name\n    end\n  end\n\n  user = User.find_by_name('Phusion')\n  user_path(user)  # =&gt; &quot;/users/Phusion&quot;\n"
+full_name: ActiveRecord::Base#to_param
+is_singleton: false
+name: to_param
+params: ()
+visibility: public

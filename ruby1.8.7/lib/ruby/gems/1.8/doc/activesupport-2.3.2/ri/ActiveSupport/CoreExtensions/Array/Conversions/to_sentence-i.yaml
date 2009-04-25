@@ -1,0 +1,24 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Converts the array to a comma-separated sentence where the last element is joined by the connector word. Options:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:words_connector</tt> - The sign or word used to join the elements in arrays with two or more elements (default: &quot;, &quot;)"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:two_words_connector</tt> - The sign or word used to join the elements in arrays with two elements (default: &quot; and &quot;)"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:last_word_connector</tt> - The sign or word used to join the last element in arrays with three or more elements (default: &quot;, and &quot;)"
+  type: :BULLET
+full_name: ActiveSupport::CoreExtensions::Array::Conversions#to_sentence
+is_singleton: false
+name: to_sentence
+params: (options = {})
+visibility: public

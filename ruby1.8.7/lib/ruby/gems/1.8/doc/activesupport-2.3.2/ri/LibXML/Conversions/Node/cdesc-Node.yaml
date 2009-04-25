@@ -1,0 +1,37 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: CONTENT_ROOT
+  value: "'__content__'"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: LIB_XML_LIMIT
+  value: "30000000"
+full_name: LibXML::Conversions::Node
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: array?
+- !ruby/object:RI::MethodSummary 
+  name: attributes_to_hash
+- !ruby/object:RI::MethodSummary 
+  name: children_array_to_hash
+- !ruby/object:RI::MethodSummary 
+  name: children_to_hash
+- !ruby/object:RI::MethodSummary 
+  name: children_yaml_to_hash
+- !ruby/object:RI::MethodSummary 
+  name: insert_name_into_hash
+- !ruby/object:RI::MethodSummary 
+  name: to_hash
+- !ruby/object:RI::MethodSummary 
+  name: yaml?
+name: Node
+superclass: 

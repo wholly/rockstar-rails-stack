@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns true if the content type of this part of the email is a disposition attachment
+full_name: TMail::Mail#disposition_is_attachment?
+is_singleton: false
+name: disposition_is_attachment?
+params: ()
+visibility: public

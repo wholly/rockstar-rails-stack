@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Provides the name or 'phrase' of the email address.
+- !ruby/struct:SM::Flow::P 
+  body: "For Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " email = TMail::Address.parse(&quot;Mikel Lindsaar &lt;mikel@lindsaar.net&gt;&quot;)\n email.name\n #=&gt; &quot;Mikel Lindsaar&quot;\n"
+full_name: TMail::Address#name
+is_singleton: false
+name: name
+params: ()
+visibility: public

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>with_server (MemCache)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_support/vendor/memcache-client-1.6.5/memcache.rb, line 635</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_server</span>(<span class="ruby-identifier">key</span>)
+    <span class="ruby-identifier">retried</span> = <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">begin</span>
+      <span class="ruby-identifier">server</span>, <span class="ruby-identifier">cache_key</span> = <span class="ruby-identifier">request_setup</span>(<span class="ruby-identifier">key</span>)
+      <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">server</span>, <span class="ruby-identifier">cache_key</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">IndexError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;Server failed: #{e.class.name}: #{e.message}&quot;</span> } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">logger</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">retried</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@servers</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Connection to server #{server.inspect} DIED! Retrying operation...&quot;</span> } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">logger</span>
+        <span class="ruby-identifier">retried</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">retry</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">handle_error</span>(<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">e</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

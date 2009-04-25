@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>accepts_nested_attributes_for (ActiveRecord::NestedAttributes::ClassMethods)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_record/nested_attributes.rb, line 189</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">accepts_nested_attributes_for</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attr_names</span>)
+        <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">:allow_destroy</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">attr_names</span>.<span class="ruby-identifier">extract_options!</span>)
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-identifier">:allow_destroy</span>, <span class="ruby-identifier">:reject_if</span>)
+
+        <span class="ruby-identifier">attr_names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">association_name</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">reflection</span> = <span class="ruby-identifier">reflect_on_association</span>(<span class="ruby-identifier">association_name</span>)
+            <span class="ruby-identifier">type</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">macro</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:has_one</span>, <span class="ruby-identifier">:belongs_to</span>
+              <span class="ruby-identifier">:one_to_one</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:has_many</span>, <span class="ruby-identifier">:has_and_belongs_to_many</span>
+              <span class="ruby-identifier">:collection</span>
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:autosave</span>] = <span class="ruby-keyword kw">true</span>
+            <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">reject_new_nested_attributes_procs</span>[<span class="ruby-identifier">association_name</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:reject_if</span>]
+
+            <span class="ruby-comment cmt"># def pirate_attributes=(attributes)</span>
+            <span class="ruby-comment cmt">#   assign_nested_attributes_for_one_to_one_association(:pirate, attributes, false)</span>
+            <span class="ruby-comment cmt"># end</span>
+            <span class="ruby-identifier">class_eval</span> <span class="ruby-node">%{
+              def #{association_name}_attributes=(attributes)
+                assign_nested_attributes_for_#{type}_association(:#{association_name}, attributes, #{options[:allow_destroy]})
+              end
+            }</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;No association found for name `#{association_name}'. Has it been defined yet?&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

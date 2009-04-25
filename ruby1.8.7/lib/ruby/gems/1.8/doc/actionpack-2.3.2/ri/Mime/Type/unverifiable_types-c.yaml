@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Mime::Type::unverifiable_types
+is_singleton: true
+name: unverifiable_types
+params: ()
+visibility: public

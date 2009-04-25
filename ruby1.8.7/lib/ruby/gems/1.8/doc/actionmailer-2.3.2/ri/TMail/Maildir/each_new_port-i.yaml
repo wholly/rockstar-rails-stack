@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: PORT_CLASS.new(dest)
+comment: 
+full_name: TMail::Maildir#each_new_port
+is_singleton: false
+name: each_new_port
+params: () {|PORT_CLASS.new(dest)| ...}
+visibility: public

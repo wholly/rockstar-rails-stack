@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Response#etag=
+is_singleton: false
+name: etag=
+params: (etag)
+visibility: public

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setup_fixtures (ActiveRecord::TestFixtures)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_record/fixtures.rb, line 910</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_fixtures</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">ActiveRecord</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">configurations</span>.<span class="ruby-identifier">blank?</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pre_loaded_fixtures</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">use_transactional_fixtures</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeError</span>, <span class="ruby-value str">'pre_loaded_fixtures requires use_transactional_fixtures'</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-ivar">@fixture_cache</span> = {}
+      <span class="ruby-ivar">@@already_loaded_fixtures</span> <span class="ruby-operator">||=</span> {}
+
+      <span class="ruby-comment cmt"># Load fixtures once and begin transaction.</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">run_in_transaction?</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@@already_loaded_fixtures</span>[<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>]
+          <span class="ruby-ivar">@loaded_fixtures</span> = <span class="ruby-ivar">@@already_loaded_fixtures</span>[<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>]
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">load_fixtures</span>
+          <span class="ruby-ivar">@@already_loaded_fixtures</span>[<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>] = <span class="ruby-ivar">@loaded_fixtures</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">increment_open_transactions</span>
+        <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">transaction_joinable</span> = <span class="ruby-keyword kw">false</span>
+        <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">begin_db_transaction</span>
+      <span class="ruby-comment cmt"># Load fixtures for every test.</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-constant">Fixtures</span>.<span class="ruby-identifier">reset_cache</span>
+        <span class="ruby-ivar">@@already_loaded_fixtures</span>[<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>] = <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-identifier">load_fixtures</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># Instantiate fixtures for every test if requested.</span>
+      <span class="ruby-identifier">instantiate_fixtures</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">use_instantiated_fixtures</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>call (ActionController::Session::AbstractStore)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_controller/session/abstract_store.rb, line 116</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+        <span class="ruby-identifier">session</span> = <span class="ruby-constant">SessionHash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">env</span>)
+
+        <span class="ruby-identifier">env</span>[<span class="ruby-constant">ENV_SESSION_KEY</span>] = <span class="ruby-identifier">session</span>
+        <span class="ruby-identifier">env</span>[<span class="ruby-constant">ENV_SESSION_OPTIONS_KEY</span>] = <span class="ruby-ivar">@default_options</span>.<span class="ruby-identifier">dup</span>
+
+        <span class="ruby-identifier">response</span> = <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+
+        <span class="ruby-identifier">session_data</span> = <span class="ruby-identifier">env</span>[<span class="ruby-constant">ENV_SESSION_KEY</span>]
+        <span class="ruby-identifier">options</span> = <span class="ruby-identifier">env</span>[<span class="ruby-constant">ENV_SESSION_OPTIONS_KEY</span>]
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">session_data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AbstractStore</span><span class="ruby-operator">::</span><span class="ruby-constant">SessionHash</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">session_data</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:loaded?</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:expire_after</span>]
+          <span class="ruby-identifier">session_data</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:load!</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">session_data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AbstractStore</span><span class="ruby-operator">::</span><span class="ruby-constant">SessionHash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">session_data</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:loaded?</span>)
+
+          <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:id</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">generate_sid</span>
+
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">set_session</span>(<span class="ruby-identifier">env</span>, <span class="ruby-identifier">sid</span>, <span class="ruby-identifier">session_data</span>.<span class="ruby-identifier">to_hash</span>)
+            <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">cookie</span> = <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-ivar">@key</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'='</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">sid</span>)
+          <span class="ruby-identifier">cookie</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;; domain=#{options[:domain]}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:domain</span>]
+          <span class="ruby-identifier">cookie</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;; path=#{options[:path]}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:path</span>]
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:expire_after</span>]
+            <span class="ruby-identifier">expiry</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:expire_after</span>]
+            <span class="ruby-identifier">cookie</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;; expires=#{expiry.httpdate}&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">cookie</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;; Secure&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:secure</span>]
+          <span class="ruby-identifier">cookie</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;; HttpOnly&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:httponly</span>]
+
+          <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">response</span>[<span class="ruby-value">1</span>]
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">headers</span>[<span class="ruby-constant">SET_COOKIE</span>].<span class="ruby-identifier">blank?</span>
+            <span class="ruby-identifier">headers</span>[<span class="ruby-constant">SET_COOKIE</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;\n#{cookie}&quot;</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">headers</span>[<span class="ruby-constant">SET_COOKIE</span>] = <span class="ruby-identifier">cookie</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">response</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

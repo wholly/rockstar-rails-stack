@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#future?
+is_singleton: false
+name: future?
+params: ()
+visibility: public

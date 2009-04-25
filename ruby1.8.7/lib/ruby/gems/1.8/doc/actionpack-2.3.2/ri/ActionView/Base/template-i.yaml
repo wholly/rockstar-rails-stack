@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Access the current template being rendered. Returns a ActionView::Template object.
+full_name: ActionView::Base#template
+is_singleton: false
+name: template
+params: ()
+visibility: public

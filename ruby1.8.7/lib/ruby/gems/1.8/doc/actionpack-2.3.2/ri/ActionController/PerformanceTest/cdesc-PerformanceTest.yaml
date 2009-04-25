@@ -1,0 +1,22 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: An integration test that runs a code profiler on your test methods. Profiling output for combinations of each test method, measurement, and output format are written to your tmp/performance directory.
+- !ruby/struct:SM::Flow::P 
+  body: By default, process_time is measured and both flat and graph_html output formats are written, so you'll have two output files per test method.
+constants: []
+
+full_name: ActionController::PerformanceTest
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::Testing::Performance
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::Testing::Default
+instance_methods: []
+
+name: PerformanceTest
+superclass: ActionController::IntegrationTest

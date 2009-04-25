@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Invokes a GET to a given custom REST method. For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Person.get(:active)  # GET /people/active.xml\n  # =&gt; [{:id =&gt; 1, :name =&gt; 'Ryan'}, {:id =&gt; 2, :name =&gt; 'Joe'}]\n\n  Person.get(:active, :awesome =&gt; true)  # GET /people/active.xml?awesome=true\n  # =&gt; [{:id =&gt; 1, :name =&gt; 'Ryan'}]\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Note: the objects returned from this method are not automatically converted into ActiveResource::Base instances - they are ordinary Hashes. If you are expecting ActiveResource::Base instances, use the <tt>find</tt> class method with the <tt>:from</tt> option. For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Person.find(:all, :from =&gt; :active)\n"
+full_name: ActiveResource::CustomMethods::get
+is_singleton: true
+name: get
+params: (custom_method_name, options = {})
+visibility: public

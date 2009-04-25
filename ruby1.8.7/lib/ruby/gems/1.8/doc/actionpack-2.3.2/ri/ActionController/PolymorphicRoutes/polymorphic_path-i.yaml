@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the path component of a URL for the given record. It uses <tt>polymorphic_url</tt> with <tt>:routing_type =&gt; :path</tt>.
+full_name: ActionController::PolymorphicRoutes#polymorphic_path
+is_singleton: false
+name: polymorphic_path
+params: (record_or_hash_or_array, options = {})
+visibility: public

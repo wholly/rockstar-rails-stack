@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nTest#test_uses_default_locale_as_locale_by_default
+is_singleton: false
+name: test_uses_default_locale_as_locale_by_default
+params: ()
+visibility: public

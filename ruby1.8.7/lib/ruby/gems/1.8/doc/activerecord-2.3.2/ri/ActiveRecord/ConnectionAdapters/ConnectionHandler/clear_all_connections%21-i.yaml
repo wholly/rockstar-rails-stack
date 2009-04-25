@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::ConnectionAdapters::ConnectionHandler#clear_all_connections!
+is_singleton: false
+name: clear_all_connections!
+params: ()
+visibility: public

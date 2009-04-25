@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#to_yaml
+is_singleton: false
+name: to_yaml
+params: (options = {})
+visibility: public

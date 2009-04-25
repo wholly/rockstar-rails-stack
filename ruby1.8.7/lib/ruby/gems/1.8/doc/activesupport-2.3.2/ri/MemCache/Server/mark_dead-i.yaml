@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Mark the server as dead and close its socket.
+full_name: MemCache::Server#mark_dead
+is_singleton: false
+name: mark_dead
+params: (error)
+visibility: public

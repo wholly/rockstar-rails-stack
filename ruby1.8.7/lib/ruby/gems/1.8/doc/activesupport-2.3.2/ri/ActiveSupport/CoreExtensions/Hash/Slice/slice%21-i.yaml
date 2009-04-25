@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Replaces the hash with only the given keys. Returns a hash contained the removed key/value pairs
+- !ruby/struct:SM::Flow::VERB 
+  body: "  {:a =&gt; 1, :b =&gt; 2, :c =&gt; 3, :d =&gt; 4}.slice!(:a, :b) # =&gt; {:c =&gt; 3, :d =&gt;4}\n"
+full_name: ActiveSupport::CoreExtensions::Hash::Slice#slice!
+is_singleton: false
+name: slice!
+params: (*keys)
+visibility: public

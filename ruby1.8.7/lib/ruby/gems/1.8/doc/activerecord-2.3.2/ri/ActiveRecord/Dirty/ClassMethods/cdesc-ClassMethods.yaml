@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: extended
+comment: 
+constants: []
+
+full_name: ActiveRecord::Dirty::ClassMethods
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: alias_attribute_with_dirty
+name: ClassMethods
+superclass: 

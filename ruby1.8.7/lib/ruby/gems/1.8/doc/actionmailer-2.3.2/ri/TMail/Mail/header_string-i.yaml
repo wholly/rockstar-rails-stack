@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Allows you to query the mail object with a string to get the contents of the field you want.
+- !ruby/struct:SM::Flow::P 
+  body: Returns a string of the exact contents of the field
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail.from = &quot;mikel &lt;mikel@lindsaar.net&gt;&quot;\n mail.header_string(&quot;From&quot;) #=&gt; &quot;mikel &lt;mikel@lindsaar.net&gt;&quot;\n"
+full_name: TMail::Mail#header_string
+is_singleton: false
+name: header_string
+params: ( name, default = nil )
+visibility: public

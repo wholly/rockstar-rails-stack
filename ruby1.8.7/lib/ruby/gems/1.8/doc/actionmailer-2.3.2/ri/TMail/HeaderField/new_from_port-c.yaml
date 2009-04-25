@@ -1,0 +1,26 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a HeaderField object matching the header you specify in the &quot;name&quot; param. Requires an initialized TMail::Port to be passed in.
+- !ruby/struct:SM::Flow::P 
+  body: The method searches the header of the Port you pass into it to find a match on the header line you pass. Once a match is found, it will unwrap the matching line as needed to return an initialized HeaderField object.
+- !ruby/struct:SM::Flow::P 
+  body: If you want to get the Envelope sender of the email object, pass in &quot;EnvelopeSender&quot;, if you want the From address of the email itself, pass in 'From'.
+- !ruby/struct:SM::Flow::P 
+  body: "This is because a mailbox doesn't have the : after the From that designates the beginning of the envelope sender (which can be different to the from address of the email)"
+- !ruby/struct:SM::Flow::P 
+  body: Other fields can be passed as normal, &quot;Reply-To&quot;, &quot;Received&quot; etc.
+- !ruby/struct:SM::Flow::P 
+  body: "Note: Change of behaviour in 1.2.1 =&gt; returns nil if it does not find the specified header field, otherwise returns an instantiated object of the correct header class"
+- !ruby/struct:SM::Flow::P 
+  body: "For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  port = TMail::FilePort.new(&quot;/test/fixtures/raw_email_simple&quot;)\n  h = TMail::HeaderField.new_from_port(port, &quot;From&quot;)\n  h.addrs.to_s #=&gt; &quot;Mikel Lindsaar &lt;mikel@nowhere.com&gt;&quot;\n  h = TMail::HeaderField.new_from_port(port, &quot;EvelopeSender&quot;)\n  h.addrs.to_s #=&gt; &quot;mike@anotherplace.com.au&quot;\n  h = TMail::HeaderField.new_from_port(port, &quot;SomeWeirdHeaderField&quot;)\n  h #=&gt; nil\n"
+full_name: TMail::HeaderField::new_from_port
+is_singleton: true
+name: new_from_port
+params: ( port, name, conf = DEFAULT_CONFIG )
+visibility: public

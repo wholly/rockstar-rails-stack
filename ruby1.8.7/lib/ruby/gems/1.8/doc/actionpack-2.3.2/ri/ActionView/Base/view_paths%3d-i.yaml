@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::Base#view_paths=
+is_singleton: false
+name: view_paths=
+params: (paths)
+visibility: public

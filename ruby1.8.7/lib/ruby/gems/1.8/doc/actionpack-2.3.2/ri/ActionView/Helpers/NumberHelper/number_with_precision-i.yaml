@@ -1,0 +1,36 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Formats a <tt>number</tt> with the specified level of <tt>:precision</tt> (e.g., 112.32 has a precision of 2). You can customize the format in the <tt>options</tt> hash.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Options
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:precision</tt> - Sets the level of precision (defaults to 3).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:separator</tt> - Sets the separator between the units (defaults to &quot;.&quot;).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:delimiter</tt> - Sets the thousands delimiter (defaults to &quot;&quot;).
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: " number_with_precision(111.2345)                    # =&gt; 111.235\n number_with_precision(111.2345, :precision =&gt; 2)   # =&gt; 111.23\n number_with_precision(13, :precision =&gt; 5)         # =&gt; 13.00000\n number_with_precision(389.32314, :precision =&gt; 0)  # =&gt; 389\n number_with_precision(1111.2345, :precision =&gt; 2, :separator =&gt; ',', :delimiter =&gt; '.')\n # =&gt; 1.111,23\n"
+- !ruby/struct:SM::Flow::P 
+  body: "You can still use <tt>number_with_precision</tt> with the old API that accepts the <tt>precision</tt> as its optional second parameter:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  number_with_precision(number_with_precision(111.2345, 2)   # =&gt; 111.23\n"
+full_name: ActionView::Helpers::NumberHelper#number_with_precision
+is_singleton: false
+name: number_with_precision
+params: (number, *args)
+visibility: public

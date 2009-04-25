@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: key
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: string
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: I18n::ReservedInterpolationKey
+includes: []
+
+instance_methods: []
+
+name: ReservedInterpolationKey
+superclass: ArgumentError

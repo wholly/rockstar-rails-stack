@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns an array of all request objects that have been sent to the mock. You can use this to check if your model actually sent an HTTP request.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Example
+- !ruby/struct:SM::Flow::VERB 
+  body: "  def setup\n    @matz  = { :id =&gt; 1, :name =&gt; &quot;Matz&quot; }.to_xml(:root =&gt; &quot;person&quot;)\n    ActiveResource::HttpMock.respond_to do |mock|\n      mock.get &quot;/people/1.xml&quot;, {}, @matz\n    end\n  end\n\n  def test_should_request_remote_service\n    person = Person.find(1)  # Call the remote service\n\n    # This request object has the same HTTP method and path as declared by the mock\n    expected_request = ActiveResource::Request.new(:get, &quot;/people/1.xml&quot;)\n\n    # Assert that the mock received, and responded to, the expected request from the model\n    assert ActiveResource::HttpMock.requests.include?(expected_request)\n  end\n"
+full_name: ActiveResource::HttpMock::requests
+is_singleton: true
+name: requests
+params: ()
+visibility: public

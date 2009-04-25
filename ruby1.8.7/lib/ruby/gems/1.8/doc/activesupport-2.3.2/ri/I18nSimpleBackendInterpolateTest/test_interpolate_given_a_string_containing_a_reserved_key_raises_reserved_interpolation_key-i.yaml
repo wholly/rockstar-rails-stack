@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendInterpolateTest#test_interpolate_given_a_string_containing_a_reserved_key_raises_reserved_interpolation_key
+is_singleton: false
+name: test_interpolate_given_a_string_containing_a_reserved_key_raises_reserved_interpolation_key
+params: ()
+visibility: public

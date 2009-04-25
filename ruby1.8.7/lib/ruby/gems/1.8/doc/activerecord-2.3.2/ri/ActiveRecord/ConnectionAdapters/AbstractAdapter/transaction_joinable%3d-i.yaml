@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::ConnectionAdapters::AbstractAdapter#transaction_joinable=
+is_singleton: false
+name: transaction_joinable=
+params: (joinable)
+visibility: public

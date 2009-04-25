@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Changes the column's definition according to the new options. See TableDefinition#column for details of the options you can use.
+- !ruby/struct:SM::Flow::H 
+  level: 5
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: " t.change(:name, :string, :limit =&gt; 80)\n t.change(:description, :text)\n"
+full_name: ActiveRecord::ConnectionAdapters::Table#change
+is_singleton: false
+name: change
+params: (column_name, type, options = {})
+visibility: public

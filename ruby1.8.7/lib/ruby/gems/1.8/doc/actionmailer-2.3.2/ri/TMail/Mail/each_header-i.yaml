@@ -1,0 +1,15 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: each_pair
+block_params: key, v
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Allows you to loop through each header in the TMail::Mail object in a block Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  @mail['to'] = 'mikel@elsewhere.org'\n  @mail['from'] = 'me@me.com'\n  @mail.each_header { |k,v| puts &quot;#{k} = #{v}&quot; }\n  # =&gt; from = me@me.com\n  # =&gt; to = mikel@elsewhere.org\n"
+full_name: TMail::Mail#each_header
+is_singleton: false
+name: each_header
+params: () {|key, v| ...}
+visibility: public

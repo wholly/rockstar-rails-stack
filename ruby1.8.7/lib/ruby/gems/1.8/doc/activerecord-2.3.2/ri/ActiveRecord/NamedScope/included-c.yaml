@@ -1,0 +1,22 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "All subclasses of ActiveRecord::Base have one named scope:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>scoped</tt> - which allows for the creation of anonymous \\scopes, on the fly: <tt>Shirt.scoped(:conditions =&gt; {:color =&gt; 'red'}).scoped(:include =&gt; :washing_instructions)</tt>"
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: These anonymous \scopes tend to be useful when procedurally generating complex queries, where passing intermediate values (scopes) around as first-class objects is convenient.
+- !ruby/struct:SM::Flow::P 
+  body: You can define a scope that applies to all finders using ActiveRecord::Base.default_scope.
+full_name: ActiveRecord::NamedScope::included
+is_singleton: true
+name: included
+params: (base)
+visibility: public

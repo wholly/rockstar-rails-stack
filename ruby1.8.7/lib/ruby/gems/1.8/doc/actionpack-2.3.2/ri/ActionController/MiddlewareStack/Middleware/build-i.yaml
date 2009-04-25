@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::MiddlewareStack::Middleware#build
+is_singleton: false
+name: build
+params: (app)
+visibility: public

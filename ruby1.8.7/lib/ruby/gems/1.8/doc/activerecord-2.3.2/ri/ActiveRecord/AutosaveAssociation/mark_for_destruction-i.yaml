@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Marks this record to be destroyed as part of the parents save transaction. This does <em>not</em> actually destroy the record yet, rather it will be destroyed when <tt>parent.save</tt> is called.
+- !ruby/struct:SM::Flow::P 
+  body: Only useful if the <tt>:autosave</tt> option on the parent is enabled for this associated model.
+full_name: ActiveRecord::AutosaveAssociation#mark_for_destruction
+is_singleton: false
+name: mark_for_destruction
+params: ()
+visibility: public

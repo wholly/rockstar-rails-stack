@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nSimpleBackendReloadTranslationsTest
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: I18nSimpleBackendTestSetup
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: setup
+- !ruby/object:RI::MethodSummary 
+  name: teardown
+- !ruby/object:RI::MethodSummary 
+  name: test_reload_translations_uninitializes_translations
+- !ruby/object:RI::MethodSummary 
+  name: test_reload_translations_unloads_translations
+- !ruby/object:RI::MethodSummary 
+  name: test_setup
+name: I18nSimpleBackendReloadTranslationsTest
+superclass: Test::Unit::TestCase

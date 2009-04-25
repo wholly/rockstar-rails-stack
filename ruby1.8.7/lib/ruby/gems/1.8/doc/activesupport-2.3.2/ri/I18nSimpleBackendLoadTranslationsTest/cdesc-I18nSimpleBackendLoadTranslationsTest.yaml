@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nSimpleBackendLoadTranslationsTest
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: I18nSimpleBackendTestSetup
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: test_load_rb_loads_data_from_ruby_file
+- !ruby/object:RI::MethodSummary 
+  name: test_load_rb_loads_data_from_yaml_file
+- !ruby/object:RI::MethodSummary 
+  name: test_load_translations_loads_from_different_file_formats
+- !ruby/object:RI::MethodSummary 
+  name: test_load_translations_with_ruby_file_type_does_not_raise_exception
+- !ruby/object:RI::MethodSummary 
+  name: test_load_translations_with_unknown_file_type_raises_exception
+name: I18nSimpleBackendLoadTranslationsTest
+superclass: Test::Unit::TestCase

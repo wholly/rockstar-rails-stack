@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Provides a proxy to access helpers methods from outside the view.
+full_name: ActionController::Helpers::ClassMethods#helpers
+is_singleton: false
+name: helpers
+params: ()
+visibility: public

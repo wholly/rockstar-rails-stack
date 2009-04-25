@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Will remove all silencers, but leave in the filters. This is useful if your context of debugging suddenly expands as you suspect a bug in the libraries you use.
+full_name: ActiveSupport::BacktraceCleaner#remove_silencers!
+is_singleton: false
+name: remove_silencers!
+params: ()
+visibility: public

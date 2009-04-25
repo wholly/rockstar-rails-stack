@@ -1,0 +1,67 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This cookie-based session store is the Rails default. Sessions typically contain at most a user_id and flash message; both fit within the 4K cookie size limit. Cookie-based sessions are dramatically faster than the alternatives.
+- !ruby/struct:SM::Flow::P 
+  body: If you have more than 4K of session data or don't want your data to be visible to the user, pick another session store.
+- !ruby/struct:SM::Flow::P 
+  body: CookieOverflow is raised if you attempt to store more than 4K of data.
+- !ruby/struct:SM::Flow::P 
+  body: "A message digest is included with the cookie to ensure data integrity: a user cannot alter his <tt>user_id</tt> without knowing the secret key included in the hash. New apps are generated with a pregenerated secret in config/environment.rb. Set your own for old apps you're upgrading."
+- !ruby/struct:SM::Flow::P 
+  body: "Session options:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:secret</tt>: An application-wide key string or block returning a string called per generated digest. The block is called with the CGI::Session instance as an argument. It's important that the secret is not vulnerable to a dictionary attack. Therefore, you should choose a secret consisting of random numbers and letters and more than 30 characters. Examples:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  :secret =&gt; '449fe2e7daee471bffae2fd8dc02313d'\n  :secret =&gt; Proc.new { User.current_user.secret_key }\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:digest</tt>: The message digest algorithm used to verify session integrity defaults to 'SHA1' but may be any digest provided by OpenSSL, such as 'MD5', 'RIPEMD160', 'SHA256', etc."
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: To generate a secret key for an existing application, run &quot;rake secret&quot; and set the key in config/environment.rb.
+- !ruby/struct:SM::Flow::P 
+  body: Note that changing digest or secret invalidates all existing sessions!
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Cookies can typically store 4096 bytes.
+  name: MAX
+  value: "4096"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: SECRET_MIN_LENGTH
+  value: "30"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: DEFAULT_OPTIONS
+  value: "{         :key          => '_session_id',         :domain       => nil,         :path         => \"/\",         :expire_after => nil,         :httponly     => true"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ENV_SESSION_KEY
+  value: "\"rack.session\".freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ENV_SESSION_OPTIONS_KEY
+  value: "\"rack.session.options\".freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: HTTP_SET_COOKIE
+  value: "\"Set-Cookie\".freeze"
+full_name: ActionController::Session::CookieStore
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: call
+name: CookieStore
+superclass: Object

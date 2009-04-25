@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: previously_last_modified
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: ActionView::ReloadableTemplate
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: mtime
+- !ruby/object:RI::MethodSummary 
+  name: reset_cache_if_stale!
+- !ruby/object:RI::MethodSummary 
+  name: stale?
+- !ruby/object:RI::MethodSummary 
+  name: undef_my_compiled_methods!
+name: ReloadableTemplate
+superclass: Template

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::TestFixtures::ClassMethods#set_fixture_class
+is_singleton: false
+name: set_fixture_class
+params: (class_names = {})
+visibility: public

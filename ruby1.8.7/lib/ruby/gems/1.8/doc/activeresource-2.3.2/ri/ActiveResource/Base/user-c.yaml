@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Gets the \user for REST HTTP authentication.
+full_name: ActiveResource::Base::user
+is_singleton: true
+name: user
+params: ()
+visibility: public

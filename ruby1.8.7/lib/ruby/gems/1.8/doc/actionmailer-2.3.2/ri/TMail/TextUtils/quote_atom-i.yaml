@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: If the string supplied has ATOM unsafe characters in it, will return the string quoted in double quotes, otherwise returns the string unmodified
+full_name: TMail::TextUtils#quote_atom
+is_singleton: false
+name: quote_atom
+params: ( str )
+visibility: public

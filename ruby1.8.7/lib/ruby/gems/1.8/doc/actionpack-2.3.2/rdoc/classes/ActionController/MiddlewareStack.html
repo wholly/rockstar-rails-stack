@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActionController::MiddlewareStack</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActionController::MiddlewareStack</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/action_controller/middleware_stack_rb.html">
+                lib/action_controller/middleware_stack.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Array
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001810">active</a>&nbsp;&nbsp;
+      <a href="#M001811">build</a>&nbsp;&nbsp;
+      <a href="#M001805">insert</a>&nbsp;&nbsp;
+      <a href="#M001807">insert_after</a>&nbsp;&nbsp;
+      <a href="#M001806">insert_before</a>&nbsp;&nbsp;
+      <a href="#M001804">new</a>&nbsp;&nbsp;
+      <a href="#M001808">swap</a>&nbsp;&nbsp;
+      <a href="#M001809">use</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="MiddlewareStack/Middleware.html" class="link">ActionController::MiddlewareStack::Middleware</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M001804" class="method-detail">
+        <a name="M001804"></a>
+
+        <div class="method-heading">
+          <a href="MiddlewareStack.src/M001804.html" target="Code" class="method-signature"
+            onclick="popupCode('MiddlewareStack.src/M001804.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(*args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001810" class="method-detail">
+        <a name="M001810"></a>
+
+        <div class="method-heading">
+          <a href="MiddlewareStack.src/M001810.html" target="Code" class="method-signature"
+            onclick="popupCode('MiddlewareStack.src/M001810.html');return false;">
+          <span class="method-name">active</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001811" class="method-detail">
+        <a name="M001811"></a>
+
+        <div class="method-heading">
+          <a href="MiddlewareStack.src/M001811.html" target="Code" class="method-signature"
+            onclick="popupCode('MiddlewareStack.src/M001811.html');return false;">
+          <span class="method-name">build</span><span class="method-args">(app)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001805" class="method-detail">
+        <a name="M001805"></a>
+
+        <div class="method-heading">
+          <a href="MiddlewareStack.src/M001805.html" target="Code" class="method-signature"
+            onclick="popupCode('MiddlewareStack.src/M001805.html');return false;">
+          <span class="method-name">insert</span><span class="method-args">(index, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001807" class="method-detail">
+        <a name="M001807"></a>
+
+        <div class="method-heading">
+          <a href="MiddlewareStack.src/M001807.html" target="Code" class="method-signature"
+            onclick="popupCode('MiddlewareStack.src/M001807.html');return false;">
+          <span class="method-name">insert_after</span><span class="method-args">(index, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001806" class="method-detail">
+        <a name="M001806"></a>
+
+        <div class="method-heading">
+          <span class="method-name">insert_before</span><span class="method-args">(index, *args, &amp;block)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="MiddlewareStack.html#M001805">insert</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001808" class="method-detail">
+        <a name="M001808"></a>
+
+        <div class="method-heading">
+          <a href="MiddlewareStack.src/M001808.html" target="Code" class="method-signature"
+            onclick="popupCode('MiddlewareStack.src/M001808.html');return false;">
+          <span class="method-name">swap</span><span class="method-args">(target, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M001809" class="method-detail">
+        <a name="M001809"></a>
+
+        <div class="method-heading">
+          <a href="MiddlewareStack.src/M001809.html" target="Code" class="method-signature"
+            onclick="popupCode('MiddlewareStack.src/M001809.html');return false;">
+          <span class="method-name">use</span><span class="method-args">(*args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

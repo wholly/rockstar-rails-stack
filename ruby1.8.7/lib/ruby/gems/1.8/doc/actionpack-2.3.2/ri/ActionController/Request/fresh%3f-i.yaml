@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Check response freshness (Last-Modified and ETag) against request If-Modified-Since and If-None-Match conditions. If both headers are supplied, both must match, or the request is not considered fresh.
+full_name: ActionController::Request#fresh?
+is_singleton: false
+name: fresh?
+params: (response)
+visibility: public

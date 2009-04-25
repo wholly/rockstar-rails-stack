@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>define_callbacks (ActiveSupport::Callbacks::ClassMethods)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_support/callbacks.rb, line 205</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">define_callbacks</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">callbacks</span>)
+        <span class="ruby-identifier">callbacks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">callback</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">class_eval</span> <span class="ruby-value str">&quot;def self.\#{callback}(*methods, &amp;block)                             # def self.before_save(*methods, &amp;block)\ncallbacks = CallbackChain.build(:\#{callback}, *methods, &amp;block)  #   callbacks = CallbackChain.build(:before_save, *methods, &amp;block)\n@\#{callback}_callbacks ||= CallbackChain.new                     #   @before_save_callbacks ||= CallbackChain.new\n@\#{callback}_callbacks.concat callbacks                          #   @before_save_callbacks.concat callbacks\nend                                                                # end\n#\ndef self.\#{callback}_callback_chain                                # def self.before_save_callback_chain\n@\#{callback}_callbacks ||= CallbackChain.new                     #   @before_save_callbacks ||= CallbackChain.new\n#\nif superclass.respond_to?(:\#{callback}_callback_chain)           #   if superclass.respond_to?(:before_save_callback_chain)\nCallbackChain.new(                                             #     CallbackChain.new(\nsuperclass.\#{callback}_callback_chain +                      #       superclass.before_save_callback_chain +\n@\#{callback}_callbacks                                       #       @before_save_callbacks\n)                                                              #     )\nelse                                                             #   else\n@\#{callback}_callbacks                                         #     @before_save_callbacks\nend                                                              #   end\nend                                                                # end\n&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

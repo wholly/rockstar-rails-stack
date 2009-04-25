@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Session::AbstractStore#call
+is_singleton: false
+name: call
+params: (env)
+visibility: public

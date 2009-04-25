@@ -1,0 +1,37 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nSimpleBackendTranslateTest
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: I18nSimpleBackendTestSetup
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: test_given_no_keys_it_returns_the_default
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_an_array_of_keys_translates_all_of_them
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_calls_interpolate
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_calls_interpolate_including_count_as_a_value
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_calls_lookup_with_locale_given
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_calls_pluralize
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_a_symbol_as_a_default_translates_the_symbol
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_an_array_as_default_uses_the_first_match
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_an_array_of_inexistent_keys_it_raises_missing_translation_data
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_given_nil_as_a_locale_raises_an_argument_error
+- !ruby/object:RI::MethodSummary 
+  name: test_translate_with_a_bogus_key_and_no_default_raises_missing_translation_data
+name: I18nSimpleBackendTranslateTest
+superclass: Test::Unit::TestCase

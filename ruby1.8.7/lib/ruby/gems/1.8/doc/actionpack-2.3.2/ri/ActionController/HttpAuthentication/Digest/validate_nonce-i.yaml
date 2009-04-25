@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Might want a shorter timeout depending on whether the request is a PUT or POST, and if client is browser or web service. Can be much shorter if the Stale directive is implemented. This would allow a user to use new nonce without prompting user again for their username and password.
+full_name: ActionController::HttpAuthentication::Digest#validate_nonce
+is_singleton: false
+name: validate_nonce
+params: (request, value, seconds_to_timeout=5*60)
+visibility: public

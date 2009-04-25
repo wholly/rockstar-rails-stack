@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendTranslateTest#test_translate_given_a_symbol_as_a_default_translates_the_symbol
+is_singleton: false
+name: test_translate_given_a_symbol_as_a_default_translates_the_symbol
+params: ()
+visibility: public

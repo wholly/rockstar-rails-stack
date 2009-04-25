@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::HttpAuthentication::Digest::ControllerMethods#authenticate_or_request_with_http_digest
+is_singleton: false
+name: authenticate_or_request_with_http_digest
+params: (realm = "Application", &password_procedure)
+visibility: public

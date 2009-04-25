@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Opaque based on random generation - but changing each request?
+full_name: ActionController::HttpAuthentication::Digest#opaque
+is_singleton: false
+name: opaque
+params: ()
+visibility: public

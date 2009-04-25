@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Given a key (as described in <tt>expire_fragment</tt>), returns a key suitable for use in reading, writing, or expiring a cached fragment. If the key is a hash, the generated key is the return value of url_for on that hash (without the protocol). All keys are prefixed with &quot;views/&quot; and uses ActiveSupport::Cache.expand_cache_key for the expansion.
+full_name: ActionController::Caching::Fragments#fragment_cache_key
+is_singleton: false
+name: fragment_cache_key
+params: (key)
+visibility: public

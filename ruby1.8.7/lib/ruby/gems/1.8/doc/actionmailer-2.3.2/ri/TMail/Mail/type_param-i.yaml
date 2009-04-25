@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the named type parameter as a string, from the &quot;Content-Type:&quot; header.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.type_param(&quot;charset&quot;) #=&gt; nil\n mail.type_param(&quot;charset&quot;, []) #=&gt; []\n mail.set_content_type(&quot;text&quot;, &quot;plain&quot;, {:charset =&gt; &quot;EUC-KR&quot;, :format =&gt; &quot;flowed&quot;})\n mail.type_param(&quot;charset&quot;) #=&gt; &quot;EUC-KR&quot;\n mail.type_param(&quot;format&quot;) #=&gt; &quot;flowed&quot;\n"
+full_name: TMail::Mail#type_param
+is_singleton: false
+name: type_param
+params: ( name, default = nil )
+visibility: public

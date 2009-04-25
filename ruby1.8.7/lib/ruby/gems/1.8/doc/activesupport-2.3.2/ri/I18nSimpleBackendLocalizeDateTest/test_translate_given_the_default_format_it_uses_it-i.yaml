@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendLocalizeDateTest#test_translate_given_the_default_format_it_uses_it
+is_singleton: false
+name: test_translate_given_the_default_format_it_uses_it
+params: ()
+visibility: public

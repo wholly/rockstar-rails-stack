@@ -1,0 +1,19 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: fetch
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Returns a TMail::AddressHeader object of the field you are querying. Examples:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " @mail['from']  #=&gt; #&lt;TMail::AddressHeader &quot;mikel@test.com.au&quot;&gt;\n @mail['to']    #=&gt; #&lt;TMail::AddressHeader &quot;mikel@test.com.au&quot;&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "You can get the string value of this by passing &quot;to_s&quot; to the query: Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " @mail['to'].to_s #=&gt; &quot;mikel@test.com.au&quot;\n"
+full_name: TMail::Mail#[]
+is_singleton: false
+name: "[]"
+params: ( key )
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Use the time in UTC for comparisons.
+full_name: ActiveSupport::TimeWithZone#<=>
+is_singleton: false
+name: <=>
+params: (other)
+visibility: public

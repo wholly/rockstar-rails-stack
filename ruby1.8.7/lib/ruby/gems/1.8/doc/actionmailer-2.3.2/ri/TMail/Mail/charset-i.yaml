@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the character set of the email. Returns nil if no encoding set or returns whatever default you pass as a parameter - note passing the parameter does NOT change the mail object in any way.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.load(&quot;path_to/utf8_email&quot;)\n mail.charset #=&gt; &quot;UTF-8&quot;\n\n mail = TMail::Mail.new\n mail.charset #=&gt; nil\n mail.charset(&quot;US-ASCII&quot;) #=&gt; &quot;US-ASCII&quot;\n"
+full_name: TMail::Mail#charset
+is_singleton: false
+name: charset
+params: ( default = nil )
+visibility: public

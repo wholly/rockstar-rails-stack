@@ -1,0 +1,3276 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: TMail::Mail</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">TMail::Mail</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/attachments_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/attachments.rb
+                </a>
+        <br />
+                <a href="../../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/interface_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/interface.rb
+                </a>
+        <br />
+                <a href="../../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/mail_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/mail.rb
+                </a>
+        <br />
+                <a href="../../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/net_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/net.rb
+                </a>
+        <br />
+                <a href="../../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/quoting_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/quoting.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2><a href="Mail.html">Mail</a> Class</h2>
+<p>
+Accessing a <a href="../TMail.html">TMail</a> object done via the <a
+href="Mail.html">TMail::Mail</a> class. As email can be fairly complex
+creatures, you will find a large amount of accessor and setter methods in
+this class!
+</p>
+<p>
+Most of the below methods handle the <a
+href="Mail.html#M002599">header</a>, in fact, what <a
+href="../TMail.html">TMail</a> does best is handle the <a
+href="Mail.html#M002599">header</a> of the email object. There are only a
+few methods that deal directly with the <a
+href="Mail.html#M002647">body</a> of the email, such as <a
+href="Mail.html#M002583">base64_encode</a> and <a
+href="Mail.html#M002585">base64_decode</a>.
+</p>
+<h3>Using <a href="../TMail.html">TMail</a> inside your code</h3>
+<p>
+The usual way is <a href="Mail.html#M002531">to</a> install the gem (see
+the {README}[<a href="../../README">README</a>] on how <a
+href="Mail.html#M002531">to</a> do this) and then put at the top of your
+class:
+</p>
+<pre>
+ require 'tmail'
+</pre>
+<p>
+You can then create a new <a href="../TMail.html">TMail</a> object in your
+code with:
+</p>
+<pre>
+ @email = TMail::Mail.new
+</pre>
+<p>
+Or if you have an email as a string, you can initialize a new <a
+href="Mail.html">TMail::Mail</a> object and get it <a
+href="Mail.html#M002531">to</a> <a href="Mail.html#M002595">parse</a> that
+string for you like so:
+</p>
+<pre>
+ @email = TMail::Mail.parse(email_text)
+</pre>
+<p>
+You can also read a single email off the disk, for example:
+</p>
+<pre>
+ @email = TMail::Mail.load('filename.txt')
+</pre>
+<p>
+Also, you can read a mailbox (usual unix mbox format) and end up with an
+array of <a href="../TMail.html">TMail</a> objects by doing something like
+this:
+</p>
+<pre>
+ # Note, we pass true as the last variable to open the mailbox read only
+ mailbox = TMail::UNIXMbox.new(&quot;mailbox&quot;, nil, true)
+ @emails = []
+ mailbox.each_port { |m| @emails &lt;&lt; TMail::Mail.new(m) }
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M002600">[]</a>&nbsp;&nbsp;
+      <a href="#M002603">[]=</a>&nbsp;&nbsp;
+      <a href="#M002598">accept</a>&nbsp;&nbsp;
+      <a href="#M002639">add_date</a>&nbsp;&nbsp;
+      <a href="#M002638">add_message_id</a>&nbsp;&nbsp;
+      <a href="#M002519">attachment?</a>&nbsp;&nbsp;
+      <a href="#M002520">attachments</a>&nbsp;&nbsp;
+      <a href="#M002585">base64_decode</a>&nbsp;&nbsp;
+      <a href="#M002584">base64_decode!</a>&nbsp;&nbsp;
+      <a href="#M002583">base64_encode</a>&nbsp;&nbsp;
+      <a href="#M002582">base64_encode!</a>&nbsp;&nbsp;
+      <a href="#M002533">bcc</a>&nbsp;&nbsp;
+      <a href="#M002536">bcc=</a>&nbsp;&nbsp;
+      <a href="#M002527">bcc_addrs</a>&nbsp;&nbsp;
+      <a href="#M002530">bcc_addrs=</a>&nbsp;&nbsp;
+      <a href="#M002647">body</a>&nbsp;&nbsp;
+      <a href="#M002624">body=</a>&nbsp;&nbsp;
+      <a href="#M002620">body_port</a>&nbsp;&nbsp;
+      <a href="#M002532">cc</a>&nbsp;&nbsp;
+      <a href="#M002535">cc=</a>&nbsp;&nbsp;
+      <a href="#M002526">cc_addrs</a>&nbsp;&nbsp;
+      <a href="#M002529">cc_addrs=</a>&nbsp;&nbsp;
+      <a href="#M002567">charset</a>&nbsp;&nbsp;
+      <a href="#M002568">charset=</a>&nbsp;&nbsp;
+      <a href="#M002612">clear</a>&nbsp;&nbsp;
+      <a href="#M002576">content_disposition</a>&nbsp;&nbsp;
+      <a href="#M002580">content_disposition=</a>&nbsp;&nbsp;
+      <a href="#M002573">content_transfer_encoding</a>&nbsp;&nbsp;
+      <a href="#M002574">content_transfer_encoding=</a>&nbsp;&nbsp;
+      <a href="#M002561">content_type</a>&nbsp;&nbsp;
+      <a href="#M002565">content_type=</a>&nbsp;&nbsp;
+      <a href="#M002632">content_type_is_text?</a>&nbsp;&nbsp;
+      <a href="#M002593">create_forward</a>&nbsp;&nbsp;
+      <a href="#M002592">create_reply</a>&nbsp;&nbsp;
+      <a href="#M002522">date</a>&nbsp;&nbsp;
+      <a href="#M002523">date=</a>&nbsp;&nbsp;
+      <a href="#M002613">delete</a>&nbsp;&nbsp;
+      <a href="#M002614">delete_if</a>&nbsp;&nbsp;
+      <a href="#M002637">delete_no_send_fields</a>&nbsp;&nbsp;
+      <a href="#M002586">destinations</a>&nbsp;&nbsp;
+      <a href="#M002575">disposition</a>&nbsp;&nbsp;
+      <a href="#M002578">disposition=</a>&nbsp;&nbsp;
+      <a href="#M002631">disposition_is_attachment?</a>&nbsp;&nbsp;
+      <a href="#M002581">disposition_param</a>&nbsp;&nbsp;
+      <a href="#M002621">each</a>&nbsp;&nbsp;
+      <a href="#M002588">each_dest</a>&nbsp;&nbsp;
+      <a href="#M002587">each_destination</a>&nbsp;&nbsp;
+      <a href="#M002609">each_field</a>&nbsp;&nbsp;
+      <a href="#M002605">each_header</a>&nbsp;&nbsp;
+      <a href="#M002607">each_header_name</a>&nbsp;&nbsp;
+      <a href="#M002608">each_key</a>&nbsp;&nbsp;
+      <a href="#M002606">each_pair</a>&nbsp;&nbsp;
+      <a href="#M002630">each_part</a>&nbsp;&nbsp;
+      <a href="#M002610">each_value</a>&nbsp;&nbsp;
+      <a href="#M002571">encoding</a>&nbsp;&nbsp;
+      <a href="#M002572">encoding=</a>&nbsp;&nbsp;
+      <a href="#M002627">epilogue</a>&nbsp;&nbsp;
+      <a href="#M002628">epilogue=</a>&nbsp;&nbsp;
+      <a href="#M002590">error_reply_addresses</a>&nbsp;&nbsp;
+      <a href="#M002602">fetch</a>&nbsp;&nbsp;
+      <a href="#M002541">friendly_from</a>&nbsp;&nbsp;
+      <a href="#M002539">from</a>&nbsp;&nbsp;
+      <a href="#M002540">from=</a>&nbsp;&nbsp;
+      <a href="#M002537">from_addrs</a>&nbsp;&nbsp;
+      <a href="#M002538">from_addrs=</a>&nbsp;&nbsp;
+      <a href="#M002518">has_attachments?</a>&nbsp;&nbsp;
+      <a href="#M002599">header</a>&nbsp;&nbsp;
+      <a href="#M002521">header_string</a>&nbsp;&nbsp;
+      <a href="#M002555">in_reply_to</a>&nbsp;&nbsp;
+      <a href="#M002556">in_reply_to=</a>&nbsp;&nbsp;
+      <a href="#M002618">indexes</a>&nbsp;&nbsp;
+      <a href="#M002619">indices</a>&nbsp;&nbsp;
+      <a href="#M002596">inspect</a>&nbsp;&nbsp;
+      <a href="#M002616">key?</a>&nbsp;&nbsp;
+      <a href="#M002615">keys</a>&nbsp;&nbsp;
+      <a href="#M002594">load</a>&nbsp;&nbsp;
+      <a href="#M002562">main_type</a>&nbsp;&nbsp;
+      <a href="#M002553">message_id</a>&nbsp;&nbsp;
+      <a href="#M002554">message_id=</a>&nbsp;&nbsp;
+      <a href="#M002640">mime_encode</a>&nbsp;&nbsp;
+      <a href="#M002643">mime_encode_binary</a>&nbsp;&nbsp;
+      <a href="#M002644">mime_encode_multipart</a>&nbsp;&nbsp;
+      <a href="#M002641">mime_encode_singlepart</a>&nbsp;&nbsp;
+      <a href="#M002642">mime_encode_text</a>&nbsp;&nbsp;
+      <a href="#M002559">mime_version</a>&nbsp;&nbsp;
+      <a href="#M002560">mime_version=</a>&nbsp;&nbsp;
+      <a href="#M002591">multipart?</a>&nbsp;&nbsp;
+      <a href="#M002611">ordered_each</a>&nbsp;&nbsp;
+      <a href="#M002595">parse</a>&nbsp;&nbsp;
+      <a href="#M002629">parts</a>&nbsp;&nbsp;
+      <a href="#M002625">preamble</a>&nbsp;&nbsp;
+      <a href="#M002626">preamble=</a>&nbsp;&nbsp;
+      <a href="#M002622">quoted_body</a>&nbsp;&nbsp;
+      <a href="#M002623">quoted_body=</a>&nbsp;&nbsp;
+      <a href="#M002551">quoted_subject</a>&nbsp;&nbsp;
+      <a href="#M002636">ready_to_send</a>&nbsp;&nbsp;
+      <a href="#M002557">references</a>&nbsp;&nbsp;
+      <a href="#M002558">references=</a>&nbsp;&nbsp;
+      <a href="#M002589">reply_addresses</a>&nbsp;&nbsp;
+      <a href="#M002544">reply_to</a>&nbsp;&nbsp;
+      <a href="#M002545">reply_to=</a>&nbsp;&nbsp;
+      <a href="#M002542">reply_to_addrs</a>&nbsp;&nbsp;
+      <a href="#M002543">reply_to_addrs=</a>&nbsp;&nbsp;
+      <a href="#M002634">send_text_to</a>&nbsp;&nbsp;
+      <a href="#M002633">send_to</a>&nbsp;&nbsp;
+      <a href="#M002635">send_to_0</a>&nbsp;&nbsp;
+      <a href="#M002548">sender</a>&nbsp;&nbsp;
+      <a href="#M002549">sender=</a>&nbsp;&nbsp;
+      <a href="#M002546">sender_addr</a>&nbsp;&nbsp;
+      <a href="#M002547">sender_addr=</a>&nbsp;&nbsp;
+      <a href="#M002579">set_content_disposition</a>&nbsp;&nbsp;
+      <a href="#M002564">set_content_type</a>&nbsp;&nbsp;
+      <a href="#M002577">set_disposition</a>&nbsp;&nbsp;
+      <a href="#M002604">store</a>&nbsp;&nbsp;
+      <a href="#M002524">strftime</a>&nbsp;&nbsp;
+      <a href="#M002601">sub_header</a>&nbsp;&nbsp;
+      <a href="#M002563">sub_type</a>&nbsp;&nbsp;
+      <a href="#M002550">subject</a>&nbsp;&nbsp;
+      <a href="#M002645">subject</a>&nbsp;&nbsp;
+      <a href="#M002552">subject=</a>&nbsp;&nbsp;
+      <a href="#M002531">to</a>&nbsp;&nbsp;
+      <a href="#M002534">to=</a>&nbsp;&nbsp;
+      <a href="#M002525">to_addrs</a>&nbsp;&nbsp;
+      <a href="#M002528">to_addrs=</a>&nbsp;&nbsp;
+      <a href="#M002569">transfer_encoding</a>&nbsp;&nbsp;
+      <a href="#M002570">transfer_encoding=</a>&nbsp;&nbsp;
+      <a href="#M002566">type_param</a>&nbsp;&nbsp;
+      <a href="#M002646">unquoted_body</a>&nbsp;&nbsp;
+      <a href="#M002617">values_at</a>&nbsp;&nbsp;
+      <a href="#M002597">write_back</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">StrategyInterface</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ALLOW_MULTIPLE</td>
+          <td>=</td>
+          <td class="context-item-value">{       'received'          =&gt; true,       'resent-date'       =&gt; true,       'resent-from'       =&gt; true,       'resent-sender'     =&gt; true,       'resent-to'         =&gt; true,       'resent-cc'         =&gt; true,       'resent-bcc'        =&gt; true,       'resent-message-id' =&gt; true,       'comments'          =&gt; true,       'keywords'          =&gt; true</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+<a href="Mail.html#M002599">header</a>
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">USE_ARRAY</td>
+          <td>=</td>
+          <td class="context-item-value">ALLOW_MULTIPLE</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">FIELD_ORDER</td>
+          <td>=</td>
+          <td class="context-item-value">%w(       return-path received       resent-date resent-from resent-sender resent-to       resent-cc resent-bcc resent-message-id       date from sender reply-to to cc bcc       message-id in-reply-to references       subject comments keywords       mime-version content-type content-transfer-encoding       content-disposition content-description     )</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NOSEND_FIELDS</td>
+          <td>=</td>
+          <td class="context-item-value">%w(       received       bcc     )</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="aliases-list">
+      <h3 class="section-bar">External Aliases</h3>
+
+      <div class="name-list">
+                        <table summary="aliases">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">load</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">load_from</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">load</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">loadfrom</td>
+        </tr>
+                        </table>
+      </div>
+    </div>
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">port</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+Provides access <a href="Mail.html#M002531">to</a> the port this email is
+using <a href="Mail.html#M002531">to</a> hold it&#8216;s data
+
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.parse(email_string)
+ mail.port
+ #=&gt; #&lt;TMail::StringPort:id=0xa2c952&gt;
+</pre>
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M002594" class="method-detail">
+        <a name="M002594"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002594.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002594.html');return false;">
+          <span class="method-name">load</span><span class="method-args">( fname )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Opens an email that has been saved out as a file by itself.
+</p>
+<p>
+This function will read a file non-destructively and then <a
+href="Mail.html#M002595">parse</a> the contents and return a <a
+href="Mail.html">TMail::Mail</a> object.
+</p>
+<p>
+Does not handle multiple email mailboxes (like a unix mbox) for that use
+the <a href="UNIXMbox.html">TMail::UNIXMbox</a> class.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.load('filename')
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002595" class="method-detail">
+        <a name="M002595"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002595.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002595.html');return false;">
+          <span class="method-name">parse</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Parses an email <a href="Mail.html#M002539">from</a> the supplied string
+and returns a <a href="Mail.html">TMail::Mail</a> object.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ require 'rubygems'; require 'tmail'
+ email_string =&lt;&lt;HEREDOC
+ To: mikel@lindsaar.net
+ From: mikel@me.com
+ Subject: This is a short Email
+
+ Hello there Mikel!
+
+ HEREDOC
+ mail = TMail::Mail.parse(email_string)
+ #=&gt; #&lt;TMail::Mail port=#&lt;TMail::StringPort:id=0xa30ac0&gt; bodyport=nil&gt;
+ mail.body
+ #=&gt; &quot;Hello there Mikel!\n\n&quot;
+</pre>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M002600" class="method-detail">
+        <a name="M002600"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002600.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002600.html');return false;">
+          <span class="method-name">[]</span><span class="method-args">( key )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a <a href="AddressHeader.html">TMail::AddressHeader</a> object of
+the field you are querying. Examples:
+</p>
+<pre>
+ @mail['from']  #=&gt; #&lt;TMail::AddressHeader &quot;mikel@test.com.au&quot;&gt;
+ @mail['to']    #=&gt; #&lt;TMail::AddressHeader &quot;mikel@test.com.au&quot;&gt;
+</pre>
+<p>
+You can get the string value of this by passing &quot;to_s&quot; <a
+href="Mail.html#M002531">to</a> the query: Example:
+</p>
+<pre>
+ @mail['to'].to_s #=&gt; &quot;mikel@test.com.au&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002603" class="method-detail">
+        <a name="M002603"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002603.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002603.html');return false;">
+          <span class="method-name">[]=</span><span class="method-args">( key, val )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows you <a href="Mail.html#M002531">to</a> set or <a
+href="Mail.html#M002613">delete</a> <a href="../TMail.html">TMail</a> <a
+href="Mail.html#M002599">header</a> objects at will. Examples:
+</p>
+<pre>
+ @mail = TMail::Mail.new
+ @mail['to'].to_s       # =&gt; 'mikel@test.com.au'
+ @mail['to'] = 'mikel@elsewhere.org'
+ @mail['to'].to_s       # =&gt; 'mikel@elsewhere.org'
+ @mail.encoded          # =&gt; &quot;To: mikel@elsewhere.org\r\n\r\n&quot;
+ @mail['to'] = nil
+ @mail['to'].to_s       # =&gt; nil
+ @mail.encoded          # =&gt; &quot;\r\n&quot;
+</pre>
+<p>
+Note: setting mail[] = nil actually deletes the <a
+href="Mail.html#M002599">header</a> field in question <a
+href="Mail.html#M002539">from</a> the object, it does not just set the
+value of the hash <a href="Mail.html#M002531">to</a> nil
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002598" class="method-detail">
+        <a name="M002598"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002598.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002598.html');return false;">
+          <span class="method-name">accept</span><span class="method-args">( strategy )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002639" class="method-detail">
+        <a name="M002639"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002639.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002639.html');return false;">
+          <span class="method-name">add_date</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002638" class="method-detail">
+        <a name="M002638"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002638.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002638.html');return false;">
+          <span class="method-name">add_message_id</span><span class="method-args">( fqdn = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002519" class="method-detail">
+        <a name="M002519"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002519.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002519.html');return false;">
+          <span class="method-name">attachment?</span><span class="method-args">(part)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002520" class="method-detail">
+        <a name="M002520"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002520.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002520.html');return false;">
+          <span class="method-name">attachments</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002585" class="method-detail">
+        <a name="M002585"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002585.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002585.html');return false;">
+          <span class="method-name">base64_decode</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the result of decoding the <a href="Mail.html">TMail::Mail</a>
+object <a href="Mail.html#M002647">body</a> without altering the current <a
+href="Mail.html#M002647">body</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002584" class="method-detail">
+        <a name="M002584"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002584.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002584.html');return false;">
+          <span class="method-name">base64_decode!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Convert the <a href="Mail.html">Mail</a> object&#8216;s <a
+href="Mail.html#M002647">body</a> into a Base64 decoded email returning the
+modified <a href="Mail.html">Mail</a> object
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002583" class="method-detail">
+        <a name="M002583"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002583.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002583.html');return false;">
+          <span class="method-name">base64_encode</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the result of <a href="Mail.html#M002571">encoding</a> the <a
+href="Mail.html">TMail::Mail</a> object <a
+href="Mail.html#M002647">body</a> without altering the current <a
+href="Mail.html#M002647">body</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002582" class="method-detail">
+        <a name="M002582"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002582.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002582.html');return false;">
+          <span class="method-name">base64_encode!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Convert the <a href="Mail.html">Mail</a> object&#8216;s <a
+href="Mail.html#M002647">body</a> into a Base64 encoded email returning the
+modified <a href="Mail.html">Mail</a> object
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002533" class="method-detail">
+        <a name="M002533"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002533.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002533.html');return false;">
+          <span class="method-name">bcc</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns who the email <a href="Mail.html#M002533">bcc</a>&#8216;d as an
+Array of email addresses as opposed <a href="Mail.html#M002531">to</a> an
+Array of <a href="Address.html">TMail::Address</a> objects which is what <a
+href="Mail.html#M002525">Mail#to_addrs</a> returns
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.bcc = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.bcc #=&gt;  [&quot;mikel@me.org&quot;, &quot;mikel@you.org&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002536" class="method-detail">
+        <a name="M002536"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002536.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002536.html');return false;">
+          <span class="method-name">bcc=</span><span class="method-args">( *strs )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the &quot;Bcc:&quot; field <a
+href="Mail.html#M002531">to</a> the passed array of strings (which should
+be valid email addresses)
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.bcc = [&quot;mikel@abc.com&quot;, &quot;Mikel &lt;mikel@xyz.com&gt;&quot;]
+ mail.bcc #=&gt;  [&quot;mikel@abc.org&quot;, &quot;mikel@xyz.org&quot;]
+ mail['bcc'].to_s #=&gt; &quot;mikel@abc.com, Mikel &lt;mikel@xyz.com&gt;&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002527" class="method-detail">
+        <a name="M002527"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002527.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002527.html');return false;">
+          <span class="method-name">bcc_addrs</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a TMail::Addresses instance for <a href="Mail.html#M002621">each</a>
+entry in the &quot;Bcc:&quot; field of the mail object <a
+href="Mail.html#M002599">header</a>.
+</p>
+<p>
+If the &quot;Bcc:&quot; field does not exist, will return nil by default or
+the value you pass as the optional parameter.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.bcc_addrs #=&gt; nil
+ mail.bcc_addrs([]) #=&gt; []
+ mail.bcc = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.bcc_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002530" class="method-detail">
+        <a name="M002530"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002530.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002530.html');return false;">
+          <span class="method-name">bcc_addrs=</span><span class="method-args">( arg )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively set the <a href="Mail.html#M002531">to</a> field of the
+&quot;Bcc:&quot; <a href="Mail.html#M002599">header</a> <a
+href="Mail.html#M002531">to</a> equal the passed in string.
+</p>
+<p>
+<a href="../TMail.html">TMail</a> will <a
+href="Mail.html#M002595">parse</a> your contents and turn <a
+href="Mail.html#M002621">each</a> valid email address into a <a
+href="Address.html">TMail::Address</a> object before assigning it <a
+href="Mail.html#M002531">to</a> the mail message.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.bcc = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.bcc_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002647" class="method-detail">
+        <a name="M002647"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002647.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002647.html');return false;">
+          <span class="method-name">body</span><span class="method-args">(to_charset = 'utf-8', &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002624" class="method-detail">
+        <a name="M002624"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002624.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002624.html');return false;">
+          <span class="method-name">body=</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002620" class="method-detail">
+        <a name="M002620"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002620.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002620.html');return false;">
+          <span class="method-name">body_port</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Mail.html#M002647">body</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002532" class="method-detail">
+        <a name="M002532"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002532.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002532.html');return false;">
+          <span class="method-name">cc</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns who the email <a href="Mail.html#M002532">cc</a>&#8216;d as an
+Array of email addresses as opposed <a href="Mail.html#M002531">to</a> an
+Array of <a href="Address.html">TMail::Address</a> objects which is what <a
+href="Mail.html#M002525">Mail#to_addrs</a> returns
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.cc = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.cc #=&gt;  [&quot;mikel@me.org&quot;, &quot;mikel@you.org&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002535" class="method-detail">
+        <a name="M002535"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002535.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002535.html');return false;">
+          <span class="method-name">cc=</span><span class="method-args">( *strs )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the &quot;Cc:&quot; field <a
+href="Mail.html#M002531">to</a> the passed array of strings (which should
+be valid email addresses)
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.cc = [&quot;mikel@abc.com&quot;, &quot;Mikel &lt;mikel@xyz.com&gt;&quot;]
+ mail.cc #=&gt;  [&quot;mikel@abc.org&quot;, &quot;mikel@xyz.org&quot;]
+ mail['cc'].to_s #=&gt; &quot;mikel@abc.com, Mikel &lt;mikel@xyz.com&gt;&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002526" class="method-detail">
+        <a name="M002526"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002526.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002526.html');return false;">
+          <span class="method-name">cc_addrs</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a TMail::Addresses instance for <a href="Mail.html#M002621">each</a>
+entry in the &quot;Cc:&quot; field of the mail object <a
+href="Mail.html#M002599">header</a>.
+</p>
+<p>
+If the &quot;Cc:&quot; field does not exist, will return nil by default or
+the value you pass as the optional parameter.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.cc_addrs #=&gt; nil
+ mail.cc_addrs([]) #=&gt; []
+ mail.cc = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.cc_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002529" class="method-detail">
+        <a name="M002529"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002529.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002529.html');return false;">
+          <span class="method-name">cc_addrs=</span><span class="method-args">( arg )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively set the <a href="Mail.html#M002531">to</a> field of the
+&quot;Cc:&quot; <a href="Mail.html#M002599">header</a> <a
+href="Mail.html#M002531">to</a> equal the passed in string.
+</p>
+<p>
+<a href="../TMail.html">TMail</a> will <a
+href="Mail.html#M002595">parse</a> your contents and turn <a
+href="Mail.html#M002621">each</a> valid email address into a <a
+href="Address.html">TMail::Address</a> object before assigning it <a
+href="Mail.html#M002531">to</a> the mail message.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.cc = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.cc_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002567" class="method-detail">
+        <a name="M002567"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002567.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002567.html');return false;">
+          <span class="method-name">charset</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the character set of the email. Returns nil if no <a
+href="Mail.html#M002571">encoding</a> set or returns whatever default you
+pass as a parameter - note passing the parameter does NOT change the mail
+object in any way.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.load(&quot;path_to/utf8_email&quot;)
+ mail.charset #=&gt; &quot;UTF-8&quot;
+
+ mail = TMail::Mail.new
+ mail.charset #=&gt; nil
+ mail.charset(&quot;US-ASCII&quot;) #=&gt; &quot;US-ASCII&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002568" class="method-detail">
+        <a name="M002568"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002568.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002568.html');return false;">
+          <span class="method-name">charset=</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the character set used by this mail object <a
+href="Mail.html#M002531">to</a> the passed string, you should note though
+that this does nothing <a href="Mail.html#M002531">to</a> the mail <a
+href="Mail.html#M002647">body</a>, just changes the <a
+href="Mail.html#M002599">header</a> value, you will need <a
+href="Mail.html#M002531">to</a> transliterate the <a
+href="Mail.html#M002647">body</a> as well <a
+href="Mail.html#M002531">to</a> match whatever you put in this <a
+href="Mail.html#M002599">header</a> value if you are changing character
+sets.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.charset #=&gt; nil
+ mail.charset = &quot;UTF-8&quot;
+ mail.charset #=&gt; &quot;UTF-8&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002612" class="method-detail">
+        <a name="M002612"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002612.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002612.html');return false;">
+          <span class="method-name">clear</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002576" class="method-detail">
+        <a name="M002576"></a>
+
+        <div class="method-heading">
+          <span class="method-name">content_disposition</span><span class="method-args">( default = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002575">disposition</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002580" class="method-detail">
+        <a name="M002580"></a>
+
+        <div class="method-heading">
+          <span class="method-name">content_disposition=</span><span class="method-args">( str, params = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002577">set_disposition</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002573" class="method-detail">
+        <a name="M002573"></a>
+
+        <div class="method-heading">
+          <span class="method-name">content_transfer_encoding</span><span class="method-args">( default = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002569">transfer_encoding</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002574" class="method-detail">
+        <a name="M002574"></a>
+
+        <div class="method-heading">
+          <span class="method-name">content_transfer_encoding=</span><span class="method-args">( str )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002569">transfer_encoding</a>=
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002561" class="method-detail">
+        <a name="M002561"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002561.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002561.html');return false;">
+          <span class="method-name">content_type</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the current &quot;Content-Type&quot; of the mail instance.
+</p>
+<p>
+If the <a href="Mail.html#M002561">content_type</a> field does not exist,
+returns nil by default or you can pass in as the parameter for what you
+want the default value <a href="Mail.html#M002531">to</a> be.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.content_type #=&gt; nil
+ mail.content_type([]) #=&gt; []
+ mail = TMail::Mail.load(&quot;../test/fixtures/raw_email&quot;)
+ mail.content_type #=&gt; &quot;text/plain&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002565" class="method-detail">
+        <a name="M002565"></a>
+
+        <div class="method-heading">
+          <span class="method-name">content_type=</span><span class="method-args">( str, sub = nil, param = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002564">set_content_type</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002632" class="method-detail">
+        <a name="M002632"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002632.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002632.html');return false;">
+          <span class="method-name">content_type_is_text?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if this part&#8216;s content main type is text, else returns
+false. By main type is meant &quot;text/plain&quot; is text.
+&quot;text/html&quot; is text
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002593" class="method-detail">
+        <a name="M002593"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002593.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002593.html');return false;">
+          <span class="method-name">create_forward</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a new email in reply <a href="Mail.html#M002531">to</a> self. Sets
+the In-Reply-To and References headers for you automagically.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.load(&quot;my_email&quot;)
+ forward_email = mail.create_forward
+ forward_email.class         #=&gt; TMail::Mail
+ forward_email.content_type  #=&gt; &quot;multipart/mixed&quot;
+ forward_email.body          #=&gt; &quot;Attachment: (unnamed)&quot;
+ forward_email.encoded       #=&gt; Returns the original email as a MIME attachment
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002592" class="method-detail">
+        <a name="M002592"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002592.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002592.html');return false;">
+          <span class="method-name">create_reply</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a new email in reply <a href="Mail.html#M002531">to</a> self. Sets
+the In-Reply-To and References headers for you automagically.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.load(&quot;my_email&quot;)
+ reply_email = mail.create_reply
+ reply_email.class         #=&gt; TMail::Mail
+ reply_email.references  #=&gt; [&quot;&lt;d3b8cf8e49f04480850c28713a1f473e@lindsaar.net&gt;&quot;]
+ reply_email.in_reply_to #=&gt; [&quot;&lt;d3b8cf8e49f04480850c28713a1f473e@lindsaar.net&gt;&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002522" class="method-detail">
+        <a name="M002522"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002522.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002522.html');return false;">
+          <span class="method-name">date</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Mail.html#M002522">date</a> of the email message as
+per the &quot;<a href="Mail.html#M002522">date</a>&quot; <a
+href="Mail.html#M002599">header</a> value or returns nil by default (if no
+<a href="Mail.html#M002522">date</a> field exists).
+</p>
+<p>
+You can also pass whatever default you want into this method and it will
+return that instead of nil if there is no <a
+href="Mail.html#M002522">date</a> already set.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002523" class="method-detail">
+        <a name="M002523"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002523.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002523.html');return false;">
+          <span class="method-name">date=</span><span class="method-args">( time )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the <a href="Mail.html#M002522">date</a> of the mail
+object with the passed Time instance, returns a Time instance set <a
+href="Mail.html#M002531">to</a> the date/time of the mail
+</p>
+<p>
+Example:
+</p>
+<pre>
+ now = Time.now
+ mail.date = now
+ mail.date #=&gt; Sat Nov 03 18:47:50 +1100 2007
+ mail.date.class #=&gt; Time
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002613" class="method-detail">
+        <a name="M002613"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002613.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002613.html');return false;">
+          <span class="method-name">delete</span><span class="method-args">( key )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002614" class="method-detail">
+        <a name="M002614"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002614.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002614.html');return false;">
+          <span class="method-name">delete_if</span><span class="method-args">() {|key, v| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002637" class="method-detail">
+        <a name="M002637"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002637.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002637.html');return false;">
+          <span class="method-name">delete_no_send_fields</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002586" class="method-detail">
+        <a name="M002586"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002586.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002586.html');return false;">
+          <span class="method-name">destinations</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an array of <a href="Mail.html#M002621">each</a> destination in the
+email message including <a href="Mail.html#M002531">to</a>: <a
+href="Mail.html#M002532">cc</a>: or <a href="Mail.html#M002533">bcc</a>:
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail.to = &quot;Mikel &lt;mikel@lindsaar.net&gt;&quot;
+ mail.cc = &quot;Trans &lt;t@t.com&gt;&quot;
+ mail.bcc = &quot;bob &lt;bob@me.com&gt;&quot;
+ mail.destinations #=&gt; [&quot;mikel@lindsaar.net&quot;, &quot;t@t.com&quot;, &quot;bob@me.com&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002575" class="method-detail">
+        <a name="M002575"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002575.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002575.html');return false;">
+          <span class="method-name">disposition</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the content-<a href="Mail.html#M002575">disposition</a> of the mail
+object, returns nil or the passed default value if given
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.load(&quot;path_to/raw_mail_with_attachment&quot;)
+ mail.disposition #=&gt; &quot;attachment&quot;
+
+ mail = TMail::Mail.load(&quot;path_to/plain_simple_email&quot;)
+ mail.disposition #=&gt; nil
+ mail.disposition(false) #=&gt; false
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002578" class="method-detail">
+        <a name="M002578"></a>
+
+        <div class="method-heading">
+          <span class="method-name">disposition=</span><span class="method-args">( str, params = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002577">set_disposition</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002631" class="method-detail">
+        <a name="M002631"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002631.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002631.html');return false;">
+          <span class="method-name">disposition_is_attachment?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if the content type of this part of the email is a <a
+href="Mail.html#M002575">disposition</a> attachment
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002581" class="method-detail">
+        <a name="M002581"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002581.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002581.html');return false;">
+          <span class="method-name">disposition_param</span><span class="method-args">( name, default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the value of a parameter in an existing content-<a
+href="Mail.html#M002575">disposition</a> <a
+href="Mail.html#M002599">header</a>
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail.set_disposition(&quot;attachment&quot;, {:filename =&gt; &quot;test.rb&quot;})
+ mail['content-disposition'].to_s #=&gt; &quot;attachment; filename=test.rb&quot;
+ mail.disposition_param(&quot;filename&quot;) #=&gt; &quot;test.rb&quot;
+ mail.disposition_param(&quot;missing_param_key&quot;) #=&gt; nil
+ mail.disposition_param(&quot;missing_param_key&quot;, false) #=&gt; false
+ mail.disposition_param(&quot;missing_param_key&quot;, &quot;Nothing to see here&quot;) #=&gt; &quot;Nothing to see here&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002621" class="method-detail">
+        <a name="M002621"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002621.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002621.html');return false;">
+          <span class="method-name">each</span><span class="method-args">( &amp;block )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002588" class="method-detail">
+        <a name="M002588"></a>
+
+        <div class="method-heading">
+          <span class="method-name">each_dest</span><span class="method-args">( &amp;block )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002587">each_destination</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002587" class="method-detail">
+        <a name="M002587"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002587.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002587.html');return false;">
+          <span class="method-name">each_destination</span><span class="method-args">( ) {|i| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Yields a block of destination, yielding <a
+href="Mail.html#M002621">each</a> as a string.
+</p>
+<pre>
+ (from the destinations example)
+ mail.each_destination { |d| puts &quot;#{d.class}: #{d}&quot; }
+ String: mikel@lindsaar.net
+ String: t@t.com
+ String: bob@me.com
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002609" class="method-detail">
+        <a name="M002609"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002609.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002609.html');return false;">
+          <span class="method-name">each_field</span><span class="method-args">( &amp;block )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002605" class="method-detail">
+        <a name="M002605"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002605.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002605.html');return false;">
+          <span class="method-name">each_header</span><span class="method-args">() {|key, v| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows you <a href="Mail.html#M002531">to</a> loop through <a
+href="Mail.html#M002621">each</a> <a href="Mail.html#M002599">header</a> in
+the <a href="Mail.html">TMail::Mail</a> object in a block Example:
+</p>
+<pre>
+  @mail['to'] = 'mikel@elsewhere.org'
+  @mail['from'] = 'me@me.com'
+  @mail.each_header { |k,v| puts &quot;#{k} = #{v}&quot; }
+  # =&gt; from = me@me.com
+  # =&gt; to = mikel@elsewhere.org
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002607" class="method-detail">
+        <a name="M002607"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002607.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002607.html');return false;">
+          <span class="method-name">each_header_name</span><span class="method-args">( &amp;block )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002608" class="method-detail">
+        <a name="M002608"></a>
+
+        <div class="method-heading">
+          <span class="method-name">each_key</span><span class="method-args">( &amp;block )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002607">each_header_name</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002606" class="method-detail">
+        <a name="M002606"></a>
+
+        <div class="method-heading">
+          <span class="method-name">each_pair</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002605">each_header</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002630" class="method-detail">
+        <a name="M002630"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002630.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002630.html');return false;">
+          <span class="method-name">each_part</span><span class="method-args">( &amp;block )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002610" class="method-detail">
+        <a name="M002610"></a>
+
+        <div class="method-heading">
+          <span class="method-name">each_value</span><span class="method-args">( &amp;block )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002609">each_field</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002571" class="method-detail">
+        <a name="M002571"></a>
+
+        <div class="method-heading">
+          <span class="method-name">encoding</span><span class="method-args">( default = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002569">transfer_encoding</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002572" class="method-detail">
+        <a name="M002572"></a>
+
+        <div class="method-heading">
+          <span class="method-name">encoding=</span><span class="method-args">( str )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002569">transfer_encoding</a>=
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002627" class="method-detail">
+        <a name="M002627"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002627.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002627.html');return false;">
+          <span class="method-name">epilogue</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002628" class="method-detail">
+        <a name="M002628"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002628.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002628.html');return false;">
+          <span class="method-name">epilogue=</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002590" class="method-detail">
+        <a name="M002590"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002590.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002590.html');return false;">
+          <span class="method-name">error_reply_addresses</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the &quot;<a href="Mail.html#M002548">sender</a>&quot; field as an
+array -&gt; useful <a href="Mail.html#M002531">to</a> find out who <a
+href="Mail.html#M002531">to</a> send an error email <a
+href="Mail.html#M002531">to</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002602" class="method-detail">
+        <a name="M002602"></a>
+
+        <div class="method-heading">
+          <span class="method-name">fetch</span><span class="method-args">( key )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for #[]
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002541" class="method-detail">
+        <a name="M002541"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002541.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002541.html');return false;">
+          <span class="method-name">friendly_from</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the &quot;friendly&quot; human readable part of the address
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.from = &quot;Mikel Lindsaar &lt;mikel@abc.com&gt;&quot;
+ mail.friendly_from #=&gt; &quot;Mikel Lindsaar&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002539" class="method-detail">
+        <a name="M002539"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002539.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002539.html');return false;">
+          <span class="method-name">from</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns who the email is <a href="Mail.html#M002539">from</a> as an Array
+of email address strings instead <a href="Mail.html#M002531">to</a> an
+Array of <a href="Address.html">TMail::Address</a> objects which is what <a
+href="Mail.html#M002537">Mail#from_addrs</a> returns
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.from = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.from #=&gt;  [&quot;mikel@me.org&quot;, &quot;mikel@you.org&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002540" class="method-detail">
+        <a name="M002540"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002540.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002540.html');return false;">
+          <span class="method-name">from=</span><span class="method-args">( *strs )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the &quot;From:&quot; field <a
+href="Mail.html#M002531">to</a> the passed array of strings (which should
+be valid email addresses)
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.from = [&quot;mikel@abc.com&quot;, &quot;Mikel &lt;mikel@xyz.com&gt;&quot;]
+ mail.from #=&gt;  [&quot;mikel@abc.org&quot;, &quot;mikel@xyz.org&quot;]
+ mail['from'].to_s #=&gt; &quot;mikel@abc.com, Mikel &lt;mikel@xyz.com&gt;&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002537" class="method-detail">
+        <a name="M002537"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002537.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002537.html');return false;">
+          <span class="method-name">from_addrs</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a TMail::Addresses instance for <a href="Mail.html#M002621">each</a>
+entry in the &quot;From:&quot; field of the mail object <a
+href="Mail.html#M002599">header</a>.
+</p>
+<p>
+If the &quot;From:&quot; field does not exist, will return nil by default
+or the value you pass as the optional parameter.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.from_addrs #=&gt; nil
+ mail.from_addrs([]) #=&gt; []
+ mail.from = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.from_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002538" class="method-detail">
+        <a name="M002538"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002538.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002538.html');return false;">
+          <span class="method-name">from_addrs=</span><span class="method-args">( arg )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively set the <a href="Mail.html#M002531">to</a> value of the
+&quot;From:&quot; <a href="Mail.html#M002599">header</a> <a
+href="Mail.html#M002531">to</a> equal the passed in string.
+</p>
+<p>
+<a href="../TMail.html">TMail</a> will <a
+href="Mail.html#M002595">parse</a> your contents and turn <a
+href="Mail.html#M002621">each</a> valid email address into a <a
+href="Address.html">TMail::Address</a> object before assigning it <a
+href="Mail.html#M002531">to</a> the mail message.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.from_addrs = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.from_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002518" class="method-detail">
+        <a name="M002518"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002518.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002518.html');return false;">
+          <span class="method-name">has_attachments?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002599" class="method-detail">
+        <a name="M002599"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002599.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002599.html');return false;">
+          <span class="method-name">header</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002521" class="method-detail">
+        <a name="M002521"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002521.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002521.html');return false;">
+          <span class="method-name">header_string</span><span class="method-args">( name, default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows you <a href="Mail.html#M002531">to</a> query the mail object with a
+string <a href="Mail.html#M002531">to</a> get the contents of the field you
+want.
+</p>
+<p>
+Returns a string of the exact contents of the field
+</p>
+<pre>
+ mail.from = &quot;mikel &lt;mikel@lindsaar.net&gt;&quot;
+ mail.header_string(&quot;From&quot;) #=&gt; &quot;mikel &lt;mikel@lindsaar.net&gt;&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002555" class="method-detail">
+        <a name="M002555"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002555.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002555.html');return false;">
+          <span class="method-name">in_reply_to</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the &quot;In-Reply-To:&quot; field contents as an array of this
+mail instance if it exists
+</p>
+<p>
+If the <a href="Mail.html#M002555">in_reply_to</a> field does not exist,
+returns nil by default or you can pass in as the parameter for what you
+want the default value <a href="Mail.html#M002531">to</a> be.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.in_reply_to #=&gt; nil
+ mail.in_reply_to([]) #=&gt; []
+ TMail::Mail.load(&quot;../test/fixtures/raw_email_reply&quot;)
+ mail.in_reply_to #=&gt; [&quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002556" class="method-detail">
+        <a name="M002556"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002556.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002556.html');return false;">
+          <span class="method-name">in_reply_to=</span><span class="method-args">( *idstrs )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the value of the &quot;In-Reply-To:&quot; field of an
+email.
+</p>
+<p>
+Accepts an array of a single string of a message id
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.in_reply_to = [&quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;]
+ mail.in_reply_to #=&gt; [&quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002618" class="method-detail">
+        <a name="M002618"></a>
+
+        <div class="method-heading">
+          <span class="method-name">indexes</span><span class="method-args">( *args )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002617">values_at</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002619" class="method-detail">
+        <a name="M002619"></a>
+
+        <div class="method-heading">
+          <span class="method-name">indices</span><span class="method-args">( *args )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002617">values_at</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002596" class="method-detail">
+        <a name="M002596"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002596.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002596.html');return false;">
+          <span class="method-name">inspect</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002616" class="method-detail">
+        <a name="M002616"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002616.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002616.html');return false;">
+          <span class="method-name">key?</span><span class="method-args">( key )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002615" class="method-detail">
+        <a name="M002615"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002615.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002615.html');return false;">
+          <span class="method-name">keys</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002562" class="method-detail">
+        <a name="M002562"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002562.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002562.html');return false;">
+          <span class="method-name">main_type</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the current main type of the &quot;Content-Type&quot; of the mail
+instance.
+</p>
+<p>
+If the <a href="Mail.html#M002561">content_type</a> field does not exist,
+returns nil by default or you can pass in as the parameter for what you
+want the default value <a href="Mail.html#M002531">to</a> be.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.main_type #=&gt; nil
+ mail.main_type([]) #=&gt; []
+ mail = TMail::Mail.load(&quot;../test/fixtures/raw_email&quot;)
+ mail.main_type #=&gt; &quot;text&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002553" class="method-detail">
+        <a name="M002553"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002553.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002553.html');return false;">
+          <span class="method-name">message_id</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the message ID for this mail object instance.
+</p>
+<p>
+If the <a href="Mail.html#M002553">message_id</a> field does not exist,
+returns nil by default or you can pass in as the parameter for what you
+want the default value <a href="Mail.html#M002531">to</a> be.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.message_id #=&gt; nil
+ mail.message_id(TMail.new_message_id) #=&gt; &quot;&lt;47404c5326d9c_2ad4fbb80161@baci.local.tmail&gt;&quot;
+ mail.message_id = TMail.new_message_id
+ mail.message_id #=&gt; &quot;&lt;47404c5326d9c_2ad4fbb80161@baci.local.tmail&gt;&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002554" class="method-detail">
+        <a name="M002554"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002554.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002554.html');return false;">
+          <span class="method-name">message_id=</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the message ID of the mail object instance <a
+href="Mail.html#M002531">to</a> the passed in string
+</p>
+<p>
+Invalid message IDs are ignored (silently, unless configured otherwise) and
+result in a nil message ID. Left and right angle brackets are required.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.message_id = &quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;
+ mail.message_id #=&gt; &quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;
+ mail.message_id = &quot;this_is_my_badly_formatted_message_id&quot;
+ mail.message_id #=&gt; nil
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002640" class="method-detail">
+        <a name="M002640"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002640.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002640.html');return false;">
+          <span class="method-name">mime_encode</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002643" class="method-detail">
+        <a name="M002643"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002643.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002643.html');return false;">
+          <span class="method-name">mime_encode_binary</span><span class="method-args">( body )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002644" class="method-detail">
+        <a name="M002644"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002644.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002644.html');return false;">
+          <span class="method-name">mime_encode_multipart</span><span class="method-args">( top = true )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002641" class="method-detail">
+        <a name="M002641"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002641.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002641.html');return false;">
+          <span class="method-name">mime_encode_singlepart</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002642" class="method-detail">
+        <a name="M002642"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002642.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002642.html');return false;">
+          <span class="method-name">mime_encode_text</span><span class="method-args">( body )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002559" class="method-detail">
+        <a name="M002559"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002559.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002559.html');return false;">
+          <span class="method-name">mime_version</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the listed MIME version of this email <a
+href="Mail.html#M002539">from</a> the &quot;Mime-Version:&quot; <a
+href="Mail.html#M002599">header</a> field
+</p>
+<p>
+If the <a href="Mail.html#M002559">mime_version</a> field does not exist,
+returns nil by default or you can pass in as the parameter for what you
+want the default value <a href="Mail.html#M002531">to</a> be.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.mime_version #=&gt; nil
+ mail.mime_version([]) #=&gt; []
+ mail = TMail::Mail.load(&quot;../test/fixtures/raw_email&quot;)
+ mail.mime_version #=&gt; &quot;1.0&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002560" class="method-detail">
+        <a name="M002560"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002560.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002560.html');return false;">
+          <span class="method-name">mime_version=</span><span class="method-args">( m, opt = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002591" class="method-detail">
+        <a name="M002591"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002591.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002591.html');return false;">
+          <span class="method-name">multipart?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if the <a href="Mail.html">Mail</a> object is a multipart
+message
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002611" class="method-detail">
+        <a name="M002611"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002611.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002611.html');return false;">
+          <span class="method-name">ordered_each</span><span class="method-args">() {|name, v| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002629" class="method-detail">
+        <a name="M002629"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002629.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002629.html');return false;">
+          <span class="method-name">parts</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002625" class="method-detail">
+        <a name="M002625"></a>
+
+        <div class="method-heading">
+          <span class="method-name">preamble</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002622">quoted_body</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002626" class="method-detail">
+        <a name="M002626"></a>
+
+        <div class="method-heading">
+          <span class="method-name">preamble=</span><span class="method-args">(str)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002622">quoted_body</a>=
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002622" class="method-detail">
+        <a name="M002622"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002622.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002622.html');return false;">
+          <span class="method-name">quoted_body</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002623" class="method-detail">
+        <a name="M002623"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002623.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002623.html');return false;">
+          <span class="method-name">quoted_body=</span><span class="method-args">(str)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002551" class="method-detail">
+        <a name="M002551"></a>
+
+        <div class="method-heading">
+          <span class="method-name">quoted_subject</span><span class="method-args">( default = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002550">subject</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002636" class="method-detail">
+        <a name="M002636"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002636.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002636.html');return false;">
+          <span class="method-name">ready_to_send</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002557" class="method-detail">
+        <a name="M002557"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002557.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002557.html');return false;">
+          <span class="method-name">references</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Mail.html#M002557">references</a> of this email (prior
+messages relating <a href="Mail.html#M002531">to</a> this message) as an
+array of message ID strings. Useful when you are trying <a
+href="Mail.html#M002531">to</a> thread an email.
+</p>
+<p>
+If the <a href="Mail.html#M002557">references</a> field does not exist,
+returns nil by default or you can pass in as the parameter for what you
+want the default value <a href="Mail.html#M002531">to</a> be.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.references #=&gt; nil
+ mail.references([]) #=&gt; []
+ mail = TMail::Mail.load(&quot;../test/fixtures/raw_email_reply&quot;)
+ mail.references #=&gt; [&quot;&lt;473FF3B8.9020707@xxx.org&gt;&quot;, &quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002558" class="method-detail">
+        <a name="M002558"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002558.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002558.html');return false;">
+          <span class="method-name">references=</span><span class="method-args">( *strs )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the value of the &quot;References:&quot; field of an
+email.
+</p>
+<p>
+Accepts an array of strings of message IDs
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.references = [&quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;]
+ mail.references #=&gt; [&quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002589" class="method-detail">
+        <a name="M002589"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002589.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002589.html');return false;">
+          <span class="method-name">reply_addresses</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an array of reply <a href="Mail.html#M002531">to</a> addresses that
+the <a href="Mail.html">Mail</a> object has, or if the <a
+href="Mail.html">Mail</a> message has no reply-<a
+href="Mail.html#M002531">to</a>, returns an array of the <a
+href="Mail.html">Mail</a> objects <a href="Mail.html#M002539">from</a>
+addresses. Else returns the default which can either be passed as a
+parameter or defaults <a href="Mail.html#M002531">to</a> nil
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail.from = &quot;Mikel &lt;mikel@lindsaar.net&gt;&quot;
+ mail.reply_to = nil
+ mail.reply_addresses #=&gt; [&quot;&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002544" class="method-detail">
+        <a name="M002544"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002544.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002544.html');return false;">
+          <span class="method-name">reply_to</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns who the email is <a href="Mail.html#M002539">from</a> as an Array
+of email address strings instead <a href="Mail.html#M002531">to</a> an
+Array of <a href="Address.html">TMail::Address</a> objects which is what <a
+href="Mail.html#M002542">Mail#reply_to_addrs</a> returns
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.reply_to = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.reply_to #=&gt;  [&quot;mikel@me.org&quot;, &quot;mikel@you.org&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002545" class="method-detail">
+        <a name="M002545"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002545.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002545.html');return false;">
+          <span class="method-name">reply_to=</span><span class="method-args">( *strs )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the &quot;Reply-To:&quot; field <a
+href="Mail.html#M002531">to</a> the passed array of strings (which should
+be valid email addresses)
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.reply_to = [&quot;mikel@abc.com&quot;, &quot;Mikel &lt;mikel@xyz.com&gt;&quot;]
+ mail.reply_to #=&gt;  [&quot;mikel@abc.org&quot;, &quot;mikel@xyz.org&quot;]
+ mail['reply_to'].to_s #=&gt; &quot;mikel@abc.com, Mikel &lt;mikel@xyz.com&gt;&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002542" class="method-detail">
+        <a name="M002542"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002542.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002542.html');return false;">
+          <span class="method-name">reply_to_addrs</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a TMail::Addresses instance for <a href="Mail.html#M002621">each</a>
+entry in the &quot;Reply-To:&quot; field of the mail object <a
+href="Mail.html#M002599">header</a>.
+</p>
+<p>
+If the &quot;Reply-To:&quot; field does not exist, will return nil by
+default or the value you pass as the optional parameter.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.reply_to_addrs #=&gt; nil
+ mail.reply_to_addrs([]) #=&gt; []
+ mail.reply_to = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.reply_to_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002543" class="method-detail">
+        <a name="M002543"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002543.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002543.html');return false;">
+          <span class="method-name">reply_to_addrs=</span><span class="method-args">( arg )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively set the <a href="Mail.html#M002531">to</a> value of the
+&quot;Reply-To:&quot; <a href="Mail.html#M002599">header</a> <a
+href="Mail.html#M002531">to</a> equal the passed in argument.
+</p>
+<p>
+<a href="../TMail.html">TMail</a> will <a
+href="Mail.html#M002595">parse</a> your contents and turn <a
+href="Mail.html#M002621">each</a> valid email address into a <a
+href="Address.html">TMail::Address</a> object before assigning it <a
+href="Mail.html#M002531">to</a> the mail message.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.reply_to_addrs = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.reply_to_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002634" class="method-detail">
+        <a name="M002634"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002634.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002634.html');return false;">
+          <span class="method-name">send_text_to</span><span class="method-args">( smtp )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002633" class="method-detail">
+        <a name="M002633"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002633.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002633.html');return false;">
+          <span class="method-name">send_to</span><span class="method-args">( smtp )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002635" class="method-detail">
+        <a name="M002635"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002635.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002635.html');return false;">
+          <span class="method-name">send_to_0</span><span class="method-args">( smtp, from, to )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002548" class="method-detail">
+        <a name="M002548"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002548.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002548.html');return false;">
+          <span class="method-name">sender</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns who the <a href="Mail.html#M002548">sender</a> of this mail is as
+string instead <a href="Mail.html#M002531">to</a> an Array of <a
+href="Address.html">TMail::Address</a> objects which is what <a
+href="Mail.html#M002546">Mail#sender_addr</a> returns
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.sender = &quot;Mikel &lt;mikel@me.org&gt;&quot;
+ mail.sender #=&gt;  &quot;mikel@me.org&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002549" class="method-detail">
+        <a name="M002549"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002549.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002549.html');return false;">
+          <span class="method-name">sender=</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the &quot;Sender:&quot; field <a
+href="Mail.html#M002531">to</a> the passed string (which should be a valid
+email address)
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.sender = &quot;mikel@abc.com&quot;
+ mail.sender #=&gt;  &quot;mikel@abc.org&quot;
+ mail['sender'].to_s #=&gt; &quot;mikel@abc.com&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002546" class="method-detail">
+        <a name="M002546"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002546.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002546.html');return false;">
+          <span class="method-name">sender_addr</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a TMail::Addresses instance of the &quot;Sender:&quot; field of the
+mail object <a href="Mail.html#M002599">header</a>.
+</p>
+<p>
+If the &quot;Sender:&quot; field does not exist, will return nil by default
+or the value you pass as the optional parameter.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.sender #=&gt; nil
+ mail.sender([]) #=&gt; []
+ mail.sender = &quot;Mikel &lt;mikel@me.org&gt;&quot;
+ mail.reply_to_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002547" class="method-detail">
+        <a name="M002547"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002547.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002547.html');return false;">
+          <span class="method-name">sender_addr=</span><span class="method-args">( addr )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively set the <a href="Mail.html#M002531">to</a> value of the
+&quot;Sender:&quot; <a href="Mail.html#M002599">header</a> <a
+href="Mail.html#M002531">to</a> equal the passed in argument.
+</p>
+<p>
+<a href="../TMail.html">TMail</a> will <a
+href="Mail.html#M002595">parse</a> your contents and turn <a
+href="Mail.html#M002621">each</a> valid email address into a <a
+href="Address.html">TMail::Address</a> object before assigning it <a
+href="Mail.html#M002531">to</a> the mail message.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.sender_addrs = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.sender_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002579" class="method-detail">
+        <a name="M002579"></a>
+
+        <div class="method-heading">
+          <span class="method-name">set_content_disposition</span><span class="method-args">( str, params = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Mail.html#M002577">set_disposition</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002564" class="method-detail">
+        <a name="M002564"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002564.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002564.html');return false;">
+          <span class="method-name">set_content_type</span><span class="method-args">( str, sub = nil, param = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the &quot;Content-Type:&quot; <a
+href="Mail.html#M002599">header</a> field of this mail object
+</p>
+<p>
+Allows you <a href="Mail.html#M002531">to</a> set the main type, sub type
+as well as parameters <a href="Mail.html#M002531">to</a> the field. The
+main type and sub type need <a href="Mail.html#M002531">to</a> be a string.
+</p>
+<p>
+The optional params hash can be passed with <a
+href="Mail.html#M002615">keys</a> as symbols and values as a string, or
+strings as <a href="Mail.html#M002615">keys</a> and values.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.set_content_type(&quot;text&quot;, &quot;plain&quot;)
+ mail.to_s #=&gt; &quot;Content-Type: text/plain\n\n&quot;
+
+ mail.set_content_type(&quot;text&quot;, &quot;plain&quot;, {:charset =&gt; &quot;EUC-KR&quot;, :format =&gt; &quot;flowed&quot;})
+ mail.to_s #=&gt; &quot;Content-Type: text/plain; charset=EUC-KR; format=flowed\n\n&quot;
+
+ mail.set_content_type(&quot;text&quot;, &quot;plain&quot;, {&quot;charset&quot; =&gt; &quot;EUC-KR&quot;, &quot;format&quot; =&gt; &quot;flowed&quot;})
+ mail.to_s #=&gt; &quot;Content-Type: text/plain; charset=EUC-KR; format=flowed\n\n&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002577" class="method-detail">
+        <a name="M002577"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002577.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002577.html');return false;">
+          <span class="method-name">set_disposition</span><span class="method-args">( str, params = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows you <a href="Mail.html#M002531">to</a> set the content-<a
+href="Mail.html#M002575">disposition</a> of the mail object. Accepts a type
+and a hash of parameters.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail.set_disposition(&quot;attachment&quot;, {:filename =&gt; &quot;test.rb&quot;})
+ mail.disposition #=&gt; &quot;attachment&quot;
+ mail['content-disposition'].to_s #=&gt; &quot;attachment; filename=test.rb&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002604" class="method-detail">
+        <a name="M002604"></a>
+
+        <div class="method-heading">
+          <span class="method-name">store</span><span class="method-args">( key, val )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for #[]=
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002524" class="method-detail">
+        <a name="M002524"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002524.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002524.html');return false;">
+          <span class="method-name">strftime</span><span class="method-args">( fmt, default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the time of the mail message formatted <a
+href="Mail.html#M002531">to</a> your taste using a <a
+href="Mail.html#M002524">strftime</a> format string. If no <a
+href="Mail.html#M002522">date</a> set returns nil by default or whatever
+value you pass as the second optional parameter.
+</p>
+<pre>
+ time = Time.now # (on Nov 16 2007)
+ mail.date = time
+ mail.strftime(&quot;%D&quot;) #=&gt; &quot;11/16/07&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002601" class="method-detail">
+        <a name="M002601"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002601.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002601.html');return false;">
+          <span class="method-name">sub_header</span><span class="method-args">(key, param)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002563" class="method-detail">
+        <a name="M002563"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002563.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002563.html');return false;">
+          <span class="method-name">sub_type</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the current sub type of the &quot;Content-Type&quot; of the mail
+instance.
+</p>
+<p>
+If the <a href="Mail.html#M002561">content_type</a> field does not exist,
+returns nil by default or you can pass in as the parameter for what you
+want the default value <a href="Mail.html#M002531">to</a> be.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.sub_type #=&gt; nil
+ mail.sub_type([]) #=&gt; []
+ mail = TMail::Mail.load(&quot;../test/fixtures/raw_email&quot;)
+ mail.sub_type #=&gt; &quot;plain&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002550" class="method-detail">
+        <a name="M002550"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002550.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002550.html');return false;">
+          <span class="method-name">subject</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Mail.html#M002550">subject</a> of the mail instance.
+</p>
+<p>
+If the <a href="Mail.html#M002550">subject</a> field does not exist,
+returns nil by default or you can pass in as the parameter for what you
+want the default value <a href="Mail.html#M002531">to</a> be.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.subject #=&gt; nil
+ mail.subject(&quot;&quot;) #=&gt; &quot;&quot;
+ mail.subject = &quot;Hello&quot;
+ mail.subject #=&gt; &quot;Hello&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002645" class="method-detail">
+        <a name="M002645"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002645.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002645.html');return false;">
+          <span class="method-name">subject</span><span class="method-args">(to_charset = 'utf-8')</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002552" class="method-detail">
+        <a name="M002552"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002552.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002552.html');return false;">
+          <span class="method-name">subject=</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the passed string as the <a
+href="Mail.html#M002550">subject</a> of the mail message.
+</p>
+<p>
+Example
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.subject #=&gt; &quot;This subject&quot;
+ mail.subject = &quot;Another subject&quot;
+ mail.subject #=&gt; &quot;Another subject&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002531" class="method-detail">
+        <a name="M002531"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002531.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002531.html');return false;">
+          <span class="method-name">to</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns who the email is <a href="Mail.html#M002531">to</a> as an Array of
+email addresses as opposed <a href="Mail.html#M002531">to</a> an Array of
+<a href="Address.html">TMail::Address</a> objects which is what <a
+href="Mail.html#M002525">Mail#to_addrs</a> returns
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.to = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.to #=&gt;  [&quot;mikel@me.org&quot;, &quot;mikel@you.org&quot;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002534" class="method-detail">
+        <a name="M002534"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002534.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002534.html');return false;">
+          <span class="method-name">to=</span><span class="method-args">( *strs )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the &quot;To:&quot; field <a
+href="Mail.html#M002531">to</a> the passed array of strings (which should
+be valid email addresses)
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.to = [&quot;mikel@abc.com&quot;, &quot;Mikel &lt;mikel@xyz.com&gt;&quot;]
+ mail.to #=&gt;  [&quot;mikel@abc.org&quot;, &quot;mikel@xyz.org&quot;]
+ mail['to'].to_s #=&gt; &quot;mikel@abc.com, Mikel &lt;mikel@xyz.com&gt;&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002525" class="method-detail">
+        <a name="M002525"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002525.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002525.html');return false;">
+          <span class="method-name">to_addrs</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a TMail::Addresses instance for <a href="Mail.html#M002621">each</a>
+entry in the &quot;To:&quot; field of the mail object <a
+href="Mail.html#M002599">header</a>.
+</p>
+<p>
+If the &quot;To:&quot; field does not exist, will return nil by default or
+the value you pass as the optional parameter.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.to_addrs #=&gt; nil
+ mail.to_addrs([]) #=&gt; []
+ mail.to = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.to_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002528" class="method-detail">
+        <a name="M002528"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002528.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002528.html');return false;">
+          <span class="method-name">to_addrs=</span><span class="method-args">( arg )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively set the <a href="Mail.html#M002531">to</a> field of the
+&quot;To:&quot; <a href="Mail.html#M002599">header</a> <a
+href="Mail.html#M002531">to</a> equal the passed in string.
+</p>
+<p>
+<a href="../TMail.html">TMail</a> will <a
+href="Mail.html#M002595">parse</a> your contents and turn <a
+href="Mail.html#M002621">each</a> valid email address into a <a
+href="Address.html">TMail::Address</a> object before assigning it <a
+href="Mail.html#M002531">to</a> the mail message.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.to = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;
+ mail.to_addrs #=&gt;  [#&lt;TMail::Address mikel@me.org&gt;, #&lt;TMail::Address mikel@you.org&gt;]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002569" class="method-detail">
+        <a name="M002569"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002569.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002569.html');return false;">
+          <span class="method-name">transfer_encoding</span><span class="method-args">( default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the transfer <a href="Mail.html#M002571">encoding</a> of the email.
+Returns nil if no <a href="Mail.html#M002571">encoding</a> set or returns
+whatever default you pass as a parameter - note passing the parameter does
+NOT change the mail object in any way.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.load(&quot;path_to/base64_encoded_email&quot;)
+ mail.transfer_encoding #=&gt; &quot;base64&quot;
+
+ mail = TMail::Mail.new
+ mail.transfer_encoding #=&gt; nil
+ mail.transfer_encoding(&quot;base64&quot;) #=&gt; &quot;base64&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002570" class="method-detail">
+        <a name="M002570"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002570.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002570.html');return false;">
+          <span class="method-name">transfer_encoding=</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Destructively sets the transfer <a href="Mail.html#M002571">encoding</a> of
+the mail object <a href="Mail.html#M002531">to</a> the passed string, you
+should note though that this does nothing <a
+href="Mail.html#M002531">to</a> the mail <a
+href="Mail.html#M002647">body</a>, just changes the <a
+href="Mail.html#M002599">header</a> value, you will need <a
+href="Mail.html#M002531">to</a> encode or decode the <a
+href="Mail.html#M002647">body</a> as well <a
+href="Mail.html#M002531">to</a> match whatever you put in this <a
+href="Mail.html#M002599">header</a> value.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.transfer_encoding #=&gt; nil
+ mail.transfer_encoding = &quot;base64&quot;
+ mail.transfer_encoding #=&gt; &quot;base64&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002566" class="method-detail">
+        <a name="M002566"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002566.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002566.html');return false;">
+          <span class="method-name">type_param</span><span class="method-args">( name, default = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the named type parameter as a string, <a
+href="Mail.html#M002539">from</a> the &quot;Content-Type:&quot; <a
+href="Mail.html#M002599">header</a>.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ mail = TMail::Mail.new
+ mail.type_param(&quot;charset&quot;) #=&gt; nil
+ mail.type_param(&quot;charset&quot;, []) #=&gt; []
+ mail.set_content_type(&quot;text&quot;, &quot;plain&quot;, {:charset =&gt; &quot;EUC-KR&quot;, :format =&gt; &quot;flowed&quot;})
+ mail.type_param(&quot;charset&quot;) #=&gt; &quot;EUC-KR&quot;
+ mail.type_param(&quot;format&quot;) #=&gt; &quot;flowed&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002646" class="method-detail">
+        <a name="M002646"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002646.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002646.html');return false;">
+          <span class="method-name">unquoted_body</span><span class="method-args">(to_charset = 'utf-8')</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002617" class="method-detail">
+        <a name="M002617"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002617.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002617.html');return false;">
+          <span class="method-name">values_at</span><span class="method-args">( *args )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M002597" class="method-detail">
+        <a name="M002597"></a>
+
+        <div class="method-heading">
+          <a href="Mail.src/M002597.html" target="Code" class="method-signature"
+            onclick="popupCode('Mail.src/M002597.html');return false;">
+          <span class="method-name">write_back</span><span class="method-args">( eol = &quot;\n&quot;, charset = 'e' )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

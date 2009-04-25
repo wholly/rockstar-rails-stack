@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendLoadTranslationsTest#test_load_translations_loads_from_different_file_formats
+is_singleton: false
+name: test_load_translations_loads_from_different_file_formats
+params: ()
+visibility: public

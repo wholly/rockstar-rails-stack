@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+constants: []
+
+full_name: ActiveSupport::Memoizable::InstanceMethods
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: flush_cache
+- !ruby/object:RI::MethodSummary 
+  name: freeze_with_memoizable
+- !ruby/object:RI::MethodSummary 
+  name: memoize_all
+- !ruby/object:RI::MethodSummary 
+  name: prime_cache
+- !ruby/object:RI::MethodSummary 
+  name: unmemoize_all
+name: InstanceMethods
+superclass: 

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendTranslateTest#test_translate_with_a_bogus_key_and_no_default_raises_missing_translation_data
+is_singleton: false
+name: test_translate_with_a_bogus_key_and_no_default_raises_missing_translation_data
+params: ()
+visibility: public

@@ -1,0 +1,72 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Polymorphic URL helpers are methods for smart resolution to a named route call when given an Active Record model instance. They are to be used in combination with ActionController::Resources.
+- !ruby/struct:SM::Flow::P 
+  body: These methods are useful when you want to generate correct URL or path to a RESTful resource without having to know the exact type of the record in question.
+- !ruby/struct:SM::Flow::P 
+  body: "Nested resources and/or namespaces are also supported, as illustrated in the example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  polymorphic_url([:admin, @article, @comment])\n"
+- !ruby/struct:SM::Flow::P 
+  body: "results in:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  admin_article_comment_url(@article, @comment)\n"
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Usage within the framework
+- !ruby/struct:SM::Flow::P 
+  body: "Polymorphic URL helpers are used in a number of places throughout the Rails framework:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>url_for</tt>, so you can use it with a record as the argument, e.g. <tt>url_for(@article)</tt>;
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: ActionView::Helpers::FormHelper uses <tt>polymorphic_path</tt>, so you can write <tt>form_for(@article)</tt> without having to specify <tt>:url</tt> parameter for the form action;
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>redirect_to</tt> (which, in fact, uses <tt>url_for</tt>) so you can write <tt>redirect_to(post)</tt> in your controllers;
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: ActionView::Helpers::AtomFeedHelper, so you don't have to explicitly specify URLs for feed entries.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Prefixed polymorphic helpers
+- !ruby/struct:SM::Flow::P 
+  body: "In addition to <tt>polymorphic_url</tt> and <tt>polymorphic_path</tt> methods, a number of prefixed helpers are available as a shorthand to <tt>:action =&gt; &quot;...&quot;</tt> in options. Those are:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>edit_polymorphic_url</tt>, <tt>edit_polymorphic_path</tt>
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>new_polymorphic_url</tt>, <tt>new_polymorphic_path</tt>
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "Example usage:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  edit_polymorphic_path(@post)              # =&gt; &quot;/posts/1/edit&quot;\n  polymorphic_path(@post, :format =&gt; :pdf)  # =&gt; &quot;/posts/1.pdf&quot;\n"
+constants: []
+
+full_name: ActionController::PolymorphicRoutes
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: formatted_polymorphic_path
+- !ruby/object:RI::MethodSummary 
+  name: formatted_polymorphic_url
+- !ruby/object:RI::MethodSummary 
+  name: polymorphic_path
+- !ruby/object:RI::MethodSummary 
+  name: polymorphic_url
+name: PolymorphicRoutes
+superclass: 

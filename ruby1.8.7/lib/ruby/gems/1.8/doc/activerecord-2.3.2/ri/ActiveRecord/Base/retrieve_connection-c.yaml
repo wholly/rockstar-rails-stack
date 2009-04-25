@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::Base::retrieve_connection
+is_singleton: true
+name: retrieve_connection
+params: ()
+visibility: public

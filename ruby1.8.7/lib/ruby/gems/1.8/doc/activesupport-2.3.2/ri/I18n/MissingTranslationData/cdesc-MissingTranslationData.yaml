@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: key
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: locale
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: options
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: I18n::MissingTranslationData
+includes: []
+
+instance_methods: []
+
+name: MissingTranslationData
+superclass: ArgumentError

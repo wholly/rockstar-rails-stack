@@ -1,0 +1,31 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: MessageVerifier makes it easy to generate and verify messages which are signed to prevent tampering.
+- !ruby/struct:SM::Flow::P 
+  body: This is useful for cases like remember-me tokens and auto-unsubscribe links where the session store isn't suitable or available.
+- !ruby/struct:SM::Flow::P 
+  body: "Remember Me:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  cookies[:remember_me] = @verifier.generate([@user.id, 2.weeks.from_now])\n"
+- !ruby/struct:SM::Flow::P 
+  body: "In the authentication filter:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  id, time = @verifier.verify(cookies[:remember_me])\n  if time &lt; Time.now\n    self.current_user = User.find(id)\n  end\n"
+constants: []
+
+full_name: ActiveSupport::MessageVerifier
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: generate
+- !ruby/object:RI::MethodSummary 
+  name: verify
+name: MessageVerifier
+superclass: Object

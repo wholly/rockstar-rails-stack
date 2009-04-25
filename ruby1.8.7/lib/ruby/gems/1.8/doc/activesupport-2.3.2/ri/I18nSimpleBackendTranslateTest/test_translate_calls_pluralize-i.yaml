@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendTranslateTest#test_translate_calls_pluralize
+is_singleton: false
+name: test_translate_calls_pluralize
+params: ()
+visibility: public

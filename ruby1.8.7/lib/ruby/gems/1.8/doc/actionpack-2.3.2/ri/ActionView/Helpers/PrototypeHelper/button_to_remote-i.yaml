@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a button with an onclick event which calls a remote action via XMLHttpRequest The options for specifying the target with :url and defining callbacks is the same as link_to_remote.
+full_name: ActionView::Helpers::PrototypeHelper#button_to_remote
+is_singleton: false
+name: button_to_remote
+params: (name, options = {}, html_options = {})
+visibility: public

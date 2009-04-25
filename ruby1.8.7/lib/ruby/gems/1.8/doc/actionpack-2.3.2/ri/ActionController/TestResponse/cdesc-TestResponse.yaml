@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Integration test methods such as ActionController::Integration::Session#get and ActionController::Integration::Session#post return objects of class TestResponse, which represent the HTTP response results of the requested controller actions.
+- !ruby/struct:SM::Flow::P 
+  body: See Response for more information on controller response objects.
+constants: []
+
+full_name: ActionController::TestResponse
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: TestResponseBehavior
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: recycle!
+name: TestResponse
+superclass: Response

@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: ActiveSupport::CoreExtensions::Float::Time
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: month
+- !ruby/object:RI::MethodSummary 
+  name: months
+- !ruby/object:RI::MethodSummary 
+  name: months_without_deprecation
+- !ruby/object:RI::MethodSummary 
+  name: year
+- !ruby/object:RI::MethodSummary 
+  name: years
+- !ruby/object:RI::MethodSummary 
+  name: years_without_deprecation
+name: Time
+superclass: 

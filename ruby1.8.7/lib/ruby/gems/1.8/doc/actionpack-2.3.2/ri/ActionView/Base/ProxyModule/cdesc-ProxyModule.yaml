@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: ActionView::Base::ProxyModule
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: include
+name: ProxyModule
+superclass: Module

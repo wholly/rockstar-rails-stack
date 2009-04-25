@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendInterpolateTest#test_interpolate_given_an_unicode_value_hash_interpolates_into_unicode_string
+is_singleton: false
+name: test_interpolate_given_an_unicode_value_hash_interpolates_into_unicode_string
+params: ()
+visibility: public

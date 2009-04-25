@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::ConnectionAdapters::AbstractAdapter#current_savepoint_name
+is_singleton: false
+name: current_savepoint_name
+params: ()
+visibility: public

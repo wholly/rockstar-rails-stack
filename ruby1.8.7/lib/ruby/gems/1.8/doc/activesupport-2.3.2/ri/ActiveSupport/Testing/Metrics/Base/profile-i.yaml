@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: ""
+comment: 
+full_name: ActiveSupport::Testing::Metrics::Base#profile
+is_singleton: false
+name: profile
+params: () {|| ...}
+visibility: public

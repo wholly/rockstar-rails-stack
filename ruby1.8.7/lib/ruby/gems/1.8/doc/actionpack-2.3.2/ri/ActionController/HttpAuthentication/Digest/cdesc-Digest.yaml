@@ -1,0 +1,42 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: ActionController::HttpAuthentication::Digest
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: authenticate
+- !ruby/object:RI::MethodSummary 
+  name: authentication_header
+- !ruby/object:RI::MethodSummary 
+  name: authentication_request
+- !ruby/object:RI::MethodSummary 
+  name: authorization
+- !ruby/object:RI::MethodSummary 
+  name: decode_credentials
+- !ruby/object:RI::MethodSummary 
+  name: decode_credentials_header
+- !ruby/object:RI::MethodSummary 
+  name: encode_credentials
+- !ruby/object:RI::MethodSummary 
+  name: expected_response
+- !ruby/object:RI::MethodSummary 
+  name: ha1
+- !ruby/object:RI::MethodSummary 
+  name: nonce
+- !ruby/object:RI::MethodSummary 
+  name: opaque
+- !ruby/object:RI::MethodSummary 
+  name: secret_key
+- !ruby/object:RI::MethodSummary 
+  name: validate_digest_response
+- !ruby/object:RI::MethodSummary 
+  name: validate_nonce
+name: Digest
+superclass: 

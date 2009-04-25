@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendLoadPathTest#test_nested_load_paths_do_not_break_locale_loading
+is_singleton: false
+name: test_nested_load_paths_do_not_break_locale_loading
+params: ()
+visibility: public

@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: delete
+- !ruby/object:RI::MethodSummary 
+  name: get
+- !ruby/object:RI::MethodSummary 
+  name: included
+- !ruby/object:RI::MethodSummary 
+  name: post
+- !ruby/object:RI::MethodSummary 
+  name: put
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "A module to support custom REST methods and sub-resources, allowing you to break out of the &quot;default&quot; REST methods with your own custom resource requests. For example, say you use Rails to expose a REST service and configure your routes with:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "   map.resources :people, :new =&gt; { :register =&gt; :post },\n                          :member =&gt; { :promote =&gt; :put, :deactivate =&gt; :delete }\n                          :collection =&gt; { :active =&gt; :get }\n\n This route set creates routes for the following HTTP requests:\n\n   POST    /people/new/register.xml # PeopleController.register\n   PUT     /people/1/promote.xml    # PeopleController.promote with :id =&gt; 1\n   DELETE  /people/1/deactivate.xml # PeopleController.deactivate with :id =&gt; 1\n   GET     /people/active.xml       # PeopleController.active\n"
+- !ruby/struct:SM::Flow::P 
+  body: Using this module, Active Resource can use these custom REST methods just like the standard methods.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Person &lt; ActiveResource::Base\n    self.site = &quot;http://37s.sunrise.i:3000&quot;\n  end\n\n  Person.new(:name =&gt; 'Ryan).post(:register)  # POST /people/new/register.xml\n  # =&gt; { :id =&gt; 1, :name =&gt; 'Ryan' }\n\n  Person.find(1).put(:promote, :position =&gt; 'Manager') # PUT /people/1/promote.xml\n  Person.find(1).delete(:deactivate) # DELETE /people/1/deactivate.xml\n\n  Person.get(:active)  # GET /people/active.xml\n  # =&gt; [{:id =&gt; 1, :name =&gt; 'Ryan'}, {:id =&gt; 2, :name =&gt; 'Joe'}]\n"
+constants: []
+
+full_name: ActiveResource::CustomMethods
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: ActiveResource::CustomMethods::InstanceMethods
+instance_methods: []
+
+name: CustomMethods
+superclass: 

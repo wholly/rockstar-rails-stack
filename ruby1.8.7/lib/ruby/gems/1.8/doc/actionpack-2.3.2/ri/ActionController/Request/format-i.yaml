@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the Mime type for the \format used in the request.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  GET /posts/5.xml   | request.format =&gt; Mime::XML\n  GET /posts/5.xhtml | request.format =&gt; Mime::HTML\n  GET /posts/5       | request.format =&gt; Mime::HTML or MIME::JS, or request.accepts.first depending on the value of <tt>ActionController::Base.use_accept_header</tt>\n"
+full_name: ActionController::Request#format
+is_singleton: false
+name: format
+params: ()
+visibility: public

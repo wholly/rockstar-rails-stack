@@ -1,0 +1,27 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Defines an attributes writer for the specified association(s). If you are using <tt>attr_protected</tt> or <tt>attr_accessible</tt>, then you will need to add the attribute writer to the allowed list.
+- !ruby/struct:SM::Flow::P 
+  body: "Supported options:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: ":allow_destroy"
+    body: If true, destroys any members from the attributes hash with a <tt>_delete</tt> key and a value that evaluates to <tt>true</tt> (eg. 1, '1', true, or 'true'). This option is off by default.
+  - !ruby/struct:SM::Flow::LI 
+    label: ":reject_if"
+    body: Allows you to specify a Proc that checks whether a record should be built for a certain attribute hash. The hash is passed to the Proc and the Proc should return either <tt>true</tt> or <tt>false</tt>. When no Proc is specified a record will be built for all attribute hashes that do not have a <tt>_delete</tt> that evaluates to true.
+  type: :LABELED
+- !ruby/struct:SM::Flow::P 
+  body: "Examples:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # creates avatar_attributes=\n  accepts_nested_attributes_for :avatar, :reject_if =&gt; proc { |attributes| attributes['name'].blank? }\n  # creates avatar_attributes= and posts_attributes=\n  accepts_nested_attributes_for :avatar, :posts, :allow_destroy =&gt; true\n"
+full_name: ActiveRecord::NestedAttributes::ClassMethods#accepts_nested_attributes_for
+is_singleton: false
+name: accepts_nested_attributes_for
+params: (*attr_names)
+visibility: public

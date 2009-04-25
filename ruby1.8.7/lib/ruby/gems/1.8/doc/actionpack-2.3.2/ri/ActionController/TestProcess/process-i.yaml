@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::TestProcess#process
+is_singleton: false
+name: process
+params: (action, parameters = nil, session = nil, flash = nil, http_method = 'GET')
+visibility: public

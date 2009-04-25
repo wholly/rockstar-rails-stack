@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::PolymorphicRoutes#formatted_polymorphic_url
+is_singleton: false
+name: formatted_polymorphic_url
+params: (record_or_hash, options = {})
+visibility: public

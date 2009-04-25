@@ -1,0 +1,91 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: AutosaveAssociation is a module that takes care of automatically saving your associations when the parent is saved. In addition to saving, it also destroys any associations that were marked for destruction. (See mark_for_destruction and marked_for_destruction?)
+- !ruby/struct:SM::Flow::P 
+  body: Saving of the parent, its associations, and the destruction of marked associations, all happen inside 1 transaction. This should never leave the database in an inconsistent state after, for instance, mass assigning attributes and saving them.
+- !ruby/struct:SM::Flow::P 
+  body: If validations for any of the associations fail, their error messages will be applied to the parent.
+- !ruby/struct:SM::Flow::P 
+  body: Note that it also means that associations marked for destruction won't be destroyed directly. They will however still be marked for destruction.
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: One-to-one Example
+- !ruby/struct:SM::Flow::P 
+  body: "Consider a Post model with one Author:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Post\n    has_one :author, :autosave =&gt; true\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Saving changes to the parent and its associated model can now be performed automatically <em>and</em> atomically:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  post = Post.find(1)\n  post.title # =&gt; &quot;The current global position of migrating ducks&quot;\n  post.author.name # =&gt; &quot;alloy&quot;\n\n  post.title = &quot;On the migration of ducks&quot;\n  post.author.name = &quot;Eloy Duran&quot;\n\n  post.save\n  post.reload\n  post.title # =&gt; &quot;On the migration of ducks&quot;\n  post.author.name # =&gt; &quot;Eloy Duran&quot;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Destroying an associated model, as part of the parent's save action, is as simple as marking it for destruction:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  post.author.mark_for_destruction\n  post.author.marked_for_destruction? # =&gt; true\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Note that the model is <em>not</em> yet removed from the database:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  id = post.author.id\n  Author.find_by_id(id).nil? # =&gt; false\n\n  post.save\n  post.reload.author # =&gt; nil\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Now it <em>is</em> removed from the database:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Author.find_by_id(id).nil? # =&gt; true\n"
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: One-to-many Example
+- !ruby/struct:SM::Flow::P 
+  body: "Consider a Post model with many Comments:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Post\n    has_many :comments, :autosave =&gt; true\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Saving changes to the parent and its associated model can now be performed automatically <em>and</em> atomically:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  post = Post.find(1)\n  post.title # =&gt; &quot;The current global position of migrating ducks&quot;\n  post.comments.first.body # =&gt; &quot;Wow, awesome info thanks!&quot;\n  post.comments.last.body # =&gt; &quot;Actually, your article should be named differently.&quot;\n\n  post.title = &quot;On the migration of ducks&quot;\n  post.comments.last.body = &quot;Actually, your article should be named differently. [UPDATED]: You are right, thanks.&quot;\n\n  post.save\n  post.reload\n  post.title # =&gt; &quot;On the migration of ducks&quot;\n  post.comments.last.body # =&gt; &quot;Actually, your article should be named differently. [UPDATED]: You are right, thanks.&quot;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Destroying one of the associated models members, as part of the parent's save action, is as simple as marking it for destruction:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  post.comments.last.mark_for_destruction\n  post.comments.last.marked_for_destruction? # =&gt; true\n  post.comments.length # =&gt; 2\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Note that the model is <em>not</em> yet removed from the database:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  id = post.comments.last.id\n  Comment.find_by_id(id).nil? # =&gt; false\n\n  post.save\n  post.reload.comments.length # =&gt; 1\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Now it <em>is</em> removed from the database:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Comment.find_by_id(id).nil? # =&gt; true\n"
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: Validation
+- !ruby/struct:SM::Flow::P 
+  body: Validation is performed on the parent as usual, but also on all autosave enabled associations. If any of the associations fail validation, its error messages will be applied on the parents errors object and validation of the parent will fail.
+- !ruby/struct:SM::Flow::P 
+  body: "Consider a Post model with Author which validates the presence of its name attribute:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Post\n    has_one :author, :autosave =&gt; true\n  end\n\n  class Author\n    validates_presence_of :name\n  end\n\n  post = Post.find(1)\n  post.author.name = ''\n  post.save # =&gt; false\n  post.errors # =&gt; #&lt;ActiveRecord::Errors:0x174498c @errors={&quot;author_name&quot;=&gt;[&quot;can't be blank&quot;]}, @base=#&lt;Post ...&gt;&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "No validations will be performed on the associated models when validations are skipped for the parent:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  post = Post.find(1)\n  post.author.name = ''\n  post.save(false) # =&gt; true\n"
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ASSOCIATION_TYPES
+  value: "%w{ has_one belongs_to has_many has_and_belongs_to_many }"
+full_name: ActiveRecord::AutosaveAssociation
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: mark_for_destruction
+- !ruby/object:RI::MethodSummary 
+  name: marked_for_destruction?
+- !ruby/object:RI::MethodSummary 
+  name: reload_with_autosave_associations
+name: AutosaveAssociation
+superclass: 

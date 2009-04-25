@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "See: http://www.sqlite.org/lang_altertable.html SQLite has an additional restriction on the ALTER TABLE statement"
+full_name: ActiveRecord::ConnectionAdapters::SQLiteAdapter#valid_alter_table_options
+is_singleton: false
+name: valid_alter_table_options
+params: ( type, options)
+visibility: public

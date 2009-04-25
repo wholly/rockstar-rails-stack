@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Check if child is of type yaml
+full_name: LibXML::Conversions::Node#yaml?
+is_singleton: false
+name: yaml?
+params: ()
+visibility: protected

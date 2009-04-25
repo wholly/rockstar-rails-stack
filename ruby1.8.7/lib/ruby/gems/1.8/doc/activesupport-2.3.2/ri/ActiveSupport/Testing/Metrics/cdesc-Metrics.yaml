@@ -1,0 +1,16 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: "[]"
+comment: 
+constants: []
+
+full_name: ActiveSupport::Testing::Metrics
+includes: []
+
+instance_methods: []
+
+name: Metrics
+superclass: 

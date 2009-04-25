@@ -1,0 +1,120 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The MySQL adapter will work with both Ruby/MySQL, which is a Ruby-based MySQL adapter that comes bundled with Active Record, and with the faster C-based MySQL/Ruby adapter (available both as a gem and from http://www.tmtm.org/en/mysql/ruby/).
+- !ruby/struct:SM::Flow::P 
+  body: "Options:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:host</tt> - Defaults to &quot;localhost&quot;.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:port</tt> - Defaults to 3306.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:socket</tt> - Defaults to &quot;/tmp/mysql.sock&quot;.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:username</tt> - Defaults to &quot;root&quot;
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:password</tt> - Defaults to nothing.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:database</tt> - The name of the database. No default, must be provided.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:encoding</tt> - (Optional) Sets the client encoding by executing &quot;SET NAMES &lt;encoding&gt;&quot; after connection.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:reconnect</tt> - Defaults to false (See MySQL documentation: http://dev.mysql.com/doc/refman/5.0/en/auto-reconnect.html)."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:sslca</tt> - Necessary to use MySQL with an SSL connection.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:sslkey</tt> - Necessary to use MySQL with an SSL connection.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:sslcert</tt> - Necessary to use MySQL with an SSL connection.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:sslcapath</tt> - Necessary to use MySQL with an SSL connection.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:sslcipher</tt> - Necessary to use MySQL with an SSL connection.
+  type: :BULLET
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ADAPTER_NAME
+  value: "'MySQL'.freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: LOST_CONNECTION_ERROR_MESSAGES
+  value: "[         \"Server shutdown in progress\",         \"Broken pipe\",         \"Lost connection to MySQL server during query\",         \"MySQL server has gone away\" ]"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: QUOTED_FALSE
+  value: "'1'.freeze, '0'.freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: NATIVE_DATABASE_TYPES
+  value: "{         :primary_key => \"int(11) DEFAULT NULL auto_increment PRIMARY KEY\".freeze,         :string      => { :name => \"varchar\", :limit => 255 },         :text        => { :name => \"text\" },         :integer     => { :name => \"int\", :limit => 4 },         :float       => { :name => \"float\" },         :decimal     => { :name => \"decimal\" },         :datetime    => { :name => \"datetime\" },         :timestamp   => { :name => \"datetime\" },         :time        => { :name => \"time\" },         :date        => { :name => \"date\" },         :binary      => { :name => \"blob\" },         :boolean     => { :name => \"tinyint\", :limit => 1 }"
+full_name: ActiveRecord::ConnectionAdapters::MysqlAdapter
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: active?
+- !ruby/object:RI::MethodSummary 
+  name: case_sensitive_equality_operator
+- !ruby/object:RI::MethodSummary 
+  name: change_column_null
+- !ruby/object:RI::MethodSummary 
+  name: charset
+- !ruby/object:RI::MethodSummary 
+  name: collation
+- !ruby/object:RI::MethodSummary 
+  name: create_database
+- !ruby/object:RI::MethodSummary 
+  name: create_savepoint
+- !ruby/object:RI::MethodSummary 
+  name: current_database
+- !ruby/object:RI::MethodSummary 
+  name: disconnect!
+- !ruby/object:RI::MethodSummary 
+  name: drop_table
+- !ruby/object:RI::MethodSummary 
+  name: limited_update_conditions
+- !ruby/object:RI::MethodSummary 
+  name: quote
+- !ruby/object:RI::MethodSummary 
+  name: quoted_false
+- !ruby/object:RI::MethodSummary 
+  name: quoted_true
+- !ruby/object:RI::MethodSummary 
+  name: reconnect!
+- !ruby/object:RI::MethodSummary 
+  name: release_savepoint
+- !ruby/object:RI::MethodSummary 
+  name: rename_table
+- !ruby/object:RI::MethodSummary 
+  name: reset!
+- !ruby/object:RI::MethodSummary 
+  name: rollback_to_savepoint
+- !ruby/object:RI::MethodSummary 
+  name: select_rows
+- !ruby/object:RI::MethodSummary 
+  name: show_variable
+- !ruby/object:RI::MethodSummary 
+  name: type_to_sql
+name: MysqlAdapter
+superclass: AbstractAdapter

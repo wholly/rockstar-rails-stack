@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: You can enable or disable the asset tag timestamps cache. With the cache enabled, the asset tag helper methods will make fewer expense file system calls. However this prevents you from modifying any asset files while the server is running.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  ActionView::Helpers::AssetTagHelper.cache_asset_timestamps = false\n"
+full_name: ActionView::Helpers::AssetTagHelper::cache_asset_timestamps=
+is_singleton: true
+name: cache_asset_timestamps=
+params: (value)
+visibility: public

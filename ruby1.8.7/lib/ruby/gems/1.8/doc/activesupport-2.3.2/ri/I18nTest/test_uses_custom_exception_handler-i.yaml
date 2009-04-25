@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nTest#test_uses_custom_exception_handler
+is_singleton: false
+name: test_uses_custom_exception_handler
+params: ()
+visibility: public

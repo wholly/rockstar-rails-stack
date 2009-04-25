@@ -1,0 +1,61 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: parse
+comment: 
+- !ruby/struct:SM::Flow::H 
+  level: 1
+  text: Class Address
+- !ruby/struct:SM::Flow::P 
+  body: Provides a complete handling library for email addresses. Can parse a string of an address directly or take in preformatted addresses themselves. Allows you to add and remove phrases from the front of the address and provides a compare function for email addresses.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: "Parsing and Handling a Valid Address:"
+- !ruby/struct:SM::Flow::P 
+  body: "Just pass the email address in as a string to Address.parse:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " email = TMail::Address.parse('Mikel Lindsaar &lt;mikel@lindsaar.net&gt;)\n #=&gt; #&lt;TMail::Address mikel@lindsaar.net&gt;\n email.address\n #=&gt; &quot;mikel@lindsaar.net&quot;\n email.local\n #=&gt; &quot;mikel&quot;\n email.domain\n #=&gt; &quot;lindsaar.net&quot;\n email.name             # Aliased as phrase as well\n #=&gt; &quot;Mikel Lindsaar&quot;\n"
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Detecting an Invalid Address
+- !ruby/struct:SM::Flow::P 
+  body: "If you want to check the syntactical validity of an email address, just pass it to Address.parse and catch any SyntaxError:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " begin\n   TMail::Mail.parse(&quot;mikel   2@@@@@ me .com&quot;)\n rescue TMail::SyntaxError\n   puts(&quot;Invalid Email Address Detected&quot;)\n else\n   puts(&quot;Address is valid&quot;)\n end\n #=&gt; &quot;Invalid Email Address Detected&quot;\n"
+constants: []
+
+full_name: TMail::Address
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: TextUtils
+- !ruby/object:RI::IncludedModule 
+  name: StrategyInterface
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: ==
+- !ruby/object:RI::MethodSummary 
+  name: address
+- !ruby/object:RI::MethodSummary 
+  name: domain
+- !ruby/object:RI::MethodSummary 
+  name: dup
+- !ruby/object:RI::MethodSummary 
+  name: eql?
+- !ruby/object:RI::MethodSummary 
+  name: hash
+- !ruby/object:RI::MethodSummary 
+  name: local
+- !ruby/object:RI::MethodSummary 
+  name: name
+- !ruby/object:RI::MethodSummary 
+  name: name=
+- !ruby/object:RI::MethodSummary 
+  name: routes
+- !ruby/object:RI::MethodSummary 
+  name: spec
+name: Address
+superclass: Object

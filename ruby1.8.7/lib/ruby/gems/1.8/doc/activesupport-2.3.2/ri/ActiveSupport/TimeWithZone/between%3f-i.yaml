@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#between?
+is_singleton: false
+name: between?
+params: (min, max)
+visibility: public

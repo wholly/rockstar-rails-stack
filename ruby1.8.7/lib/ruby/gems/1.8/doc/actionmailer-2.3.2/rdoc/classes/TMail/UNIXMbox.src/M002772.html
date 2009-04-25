@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>fromaddr (TMail::UNIXMbox)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_mailer/vendor/tmail-1.2.3/tmail/mailbox.rb, line 276</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-constant">UNIXMbox</span>.<span class="ruby-identifier">fromaddr</span>(<span class="ruby-identifier">port</span>)
+      <span class="ruby-identifier">h</span> = <span class="ruby-constant">HeaderField</span>.<span class="ruby-identifier">new_from_port</span>(<span class="ruby-identifier">port</span>, <span class="ruby-value str">'Return-Path'</span>) <span class="ruby-operator">||</span>
+      <span class="ruby-constant">HeaderField</span>.<span class="ruby-identifier">new_from_port</span>(<span class="ruby-identifier">port</span>, <span class="ruby-value str">'From'</span>) <span class="ruby-operator">||</span>
+      <span class="ruby-constant">HeaderField</span>.<span class="ruby-identifier">new_from_port</span>(<span class="ruby-identifier">port</span>, <span class="ruby-value str">'EnvelopeSender'</span>) <span class="ruby-keyword kw">or</span> <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'nobody'</span>
+      <span class="ruby-identifier">a</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">addrs</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword kw">or</span> <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'nobody'</span>
+      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">spec</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

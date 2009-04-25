@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::SessionStore::Session::marshal
+is_singleton: true
+name: marshal
+params: (data)
+visibility: public

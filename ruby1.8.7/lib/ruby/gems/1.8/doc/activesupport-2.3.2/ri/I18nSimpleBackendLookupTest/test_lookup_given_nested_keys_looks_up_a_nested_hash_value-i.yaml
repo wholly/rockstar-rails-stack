@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendLookupTest#test_lookup_given_nested_keys_looks_up_a_nested_hash_value
+is_singleton: false
+name: test_lookup_given_nested_keys_looks_up_a_nested_hash_value
+params: ()
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::ReloadableTemplate#reset_cache_if_stale!
+is_singleton: false
+name: reset_cache_if_stale!
+params: ()
+visibility: public

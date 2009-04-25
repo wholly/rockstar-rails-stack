@@ -1,0 +1,27 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Address.new(local, domain)
+- !ruby/struct:SM::Flow::P 
+  body: "Accepts:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: local - Left of the at symbol
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: domain - Array of the domain split at the periods.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " Address.new(&quot;mikel&quot;, [&quot;lindsaar&quot;, &quot;net&quot;])\n #=&gt; &quot;#&lt;TMail::Address mikel@lindsaar.net&gt;&quot;\n"
+full_name: TMail::Address::new
+is_singleton: true
+name: new
+params: ( local, domain )
+visibility: public

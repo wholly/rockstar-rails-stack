@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+constants: []
+
+full_name: ActiveRecord::TestFixtures
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: run_in_transaction?
+- !ruby/object:RI::MethodSummary 
+  name: setup_fixtures
+- !ruby/object:RI::MethodSummary 
+  name: teardown_fixtures
+name: TestFixtures
+superclass: 

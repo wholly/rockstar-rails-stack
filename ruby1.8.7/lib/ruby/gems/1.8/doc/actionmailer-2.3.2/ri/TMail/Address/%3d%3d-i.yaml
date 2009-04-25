@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: eql?
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Provides == function to the email. Only checks the actual address and ignores the name/phrase component
+- !ruby/struct:SM::Flow::P 
+  body: For Example
+- !ruby/struct:SM::Flow::VERB 
+  body: " addr1 = TMail::Address.parse(&quot;My Address &lt;mikel@lindsaar.net&gt;&quot;)\n #=&gt; &quot;#&lt;TMail::Address mikel@lindsaar.net&gt;&quot;\n addr2 = TMail::Address.parse(&quot;Another &lt;mikel@lindsaar.net&gt;&quot;)\n #=&gt; &quot;#&lt;TMail::Address mikel@lindsaar.net&gt;&quot;\n addr1 == addr2\n #=&gt; true\n"
+full_name: TMail::Address#==
+is_singleton: false
+name: ==
+params: ( other )
+visibility: public

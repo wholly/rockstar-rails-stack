@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Destructively sets the character set used by this mail object to the passed string, you should note though that this does nothing to the mail body, just changes the header value, you will need to transliterate the body as well to match whatever you put in this header value if you are changing character sets.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.charset #=&gt; nil\n mail.charset = &quot;UTF-8&quot;\n mail.charset #=&gt; &quot;UTF-8&quot;\n"
+full_name: TMail::Mail#charset=
+is_singleton: false
+name: charset=
+params: ( str )
+visibility: public

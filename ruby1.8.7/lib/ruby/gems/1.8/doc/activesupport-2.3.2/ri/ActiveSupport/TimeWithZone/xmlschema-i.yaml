@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: iso8601
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#xmlschema
+is_singleton: false
+name: xmlschema
+params: (fraction_digits = 0)
+visibility: public

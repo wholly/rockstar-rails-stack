@@ -1,0 +1,28 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: backend
+  rw: R
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::H 
+  level: 1
+  text: XmlMini
+- !ruby/struct:SM::Flow::P 
+  body: "To use the much faster libxml parser:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  gem 'libxml-ruby', '=0.9.7'\n  XmlMini.backend = 'LibXML'\n"
+constants: []
+
+full_name: ActiveSupport::XmlMini
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: backend=
+- !ruby/object:RI::MethodSummary 
+  name: with_backend
+name: XmlMini
+superclass: 

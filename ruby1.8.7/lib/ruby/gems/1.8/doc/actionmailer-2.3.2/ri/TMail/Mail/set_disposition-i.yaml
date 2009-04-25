@@ -1,0 +1,21 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: disposition=
+- !ruby/object:RI::AliasName 
+  name: set_content_disposition
+- !ruby/object:RI::AliasName 
+  name: content_disposition=
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Allows you to set the content-disposition of the mail object. Accepts a type and a hash of parameters.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail.set_disposition(&quot;attachment&quot;, {:filename =&gt; &quot;test.rb&quot;})\n mail.disposition #=&gt; &quot;attachment&quot;\n mail['content-disposition'].to_s #=&gt; &quot;attachment; filename=test.rb&quot;\n"
+full_name: TMail::Mail#set_disposition
+is_singleton: false
+name: set_disposition
+params: ( str, params = nil )
+visibility: public

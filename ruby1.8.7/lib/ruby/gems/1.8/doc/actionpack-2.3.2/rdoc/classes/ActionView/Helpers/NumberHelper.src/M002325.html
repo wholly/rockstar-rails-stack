@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>number_to_human_size (ActionView::Helpers::NumberHelper)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_view/helpers/number_helper.rb, line 253</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">number_to_human_size</span>(<span class="ruby-identifier">number</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">nil?</span>
+
+        <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>
+
+        <span class="ruby-identifier">defaults</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'number.format'</span><span class="ruby-value str">'number.format'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>], <span class="ruby-identifier">:raise</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>) <span class="ruby-keyword kw">rescue</span> {}
+        <span class="ruby-identifier">human</span>    = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'number.human.format'</span><span class="ruby-value str">'number.human.format'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>], <span class="ruby-identifier">:raise</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>) <span class="ruby-keyword kw">rescue</span> {}
+        <span class="ruby-identifier">defaults</span> = <span class="ruby-identifier">defaults</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">human</span>)
+
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+          <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">'number_to_human_size takes an option hash '</span> <span class="ruby-operator">+</span>
+            <span class="ruby-value str">'instead of a separate precision argument.'</span>, <span class="ruby-identifier">caller</span>)
+          <span class="ruby-identifier">precision</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">:precision</span>]
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">precision</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:precision</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">:precision</span>])
+        <span class="ruby-identifier">separator</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:separator</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">:separator</span>])
+        <span class="ruby-identifier">delimiter</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:delimiter</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">:delimiter</span>])
+
+        <span class="ruby-identifier">storage_units_format</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'number.human.storage_units.format'</span><span class="ruby-value str">'number.human.storage_units.format'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>], <span class="ruby-identifier">:raise</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1024</span>
+          <span class="ruby-identifier">unit</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'number.human.storage_units.units.byte'</span><span class="ruby-value str">'number.human.storage_units.units.byte'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>], <span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">:raise</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)
+          <span class="ruby-identifier">storage_units_format</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/%n/</span>, <span class="ruby-identifier">number</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/%u/</span>, <span class="ruby-identifier">unit</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">max_exp</span>  = <span class="ruby-constant">STORAGE_UNITS</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">number</span>   = <span class="ruby-constant">Float</span>(<span class="ruby-identifier">number</span>)
+          <span class="ruby-identifier">exponent</span> = (<span class="ruby-constant">Math</span>.<span class="ruby-identifier">log</span>(<span class="ruby-identifier">number</span>) <span class="ruby-operator">/</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log</span>(<span class="ruby-value">1024</span>)).<span class="ruby-identifier">to_i</span> <span class="ruby-comment cmt"># Convert to base 1024</span>
+          <span class="ruby-identifier">exponent</span> = <span class="ruby-identifier">max_exp</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">exponent</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">max_exp</span> <span class="ruby-comment cmt"># we need this to avoid overflow for the highest unit</span>
+          <span class="ruby-identifier">number</span>  <span class="ruby-operator">/=</span> <span class="ruby-value">1024</span> <span class="ruby-operator">**</span> <span class="ruby-identifier">exponent</span>
+
+          <span class="ruby-identifier">unit_key</span> = <span class="ruby-constant">STORAGE_UNITS</span>[<span class="ruby-identifier">exponent</span>]
+          <span class="ruby-identifier">unit</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-node">&quot;number.human.storage_units.units.#{unit_key}&quot;</span><span class="ruby-node">&quot;number.human.storage_units.units.#{unit_key}&quot;</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>], <span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">number</span>, <span class="ruby-identifier">:raise</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)
+
+          <span class="ruby-keyword kw">begin</span>
+            <span class="ruby-identifier">escaped_separator</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">separator</span>)
+            <span class="ruby-identifier">formatted_number</span> = <span class="ruby-identifier">number_with_precision</span>(<span class="ruby-identifier">number</span>,
+              <span class="ruby-identifier">:precision</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">precision</span>,
+              <span class="ruby-identifier">:separator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">separator</span>,
+              <span class="ruby-identifier">:delimiter</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">delimiter</span>
+            ).<span class="ruby-identifier">sub</span>(<span class="ruby-node">/(\d)(#{escaped_separator}[1-9]*)?0+\z/</span>, <span class="ruby-value str">'\1\2'</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{escaped_separator}\z/</span>, <span class="ruby-value str">''</span>)
+            <span class="ruby-identifier">storage_units_format</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/%n/</span>, <span class="ruby-identifier">formatted_number</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/%u/</span>, <span class="ruby-identifier">unit</span>)
+          <span class="ruby-keyword kw">rescue</span>
+            <span class="ruby-identifier">number</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

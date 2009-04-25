@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the references of this email (prior messages relating to this message) as an array of message ID strings. Useful when you are trying to thread an email.
+- !ruby/struct:SM::Flow::P 
+  body: If the references field does not exist, returns nil by default or you can pass in as the parameter for what you want the default value to be.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.references #=&gt; nil\n mail.references([]) #=&gt; []\n mail = TMail::Mail.load(&quot;../test/fixtures/raw_email_reply&quot;)\n mail.references #=&gt; [&quot;&lt;473FF3B8.9020707@xxx.org&gt;&quot;, &quot;&lt;348F04F142D69C21-291E56D292BC@xxxx.net&gt;&quot;]\n"
+full_name: TMail::Mail#references
+is_singleton: false
+name: references
+params: ( default = nil )
+visibility: public

@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Destructively sets the passed string as the subject of the mail message.
+- !ruby/struct:SM::Flow::P 
+  body: Example
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.subject #=&gt; &quot;This subject&quot;\n mail.subject = &quot;Another subject&quot;\n mail.subject #=&gt; &quot;Another subject&quot;\n"
+full_name: TMail::Mail#subject=
+is_singleton: false
+name: subject=
+params: ( str )
+visibility: public

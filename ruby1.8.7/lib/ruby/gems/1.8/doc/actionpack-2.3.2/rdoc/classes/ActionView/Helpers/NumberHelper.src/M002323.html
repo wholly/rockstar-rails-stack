@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>number_with_delimiter (ActionView::Helpers::NumberHelper)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_view/helpers/number_helper.rb, line 152</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">number_with_delimiter</span>(<span class="ruby-identifier">number</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+        <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>
+
+        <span class="ruby-identifier">defaults</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'number.format'</span><span class="ruby-value str">'number.format'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>], <span class="ruby-identifier">:raise</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>) <span class="ruby-keyword kw">rescue</span> {}
+
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+          <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">'number_with_delimiter takes an option hash '</span> <span class="ruby-operator">+</span>
+            <span class="ruby-value str">'instead of separate delimiter and precision arguments.'</span>, <span class="ruby-identifier">caller</span>)
+          <span class="ruby-identifier">delimiter</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">:delimiter</span>]
+          <span class="ruby-identifier">separator</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">:separator</span>]
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">delimiter</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:delimiter</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">:delimiter</span>])
+        <span class="ruby-identifier">separator</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:separator</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">:separator</span>])
+
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">number</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>)
+          <span class="ruby-identifier">parts</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/(\d)(?=(\d\d\d)+(?!\d))/</span>, <span class="ruby-node">&quot;\\1#{delimiter}&quot;</span>)
+          <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">separator</span>)
+        <span class="ruby-keyword kw">rescue</span>
+          <span class="ruby-identifier">number</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Mime::Type#html?
+is_singleton: false
+name: html?
+params: ()
+visibility: public

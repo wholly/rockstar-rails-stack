@@ -1,0 +1,49 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Core method for finding resources. Used similarly to Active Record's <tt>find</tt> method.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Arguments
+- !ruby/struct:SM::Flow::P 
+  body: The first argument is considered to be the scope of the query. That is, how many resources are returned from the request. It can be one of the following.
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:one</tt> - Returns a single resource.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:first</tt> - Returns the first resource found.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:last</tt> - Returns the last resource found.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:all</tt> - Returns every resource that matches the request.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Options
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:from</tt> - Sets the path or custom method that resources will be fetched from.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:params</tt> - Sets query and \prefix (nested URL) parameters.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Person.find(1)\n  # =&gt; GET /people/1.xml\n\n  Person.find(:all)\n  # =&gt; GET /people.xml\n\n  Person.find(:all, :params =&gt; { :title =&gt; &quot;CEO&quot; })\n  # =&gt; GET /people.xml?title=CEO\n\n  Person.find(:first, :from =&gt; :managers)\n  # =&gt; GET /people/managers.xml\n\n  Person.find(:last, :from =&gt; :managers)\n  # =&gt; GET /people/managers.xml\n\n  Person.find(:all, :from =&gt; &quot;/companies/1/people.xml&quot;)\n  # =&gt; GET /companies/1/people.xml\n\n  Person.find(:one, :from =&gt; :leader)\n  # =&gt; GET /people/leader.xml\n\n  Person.find(:all, :from =&gt; :developers, :params =&gt; { :language =&gt; 'ruby' })\n  # =&gt; GET /people/developers.xml?language=ruby\n\n  Person.find(:one, :from =&gt; &quot;/companies/1/manager.xml&quot;)\n  # =&gt; GET /companies/1/manager.xml\n\n  StreetAddress.find(1, :params =&gt; { :person_id =&gt; 1 })\n  # =&gt; GET /people/1/street_addresses/1.xml\n"
+full_name: ActiveResource::Base::find
+is_singleton: true
+name: find
+params: (*arguments)
+visibility: public

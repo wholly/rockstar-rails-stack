@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: conn
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Reserve a connection, and yield it to a block. Ensure the connection is checked back in when finished.
+full_name: ActiveRecord::ConnectionAdapters::ConnectionPool#with_connection
+is_singleton: false
+name: with_connection
+params: () {|conn| ...}
+visibility: public

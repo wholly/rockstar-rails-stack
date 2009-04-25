@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns who the email cc'd as an Array of email addresses as opposed to an Array of TMail::Address objects which is what Mail#to_addrs returns
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.cc = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;\n mail.cc #=&gt;  [&quot;mikel@me.org&quot;, &quot;mikel@you.org&quot;]\n"
+full_name: TMail::Mail#cc
+is_singleton: false
+name: cc
+params: ( default = nil )
+visibility: public

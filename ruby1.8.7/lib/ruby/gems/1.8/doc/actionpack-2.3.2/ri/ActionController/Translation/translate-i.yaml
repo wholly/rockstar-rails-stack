@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: t
+block_params: 
+comment: 
+full_name: ActionController::Translation#translate
+is_singleton: false
+name: translate
+params: (*args)
+visibility: public

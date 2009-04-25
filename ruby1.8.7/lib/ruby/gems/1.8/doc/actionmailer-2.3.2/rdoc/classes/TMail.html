@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: TMail</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">TMail</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/address_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/address.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/attachments_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/attachments.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/encode_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/encode.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/header_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/header.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/interface_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/interface.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/mail_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/mail.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/mailbox_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/mailbox.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/net_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/net.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/port_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/port.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/quoting_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/quoting.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/utils_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/utils.rb
+                </a>
+        <br />
+                <a href="../files/lib/action_mailer/vendor/tmail_rb.html">
+                lib/action_mailer/vendor/tmail.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="TMail.html">TMail</a> - The EMail Swiss Army Knife for Ruby</h1>
+<p>
+The <a href="TMail.html">TMail</a> library provides you with a very
+complete way to handle and manipulate EMails from within your Ruby
+programs.
+</p>
+<p>
+Used as the backbone for email handling by the Ruby on Rails and Nitro web
+frameworks as well as a bunch of other Ruby apps including the Ruby-Talk
+mailing list to newsgroup email gateway, it is a proven and reliable email
+handler that won&#8216;t let you down.
+</p>
+<p>
+Originally created by Minero Aoki, <a href="TMail.html">TMail</a> has been
+recently picked up by Mikel Lindsaar and is being actively maintained.
+Numerous backlogged bug fixes have been applied as well as Ruby 1.9
+compatibility and a swath of documentation to boot.
+</p>
+<p>
+<a href="TMail.html">TMail</a> allows you to treat an email totally as an
+object and allow you to get on with your own programming without having to
+worry about crafting the perfect email address validation parser, or
+assembling an email from all it&#8216;s component parts.
+</p>
+<p>
+<a href="TMail.html">TMail</a> handles the most complex part of the email -
+the header. It generates and parses headers and provides you with instant
+access to their innards through simple and logically named accessor and
+setter methods.
+</p>
+<p>
+<a href="TMail.html">TMail</a> also provides a wrapper to <a
+href="Net.html">Net</a>/SMTP as well as Unix Mailbox handling methods to
+directly read emails from your unix mailbox, parse them and use them.
+</p>
+<p>
+Following is the comprehensive list of methods to access <a
+href="TMail/Mail.html">TMail::Mail</a> objects. You can also check out <a
+href="TMail/Mail.html">TMail::Mail</a>, <a
+href="TMail/Address.html">TMail::Address</a> and TMail::Headers for other
+lists.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M002488">decoded</a>&nbsp;&nbsp;
+      <a href="#M002487">encoded</a>&nbsp;&nbsp;
+      <a href="#M002490">new_boundary</a>&nbsp;&nbsp;
+      <a href="#M002491">new_message_id</a>&nbsp;&nbsp;
+      <a href="#M002489">to_s</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="TMail/MailFlags.html" class="link">TMail::MailFlags</a><br />
+Module <a href="TMail/TextUtils.html" class="link">TMail::TextUtils</a><br />
+Class <a href="TMail/Address.html" class="link">TMail::Address</a><br />
+Class <a href="TMail/AddressGroup.html" class="link">TMail::AddressGroup</a><br />
+Class <a href="TMail/AddressHeader.html" class="link">TMail::AddressHeader</a><br />
+Class <a href="TMail/Attachment.html" class="link">TMail::Attachment</a><br />
+Class <a href="TMail/ContentDispositionHeader.html" class="link">TMail::ContentDispositionHeader</a><br />
+Class <a href="TMail/ContentTransferEncodingHeader.html" class="link">TMail::ContentTransferEncodingHeader</a><br />
+Class <a href="TMail/ContentTypeHeader.html" class="link">TMail::ContentTypeHeader</a><br />
+Class <a href="TMail/DateTimeHeader.html" class="link">TMail::DateTimeHeader</a><br />
+Class <a href="TMail/EncryptedHeader.html" class="link">TMail::EncryptedHeader</a><br />
+Class <a href="TMail/FilePort.html" class="link">TMail::FilePort</a><br />
+Class <a href="TMail/HeaderField.html" class="link">TMail::HeaderField</a><br />
+Class <a href="TMail/KeywordsHeader.html" class="link">TMail::KeywordsHeader</a><br />
+Class <a href="TMail/Mail.html" class="link">TMail::Mail</a><br />
+Class <a href="TMail/Maildir.html" class="link">TMail::Maildir</a><br />
+Class <a href="TMail/MaildirPort.html" class="link">TMail::MaildirPort</a><br />
+Class <a href="TMail/MessageIdHeader.html" class="link">TMail::MessageIdHeader</a><br />
+Class <a href="TMail/MhMailbox.html" class="link">TMail::MhMailbox</a><br />
+Class <a href="TMail/MhPort.html" class="link">TMail::MhPort</a><br />
+Class <a href="TMail/MimeVersionHeader.html" class="link">TMail::MimeVersionHeader</a><br />
+Class <a href="TMail/Port.html" class="link">TMail::Port</a><br />
+Class <a href="TMail/ReceivedHeader.html" class="link">TMail::ReceivedHeader</a><br />
+Class <a href="TMail/ReferencesHeader.html" class="link">TMail::ReferencesHeader</a><br />
+Class <a href="TMail/ReturnPathHeader.html" class="link">TMail::ReturnPathHeader</a><br />
+Class <a href="TMail/SingleAddressHeader.html" class="link">TMail::SingleAddressHeader</a><br />
+Class <a href="TMail/StringPort.html" class="link">TMail::StringPort</a><br />
+Class <a href="TMail/StructuredHeader.html" class="link">TMail::StructuredHeader</a><br />
+Class <a href="TMail/SyntaxError.html" class="link">TMail::SyntaxError</a><br />
+Class <a href="TMail/UNIXMbox.html" class="link">TMail::UNIXMbox</a><br />
+Class <a href="TMail/Unquoter.html" class="link">TMail::Unquoter</a><br />
+Class <a href="TMail/UnstructuredHeader.html" class="link">TMail::UnstructuredHeader</a><br />
+
+    </div>
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MhLoader</td>
+          <td>=</td>
+          <td class="context-item-value">MhMailbox</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MboxLoader</td>
+          <td>=</td>
+          <td class="context-item-value">UNIXMbox</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MaildirLoader</td>
+          <td>=</td>
+          <td class="context-item-value">Maildir</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M002490" class="method-detail">
+        <a name="M002490"></a>
+
+        <div class="method-heading">
+          <a href="TMail.src/M002490.html" target="Code" class="method-signature"
+            onclick="popupCode('TMail.src/M002490.html');return false;">
+          <span class="method-name">new_boundary</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Provides a new email boundary to separate parts of the email. This is a
+random string based off the current time, so should be fairly unique.
+</p>
+<p>
+For Example:
+</p>
+<pre>
+ TMail.new_boundary
+ #=&gt; &quot;mimepart_47bf656968207_25a8fbb80114&quot;
+ TMail.new_boundary
+ #=&gt; &quot;mimepart_47bf66051de4_25a8fbb80240&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002491" class="method-detail">
+        <a name="M002491"></a>
+
+        <div class="method-heading">
+          <a href="TMail.src/M002491.html" target="Code" class="method-signature"
+            onclick="popupCode('TMail.src/M002491.html');return false;">
+          <span class="method-name">new_message_id</span><span class="method-args">( fqdn = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Provides a new email message ID. You can use this to generate unique email
+message id&#8216;s for your email so you can track them.
+</p>
+<p>
+Optionally takes a fully qualified domain name (default to the current
+hostname returned by Socket.gethostname) that will be appended to the
+message ID.
+</p>
+<p>
+For Example:
+</p>
+<pre>
+ email.message_id = TMail.new_message_id
+ #=&gt; &quot;&lt;47bf66845380e_25a8fbb80332@baci.local.tmail&gt;&quot;
+ email.to_s
+ #=&gt; &quot;Message-Id: &lt;47bf668b633f1_25a8fbb80475@baci.local.tmail&gt;\n\n&quot;
+ email.message_id = TMail.new_message_id(&quot;lindsaar.net&quot;)
+ #=&gt; &quot;&lt;47bf668b633f1_25a8fbb80475@lindsaar.net.tmail&gt;&quot;
+ email.to_s
+ #=&gt; &quot;Message-Id: &lt;47bf668b633f1_25a8fbb80475@lindsaar.net.tmail&gt;\n\n&quot;
+</pre>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M002488" class="method-detail">
+        <a name="M002488"></a>
+
+        <div class="method-heading">
+          <a href="TMail.src/M002488.html" target="Code" class="method-signature"
+            onclick="popupCode('TMail.src/M002488.html');return false;">
+          <span class="method-name">decoded</span><span class="method-args">( eol = &quot;\n&quot;, charset = 'e', dest = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="TMail.html">TMail</a> object <a
+href="TMail.html#M002488">decoded</a> and ready to be used by you, your
+program etc.
+</p>
+<p>
+You should call this before you are packaging up your email to correctly
+escape all the values that need escaping in the email, line wrap the email
+etc.
+</p>
+<p>
+For Example:
+</p>
+<pre>
+ email = TMail::Load(my_email_file)
+ email_to_send = email.encoded
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002487" class="method-detail">
+        <a name="M002487"></a>
+
+        <div class="method-heading">
+          <a href="TMail.src/M002487.html" target="Code" class="method-signature"
+            onclick="popupCode('TMail.src/M002487.html');return false;">
+          <span class="method-name">encoded</span><span class="method-args">( eol = &quot;\r\n&quot;, charset = 'j', dest = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+You should call this before you are packaging up your email to correctly
+escape all the values that need escaping in the email, line wrap the email
+etc.
+</p>
+<p>
+It is also a good idea to call this before you marshal or serialize a <a
+href="TMail.html">TMail</a> object.
+</p>
+<p>
+For Example:
+</p>
+<pre>
+ email = TMail::Load(my_email_file)
+ email_to_send = email.encoded
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M002489" class="method-detail">
+        <a name="M002489"></a>
+
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span class="method-args">( eol = &quot;\n&quot;, charset = 'e', dest = nil )</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="TMail.html#M002488">decoded</a>
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

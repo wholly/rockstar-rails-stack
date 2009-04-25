@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A method to determine if an object responds to a message (e.g., a method call). In Active Resource, a Person object with a <tt>name</tt> attribute can answer <tt>true</tt> to <tt>my_person.respond_to?(:name)</tt>, <tt>my_person.respond_to?(:name=)</tt>, and <tt>my_person.respond_to?(:name?)</tt>.
+full_name: ActiveResource::Base#respond_to?
+is_singleton: false
+name: respond_to?
+params: (method, include_priv = false)
+visibility: public

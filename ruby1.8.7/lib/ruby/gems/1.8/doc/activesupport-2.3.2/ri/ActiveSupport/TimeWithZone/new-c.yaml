@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone::new
+is_singleton: true
+name: new
+params: (utc_time, time_zone, local_time = nil, period = nil)
+visibility: public

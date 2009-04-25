@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionMailer::TestCase#initialize_test_deliveries
+is_singleton: false
+name: initialize_test_deliveries
+params: ()
+visibility: protected

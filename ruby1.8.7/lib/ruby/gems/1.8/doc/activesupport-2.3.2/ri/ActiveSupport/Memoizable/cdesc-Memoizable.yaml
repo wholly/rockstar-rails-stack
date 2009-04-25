@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: memoized_ivar_for
+comment: 
+constants: []
+
+full_name: ActiveSupport::Memoizable
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: memoize
+name: Memoizable
+superclass: 

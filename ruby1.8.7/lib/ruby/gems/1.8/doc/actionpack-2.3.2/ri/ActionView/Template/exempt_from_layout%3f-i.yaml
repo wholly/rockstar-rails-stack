@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::Template#exempt_from_layout?
+is_singleton: false
+name: exempt_from_layout?
+params: ()
+visibility: public

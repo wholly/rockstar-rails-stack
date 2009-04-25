@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>entry_count_for (MemCache)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/active_support/vendor/memcache-client-1.6.5/memcache.rb, line 694</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">entry_count_for</span>(<span class="ruby-identifier">server</span>, <span class="ruby-identifier">total_servers</span>, <span class="ruby-identifier">total_weight</span>)
+    ((<span class="ruby-identifier">total_servers</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Continuum</span><span class="ruby-operator">::</span><span class="ruby-constant">POINTS_PER_SERVER</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">server</span>.<span class="ruby-identifier">weight</span>) <span class="ruby-operator">/</span> <span class="ruby-constant">Float</span>(<span class="ruby-identifier">total_weight</span>)).<span class="ruby-identifier">floor</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

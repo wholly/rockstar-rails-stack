@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a new email in reply to self. Sets the In-Reply-To and References headers for you automagically.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.load(&quot;my_email&quot;)\n reply_email = mail.create_reply\n reply_email.class         #=&gt; TMail::Mail\n reply_email.references  #=&gt; [&quot;&lt;d3b8cf8e49f04480850c28713a1f473e@lindsaar.net&gt;&quot;]\n reply_email.in_reply_to #=&gt; [&quot;&lt;d3b8cf8e49f04480850c28713a1f473e@lindsaar.net&gt;&quot;]\n"
+full_name: TMail::Mail#create_reply
+is_singleton: false
+name: create_reply
+params: ()
+visibility: public

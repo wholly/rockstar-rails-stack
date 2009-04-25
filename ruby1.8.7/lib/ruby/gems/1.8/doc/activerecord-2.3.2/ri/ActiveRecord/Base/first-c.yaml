@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A convenience wrapper for <tt>find(:first, *args)</tt>. You can pass in all the same arguments to this method as you can to <tt>find(:first)</tt>.
+full_name: ActiveRecord::Base::first
+is_singleton: true
+name: first
+params: (*args)
+visibility: public

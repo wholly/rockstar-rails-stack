@@ -1,0 +1,49 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Text Utils provides a namespace to define TOKENs, ATOMs, PHRASEs and CONTROL characters that are OK per RFC 2822.
+- !ruby/struct:SM::Flow::P 
+  body: It also provides methods you can call to determine if a string is safe
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: CONTROL_CHAR
+  value: /[#{control}]/n
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ATOM_UNSAFE
+  value: /[#{Regexp.quote aspecial}#{control}#{lwsp}]/n
+- !ruby/object:RI::Constant 
+  comment: 
+  name: PHRASE_UNSAFE
+  value: /[#{Regexp.quote aspecial}#{control}]/n
+- !ruby/object:RI::Constant 
+  comment: 
+  name: TOKEN_UNSAFE
+  value: /[#{Regexp.quote tspecial}#{control}#{lwsp}]/n
+full_name: TMail::TextUtils
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: atom_safe?
+- !ruby/object:RI::MethodSummary 
+  name: join_domain
+- !ruby/object:RI::MethodSummary 
+  name: quote_atom
+- !ruby/object:RI::MethodSummary 
+  name: quote_phrase
+- !ruby/object:RI::MethodSummary 
+  name: quote_token
+- !ruby/object:RI::MethodSummary 
+  name: timezone_string_to_unixtime
+- !ruby/object:RI::MethodSummary 
+  name: token_safe?
+- !ruby/object:RI::MethodSummary 
+  name: unquote
+name: TextUtils
+superclass: 

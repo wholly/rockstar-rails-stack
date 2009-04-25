@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>stale? (ActionView::ReloadableTemplate)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_view/reloadable_template.rb, line 93</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stale?</span>
+      <span class="ruby-identifier">previously_last_modified</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">previously_last_modified</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">mtime</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-identifier">undef_my_compiled_methods!</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">TemplateDeleted</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -16,12 +16,14 @@ p. Here you go..
   cd ~/binaries ; ./make_me_rockstar
 </code>
 </pre>
+...and just reboot your computer
 
 h2. Alright!, What do I really get?
 
 * Ruby , RubyGems , MacPorts installed in a single directory
 * mysql server + mysql gem pre-installed.
-* No Rails? ... No! because being rails rockstar, you are encouraged to grab latest "rails":http://github.com/rails/rails/tree/master and freeze  rails version in your specific apps.
-* You can keep installing your favorite gems , libs , or native dependencies (with MacPorts, eg. graphviz , imagemagick) and all of this can be instantly backed up by grabbing one single directory. Hence if your system crashes or you are moving to different computer , your personal development stack is restored with no surprises.    
+* Imagemagick (with full support) + rmagick gem pre-installed (and many more , check out "here":http://wiki.github.com/wholly/rockstar-rails-stack/list_of_packages )
+* Rails 2.3.2 ... While you are encouraged to grab latest "rails":http://github.com/rails/rails/tree/master and freeze  rails version in your specific apps.
+* You can keep installing your favorite gems , libs , or native dependencies (with MacPorts, eg. graphviz ) and all of this can be instantly backed up by grabbing one single directory. Hence if your system crashes or you are moving to different computer , your personal development stack is restored with no surprises.    
 
 

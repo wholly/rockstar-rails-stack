@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Removes the column(s) from the table definition.
+- !ruby/struct:SM::Flow::H 
+  level: 5
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: " t.remove(:qualification)\n t.remove(:qualification, :experience)\n"
+full_name: ActiveRecord::ConnectionAdapters::Table#remove
+is_singleton: false
+name: remove
+params: (*column_names)
+visibility: public

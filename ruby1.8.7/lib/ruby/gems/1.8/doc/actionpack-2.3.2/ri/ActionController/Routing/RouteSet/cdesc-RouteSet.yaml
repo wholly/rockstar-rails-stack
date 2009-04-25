@@ -1,0 +1,41 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "BEFORE: 0.191446860631307 ms/url AFTER: 0.029847304022858 ms/url Speed up: 6.4 times"
+- !ruby/struct:SM::Flow::P 
+  body: Route recognition is slow due to one-by-one iterating over a whole routeset (each map.resources generates at least 14 routes) and matching weird regexps on each step.
+- !ruby/struct:SM::Flow::P 
+  body: "We optimize this by skipping all URI segments that 100% sure can't be matched, moving deeper in a tree of routes (where node == segment) until first possible match is accured. In such case, we start walking a flat list of routes, matching them with accurate matcher. So, first step: search a segment tree for the first relevant index. Second step: iterate routes starting with that index."
+- !ruby/struct:SM::Flow::P 
+  body: "How tree is walked? We can do a recursive tests, but it's smarter: We just create a tree of if-s and elsif-s matching segments."
+- !ruby/struct:SM::Flow::P 
+  body: "We have segments of 3 flavors: 1) nil (no segment, route finished) 2) const-dot-dynamic (like &quot;/posts.:xml&quot;, &quot;/preview.:size.jpg&quot;) 3) const (like &quot;/posts&quot;, &quot;/comments&quot;) 4) dynamic (&quot;/:id&quot;, &quot;file.:size.:extension&quot;)"
+- !ruby/struct:SM::Flow::P 
+  body: We split incoming string into segments and iterate over them. When segment is nil, we drop immediately, on a current node index. When segment is equal to some const, we step into branch. If none constants matched, we step into 'dynamic' branch (it's a last). If we can't match anything, we drop to last index on a level.
+- !ruby/struct:SM::Flow::P 
+  body: "Note: we maintain the original routes order, so we finish building"
+- !ruby/struct:SM::Flow::VERB 
+  body: "      steps on a first dynamic segment.\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Example. Given the routes:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  0 /posts/\n  1 /posts/:id\n  2 /posts/:id/comments\n  3 /posts/blah\n  4 /users/\n  5 /users/:id\n  6 /users/:id/profile\n"
+- !ruby/struct:SM::Flow::P 
+  body: request_uri = /users/123
+- !ruby/struct:SM::Flow::P 
+  body: "There will be only 4 iterations:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " 1) segm test for /posts prefix, skip all /posts/* routes\n 2) segm test for /users/\n 3) segm test for /users/:id\n    (jump to list index = 5)\n 4) full test for /users/:id =&gt; here we are!\n"
+constants: []
+
+full_name: ActionController::Routing::RouteSet
+includes: []
+
+instance_methods: []
+
+name: RouteSet
+superclass: Object

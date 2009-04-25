@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::CGIHandler::dispatch_cgi
+is_singleton: true
+name: dispatch_cgi
+params: (app, cgi, out = $stdout)
+visibility: public

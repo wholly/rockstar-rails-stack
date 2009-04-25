@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionController::Caching::Fragments</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionController::Caching::Fragments</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/action_controller/caching/fragments_rb.html">
+                lib/action_controller/caching/fragments.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Fragment caching is used for caching various blocks within templates
+without caching the entire action as a whole. This is useful when certain
+elements of an action change frequently or depend on complicated state
+while other parts rarely change or can be shared amongst multiple parties.
+The caching is done using the cache helper available in the Action View. A
+template with caching might look something like:
+</p>
+<pre>
+  &lt;b&gt;Hello &lt;%= @name %&gt;&lt;/b&gt;
+  &lt;% cache do %&gt;
+    All the topics in the system:
+    &lt;%= render :partial =&gt; &quot;topic&quot;, :collection =&gt; Topic.find(:all) %&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+This cache will bind to the name of the action that called it, so if this
+code was part of the view for the topics/list action, you would be able to
+invalidate it using <tt><a
+href="Fragments.html#M001642">expire_fragment</a>(:controller =&gt;
+&quot;topics&quot;, :action =&gt; &quot;list&quot;)</tt>.
+</p>
+<p>
+This default behavior is of limited use if you need to cache multiple
+fragments per action or if the action itself is cached using
+<tt>caches_action</tt>, so we also have the option to qualify the name of
+the cached fragment with something like:
+</p>
+<pre>
+  &lt;% cache(:action =&gt; &quot;list&quot;, :action_suffix =&gt; &quot;all_topics&quot;) do %&gt;
+</pre>
+<p>
+That would result in a name such as &quot;/topics/list/all_topics&quot;,
+avoiding conflicts with the action cache and with any fragments that use a
+different suffix. Note that the URL doesn&#8216;t have to really exist or
+be callable - the url_for system is just used to generate unique cache
+names that we can refer to when we need to expire the cache.
+</p>
+<p>
+The expiration call for this example is:
+</p>
+<pre>
+  expire_fragment(:controller =&gt; &quot;topics&quot;, :action =&gt; &quot;list&quot;, :action_suffix =&gt; &quot;all_topics&quot;)
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001642">expire_fragment</a>&nbsp;&nbsp;
+      <a href="#M001638">fragment_cache_key</a>&nbsp;&nbsp;
+      <a href="#M001641">fragment_exist?</a>&nbsp;&nbsp;
+      <a href="#M001640">read_fragment</a>&nbsp;&nbsp;
+      <a href="#M001639">write_fragment</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001642" class="method-detail">
+        <a name="M001642"></a>
+
+        <div class="method-heading">
+          <a href="Fragments.src/M001642.html" target="Code" class="method-signature"
+            onclick="popupCode('Fragments.src/M001642.html');return false;">
+          <span class="method-name">expire_fragment</span><span class="method-args">(key, options = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes fragments from the cache.
+</p>
+<p>
+<tt>key</tt> can take one of three forms:
+</p>
+<ul>
+<li>String - This would normally take the form of a path, like
+<tt>&quot;pages/45/notes&quot;</tt>.
+
+</li>
+<li>Hash - Treated as an implicit call to <tt>url_for</tt>, like
+<tt>{:controller =&gt; &quot;pages&quot;, :action =&gt; &quot;notes&quot;,
+:id =&gt; 45}</tt>
+
+</li>
+<li>Regexp - Will remove any fragment that matches, so
+<tt>%r{pages/\d*/notes}</tt> might remove all notes. Make sure you
+don&#8216;t use anchors in the regex (<tt>^</tt> or <tt>$</tt>) because the
+actual filename matched looks like <tt>./cache/filename/path.cache</tt>.
+Note: Regexp expiration is only supported on caches that can iterate over
+all keys (unlike memcached).
+
+</li>
+</ul>
+<p>
+<tt>options</tt> is passed through to the cache store&#8216;s
+<tt>delete</tt> method (or <tt>delete_matched</tt>, for Regexp keys.)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001638" class="method-detail">
+        <a name="M001638"></a>
+
+        <div class="method-heading">
+          <a href="Fragments.src/M001638.html" target="Code" class="method-signature"
+            onclick="popupCode('Fragments.src/M001638.html');return false;">
+          <span class="method-name">fragment_cache_key</span><span class="method-args">(key)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Given a key (as described in <tt><a
+href="Fragments.html#M001642">expire_fragment</a></tt>), returns a key
+suitable for use in reading, writing, or expiring a cached fragment. If the
+key is a hash, the generated key is the return value of url_for on that
+hash (without the protocol). All keys are prefixed with &quot;views/&quot;
+and uses ActiveSupport::Cache.expand_cache_key for the expansion.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001641" class="method-detail">
+        <a name="M001641"></a>
+
+        <div class="method-heading">
+          <a href="Fragments.src/M001641.html" target="Code" class="method-signature"
+            onclick="popupCode('Fragments.src/M001641.html');return false;">
+          <span class="method-name">fragment_exist?</span><span class="method-args">(key, options = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Check if a cached fragment from the location signified by <tt>key</tt>
+exists (see <tt><a href="Fragments.html#M001642">expire_fragment</a></tt>
+for acceptable formats)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001640" class="method-detail">
+        <a name="M001640"></a>
+
+        <div class="method-heading">
+          <a href="Fragments.src/M001640.html" target="Code" class="method-signature"
+            onclick="popupCode('Fragments.src/M001640.html');return false;">
+          <span class="method-name">read_fragment</span><span class="method-args">(key, options = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Reads a cached fragment from the location signified by <tt>key</tt> (see
+<tt><a href="Fragments.html#M001642">expire_fragment</a></tt> for
+acceptable formats)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001639" class="method-detail">
+        <a name="M001639"></a>
+
+        <div class="method-heading">
+          <a href="Fragments.src/M001639.html" target="Code" class="method-signature"
+            onclick="popupCode('Fragments.src/M001639.html');return false;">
+          <span class="method-name">write_fragment</span><span class="method-args">(key, content, options = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes <tt>content</tt> to the location signified by <tt>key</tt> (see
+<tt><a href="Fragments.html#M001642">expire_fragment</a></tt> for
+acceptable formats)
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: See ActiveRecord::Transactions::ClassMethods for detailed documentation.
+full_name: ActiveRecord::Transactions#transaction
+is_singleton: false
+name: transaction
+params: (&block)
+visibility: public

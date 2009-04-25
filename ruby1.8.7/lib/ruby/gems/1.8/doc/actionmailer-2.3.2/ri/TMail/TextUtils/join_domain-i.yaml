@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Provides a method to join a domain name by it's parts and also makes it ATOM safe by quoting it as needed
+full_name: TMail::TextUtils#join_domain
+is_singleton: false
+name: join_domain
+params: ( arr )
+visibility: public

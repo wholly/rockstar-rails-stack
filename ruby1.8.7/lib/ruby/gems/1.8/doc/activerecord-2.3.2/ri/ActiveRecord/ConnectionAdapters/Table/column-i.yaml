@@ -1,0 +1,20 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Adds a new column to the named table. See TableDefinition#column for details of the options you can use.
+- !ruby/struct:SM::Flow::H 
+  level: 5
+  text: Example
+- !ruby/struct:SM::Flow::H 
+  level: 6
+  text: Creating a simple column
+- !ruby/struct:SM::Flow::VERB 
+  body: " t.column(:name, :string)\n"
+full_name: ActiveRecord::ConnectionAdapters::Table#column
+is_singleton: false
+name: column
+params: (column_name, type, options = {})
+visibility: public

@@ -1,0 +1,19 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Reverse operation of g_unpack.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: !binary |
+    ICBDaGFycy5nX3BhY2soQ2hhcnMuZ191bnBhY2soJ+CkleCljeCkt+Ckvycp
+    KSAjPSZndDsgJ+CkleCljeCkt+CkvycK
+
+full_name: ActiveSupport::Multibyte::Chars::g_pack
+is_singleton: true
+name: g_pack
+params: (unpacked)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Is this a HEAD request? Since <tt>request.method</tt> sees HEAD as <tt>:get</tt>, this \method checks the actual HTTP \method directly.
+full_name: ActionController::Request#head?
+is_singleton: false
+name: head?
+params: ()
+visibility: public

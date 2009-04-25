@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>assert_redirected_to (ActionController::Assertions::ResponseAssertions)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_controller/assertions/response_assertions.rb, line 59</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_redirected_to</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">message</span>=<span class="ruby-keyword kw">nil</span>)
+        <span class="ruby-identifier">clean_backtrace</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">assert_response</span>(<span class="ruby-identifier">:redirect</span>, <span class="ruby-identifier">message</span>)
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">redirected_to</span>
+
+          <span class="ruby-comment cmt"># Support partial arguments for hash redirections</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">redirected_to</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+            <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">all?</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span> <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">redirected_to</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>}
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">redirected_to_after_normalisation</span> = <span class="ruby-identifier">normalize_argument_to_redirection</span>(<span class="ruby-ivar">@response</span>.<span class="ruby-identifier">redirected_to</span>)
+          <span class="ruby-identifier">options_after_normalisation</span>       = <span class="ruby-identifier">normalize_argument_to_redirection</span>(<span class="ruby-identifier">options</span>)
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">redirected_to_after_normalisation</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">options_after_normalisation</span>
+            <span class="ruby-identifier">flunk</span> <span class="ruby-node">&quot;Expected response to be a redirect to &lt;#{options_after_normalisation}&gt; but was a redirect to &lt;#{redirected_to_after_normalisation}&gt;&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

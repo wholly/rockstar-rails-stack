@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Executes a request simulating DELETE HTTP method and set/volley the response
+full_name: ActionController::TestProcess#delete
+is_singleton: false
+name: delete
+params: (action, parameters = nil, session = nil, flash = nil)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Sets the controller class name. Useful if the name can't be inferred from test class. Expects <tt>controller_class</tt> as a constant. Example: <tt>tests WidgetController</tt>."
+full_name: ActionController::TestCase::tests
+is_singleton: true
+name: tests
+params: (controller_class)
+visibility: public

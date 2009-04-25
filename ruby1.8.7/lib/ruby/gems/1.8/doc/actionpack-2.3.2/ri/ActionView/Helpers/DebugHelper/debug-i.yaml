@@ -1,0 +1,17 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a YAML representation of <tt>object</tt> wrapped with &lt;pre&gt; and &lt;/pre&gt;. If the object cannot be converted to YAML using <tt>to_yaml</tt>, <tt>inspect</tt> will be called instead. Useful for inspecting an object at the time of rendering.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Example
+- !ruby/struct:SM::Flow::VERB 
+  body: "  @user = User.new({ :username =&gt; 'testing', :password =&gt; 'xyz', :age =&gt; 42}) %&gt;\n  debug(@user)\n  # =&gt;\n  &lt;pre class='debug_dump'&gt;--- !ruby/object:User\n  attributes:\n  &amp;nbsp; updated_at:\n  &amp;nbsp; username: testing\n\n  &amp;nbsp; age: 42\n  &amp;nbsp; password: xyz\n  &amp;nbsp; created_at:\n  attributes_cache: {}\n\n  new_record: true\n  &lt;/pre&gt;\n"
+full_name: ActionView::Helpers::DebugHelper#debug
+is_singleton: false
+name: debug
+params: (object)
+visibility: public

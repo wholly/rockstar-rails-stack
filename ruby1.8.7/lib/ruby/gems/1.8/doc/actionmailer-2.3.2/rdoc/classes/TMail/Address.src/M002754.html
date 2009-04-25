@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (TMail::Address)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_mailer/vendor/tmail-1.2.3/tmail/address.rb, line 137</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">local</span>, <span class="ruby-identifier">domain</span> )
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">domain</span>
+        <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>, <span class="ruby-value str">'empty word in domain'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-comment cmt"># This is to catch an unquoted &quot;@&quot; symbol in the local part of the</span>
+      <span class="ruby-comment cmt"># address.  Handles addresses like &lt;&quot;@&quot;@me.com&gt; and makes sure they</span>
+      <span class="ruby-comment cmt"># stay like &lt;&quot;@&quot;@me.com&gt; (previously were becoming &lt;@@me.com&gt;)</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">local</span>.<span class="ruby-identifier">join</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'@'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">local</span>.<span class="ruby-identifier">join</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\A[^&quot;].*?@.*?[^&quot;]\Z/</span>)
+        <span class="ruby-ivar">@local</span> = <span class="ruby-node">&quot;\&quot;#{local.join}\&quot;&quot;</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-ivar">@local</span> = <span class="ruby-identifier">local</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-ivar">@domain</span> = <span class="ruby-identifier">domain</span>
+      <span class="ruby-ivar">@name</span>   = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-ivar">@routes</span> = []
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

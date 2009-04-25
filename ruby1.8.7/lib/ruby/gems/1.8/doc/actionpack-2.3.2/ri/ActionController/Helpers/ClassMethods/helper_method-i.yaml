@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Declare a controller method as a helper. For example, the following makes the <tt>current_user</tt> controller method available to the view:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class ApplicationController &lt; ActionController::Base\n    helper_method :current_user, :logged_in?\n\n    def current_user\n      @current_user ||= User.find_by_id(session[:user])\n    end\n\n     def logged_in?\n       current_user != nil\n     end\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "In a view:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " &lt;% if logged_in? -%&gt;Welcome, &lt;%= current_user.name %&gt;&lt;% end -%&gt;\n"
+full_name: ActionController::Helpers::ClassMethods#helper_method
+is_singleton: false
+name: helper_method
+params: (*methods)
+visibility: public

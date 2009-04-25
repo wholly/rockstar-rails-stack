@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#formatted_offset
+is_singleton: false
+name: formatted_offset
+params: (colon = true, alternate_utc_string = nil)
+visibility: public

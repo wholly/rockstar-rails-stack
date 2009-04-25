@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::CoreExtensions::Float::Time#months_without_deprecation
+is_singleton: false
+name: months_without_deprecation
+params: ()
+visibility: public

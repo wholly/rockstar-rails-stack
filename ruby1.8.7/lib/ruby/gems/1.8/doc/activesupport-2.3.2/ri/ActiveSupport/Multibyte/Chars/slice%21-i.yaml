@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Like <tt>String#slice!</tt>, except instead of byte offsets you specify character offsets.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  s = '\xE3\x81\x93\xE3\x82\x93\xE3\x81\xAB\xE3\x81\xA1\xE3\x81\xAF'\n  s.mb_chars.slice!(2..3).to_s #=&gt; &quot;\xE3\x81\xAB\xE3\x81\xA1&quot;\n  s #=&gt; &quot;\xE3\x81\x93\xE3\x82\x93\xE3\x81\xAF&quot;\n"
+full_name: ActiveSupport::Multibyte::Chars#slice!
+is_singleton: false
+name: slice!
+params: (*args)
+visibility: public

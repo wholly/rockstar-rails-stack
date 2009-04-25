@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>format (ActionController::Request)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_controller/request.rb, line 150</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format</span>
+      <span class="ruby-ivar">@format</span> <span class="ruby-operator">||=</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">:format</span>]
+          <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup_by_extension</span>(<span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">:format</span>])
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">use_accept_header</span>
+          <span class="ruby-identifier">accepts</span>.<span class="ruby-identifier">first</span>
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">xhr?</span>
+          <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup_by_extension</span>(<span class="ruby-value str">&quot;js&quot;</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup_by_extension</span>(<span class="ruby-value str">&quot;html&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

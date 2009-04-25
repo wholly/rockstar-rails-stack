@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Authenticate with HTTP Digest, returns true or false
+full_name: ActionController::HttpAuthentication::Digest::ControllerMethods#authenticate_with_http_digest
+is_singleton: false
+name: authenticate_with_http_digest
+params: (realm = "Application", &password_procedure)
+visibility: public

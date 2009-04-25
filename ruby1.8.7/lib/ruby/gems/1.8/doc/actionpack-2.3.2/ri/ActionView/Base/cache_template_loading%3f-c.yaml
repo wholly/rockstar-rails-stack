@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::Base::cache_template_loading?
+is_singleton: true
+name: cache_template_loading?
+params: ()
+visibility: public

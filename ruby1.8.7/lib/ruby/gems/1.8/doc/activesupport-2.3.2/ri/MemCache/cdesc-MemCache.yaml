@@ -1,0 +1,145 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Should the client try to failover to another server if the first server is down? Defaults to true.
+  name: failover
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Log debug/info/warn/error to the given Logger, defaults to nil.
+  name: logger
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The multithread setting for this instance
+  name: multithread
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The namespace for this instance
+  name: namespace
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The servers this client talks to. Play at your own peril.
+  name: servers
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Socket timeout limit with this client, defaults to 0.5 sec. Set to nil to disable timeouts.
+  name: timeout
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A Ruby client library for memcached.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The version of MemCache you are using.
+  name: VERSION
+  value: "'1.6.4.99'"
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Default options for the cache object.
+  name: DEFAULT_OPTIONS
+  value: "{     :namespace   => nil,     :readonly    => false,     :multithread => true,     :failover    => true,     :timeout     => 0.5,     :logger      => nil,   }"
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Default memcached port.
+  name: DEFAULT_PORT
+  value: "11211"
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Default memcached server weight.
+  name: DEFAULT_WEIGHT
+  value: "1"
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Add <tt>key</tt> to the cache with value <tt>value</tt> that expires in <tt>expiry</tt> seconds. If <tt>raw</tt> is true, <tt>value</tt> will not be Marshalled.
+  - !ruby/struct:SM::Flow::P 
+    body: "Warning: Readers should not call this method in the event of a cache miss; see MemCache#add."
+  name: ONE_MB
+  value: 1024 * 1024
+full_name: MemCache
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: "[]"
+- !ruby/object:RI::MethodSummary 
+  name: "[]="
+- !ruby/object:RI::MethodSummary 
+  name: active?
+- !ruby/object:RI::MethodSummary 
+  name: add
+- !ruby/object:RI::MethodSummary 
+  name: cache_decr
+- !ruby/object:RI::MethodSummary 
+  name: cache_get
+- !ruby/object:RI::MethodSummary 
+  name: cache_get_multi
+- !ruby/object:RI::MethodSummary 
+  name: cache_incr
+- !ruby/object:RI::MethodSummary 
+  name: check_multithread_status!
+- !ruby/object:RI::MethodSummary 
+  name: create_continuum_for
+- !ruby/object:RI::MethodSummary 
+  name: decr
+- !ruby/object:RI::MethodSummary 
+  name: delete
+- !ruby/object:RI::MethodSummary 
+  name: entry_count_for
+- !ruby/object:RI::MethodSummary 
+  name: flush_all
+- !ruby/object:RI::MethodSummary 
+  name: get
+- !ruby/object:RI::MethodSummary 
+  name: get_multi
+- !ruby/object:RI::MethodSummary 
+  name: get_server_for_key
+- !ruby/object:RI::MethodSummary 
+  name: handle_error
+- !ruby/object:RI::MethodSummary 
+  name: hash_for
+- !ruby/object:RI::MethodSummary 
+  name: incr
+- !ruby/object:RI::MethodSummary 
+  name: inspect
+- !ruby/object:RI::MethodSummary 
+  name: make_cache_key
+- !ruby/object:RI::MethodSummary 
+  name: raise_on_error_response!
+- !ruby/object:RI::MethodSummary 
+  name: readonly?
+- !ruby/object:RI::MethodSummary 
+  name: request_setup
+- !ruby/object:RI::MethodSummary 
+  name: reset
+- !ruby/object:RI::MethodSummary 
+  name: servers=
+- !ruby/object:RI::MethodSummary 
+  name: set
+- !ruby/object:RI::MethodSummary 
+  name: stats
+- !ruby/object:RI::MethodSummary 
+  name: with_server
+- !ruby/object:RI::MethodSummary 
+  name: with_socket_management
+name: MemCache
+superclass: Object

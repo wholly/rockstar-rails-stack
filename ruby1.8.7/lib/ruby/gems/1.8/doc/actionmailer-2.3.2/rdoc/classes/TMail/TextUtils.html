@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: TMail::TextUtils</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">TMail::TextUtils</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/action_mailer/vendor/tmail-1_2_3/tmail/utils_rb.html">
+                lib/action_mailer/vendor/tmail-1.2.3/tmail/utils.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Text Utils provides a namespace to define TOKENs, ATOMs, PHRASEs and
+CONTROL characters that are OK per RFC 2822.
+</p>
+<p>
+It also provides methods you can call to determine if a string is safe
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M002492">atom_safe?</a>&nbsp;&nbsp;
+      <a href="#M002498">join_domain</a>&nbsp;&nbsp;
+      <a href="#M002493">quote_atom</a>&nbsp;&nbsp;
+      <a href="#M002494">quote_phrase</a>&nbsp;&nbsp;
+      <a href="#M002496">quote_token</a>&nbsp;&nbsp;
+      <a href="#M002499">timezone_string_to_unixtime</a>&nbsp;&nbsp;
+      <a href="#M002495">token_safe?</a>&nbsp;&nbsp;
+      <a href="#M002497">unquote</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">CONTROL_CHAR</td>
+          <td>=</td>
+          <td class="context-item-value">/[#{control}]/n</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ATOM_UNSAFE</td>
+          <td>=</td>
+          <td class="context-item-value">/[#{Regexp.quote aspecial}#{control}#{lwsp}]/n</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">PHRASE_UNSAFE</td>
+          <td>=</td>
+          <td class="context-item-value">/[#{Regexp.quote aspecial}#{control}]/n</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TOKEN_UNSAFE</td>
+          <td>=</td>
+          <td class="context-item-value">/[#{Regexp.quote tspecial}#{control}#{lwsp}]/n</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M002492" class="method-detail">
+        <a name="M002492"></a>
+
+        <div class="method-heading">
+          <a href="TextUtils.src/M002492.html" target="Code" class="method-signature"
+            onclick="popupCode('TextUtils.src/M002492.html');return false;">
+          <span class="method-name">atom_safe?</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if the string supplied is free from characters not allowed as
+an ATOM
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002498" class="method-detail">
+        <a name="M002498"></a>
+
+        <div class="method-heading">
+          <a href="TextUtils.src/M002498.html" target="Code" class="method-signature"
+            onclick="popupCode('TextUtils.src/M002498.html');return false;">
+          <span class="method-name">join_domain</span><span class="method-args">( arr )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Provides a method to join a domain name by it&#8216;s parts and also makes
+it ATOM safe by quoting it as needed
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002493" class="method-detail">
+        <a name="M002493"></a>
+
+        <div class="method-heading">
+          <a href="TextUtils.src/M002493.html" target="Code" class="method-signature"
+            onclick="popupCode('TextUtils.src/M002493.html');return false;">
+          <span class="method-name">quote_atom</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+If the string supplied has ATOM unsafe characters in it, will return the
+string quoted in double quotes, otherwise returns the string unmodified
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002494" class="method-detail">
+        <a name="M002494"></a>
+
+        <div class="method-heading">
+          <a href="TextUtils.src/M002494.html" target="Code" class="method-signature"
+            onclick="popupCode('TextUtils.src/M002494.html');return false;">
+          <span class="method-name">quote_phrase</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+If the string supplied has PHRASE unsafe characters in it, will return the
+string quoted in double quotes, otherwise returns the string unmodified
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002496" class="method-detail">
+        <a name="M002496"></a>
+
+        <div class="method-heading">
+          <a href="TextUtils.src/M002496.html" target="Code" class="method-signature"
+            onclick="popupCode('TextUtils.src/M002496.html');return false;">
+          <span class="method-name">quote_token</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+If the string supplied has TOKEN unsafe characters in it, will return the
+string quoted in double quotes, otherwise returns the string unmodified
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002499" class="method-detail">
+        <a name="M002499"></a>
+
+        <div class="method-heading">
+          <a href="TextUtils.src/M002499.html" target="Code" class="method-signature"
+            onclick="popupCode('TextUtils.src/M002499.html');return false;">
+          <span class="method-name">timezone_string_to_unixtime</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Takes a time zone string from an EMail and converts it to Unix Time
+(seconds)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002495" class="method-detail">
+        <a name="M002495"></a>
+
+        <div class="method-heading">
+          <a href="TextUtils.src/M002495.html" target="Code" class="method-signature"
+            onclick="popupCode('TextUtils.src/M002495.html');return false;">
+          <span class="method-name">token_safe?</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if the string supplied is free from characters not allowed as
+a TOKEN
+</p>
+        </div>
+      </div>
+
+      <div id="method-M002497" class="method-detail">
+        <a name="M002497"></a>
+
+        <div class="method-heading">
+          <a href="TextUtils.src/M002497.html" target="Code" class="method-signature"
+            onclick="popupCode('TextUtils.src/M002497.html');return false;">
+          <span class="method-name">unquote</span><span class="method-args">( str )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Unwraps supplied string from inside double quotes Returns unquoted string
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

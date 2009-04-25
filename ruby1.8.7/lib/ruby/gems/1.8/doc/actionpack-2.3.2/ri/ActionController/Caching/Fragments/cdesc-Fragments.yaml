@@ -1,0 +1,40 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Fragment caching is used for caching various blocks within templates without caching the entire action as a whole. This is useful when certain elements of an action change frequently or depend on complicated state while other parts rarely change or can be shared amongst multiple parties. The caching is done using the cache helper available in the Action View. A template with caching might look something like:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  <b>Hello &lt;%= @name %&gt;</b>\n  &lt;% cache do %&gt;\n    All the topics in the system:\n    &lt;%= render :partial =&gt; &quot;topic&quot;, :collection =&gt; Topic.find(:all) %&gt;\n  &lt;% end %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: This cache will bind to the name of the action that called it, so if this code was part of the view for the topics/list action, you would be able to invalidate it using <tt>expire_fragment(:controller =&gt; &quot;topics&quot;, :action =&gt; &quot;list&quot;)</tt>.
+- !ruby/struct:SM::Flow::P 
+  body: "This default behavior is of limited use if you need to cache multiple fragments per action or if the action itself is cached using <tt>caches_action</tt>, so we also have the option to qualify the name of the cached fragment with something like:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;% cache(:action =&gt; &quot;list&quot;, :action_suffix =&gt; &quot;all_topics&quot;) do %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: That would result in a name such as &quot;/topics/list/all_topics&quot;, avoiding conflicts with the action cache and with any fragments that use a different suffix. Note that the URL doesn't have to really exist or be callable - the url_for system is just used to generate unique cache names that we can refer to when we need to expire the cache.
+- !ruby/struct:SM::Flow::P 
+  body: "The expiration call for this example is:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  expire_fragment(:controller =&gt; &quot;topics&quot;, :action =&gt; &quot;list&quot;, :action_suffix =&gt; &quot;all_topics&quot;)\n"
+constants: []
+
+full_name: ActionController::Caching::Fragments
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: expire_fragment
+- !ruby/object:RI::MethodSummary 
+  name: fragment_cache_key
+- !ruby/object:RI::MethodSummary 
+  name: fragment_exist?
+- !ruby/object:RI::MethodSummary 
+  name: read_fragment
+- !ruby/object:RI::MethodSummary 
+  name: write_fragment
+name: Fragments
+superclass: 

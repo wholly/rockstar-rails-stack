@@ -1,0 +1,31 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a JSON string representing the model. Some configuration is available through <tt>options</tt>.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Options
+- !ruby/struct:SM::Flow::P 
+  body: The <tt>options</tt> are passed to the <tt>to_json</tt> method on each attribute, so the same options as the <tt>to_json</tt> methods in Active Support.
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:only</tt> - Only include the specified attribute or list of attributes in the serialized output. Attribute names must be specified as strings.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:except</tt> - Do not include the specified attribute or list of attributes in the serialized output. Attribute names must be specified as strings.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  person = Person.new(:first_name =&gt; &quot;Jim&quot;, :last_name =&gt; &quot;Smith&quot;)\n  person.to_json\n  # =&gt; {&quot;first_name&quot;: &quot;Jim&quot;, &quot;last_name&quot;: &quot;Smith&quot;}\n\n  person.to_json(:only =&gt; [&quot;first_name&quot;])\n  # =&gt; {&quot;first_name&quot;: &quot;Jim&quot;}\n\n  person.to_json(:except =&gt; [&quot;first_name&quot;])\n  # =&gt; {&quot;last_name&quot;: &quot;Smith&quot;}\n"
+full_name: ActiveResource::Base#to_json
+is_singleton: false
+name: to_json
+params: (options={})
+visibility: public

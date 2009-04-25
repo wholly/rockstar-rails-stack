@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns whether or not this record will be destroyed as part of the parents save transaction.
+- !ruby/struct:SM::Flow::P 
+  body: Only useful if the <tt>:autosave</tt> option on the parent is enabled for this associated model.
+full_name: ActiveRecord::AutosaveAssociation#marked_for_destruction?
+is_singleton: false
+name: marked_for_destruction?
+params: ()
+visibility: public

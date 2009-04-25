@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::SessionStore::Session::unmarshal
+is_singleton: true
+name: unmarshal
+params: (data)
+visibility: public

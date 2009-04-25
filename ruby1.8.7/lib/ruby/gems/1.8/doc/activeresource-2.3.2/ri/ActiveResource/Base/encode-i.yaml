@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the serialized string representation of the resource in the configured serialization format specified in ActiveResource::Base.format. The options applicable depend on the configured encoding format.
+full_name: ActiveResource::Base#encode
+is_singleton: false
+name: encode
+params: (options={})
+visibility: public

@@ -1,0 +1,44 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Makes the element with the DOM ID specified by <tt>element_id</tt> receive dropped draggable elements (created by <tt>draggable_element</tt>). and make an AJAX call. By default, the action called gets the DOM ID of the element as parameter.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;%= drop_receiving_element(&quot;my_cart&quot;, :url =&gt;\n    { :controller =&gt; &quot;cart&quot;, :action =&gt; &quot;add&quot; }) %&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: You can change the behaviour with various options, see http://script.aculo.us for more documentation.
+- !ruby/struct:SM::Flow::P 
+  body: "Some of these <tt>options</tt> include:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:accept</tt> - Set this to a string or an array of strings describing the allowable CSS classes that the <tt>draggable_element</tt> must have in order to be accepted by this <tt>drop_receiving_element</tt>.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:confirm</tt> - Adds a confirmation dialog. Example:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  :confirm =&gt; &quot;Are you sure you want to do this?&quot;\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:hoverclass</tt> - If set, the <tt>drop_receiving_element</tt> will have this additional CSS class when an accepted <tt>draggable_element</tt> is hovered over it.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:onDrop</tt> - Called when a <tt>draggable_element</tt> is dropped onto this element. Override this callback with a JavaScript expression to change the default drop behaviour. Example:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  :onDrop =&gt; &quot;function(draggable_element, droppable_element, event) { alert('I like bananas') }&quot;\n"
+  - !ruby/struct:SM::Flow::P 
+    body: "This callback gets three parameters: The Draggable element, the Droppable element and the Event object. You can extract additional information about the drop - like if the Ctrl or Shift keys were pressed - from the Event object."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:with</tt> - A JavaScript expression specifying the parameters for the XMLHttpRequest. Any expressions should return a valid URL query string.
+  type: :BULLET
+full_name: ActionView::Helpers::ScriptaculousHelper#drop_receiving_element
+is_singleton: false
+name: drop_receiving_element
+params: (element_id, options = {})
+visibility: public

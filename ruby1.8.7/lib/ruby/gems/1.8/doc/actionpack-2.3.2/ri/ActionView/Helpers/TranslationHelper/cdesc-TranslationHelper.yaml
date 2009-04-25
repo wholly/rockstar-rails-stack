@@ -1,0 +1,22 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: ActionView::Helpers::TranslationHelper
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: l
+- !ruby/object:RI::MethodSummary 
+  name: localize
+- !ruby/object:RI::MethodSummary 
+  name: t
+- !ruby/object:RI::MethodSummary 
+  name: translate
+name: TranslationHelper
+superclass: 

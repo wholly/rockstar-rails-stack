@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendHelperMethodsTest#test_deep_symbolize_keys_works
+is_singleton: false
+name: test_deep_symbolize_keys_works
+params: ()
+visibility: public

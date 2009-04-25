@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>remote_ip (ActionController::Request)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/action_controller/request.rb, line 217</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remote_ip</span>
+      <span class="ruby-identifier">remote_addr_list</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REMOTE_ADDR'</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REMOTE_ADDR'</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/[^,\s]+/</span>)
+
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">remote_addr_list</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-identifier">not_trusted_addrs</span> = <span class="ruby-identifier">remote_addr_list</span>.<span class="ruby-identifier">reject</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">addr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">addr</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">TRUSTED_PROXIES</span>}
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">not_trusted_addrs</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">not_trusted_addrs</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">remote_ips</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_X_FORWARDED_FOR'</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_X_FORWARDED_FOR'</span>].<span class="ruby-identifier">split</span>(<span class="ruby-value str">','</span>)
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">include?</span> <span class="ruby-value str">'HTTP_CLIENT_IP'</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">ip_spoofing_check</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">remote_ips</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_CLIENT_IP'</span>])
+          <span class="ruby-comment cmt"># We don't know which came from the proxy, and which from the user</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActionControllerError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;IP spoofing attack?!\nHTTP_CLIENT_IP=\#{@env['HTTP_CLIENT_IP'].inspect}\nHTTP_X_FORWARDED_FOR=\#{@env['HTTP_X_FORWARDED_FOR'].inspect}\n&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_CLIENT_IP'</span>]
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">remote_ips</span>
+        <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">TRUSTED_PROXIES</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">strip</span>
+          <span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">pop</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">strip</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REMOTE_ADDR'</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

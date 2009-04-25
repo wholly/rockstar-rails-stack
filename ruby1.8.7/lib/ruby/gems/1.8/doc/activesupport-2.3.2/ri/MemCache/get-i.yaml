@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: "[]"
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Retrieves <tt>key</tt> from memcache. If <tt>raw</tt> is false, the value will be unmarshalled.
+full_name: MemCache#get
+is_singleton: false
+name: get
+params: (key, raw = false)
+visibility: public

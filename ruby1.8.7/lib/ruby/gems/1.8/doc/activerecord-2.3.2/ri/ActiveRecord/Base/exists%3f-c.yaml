@@ -1,0 +1,39 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Returns true if a record exists in the table that matches the <tt>id</tt> or conditions given, or false otherwise. The argument can take five forms:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Integer - Finds the record with this primary key.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: String - Finds the record with a primary key corresponding to this string (such as <tt>'5'</tt>).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Array - Finds the record that matches these <tt>find</tt>-style conditions (such as <tt>['color = ?', 'red']</tt>).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Hash - Finds the record that matches these <tt>find</tt>-style conditions (such as <tt>{:color =&gt; 'red'}</tt>).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: No args - Returns false if the table is empty, true otherwise.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: For more information about specifying conditions as a Hash or Array, see the Conditions section in the introduction to ActiveRecord::Base.
+- !ruby/struct:SM::Flow::P 
+  body: "Note: You can't pass in a condition as a string (like <tt>name = 'Jamie'</tt>), since it would be sanitized and then queried against the primary key column, like <tt>id = 'name = \\'Jamie\\''</tt>."
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Person.exists?(5)\n  Person.exists?('5')\n  Person.exists?(:name =&gt; &quot;David&quot;)\n  Person.exists?(['name LIKE ?', &quot;%#{query}%&quot;])\n  Person.exists?\n"
+full_name: ActiveRecord::Base::exists?
+is_singleton: true
+name: exists?
+params: (id_or_conditions = {})
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::Template#accessible_paths
+is_singleton: false
+name: accessible_paths
+params: ()
+visibility: public

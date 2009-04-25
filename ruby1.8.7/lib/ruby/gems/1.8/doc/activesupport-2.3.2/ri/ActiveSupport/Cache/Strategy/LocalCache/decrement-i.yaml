@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::Cache::Strategy::LocalCache#decrement
+is_singleton: false
+name: decrement
+params: (key, amount = 1)
+visibility: public

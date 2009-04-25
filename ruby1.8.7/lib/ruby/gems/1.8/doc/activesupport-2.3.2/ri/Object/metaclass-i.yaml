@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get object's meta (ghost, eigenclass, singleton) class
+full_name: Object#metaclass
+is_singleton: false
+name: metaclass
+params: ()
+visibility: public

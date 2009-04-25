@@ -1,0 +1,42 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a string of <tt>&lt;option&gt;</tt> tags, like <tt>options_for_select</tt>, but wraps them with <tt>&lt;optgroup&gt;</tt> tags.
+- !ruby/struct:SM::Flow::P 
+  body: "Parameters:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>grouped_options</tt> - Accepts a nested array or hash of strings. The first value serves as the <tt>&lt;optgroup&gt;</tt> label while the second value must be an array of options. The second value can be a nested array of text-value pairs. See <tt>options_for_select</tt> for more info.
+  - !ruby/struct:SM::Flow::VERB 
+    body: " Ex. [&quot;North America&quot;,[[&quot;United States&quot;,&quot;US&quot;],[&quot;Canada&quot;,&quot;CA&quot;]]]\n"
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>selected_key</tt> - A value equal to the <tt>value</tt> attribute for one of the <tt>&lt;option&gt;</tt> tags, which will have the <tt>selected</tt> attribute set. Note: It is possible for this value to match multiple options as you might have the same option in multiple groups. Each will then get <tt>selected=&quot;selected&quot;</tt>."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>prompt</tt> - set to true or a prompt string. When the select element doesn\xE2\x80\x99t have a value yet, this prepends an option with a generic prompt \xE2\x80\x94 &quot;Please select&quot; \xE2\x80\x94 or the given prompt string."
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "Sample usage (Array):"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  grouped_options = [\n   ['North America',\n     [['United States','US'],'Canada']],\n   ['Europe',\n     ['Denmark','Germany','France']]\n  ]\n  grouped_options_for_select(grouped_options)\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Sample usage (Hash):"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  grouped_options = {\n   'North America' =&gt; [['United States','US], 'Canada'],\n   'Europe' =&gt; ['Denmark','Germany','France']\n  }\n  grouped_options_for_select(grouped_options)\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Possible output:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;optgroup label=&quot;Europe&quot;&gt;\n    &lt;option value=&quot;Denmark&quot;&gt;Denmark&lt;/option&gt;\n    &lt;option value=&quot;Germany&quot;&gt;Germany&lt;/option&gt;\n    &lt;option value=&quot;France&quot;&gt;France&lt;/option&gt;\n  &lt;/optgroup&gt;\n  &lt;optgroup label=&quot;North America&quot;&gt;\n    &lt;option value=&quot;US&quot;&gt;United States&lt;/option&gt;\n    &lt;option value=&quot;Canada&quot;&gt;Canada&lt;/option&gt;\n  &lt;/optgroup&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: <b>Note:</b> Only the <tt>&lt;optgroup&gt;</tt> and <tt>&lt;option&gt;</tt> tags are returned, so you still have to wrap the output in an appropriate <tt>&lt;select&gt;</tt> tag.
+full_name: ActionView::Helpers::FormOptionsHelper#grouped_options_for_select
+is_singleton: false
+name: grouped_options_for_select
+params: (grouped_options, selected_key = nil, prompt = nil)
+visibility: public

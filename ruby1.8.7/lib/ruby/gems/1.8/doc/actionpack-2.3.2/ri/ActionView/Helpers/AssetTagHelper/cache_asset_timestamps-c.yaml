@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionView::Helpers::AssetTagHelper::cache_asset_timestamps
+is_singleton: true
+name: cache_asset_timestamps
+params: ()
+visibility: public

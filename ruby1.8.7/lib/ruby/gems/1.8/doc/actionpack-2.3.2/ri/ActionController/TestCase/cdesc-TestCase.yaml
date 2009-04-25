@@ -1,0 +1,120 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: controller_class
+- !ruby/object:RI::MethodSummary 
+  name: controller_class=
+- !ruby/object:RI::MethodSummary 
+  name: determine_default_controller_class
+- !ruby/object:RI::MethodSummary 
+  name: prepare_controller_class
+- !ruby/object:RI::MethodSummary 
+  name: tests
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Superclass for ActionController functional tests. Functional tests allow you to test a single controller action per test method. This should not be confused with integration tests (see ActionController::IntegrationTest), which are more like &quot;stories&quot; that can involve multiple controllers and mutliple actions (i.e. multiple different HTTP requests).
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Basic example
+- !ruby/struct:SM::Flow::P 
+  body: "Functional tests are written as follows:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "1."
+    body: First, one uses the <tt>get</tt>, <tt>post</tt>, <tt>put</tt>, <tt>delete</tt> or <tt>head</tt> method to simulate an HTTP request.
+  - !ruby/struct:SM::Flow::LI 
+    label: "2."
+    body: "Then, one asserts whether the current state is as expected. &quot;State&quot; can be anything: the controller's HTTP response, the database contents, etc."
+  type: :NUMBER
+- !ruby/struct:SM::Flow::P 
+  body: "For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class BooksControllerTest &lt; ActionController::TestCase\n    def test_create\n      # Simulate a POST response with the given HTTP parameters.\n      post(:create, :book =&gt; { :title =&gt; &quot;Love Hina&quot; })\n\n      # Assert that the controller tried to redirect us to\n      # the created book's URI.\n      assert_response :found\n\n      # Assert that the controller really put the book in the database.\n      assert_not_nil Book.find_by_title(&quot;Love Hina&quot;)\n    end\n  end\n"
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Special instance variables
+- !ruby/struct:SM::Flow::P 
+  body: "ActionController::TestCase will also automatically provide the following instance variables for use in the tests:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "<b>@controller</b>:"
+    body: The controller instance that will be tested.
+  - !ruby/struct:SM::Flow::LI 
+    label: "<b>@request</b>:"
+    body: An ActionController::TestRequest, representing the current HTTP request. You can modify this object before sending the HTTP request. For example, you might want to set some session properties before sending a GET request.
+  - !ruby/struct:SM::Flow::LI 
+    label: "<b>@response</b>:"
+    body: An ActionController::TestResponse object, representing the response of the last HTTP response. In the above example, <tt>@response</tt> becomes valid after calling <tt>post</tt>. If the various assert methods are not sufficient, then you may use this object to inspect the HTTP response in detail.
+  type: :NOTE
+- !ruby/struct:SM::Flow::P 
+  body: (Earlier versions of Rails required each functional test to subclass Test::Unit::TestCase and define @controller, @request, @response in <tt>setup</tt>.)
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Controller is automatically inferred
+- !ruby/struct:SM::Flow::P 
+  body: ActionController::TestCase will automatically infer the controller under test from the test class name. If the controller cannot be inferred from the test class name, you can explicity set it with <tt>tests</tt>.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class SpecialEdgeCaseWidgetsControllerTest &lt; ActionController::TestCase\n    tests WidgetController\n  end\n"
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Testing controller internals
+- !ruby/struct:SM::Flow::P 
+  body: "In addition to these specific assertions, you also have easy access to various collections that the regular test/unit assertions can be used against. These collections are:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "assigns: Instance variables assigned in the action that are available for the view."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "session: Objects being saved in the session."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "flash: The flash objects currently in the session."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "cookies: Cookies being sent to the user on this request."
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "These collections can be used just like any other hash:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  assert_not_nil assigns(:person) # makes sure that a @person instance variable was set\n  assert_equal &quot;Dave&quot;, cookies[:name] # makes sure that a cookie called :name was set as &quot;Dave&quot;\n  assert flash.empty? # makes sure that there's nothing in the flash\n"
+- !ruby/struct:SM::Flow::P 
+  body: For historic reasons, the assigns hash uses string-based keys. So assigns[:person] won't work, but assigns[&quot;person&quot;] will. To appease our yearning for symbols, though, an alternative accessor has been devised using a method call instead of index referencing. So assigns(:person) will work just like assigns[&quot;person&quot;], but again, assigns[:person] will not work.
+- !ruby/struct:SM::Flow::P 
+  body: On top of the collections, you have the complete url that a given action redirected to available in redirect_to_url.
+- !ruby/struct:SM::Flow::P 
+  body: For redirects within the same controller, you can even call follow_redirect and the redirect will be followed, triggering another action call which can then be asserted against.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Manipulating the request collections
+- !ruby/struct:SM::Flow::P 
+  body: "The collections described above link to the response, so you can test if what the actions were expected to do happened. But sometimes you also want to manipulate these collections in the incoming request. This is really only relevant for sessions and cookies, though. For sessions, you just do:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  @request.session[:key] = &quot;value&quot;\n  @request.cookies[&quot;key&quot;] = &quot;value&quot;\n"
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Testing named routes
+- !ruby/struct:SM::Flow::P 
+  body: "If you're using named routes, they can be easily tested using the original named routes' methods straight in the test case. Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " assert_redirected_to page_url(:title =&gt; 'foo')\n"
+constants: []
+
+full_name: ActionController::TestCase
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: TestProcess
+- !ruby/object:RI::IncludedModule 
+  name: Assertions
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: rescue_action_in_public!
+- !ruby/object:RI::MethodSummary 
+  name: setup_controller_request_and_response
+name: TestCase
+superclass: ActiveSupport::TestCase

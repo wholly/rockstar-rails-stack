@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Destructively sets the &quot;Sender:&quot; field to the passed string (which should be a valid email address)
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.sender = &quot;mikel@abc.com&quot;\n mail.sender #=&gt;  &quot;mikel@abc.org&quot;\n mail['sender'].to_s #=&gt; &quot;mikel@abc.com&quot;\n"
+full_name: TMail::Mail#sender=
+is_singleton: false
+name: sender=
+params: ( str )
+visibility: public

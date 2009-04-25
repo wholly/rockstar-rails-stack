@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Dispatcher::run_prepare_callbacks
+is_singleton: true
+name: run_prepare_callbacks
+params: ()
+visibility: public

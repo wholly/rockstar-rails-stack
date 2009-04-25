@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nSimpleBackendTranslationsTest
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: I18nSimpleBackendTestSetup
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: test_store_translations_adds_translations
+- !ruby/object:RI::MethodSummary 
+  name: test_store_translations_converts_keys_to_symbols
+- !ruby/object:RI::MethodSummary 
+  name: test_store_translations_deep_merges_translations
+- !ruby/object:RI::MethodSummary 
+  name: test_store_translations_forces_locale_to_sym
+name: I18nSimpleBackendTranslationsTest
+superclass: Test::Unit::TestCase

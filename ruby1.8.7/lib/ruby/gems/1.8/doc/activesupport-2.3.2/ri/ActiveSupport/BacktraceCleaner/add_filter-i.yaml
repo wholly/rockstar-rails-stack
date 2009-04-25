@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Adds a filter from the block provided. Each line in the backtrace will be mapped against this filter.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # Will turn &quot;/my/rails/root/app/models/person.rb&quot; into &quot;/app/models/person.rb&quot;\n  backtrace_cleaner.add_filter { |line| line.gsub(Rails.root, '') }\n"
+full_name: ActiveSupport::BacktraceCleaner#add_filter
+is_singleton: false
+name: add_filter
+params: (&block)
+visibility: public

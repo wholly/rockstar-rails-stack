@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::MessageEncryptor#decrypt
+is_singleton: false
+name: decrypt
+params: (encrypted_message)
+visibility: public

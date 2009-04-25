@@ -1,0 +1,110 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Provides a number of methods for turning different kinds of containers into a set of option tags.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Options
+- !ruby/struct:SM::Flow::P 
+  body: "The <tt>collection_select</tt>, <tt>select</tt> and <tt>time_zone_select</tt> methods take an <tt>options</tt> parameter, a hash:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:include_blank</tt> - set to true or a prompt string if the first option element of the select element is a blank. Useful if there is not a default value required for the select element.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: For example,
+- !ruby/struct:SM::Flow::VERB 
+  body: "  select(&quot;post&quot;, &quot;category&quot;, Post::CATEGORIES, {:include_blank =&gt; true})\n"
+- !ruby/struct:SM::Flow::P 
+  body: "could become:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;select name=&quot;post[category]&quot;&gt;\n    &lt;option&gt;&lt;/option&gt;\n    &lt;option&gt;joke&lt;/option&gt;\n    &lt;option&gt;poem&lt;/option&gt;\n  &lt;/select&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: Another common case is a select tag for an <tt>belongs_to</tt>-associated object.
+- !ruby/struct:SM::Flow::P 
+  body: "Example with @post.person_id =&gt; 2:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  select(&quot;post&quot;, &quot;person_id&quot;, Person.all.collect {|p| [ p.name, p.id ] }, {:include_blank =&gt; 'None'})\n"
+- !ruby/struct:SM::Flow::P 
+  body: "could become:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;select name=&quot;post[person_id]&quot;&gt;\n    &lt;option value=&quot;&quot;&gt;None&lt;/option&gt;\n    &lt;option value=&quot;1&quot;&gt;David&lt;/option&gt;\n    &lt;option value=&quot;2&quot; selected=&quot;selected&quot;&gt;Sam&lt;/option&gt;\n    &lt;option value=&quot;3&quot;&gt;Tobias&lt;/option&gt;\n  &lt;/select&gt;\n"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:prompt</tt> - set to true or a prompt string. When the select element doesn't have a value yet, this prepends an option with a generic prompt -- &quot;Please select&quot; -- or the given prompt string.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  select(&quot;post&quot;, &quot;person_id&quot;, Person.all.collect {|p| [ p.name, p.id ] }, {:prompt =&gt; 'Select Person'})\n"
+- !ruby/struct:SM::Flow::P 
+  body: "could become:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;select name=&quot;post[person_id]&quot;&gt;\n    &lt;option value=&quot;&quot;&gt;Select Person&lt;/option&gt;\n    &lt;option value=&quot;1&quot;&gt;David&lt;/option&gt;\n    &lt;option value=&quot;2&quot;&gt;Sam&lt;/option&gt;\n    &lt;option value=&quot;3&quot;&gt;Tobias&lt;/option&gt;\n  &lt;/select&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: Like the other form helpers, <tt>select</tt> can accept an <tt>:index</tt> option to manually set the ID used in the resulting output. Unlike other helpers, <tt>select</tt> expects this option to be in the <tt>html_options</tt> parameter.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  select(&quot;album[]&quot;, &quot;genre&quot;, %w[rap rock country], {}, { :index =&gt; nil })\n"
+- !ruby/struct:SM::Flow::P 
+  body: "becomes:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;select name=&quot;album[][genre]&quot; id=&quot;album__genre&quot;&gt;\n    &lt;option value=&quot;rap&quot;&gt;rap&lt;/option&gt;\n    &lt;option value=&quot;rock&quot;&gt;rock&lt;/option&gt;\n    &lt;option value=&quot;country&quot;&gt;country&lt;/option&gt;\n  &lt;/select&gt;\n"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:disabled</tt> - can be a single value or an array of values that will be disabled options in the final output.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  select(&quot;post&quot;, &quot;category&quot;, Post::CATEGORIES, {:disabled =&gt; 'restricted'})\n"
+- !ruby/struct:SM::Flow::P 
+  body: "could become:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;select name=&quot;post[category]&quot;&gt;\n    &lt;option&gt;&lt;/option&gt;\n    &lt;option&gt;joke&lt;/option&gt;\n    &lt;option&gt;poem&lt;/option&gt;\n    &lt;option disabled=&quot;disabled&quot;&gt;restricted&lt;/option&gt;\n  &lt;/select&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: When used with the <tt>collection_select</tt> helper, <tt>:disabled</tt> can also be a Proc that identifies those options that should be disabled.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  collection_select(:post, :category_id, Category.all, :id, :name, {:disabled =&gt; lambda{|category| category.archived? }})\n"
+- !ruby/struct:SM::Flow::P 
+  body: "If the categories &quot;2008 stuff&quot; and &quot;Christmas&quot; return true when the method <tt>archived?</tt> is called, this would return:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;select name=&quot;post[category_id]&quot;&gt;\n    &lt;option value=&quot;1&quot; disabled=&quot;disabled&quot;&gt;2008 stuff&lt;/option&gt;\n    &lt;option value=&quot;2&quot; disabled=&quot;disabled&quot;&gt;Christmas&lt;/option&gt;\n    &lt;option value=&quot;3&quot;&gt;Jokes&lt;/option&gt;\n    &lt;option value=&quot;4&quot;&gt;Poems&lt;/option&gt;\n  &lt;/select&gt;\n"
+constants: []
+
+full_name: ActionView::Helpers::FormOptionsHelper
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: ERB::Util
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: collection_select
+- !ruby/object:RI::MethodSummary 
+  name: grouped_options_for_select
+- !ruby/object:RI::MethodSummary 
+  name: option_groups_from_collection_for_select
+- !ruby/object:RI::MethodSummary 
+  name: options_for_select
+- !ruby/object:RI::MethodSummary 
+  name: options_from_collection_for_select
+- !ruby/object:RI::MethodSummary 
+  name: select
+- !ruby/object:RI::MethodSummary 
+  name: time_zone_options_for_select
+- !ruby/object:RI::MethodSummary 
+  name: time_zone_select
+name: FormOptionsHelper
+superclass: 

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: MemCache#check_multithread_status!
+is_singleton: false
+name: check_multithread_status!
+params: ()
+visibility: protected

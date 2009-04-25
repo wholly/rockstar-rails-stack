@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets the default options for the model. The format of the <tt>options</tt> argument is the same as in find.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class Person &lt; ActiveRecord::Base\n    default_scope :order =&gt; 'last_name, first_name'\n  end\n"
+full_name: ActiveRecord::Base::default_scope
+is_singleton: true
+name: default_scope
+params: (options = {})
+visibility: protected

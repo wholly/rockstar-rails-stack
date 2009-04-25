@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::Request#form_data?
+is_singleton: false
+name: form_data?
+params: ()
+visibility: public

@@ -1,0 +1,31 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Constructs a call to a named RESTful route for the given record and returns the resulting URL string. For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # calls post_url(post)\n  polymorphic_url(post) # =&gt; &quot;http://example.com/posts/1&quot;\n  polymorphic_url([blog, post]) # =&gt; &quot;http://example.com/blogs/1/posts/1&quot;\n  polymorphic_url([:admin, blog, post]) # =&gt; &quot;http://example.com/admin/blogs/1/posts/1&quot;\n  polymorphic_url([user, :blog, post]) # =&gt; &quot;http://example.com/users/1/blog/posts/1&quot;\n"
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Options
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:action</tt> - Specifies the action prefix for the named route: <tt>:new</tt> or <tt>:edit</tt>. Default is no prefix."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:routing_type</tt> - Allowed values are <tt>:path</tt> or <tt>:url</tt>. Default is <tt>:url</tt>.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Examples
+- !ruby/struct:SM::Flow::VERB 
+  body: "  # an Article record\n  polymorphic_url(record)  # same as article_url(record)\n\n  # a Comment record\n  polymorphic_url(record)  # same as comment_url(record)\n\n  # it recognizes new records and maps to the collection\n  record = Comment.new\n  polymorphic_url(record)  # same as comments_url()\n"
+full_name: ActionController::PolymorphicRoutes#polymorphic_url
+is_singleton: false
+name: polymorphic_url
+params: (record_or_hash_or_array, options = {})
+visibility: public

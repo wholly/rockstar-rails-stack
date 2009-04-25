@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Accepts a list of <tt>servers</tt> and a list of <tt>opts</tt>. <tt>servers</tt> may be omitted. See +servers=+ for acceptable server list arguments.
+- !ruby/struct:SM::Flow::P 
+  body: "Valid options for <tt>opts</tt> are:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  [:namespace]   Prepends this value to all keys added or retrieved.\n  [:readonly]    Raises an exception on cache writes when true.\n  [:multithread] Wraps cache access in a Mutex for thread safety.\n  [:failover]    Should the client try to failover to another server if the\n                 first server is down?  Defaults to true.\n  [:timeout]     Time to use as the socket read timeout.  Defaults to 0.5 sec,\n                 set to nil to disable timeouts (this is a major performance penalty in Ruby 1.8).\n  [:logger]      Logger to use for info/debug output, defaults to nil\n"
+- !ruby/struct:SM::Flow::P 
+  body: Other options are ignored.
+full_name: MemCache::new
+is_singleton: true
+name: new
+params: (*args)
+visibility: public

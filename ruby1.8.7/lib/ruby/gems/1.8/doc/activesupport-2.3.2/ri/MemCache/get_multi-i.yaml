@@ -1,0 +1,29 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Retrieves multiple values from memcached in parallel, if possible.
+- !ruby/struct:SM::Flow::P 
+  body: "The memcached protocol supports the ability to retrieve multiple keys in a single request. Pass in an array of keys to this method and it will:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "1."
+    body: map the key to the appropriate memcached server
+  - !ruby/struct:SM::Flow::LI 
+    label: "2."
+    body: send a single request to each server that has one or more key values
+  type: :NUMBER
+- !ruby/struct:SM::Flow::P 
+  body: Returns a hash of values.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  cache[&quot;a&quot;] = 1\n  cache[&quot;b&quot;] = 2\n  cache.get_multi &quot;a&quot;, &quot;b&quot; # =&gt; { &quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2 }\n"
+- !ruby/struct:SM::Flow::P 
+  body: Note that get_multi assumes the values are marshalled.
+full_name: MemCache#get_multi
+is_singleton: false
+name: get_multi
+params: (*keys)
+visibility: public

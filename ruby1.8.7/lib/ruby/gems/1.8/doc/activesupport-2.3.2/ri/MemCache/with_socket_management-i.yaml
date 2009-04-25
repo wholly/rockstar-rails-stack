@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Gets or creates a socket connected to the given server, and yields it to the block, wrapped in a mutex synchronization if @multithread is true.
+- !ruby/struct:SM::Flow::P 
+  body: If a socket error (SocketError, SystemCallError, IOError) or protocol error (MemCacheError) is raised by the block, closes the socket, attempts to connect again, and retries the block (once). If an error is again raised, reraises it as MemCacheError.
+- !ruby/struct:SM::Flow::P 
+  body: If unable to connect to the server (or if in the reconnect wait period), raises MemCacheError. Note that the socket connect code marks a server dead for a timeout period, so retrying does not apply to connection attempt failures (but does still apply to unexpectedly lost connections etc.).
+full_name: MemCache#with_socket_management
+is_singleton: false
+name: with_socket_management
+params: (server, &block)
+visibility: protected

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nTest#test_uses_simple_backend_set_by_default
+is_singleton: false
+name: test_uses_simple_backend_set_by_default
+params: ()
+visibility: public

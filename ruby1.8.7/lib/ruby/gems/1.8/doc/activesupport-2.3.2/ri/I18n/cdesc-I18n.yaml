@@ -1,0 +1,44 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: available_locales
+- !ruby/object:RI::MethodSummary 
+  name: backend
+- !ruby/object:RI::MethodSummary 
+  name: backend=
+- !ruby/object:RI::MethodSummary 
+  name: default_exception_handler
+- !ruby/object:RI::MethodSummary 
+  name: default_locale
+- !ruby/object:RI::MethodSummary 
+  name: default_locale=
+- !ruby/object:RI::MethodSummary 
+  name: exception_handler=
+- !ruby/object:RI::MethodSummary 
+  name: load_path
+- !ruby/object:RI::MethodSummary 
+  name: load_path=
+- !ruby/object:RI::MethodSummary 
+  name: locale
+- !ruby/object:RI::MethodSummary 
+  name: locale=
+- !ruby/object:RI::MethodSummary 
+  name: localize
+- !ruby/object:RI::MethodSummary 
+  name: normalize_translation_keys
+- !ruby/object:RI::MethodSummary 
+  name: reload!
+- !ruby/object:RI::MethodSummary 
+  name: translate
+comment: 
+constants: []
+
+full_name: I18n
+includes: []
+
+instance_methods: []
+
+name: I18n
+superclass: 

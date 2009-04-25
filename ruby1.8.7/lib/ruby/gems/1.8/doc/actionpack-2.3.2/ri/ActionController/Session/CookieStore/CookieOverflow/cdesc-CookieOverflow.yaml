@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Raised when storing more than 4K of session data.
+constants: []
+
+full_name: ActionController::Session::CookieStore::CookieOverflow
+includes: []
+
+instance_methods: []
+
+name: CookieOverflow
+superclass: StandardError

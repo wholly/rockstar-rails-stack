@@ -1,0 +1,28 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: ActiveRecord::TestFixtures::ClassMethods
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: fixtures
+- !ruby/object:RI::MethodSummary 
+  name: require_fixture_classes
+- !ruby/object:RI::MethodSummary 
+  name: set_fixture_class
+- !ruby/object:RI::MethodSummary 
+  name: setup_fixture_accessors
+- !ruby/object:RI::MethodSummary 
+  name: try_to_load_dependency
+- !ruby/object:RI::MethodSummary 
+  name: uses_transaction
+- !ruby/object:RI::MethodSummary 
+  name: uses_transaction?
+name: ClassMethods
+superclass: 

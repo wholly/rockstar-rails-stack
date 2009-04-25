@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::SessionStore::SqlBypass::drop_table!
+is_singleton: true
+name: drop_table!
+params: ()
+visibility: public

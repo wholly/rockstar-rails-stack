@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Performs canonical decomposition on all the characters.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  '\xC3\xA9'.length #=&gt; 2\n  '\xC3\xA9'.mb_chars.decompose.to_s.length #=&gt; 3\n"
+full_name: ActiveSupport::Multibyte::Chars#decompose
+is_singleton: false
+name: decompose
+params: ()
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Look for normal and marshaled data, self.find_by_session_id's way of telling us to postpone unmarshaling until the data is requested. We need to handle a normal data attribute in case of a new record.
+full_name: ActiveRecord::SessionStore::SqlBypass::new
+is_singleton: true
+name: new
+params: (attributes)
+visibility: public

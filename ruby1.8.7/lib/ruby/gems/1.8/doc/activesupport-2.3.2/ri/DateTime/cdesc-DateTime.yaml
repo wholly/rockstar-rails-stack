@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: DateTime
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::CoreExtensions::Time::Behavior
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::CoreExtensions::Time::Zones
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::CoreExtensions::DateTime::Calculations
+- !ruby/object:RI::IncludedModule 
+  name: ActiveSupport::CoreExtensions::DateTime::Conversions
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: to_json
+name: DateTime
+superclass: Object

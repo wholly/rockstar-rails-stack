@@ -1,0 +1,22 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This is still here from RFC 822, and is now obsolete per RFC2822 Section 4.
+- !ruby/struct:SM::Flow::P 
+  body: "&quot;When interpreting addresses, the route portion SHOULD be ignored.&quot;"
+- !ruby/struct:SM::Flow::P 
+  body: It is still here, so you can access it.
+- !ruby/struct:SM::Flow::P 
+  body: Routes return the route portion at the front of the email address, if any.
+- !ruby/struct:SM::Flow::P 
+  body: "For Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " email = TMail::Address.parse( &quot;&lt;@sa,@another:Mikel@me.com&gt;&quot;)\n =&gt; #&lt;TMail::Address Mikel@me.com&gt;\n email.to_s\n =&gt; &quot;&lt;@sa,@another:Mikel@me.com&gt;&quot;\n email.routes\n =&gt; [&quot;sa&quot;, &quot;another&quot;]\n"
+full_name: TMail::Address#routes
+is_singleton: false
+name: routes
+params: ()
+visibility: public

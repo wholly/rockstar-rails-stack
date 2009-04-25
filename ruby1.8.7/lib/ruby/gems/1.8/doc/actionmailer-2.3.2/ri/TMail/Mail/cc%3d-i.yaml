@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Destructively sets the &quot;Cc:&quot; field to the passed array of strings (which should be valid email addresses)
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.cc = [&quot;mikel@abc.com&quot;, &quot;Mikel &lt;mikel@xyz.com&gt;&quot;]\n mail.cc #=&gt;  [&quot;mikel@abc.org&quot;, &quot;mikel@xyz.org&quot;]\n mail['cc'].to_s #=&gt; &quot;mikel@abc.com, Mikel &lt;mikel@xyz.com&gt;&quot;\n"
+full_name: TMail::Mail#cc=
+is_singleton: false
+name: cc=
+params: ( *strs )
+visibility: public

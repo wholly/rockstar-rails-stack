@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: attribute
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: exception
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Raised when an error occurred while doing a mass assignment to an attribute through the <tt>attributes=</tt> method. The exception has an <tt>attribute</tt> property that is the name of the offending attribute.
+constants: []
+
+full_name: ActiveRecord::AttributeAssignmentError
+includes: []
+
+instance_methods: []
+
+name: AttributeAssignmentError
+superclass: ActiveRecordError

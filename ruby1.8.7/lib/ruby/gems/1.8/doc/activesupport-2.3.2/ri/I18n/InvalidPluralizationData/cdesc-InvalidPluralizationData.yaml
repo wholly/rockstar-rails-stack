@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: count
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: entry
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: I18n::InvalidPluralizationData
+includes: []
+
+instance_methods: []
+
+name: InvalidPluralizationData
+superclass: ArgumentError

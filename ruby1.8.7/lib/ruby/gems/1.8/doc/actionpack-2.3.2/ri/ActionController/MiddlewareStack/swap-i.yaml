@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActionController::MiddlewareStack#swap
+is_singleton: false
+name: swap
+params: (target, *args, &block)
+visibility: public

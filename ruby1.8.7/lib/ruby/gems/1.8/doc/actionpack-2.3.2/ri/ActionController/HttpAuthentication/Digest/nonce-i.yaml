@@ -1,0 +1,25 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Uses an MD5 digest based on time to generate a value to be used only once.
+- !ruby/struct:SM::Flow::P 
+  body: A server-specified data string which should be uniquely generated each time a 401 response is made. It is recommended that this string be base64 or hexadecimal data. Specifically, since the string is passed in the header lines as a quoted string, the double-quote character is not allowed.
+- !ruby/struct:SM::Flow::P 
+  body: The contents of the nonce are implementation dependent. The quality of the implementation depends on a good choice. A nonce might, for example, be constructed as the base 64 encoding of
+- !ruby/struct:SM::Flow::H 
+  level: 1
+  text: "&gt; time-stamp H(time-stamp &quot;:&quot; ETag &quot;:&quot; private-key)"
+- !ruby/struct:SM::Flow::P 
+  body: "where time-stamp is a server-generated time or other non-repeating value, ETag is the value of the HTTP ETag header associated with the requested entity, and private-key is data known only to the server. With a nonce of this form a server would recalculate the hash portion after receiving the client authentication header and reject the request if it did not match the nonce from that header or if the time-stamp value is not recent enough. In this way the server can limit the time of the nonce's validity. The inclusion of the ETag prevents a replay request for an updated version of the resource. (Note: including the IP address of the client in the nonce would appear to offer the server the ability to limit the reuse of the nonce to the same client that originally got it. However, that would break proxy farms, where requests from a single user often go through different proxies in the farm. Also, IP address spoofing is not that hard.)"
+- !ruby/struct:SM::Flow::P 
+  body: An implementation might choose not to accept a previously used nonce or a previously used digest, in order to protect against a replay attack. Or, an implementation might choose to use one-time nonces or digests for POST or PUT requests and a time-stamp for GET requests. For more details on the issues involved see Section 4 of this document.
+- !ruby/struct:SM::Flow::P 
+  body: The nonce is opaque to the client. Composed of Time, and hash of Time with secret key from the Rails session secret generated upon creation of project. Ensures the time cannot be modifed by client.
+full_name: ActionController::HttpAuthentication::Digest#nonce
+is_singleton: false
+name: nonce
+params: (time = Time.now)
+visibility: public

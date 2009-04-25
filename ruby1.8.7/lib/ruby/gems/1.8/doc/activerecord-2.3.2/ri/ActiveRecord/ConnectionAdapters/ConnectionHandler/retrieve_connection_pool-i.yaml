@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveRecord::ConnectionAdapters::ConnectionHandler#retrieve_connection_pool
+is_singleton: false
+name: retrieve_connection_pool
+params: (klass)
+visibility: public

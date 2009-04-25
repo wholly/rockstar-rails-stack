@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns who the email is from as an Array of email address strings instead to an Array of TMail::Address objects which is what Mail#reply_to_addrs returns
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " mail = TMail::Mail.new\n mail.reply_to = &quot;Mikel &lt;mikel@me.org&gt;, another Mikel &lt;mikel@you.org&gt;&quot;\n mail.reply_to #=&gt;  [&quot;mikel@me.org&quot;, &quot;mikel@you.org&quot;]\n"
+full_name: TMail::Mail#reply_to
+is_singleton: false
+name: reply_to
+params: ( default = nil )
+visibility: public

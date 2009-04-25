@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: insert_before
+block_params: 
+comment: 
+full_name: ActionController::MiddlewareStack#insert
+is_singleton: false
+name: insert
+params: (index, *args, &block)
+visibility: public

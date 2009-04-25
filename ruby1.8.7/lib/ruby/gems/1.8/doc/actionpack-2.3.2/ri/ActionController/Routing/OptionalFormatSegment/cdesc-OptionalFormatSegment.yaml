@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The OptionalFormatSegment allows for any resource route to have an optional :format, which decreases the amount of routes created by 50%.
+constants: []
+
+full_name: ActionController::Routing::OptionalFormatSegment
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: extract_value
+- !ruby/object:RI::MethodSummary 
+  name: interpolation_chunk
+- !ruby/object:RI::MethodSummary 
+  name: match_extraction
+- !ruby/object:RI::MethodSummary 
+  name: regexp_chunk
+- !ruby/object:RI::MethodSummary 
+  name: to_s
+name: OptionalFormatSegment
+superclass: DynamicSegment

@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: l
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Delegates to I18n.localize with no additional functionality.
+full_name: ActionView::Helpers::TranslationHelper#localize
+is_singleton: false
+name: localize
+params: (*args)
+visibility: public

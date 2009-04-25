@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendAvailableLocalesTest#test_available_locales
+is_singleton: false
+name: test_available_locales
+params: ()
+visibility: public

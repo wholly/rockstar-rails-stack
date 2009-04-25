@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Raised when a connection could not be obtained within the connection acquisition timeout period.
+constants: []
+
+full_name: ActiveRecord::ConnectionTimeoutError
+includes: []
+
+instance_methods: []
+
+name: ConnectionTimeoutError
+superclass: ConnectionNotEstablished

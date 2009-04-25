@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18n::MissingTranslationData::new
+is_singleton: true
+name: new
+params: (locale, key, options)
+visibility: public

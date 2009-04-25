@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Performs composition on all the characters.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  '\xC3\xA9'.length #=&gt; 3\n  '\xC3\xA9'.mb_chars.compose.to_s.length #=&gt; 2\n"
+full_name: ActiveSupport::Multibyte::Chars#compose
+is_singleton: false
+name: compose
+params: ()
+visibility: public

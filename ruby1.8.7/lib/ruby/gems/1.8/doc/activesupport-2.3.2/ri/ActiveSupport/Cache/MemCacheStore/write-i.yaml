@@ -1,0 +1,23 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Writes a value to the cache.
+- !ruby/struct:SM::Flow::P 
+  body: "Possible options:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "-"
+    body: +:unless_exist+ - set to true if you don't want to update the cache if the key is already set.
+  - !ruby/struct:SM::Flow::LI 
+    label: "-"
+    body: +:expires_in+ - the number of seconds that this value may stay in the cache. See ActiveSupport::Cache::Store#write for an example.
+  type: :BULLET
+full_name: ActiveSupport::Cache::MemCacheStore#write
+is_singleton: false
+name: write
+params: (key, value, options = nil)
+visibility: public

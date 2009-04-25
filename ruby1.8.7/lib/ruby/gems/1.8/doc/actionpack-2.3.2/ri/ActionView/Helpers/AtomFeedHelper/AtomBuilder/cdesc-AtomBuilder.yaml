@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: XHTML_TAG_NAMES
+  value: "%w(content rights title subtitle summary).to_set"
+full_name: ActionView::Helpers::AtomFeedHelper::AtomBuilder
+includes: []
+
+instance_methods: []
+
+name: AtomBuilder
+superclass: Object

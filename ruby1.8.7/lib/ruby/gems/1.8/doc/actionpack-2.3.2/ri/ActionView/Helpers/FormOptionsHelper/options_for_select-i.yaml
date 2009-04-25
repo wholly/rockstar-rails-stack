@@ -1,0 +1,24 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Accepts a container (hash, array, enumerable, your type) and returns a string of option tags. Given a container where the elements respond to first and last (such as a two-element array), the &quot;lasts&quot; serve as option values and the &quot;firsts&quot; as option text. Hashes are turned into this form automatically, so the keys become &quot;firsts&quot; and values become lasts. If <tt>selected</tt> is specified, the matching &quot;last&quot; or element will get the selected option-tag. <tt>selected</tt> may also be an array of values to be selected when using a multiple select.
+- !ruby/struct:SM::Flow::P 
+  body: "Examples (call, result):"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  options_for_select([[&quot;Dollar&quot;, &quot;$&quot;], [&quot;Kroner&quot;, &quot;DKK&quot;]])\n    &lt;option value=&quot;$&quot;&gt;Dollar&lt;/option&gt;\\n&lt;option value=&quot;DKK&quot;&gt;Kroner&lt;/option&gt;\n\n  options_for_select([ &quot;VISA&quot;, &quot;MasterCard&quot; ], &quot;MasterCard&quot;)\n    &lt;option&gt;VISA&lt;/option&gt;\\n&lt;option selected=&quot;selected&quot;&gt;MasterCard&lt;/option&gt;\n\n  options_for_select({ &quot;Basic&quot; =&gt; &quot;$20&quot;, &quot;Plus&quot; =&gt; &quot;$40&quot; }, &quot;$40&quot;)\n    &lt;option value=&quot;$20&quot;&gt;Basic&lt;/option&gt;\\n&lt;option value=&quot;$40&quot; selected=&quot;selected&quot;&gt;Plus&lt;/option&gt;\n\n  options_for_select([ &quot;VISA&quot;, &quot;MasterCard&quot;, &quot;Discover&quot; ], [&quot;VISA&quot;, &quot;Discover&quot;])\n    &lt;option selected=&quot;selected&quot;&gt;VISA&lt;/option&gt;\\n&lt;option&gt;MasterCard&lt;/option&gt;\\n&lt;option selected=&quot;selected&quot;&gt;Discover&lt;/option&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: If you wish to specify disabled option tags, set <tt>selected</tt> to be a hash, with <tt>:disabled</tt> being either a value or array of values to be disabled. In this case, you can use <tt>:selected</tt> to specify selected option tags.
+- !ruby/struct:SM::Flow::P 
+  body: "Examples:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  options_for_select([&quot;Free&quot;, &quot;Basic&quot;, &quot;Advanced&quot;, &quot;Super Platinum&quot;], :disabled =&gt; &quot;Super Platinum&quot;)\n    &lt;option value=&quot;Free&quot;&gt;Free&lt;/option&gt;\\n&lt;option value=&quot;Basic&quot;&gt;Basic&lt;/option&gt;\\n&lt;option value=&quot;Advanced&quot;&gt;Advanced&lt;/option&gt;\\n&lt;option value=&quot;Super Platinum&quot; disabled=&quot;disabled&quot;&gt;Super Platinum&lt;/option&gt;\n\n  options_for_select([&quot;Free&quot;, &quot;Basic&quot;, &quot;Advanced&quot;, &quot;Super Platinum&quot;], :disabled =&gt; [&quot;Advanced&quot;, &quot;Super Platinum&quot;])\n    &lt;option value=&quot;Free&quot;&gt;Free&lt;/option&gt;\\n&lt;option value=&quot;Basic&quot;&gt;Basic&lt;/option&gt;\\n&lt;option value=&quot;Advanced&quot; disabled=&quot;disabled&quot;&gt;Advanced&lt;/option&gt;\\n&lt;option value=&quot;Super Platinum&quot; disabled=&quot;disabled&quot;&gt;Super Platinum&lt;/option&gt;\n\n  options_for_select([&quot;Free&quot;, &quot;Basic&quot;, &quot;Advanced&quot;, &quot;Super Platinum&quot;], :selected =&gt; &quot;Free&quot;, :disabled =&gt; &quot;Super Platinum&quot;)\n    &lt;option value=&quot;Free&quot; selected=&quot;selected&quot;&gt;Free&lt;/option&gt;\\n&lt;option value=&quot;Basic&quot;&gt;Basic&lt;/option&gt;\\n&lt;option value=&quot;Advanced&quot;&gt;Advanced&lt;/option&gt;\\n&lt;option value=&quot;Super Platinum&quot; disabled=&quot;disabled&quot;&gt;Super Platinum&lt;/option&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "NOTE: Only the option tags are returned, you have to wrap this call in a regular HTML select tag."
+full_name: ActionView::Helpers::FormOptionsHelper#options_for_select
+is_singleton: false
+name: options_for_select
+params: (container, selected = nil)
+visibility: public

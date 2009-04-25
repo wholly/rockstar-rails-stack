@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionView::Helpers::AtomFeedHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionView::Helpers::AtomFeedHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/action_view/helpers/atom_feed_helper_rb.html">
+                lib/action_view/helpers/atom_feed_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M002263">atom_feed</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="AtomFeedHelper/AtomBuilder.html" class="link">ActionView::Helpers::AtomFeedHelper::AtomBuilder</a><br />
+Class <a href="AtomFeedHelper/AtomFeedBuilder.html" class="link">ActionView::Helpers::AtomFeedHelper::AtomFeedBuilder</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M002263" class="method-detail">
+        <a name="M002263"></a>
+
+        <div class="method-heading">
+          <a href="AtomFeedHelper.src/M002263.html" target="Code" class="method-signature"
+            onclick="popupCode('AtomFeedHelper.src/M002263.html');return false;">
+          <span class="method-name">atom_feed</span><span class="method-args">(options = {}) {|AtomFeedBuilder.new(xml, self, options)| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Full usage example:
+</p>
+<pre>
+  config/routes.rb:
+    ActionController::Routing::Routes.draw do |map|
+      map.resources :posts
+      map.root :controller =&gt; &quot;posts&quot;
+    end
+
+  app/controllers/posts_controller.rb:
+    class PostsController &lt; ApplicationController::Base
+      # GET /posts.html
+      # GET /posts.atom
+      def index
+        @posts = Post.find(:all)
+
+        respond_to do |format|
+          format.html
+          format.atom
+        end
+      end
+    end
+
+  app/views/posts/index.atom.builder:
+    atom_feed do |feed|
+      feed.title(&quot;My great blog!&quot;)
+      feed.updated(@posts.first.created_at)
+
+      for post in @posts
+        feed.entry(post) do |entry|
+          entry.title(post.title)
+          entry.content(post.body, :type =&gt; 'html')
+
+          entry.author do |author|
+            author.name(&quot;DHH&quot;)
+          end
+        end
+      end
+    end
+</pre>
+<p>
+The options for <a href="AtomFeedHelper.html#M002263">atom_feed</a> are:
+</p>
+<ul>
+<li><tt>:language</tt>: Defaults to &quot;en-US&quot;.
+
+</li>
+<li><tt>:root_url</tt>: The HTML alternative that this feed is doubling for.
+Defaults to / on the current host.
+
+</li>
+<li><tt>:url</tt>: The URL for this feed. Defaults to the current URL.
+
+</li>
+<li><tt>:id</tt>: The id for this feed. Defaults to &quot;<a
+href="http://0">tag:#{request.host},#{options[:schema_date]}:#{request.request_uri.split(".")</a>}&quot;
+
+</li>
+<li><tt>:schema_date</tt>: The date at which the tag scheme for the feed was
+first used. A good default is the year you created the feed. See <a
+href="http://feedvalidator.org/docs/error/InvalidTAG.html">feedvalidator.org/docs/error/InvalidTAG.html</a>
+for more information. If not specified, 2005 is used (as an &quot;I
+don&#8216;t care&quot; value).
+
+</li>
+<li><tt>:instruct</tt>: Hash of XML processing instructions in the form {target
+=&gt; {attribute =&gt; value, }} or {target =&gt; [{attribute =&gt; value,
+}, ]}
+
+</li>
+</ul>
+<p>
+Other namespaces can be added to the root element:
+</p>
+<pre>
+  app/views/posts/index.atom.builder:
+    atom_feed({'xmlns:app' =&gt; 'http://www.w3.org/2007/app',
+        'xmlns:openSearch' =&gt; 'http://a9.com/-/spec/opensearch/1.1/'}) do |feed|
+      feed.title(&quot;My great blog!&quot;)
+      feed.updated((@posts.first.created_at))
+      feed.tag!(openSearch:totalResults, 10)
+
+      for post in @posts
+        feed.entry(post) do |entry|
+          entry.title(post.title)
+          entry.content(post.body, :type =&gt; 'html')
+          entry.tag!('app:edited', Time.now)
+
+          entry.author do |author|
+            author.name(&quot;DHH&quot;)
+          end
+        end
+      end
+    end
+</pre>
+<p>
+The Atom spec defines five elements (content rights title subtitle summary)
+which may directly contain xhtml content if :type =&gt; &#8216;xhtml&#8217;
+is specified as an attribute. If so, this helper will take care of the
+enclosing div and xhtml namespace declaration. Example usage:
+</p>
+<pre>
+   entry.summary :type =&gt; 'xhtml' do |xhtml|
+     xhtml.p pluralize(order.line_items.count, &quot;line item&quot;)
+     xhtml.p &quot;Shipped to #{order.address}&quot;
+     xhtml.p &quot;Paid by #{order.pay_type}&quot;
+   end
+</pre>
+<p>
+<a href="AtomFeedHelper.html#M002263">atom_feed</a> yields an <a
+href="AtomFeedHelper/AtomFeedBuilder.html">AtomFeedBuilder</a> instance.
+Nested elements yield an <a
+href="AtomFeedHelper/AtomBuilder.html">AtomBuilder</a> instance.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

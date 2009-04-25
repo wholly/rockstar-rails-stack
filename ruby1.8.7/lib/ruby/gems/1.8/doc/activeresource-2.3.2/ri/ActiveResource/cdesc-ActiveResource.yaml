@@ -1,0 +1,18 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: ActiveResource
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Validations
+- !ruby/object:RI::IncludedModule 
+  name: CustomMethods
+instance_methods: []
+
+name: ActiveResource
+superclass: 

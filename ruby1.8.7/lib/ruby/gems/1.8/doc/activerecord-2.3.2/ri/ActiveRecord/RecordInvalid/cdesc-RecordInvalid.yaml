@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: record
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Raised by <tt>save!</tt> and <tt>create!</tt> when the record is invalid. Use the <tt>record</tt> method to retrieve the record which did not validate.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  begin\n    complex_operation_that_calls_save!_internally\n  rescue ActiveRecord::RecordInvalid =&gt; invalid\n    puts invalid.record.errors\n  end\n"
+constants: []
+
+full_name: ActiveRecord::RecordInvalid
+includes: []
+
+instance_methods: []
+
+name: RecordInvalid
+superclass: ActiveRecordError

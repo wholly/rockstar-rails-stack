@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Many backtraces include too much information that's not relevant for the context. This makes it hard to find the signal in the backtrace and adds debugging time. With a BacktraceCleaner, you can setup filters and silencers for your particular context, so only the relevant lines are included.
+- !ruby/struct:SM::Flow::P 
+  body: If you need to reconfigure an existing BacktraceCleaner, like the one in Rails, to show as much as possible, you can always call BacktraceCleaner#remove_silencers!
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  bc = BacktraceCleaner.new\n  bc.add_filter   { |line| line.gsub(Rails.root, '') }\n  bc.add_silencer { |line| line =~ /mongrel|rubygems/ }\n  bc.clean(exception.backtrace) # will strip the Rails.root prefix and skip any lines from mongrel or rubygems\n"
+- !ruby/struct:SM::Flow::P 
+  body: Inspired by the Quiet Backtrace gem by Thoughtbot.
+constants: []
+
+full_name: ActiveSupport::BacktraceCleaner
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add_filter
+- !ruby/object:RI::MethodSummary 
+  name: add_silencer
+- !ruby/object:RI::MethodSummary 
+  name: clean
+- !ruby/object:RI::MethodSummary 
+  name: remove_silencers!
+name: BacktraceCleaner
+superclass: Object

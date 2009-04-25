@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nSimpleBackendLoadPathTest
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: I18nSimpleBackendTestSetup
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: teardown
+- !ruby/object:RI::MethodSummary 
+  name: test_adding_arrays_of_filenames_to_load_path_do_not_break_locale_loading
+- !ruby/object:RI::MethodSummary 
+  name: test_nested_load_paths_do_not_break_locale_loading
+name: I18nSimpleBackendLoadPathTest
+superclass: Test::Unit::TestCase

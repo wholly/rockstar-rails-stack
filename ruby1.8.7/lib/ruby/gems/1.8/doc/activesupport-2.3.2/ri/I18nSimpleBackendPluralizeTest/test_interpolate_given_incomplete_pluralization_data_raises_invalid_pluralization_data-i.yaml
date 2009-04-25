@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendPluralizeTest#test_interpolate_given_incomplete_pluralization_data_raises_invalid_pluralization_data
+is_singleton: false
+name: test_interpolate_given_incomplete_pluralization_data_raises_invalid_pluralization_data
+params: ()
+visibility: public

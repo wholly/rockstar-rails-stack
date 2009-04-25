@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::TimeWithZone#marshal_load
+is_singleton: false
+name: marshal_load
+params: (variables)
+visibility: public

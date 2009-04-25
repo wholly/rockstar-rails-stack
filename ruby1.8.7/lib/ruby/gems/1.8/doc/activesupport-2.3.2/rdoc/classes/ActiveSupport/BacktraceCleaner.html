@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActiveSupport::BacktraceCleaner</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActiveSupport::BacktraceCleaner</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/active_support/backtrace_cleaner_rb.html">
+                lib/active_support/backtrace_cleaner.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../Object.html">
+                Object
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Many backtraces include too much information that&#8216;s not relevant for
+the context. This makes it hard to find the signal in the backtrace and
+adds debugging time. With a <a
+href="BacktraceCleaner.html">BacktraceCleaner</a>, you can setup filters
+and silencers for your particular context, so only the relevant lines are
+included.
+</p>
+<p>
+If you need to reconfigure an existing <a
+href="BacktraceCleaner.html">BacktraceCleaner</a>, like the one in Rails,
+to show as much as possible, you can always call
+BacktraceCleaner#remove_silencers!
+</p>
+<p>
+Example:
+</p>
+<pre>
+  bc = BacktraceCleaner.new
+  bc.add_filter   { |line| line.gsub(Rails.root, '') }
+  bc.add_silencer { |line| line =~ /mongrel|rubygems/ }
+  bc.clean(exception.backtrace) # will strip the Rails.root prefix and skip any lines from mongrel or rubygems
+</pre>
+<p>
+Inspired by the Quiet Backtrace gem by Thoughtbot.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000886">add_filter</a>&nbsp;&nbsp;
+      <a href="#M000887">add_silencer</a>&nbsp;&nbsp;
+      <a href="#M000885">clean</a>&nbsp;&nbsp;
+      <a href="#M000884">new</a>&nbsp;&nbsp;
+      <a href="#M000888">remove_silencers!</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000884" class="method-detail">
+        <a name="M000884"></a>
+
+        <div class="method-heading">
+          <a href="BacktraceCleaner.src/M000884.html" target="Code" class="method-signature"
+            onclick="popupCode('BacktraceCleaner.src/M000884.html');return false;">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000886" class="method-detail">
+        <a name="M000886"></a>
+
+        <div class="method-heading">
+          <a href="BacktraceCleaner.src/M000886.html" target="Code" class="method-signature"
+            onclick="popupCode('BacktraceCleaner.src/M000886.html');return false;">
+          <span class="method-name">add_filter</span><span class="method-args">(&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds a filter from the block provided. Each line in the backtrace will be
+mapped against this filter.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  # Will turn &quot;/my/rails/root/app/models/person.rb&quot; into &quot;/app/models/person.rb&quot;
+  backtrace_cleaner.add_filter { |line| line.gsub(Rails.root, '') }
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000887" class="method-detail">
+        <a name="M000887"></a>
+
+        <div class="method-heading">
+          <a href="BacktraceCleaner.src/M000887.html" target="Code" class="method-signature"
+            onclick="popupCode('BacktraceCleaner.src/M000887.html');return false;">
+          <span class="method-name">add_silencer</span><span class="method-args">(&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds a silencer from the block provided. If the silencer returns true for a
+given line, it&#8216;ll be excluded from the <a
+href="BacktraceCleaner.html#M000885">clean</a> backtrace.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  # Will reject all lines that include the word &quot;mongrel&quot;, like &quot;/gems/mongrel/server.rb&quot; or &quot;/app/my_mongrel_server/rb&quot;
+  backtrace_cleaner.add_silencer { |line| line =~ /mongrel/ }
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000885" class="method-detail">
+        <a name="M000885"></a>
+
+        <div class="method-heading">
+          <a href="BacktraceCleaner.src/M000885.html" target="Code" class="method-signature"
+            onclick="popupCode('BacktraceCleaner.src/M000885.html');return false;">
+          <span class="method-name">clean</span><span class="method-args">(backtrace)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the backtrace after all filters and silencers has been run against
+it. Filters run first, then silencers.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000888" class="method-detail">
+        <a name="M000888"></a>
+
+        <div class="method-heading">
+          <a href="BacktraceCleaner.src/M000888.html" target="Code" class="method-signature"
+            onclick="popupCode('BacktraceCleaner.src/M000888.html');return false;">
+          <span class="method-name">remove_silencers!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Will remove all silencers, but leave in the filters. This is useful if your
+context of debugging suddenly expands as you suspect a bug in the libraries
+you use.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

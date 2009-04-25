@@ -1,0 +1,50 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: contents if block_given?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns an entire form with all needed input tags for a specified Active Record object. For example, if <tt>@post</tt> has attributes named <tt>title</tt> of type <tt>VARCHAR</tt> and <tt>body</tt> of type <tt>TEXT</tt> then
+- !ruby/struct:SM::Flow::VERB 
+  body: "  form(&quot;post&quot;)\n"
+- !ruby/struct:SM::Flow::P 
+  body: "would yield a form like the following (modulus formatting):"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;form action='/posts/create' method='post'&gt;\n    &lt;p&gt;\n      &lt;label for=&quot;post_title&quot;&gt;Title&lt;/label&gt;&lt;br /&gt;\n      &lt;input id=&quot;post_title&quot; name=&quot;post[title]&quot; size=&quot;30&quot; type=&quot;text&quot; value=&quot;Hello World&quot; /&gt;\n    &lt;/p&gt;\n    &lt;p&gt;\n      &lt;label for=&quot;post_body&quot;&gt;Body&lt;/label&gt;&lt;br /&gt;\n      &lt;textarea cols=&quot;40&quot; id=&quot;post_body&quot; name=&quot;post[body]&quot; rows=&quot;20&quot;&gt;&lt;/textarea&gt;\n    &lt;/p&gt;\n    &lt;input name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;Create&quot; /&gt;\n  &lt;/form&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: It's possible to specialize the form builder by using a different action name and by supplying another block renderer. For example, if <tt>@entry</tt> has an attribute <tt>message</tt> of type <tt>VARCHAR</tt> then
+- !ruby/struct:SM::Flow::VERB 
+  body: "  form(&quot;entry&quot;,\n    :action =&gt; &quot;sign&quot;,\n    :input_block =&gt; Proc.new { |record, column|\n      &quot;#{column.human_name}: #{input(record, column.name)}&lt;br /&gt;&quot;\n  })\n"
+- !ruby/struct:SM::Flow::P 
+  body: "would yield a form like the following (modulus formatting):"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  &lt;form action=&quot;/entries/sign&quot; method=&quot;post&quot;&gt;\n    Message:\n    &lt;input id=&quot;entry_message&quot; name=&quot;entry[message]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;br /&gt;\n    &lt;input name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;Sign&quot; /&gt;\n  &lt;/form&gt;\n"
+- !ruby/struct:SM::Flow::P 
+  body: "It's also possible to add additional content to the form by giving it a block, such as:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  form(&quot;entry&quot;, :action =&gt; &quot;sign&quot;) do |form|\n    form &lt;&lt; content_tag(&quot;b&quot;, &quot;Department&quot;)\n    form &lt;&lt; collection_select(&quot;department&quot;, &quot;id&quot;, @departments, &quot;id&quot;, &quot;name&quot;)\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: "The following options are available:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:action</tt> - The action used when submitting the form (default: <tt>create</tt> if a new record, otherwise <tt>update</tt>)."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:input_block</tt> - Specialize the output using a different block, see above.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:method</tt> - The method used when submitting the form (default: <tt>post</tt>)."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:multipart</tt> - Whether to change the enctype of the form to &quot;multipart/form-data&quot;, used when uploading a file (default: <tt>false</tt>)."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "<tt>:submit_value</tt> - The text of the submit button (default: &quot;Create&quot; if a new record, otherwise &quot;Update&quot;)."
+  type: :BULLET
+full_name: ActionView::Helpers::ActiveRecordHelper#form
+is_singleton: false
+name: form
+params: (record_name, options = {}) {|contents if block_given?| ...}
+visibility: public

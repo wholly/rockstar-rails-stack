@@ -1,0 +1,40 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a new CGI::Cookie object.
+- !ruby/struct:SM::Flow::P 
+  body: "The contents of the cookie can be specified as a <tt>name</tt> and one or more <tt>value</tt> arguments. Alternatively, the contents can be specified as a single hash argument. The possible keywords of this hash are as follows:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:name</tt> - The name of the cookie. Required.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:value</tt> - The cookie's value or list of values.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:path</tt> - The path for which this cookie applies. Defaults to the base directory of the CGI script.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:domain</tt> - The domain for which this cookie applies.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:expires</tt> - The time at which this cookie expires, as a Time object.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:secure</tt> - Whether this cookie is a secure cookie or not (defaults to <tt>false</tt>). Secure cookies are only transmitted to HTTPS servers.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:http_only</tt> - Whether this cookie can be accessed by client side scripts (e.g. document.cookie) or only over HTTP. More details in http://msdn2.microsoft.com/en-us/library/system.web.httpcookie.httponly.aspx. Defaults to <tt>false</tt>.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: These keywords correspond to attributes of the cookie object.
+full_name: CGI::Cookie::new
+is_singleton: true
+name: new
+params: (name = '', *value)
+visibility: public

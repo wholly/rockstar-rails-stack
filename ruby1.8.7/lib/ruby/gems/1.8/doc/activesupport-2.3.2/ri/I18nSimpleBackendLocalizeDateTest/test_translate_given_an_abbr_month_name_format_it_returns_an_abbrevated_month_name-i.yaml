@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: I18nSimpleBackendLocalizeDateTest#test_translate_given_an_abbr_month_name_format_it_returns_an_abbrevated_month_name
+is_singleton: false
+name: test_translate_given_an_abbr_month_name_format_it_returns_an_abbrevated_month_name
+params: ()
+visibility: public

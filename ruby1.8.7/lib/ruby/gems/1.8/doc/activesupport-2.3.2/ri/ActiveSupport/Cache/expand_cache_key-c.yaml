@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ActiveSupport::Cache::expand_cache_key
+is_singleton: true
+name: expand_cache_key
+params: (key, namespace = nil)
+visibility: public

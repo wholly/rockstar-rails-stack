@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: server, cache_key
+comment: 
+full_name: MemCache#with_server
+is_singleton: false
+name: with_server
+params: (key) {|server, cache_key| ...}
+visibility: protected

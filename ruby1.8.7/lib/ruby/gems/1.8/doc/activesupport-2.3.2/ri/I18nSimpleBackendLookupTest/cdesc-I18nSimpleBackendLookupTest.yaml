@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: I18nSimpleBackendLookupTest
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: I18nSimpleBackendTestSetup
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: test_lookup_given_nested_keys_looks_up_a_nested_hash_value
+- !ruby/object:RI::MethodSummary 
+  name: test_lookup_given_nil_as_a_key_returns_nil
+name: I18nSimpleBackendLookupTest
+superclass: Test::Unit::TestCase

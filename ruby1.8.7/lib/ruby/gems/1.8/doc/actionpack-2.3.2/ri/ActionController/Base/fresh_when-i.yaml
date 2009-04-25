@@ -1,0 +1,32 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets the etag, last_modified, or both on the response and renders a &quot;304 Not Modified&quot; response if the request is already fresh.
+- !ruby/struct:SM::Flow::P 
+  body: "Parameters:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:etag</tt>
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:last_modified</tt>
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: <tt>:public</tt> By default the Cache-Control header is private, set this to true if you want your application to be cachable by other devices (proxy caches).
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  def show\n    @article = Article.find(params[:id])\n    fresh_when(:etag =&gt; @article, :last_modified =&gt; @article.created_at.utc, :public =&gt; true)\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: This will render the show template if the request isn't sending a matching etag or If-Modified-Since header and just a &quot;304 Not Modified&quot; response if there's a match.
+full_name: ActionController::Base#fresh_when
+is_singleton: false
+name: fresh_when
+params: (options)
+visibility: protected

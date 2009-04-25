@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Deep merges the given translations hash with the existing translations for the given locale
+full_name: I18n::Backend::Simple#merge_translations
+is_singleton: false
+name: merge_translations
+params: (locale, data)
+visibility: protected
