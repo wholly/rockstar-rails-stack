@@ -1,1 +1,0 @@
-../sql/spatial.cc

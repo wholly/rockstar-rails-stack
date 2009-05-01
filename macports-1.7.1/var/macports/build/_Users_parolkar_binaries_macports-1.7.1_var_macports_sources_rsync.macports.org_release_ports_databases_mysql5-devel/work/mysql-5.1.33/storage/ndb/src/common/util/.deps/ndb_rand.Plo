@@ -1,4 +1,0 @@
-ndb_rand.lo ndb_rand.o: ndb_rand.c \
-  ../../../../../storage/ndb/include/util/ndb_rand.h
-
-../../../../../storage/ndb/include/util/ndb_rand.h:

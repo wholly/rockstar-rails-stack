@@ -1,3 +1,0 @@
-sql_builtin.o sql_builtin.o: sql_builtin.cc ../include/mysql/plugin.h
-
-../include/mysql/plugin.h:

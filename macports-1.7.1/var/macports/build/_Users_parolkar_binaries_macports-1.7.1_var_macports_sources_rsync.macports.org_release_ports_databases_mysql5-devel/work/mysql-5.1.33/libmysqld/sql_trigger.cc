@@ -1,1 +1,0 @@
-../sql/sql_trigger.cc

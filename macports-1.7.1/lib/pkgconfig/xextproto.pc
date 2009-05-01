@@ -1,9 +1,0 @@
-prefix=/Users/parolkar/binaries/macports-1.7.1
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
- 
-Name: XExtProto
-Description: XExt extension headers
-Version: 7.0.5
-Cflags: -I${includedir}

@@ -1,4 +1,0 @@
-CircularIndex.o CircularIndex.o: ndbfs/CircularIndex.cpp \
-  ndbfs/CircularIndex.hpp
-
-ndbfs/CircularIndex.hpp:

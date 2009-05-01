@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "CC=${CC:-cc}" > flags
-echo "PREFIX=${PREFIX}" >> flags
-

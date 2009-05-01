@@ -1,8 +1,0 @@
-# $Id: Makefile.in 26177 2007-06-15 10:11:22Z jmpp@macports.org $
-
-SUBDIR=	@REPLACEMENT_PROGS@ @EXTRA_PROGS@
-
-include ../../Mk/macports.subdir.mk
-
-distclean::
-	rm -f Makefile

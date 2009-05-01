@@ -1,9 +1,0 @@
-prefix=/Users/parolkar/binaries/macports-1.7.1
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
- 
-Name: InputProto
-Description: Input extension headers
-Version: 1.5.0
-Cflags: -I${includedir}
